@@ -22,20 +22,45 @@
 #ifndef _INCLUDE_LIBAISUTIL_STRING_STRINGMASK_H_
 # define _INCLUDE_LIBAISUTIL_STRING_STRINGMASK_H_ 1
 
+/*! \file
+ * \brief Simple metachar based mask routines
+ * 
+ * This file contains the StringMask class, which contains rudimentary mask
+ * matching routines.
+ */
+
 # include <aisutil/string/string.h>
 
 namespace AIS {
    namespace Util {
-      //! String mask class, used to match strings using metachars (* and ?)
+      /*!
+       * \brief String mask class, used to match strings using metachars
+       *
+       * This special string class is designed to hold a \e mask, containing
+       * metachars (<em>'*'</em> and <em>'?'</em>)
+       * 
+       * \ingroup Strings
+       */
       class StringMask : public String {
        public:
-	 //! Blank Constructor
+	 /*!
+	  * \brief Default Constructor
+	  * 
+	  * This will create a 'blank' mask which will match everything.
+	  */
 	 StringMask(void)
+	   : String("*")
 	   {};
 
-	 //! Constructor
+	 /*!
+	  * \brief Constructor
+	  * 
+	  * Construct a mask from the given string
+	  * 
+	  * \param mask A string to be stored (should be a mask)
+	  */
 	 template <class T>
-	   StringMask(const T& a)
+	   explicit StringMask(const T& mask)
 	     : String(a) 
 	       {};
 	 
@@ -44,19 +69,41 @@ namespace AIS {
 	   {};
 	 
 	 
-	 //! Check string match
-	 const bool matchesCase(const char* str) const;
+	 /*!
+	  * \brief Check string match (case-sensitive)
+	  * 
+	  * Check the given \p string against the mask stored within this
+	  * class. The check will \b case-sensitive.
+	  * 
+	  * \param string A string to check against the stored mask
+	  * \return A value representing whether the match was successful
+	  * \retval true The given \p string matches the mask
+	  * \retval false The given \p string does not match the mask
+	  */
+	 const bool matchesCase(const char* string) const;
 	 
-	 //! Check string match
-	 const bool matchesCase(const std::string& str) const
+	 /*! \overload */
+	 const bool matchesCase(const std::string& string) const
 	   { return matchesCase(str.c_str()); };
 	 
 	 
-	 //! Check string match (case-insensitive)
-	 const bool matches(const char* str) const;
+	 /*!
+	  * \brief Check string match (case-insensitive)
+	  * 
+	  * Similar to matchesCase(), this will check the given \p string
+	  * against the stored mask. The difference is that this will perform
+	  * a \b case-insensitive match (ie. 'A' and 'a' will be considered
+	  * equal).
+	  * 
+	  * \param str A string to check against the stored mask
+	  * \return A value representing whether the match was successful
+	  * \retval true The given \p string matches the mask
+	  * \retval false The given \p string does not match the mask
+	  */
+	 const bool matches(const char* string) const;
 	 
-	 //! Check string match (case-insensitive)
-	 const bool matches(const std::string& str) const
+	 /*! \overload */
+	 const bool matches(const std::string& string) const
 	   { return matches(str.c_str()); }
       }; // class StringMask
    }; // namespace Util

@@ -40,7 +40,7 @@ extern "C" {
 
 /*! Define the length of the read buffer. This SEEMS low but it's really the
  * safest value to use with IPX/SPX (especially passing through very old IPX
- * routers, etc). This is ALSO the original IRC line length (including \r\n)
+ * routers, etc). This is ALSO the original IRC line length (including \\r\\n)
  * and hense works out neatly with the IRC on IPX/SPX plans. In bog-standard
  * IRC2 protocol mode, each line MUST be a single packet. Other protocols
  * won't have this annoying limit.
@@ -60,7 +60,11 @@ extern "C" {
 
 namespace AIS {
    namespace Util {
-      //! IPX/SPX socket class
+      /*!
+       * \brief IPX/SPX socket class
+       * 
+       * \ingroup Sockets
+       */
       class SocketIPXSPX : public SocketDomainIPX, public SocketTypeSEQPACKET {
        private:
 	 //! Constructor used when creating a new connection via accept()

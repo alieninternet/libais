@@ -51,7 +51,11 @@ namespace AIS {
 
 namespace AIS {
    namespace Util {
-      //! Configuration file parsing routines
+      /*!
+       * \brief Configuration file parsing routines
+       * 
+       * \ingroup Config
+       */
       class ConfigParser {
        public:
 	 //! This type is for sequences of values/parameters for variable defs

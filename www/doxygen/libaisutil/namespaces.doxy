@@ -1,0 +1,17 @@
+
+/*! \namespace AIS
+ * \brief The AIS namespace
+ *
+ * This is the 'Alien Internet Services' namespace, used by the aforementioned
+ * company in all their software. More information about the company can be
+ * obtained at http://www.alien.net.au/
+ */
+
+/*! \namespace AIS::Util
+ * \brief Namespace for LibAISutil
+ *
+ * This is the namespace for LibAISutil, the utility library used by
+ * 'Alien Internet Services'. For further information, including downloads
+ * and documentation, please visit the library's website at
+ * http://libais.sourceforge.net/
+ */

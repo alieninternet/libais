@@ -22,6 +22,18 @@
 #ifndef _INCLUDE_LIBAISUTIL_LIBAISCONF_H_
 # define _INCLUDE_LIBAISUTIL_LIBAISCONF_H_ 1
 
+/*! \file
+ * \brief LibAISutil package configuration defines
+ *
+ * When the LibAISutil package is configured and compiled, some sections of
+ * the code may become unavailable. For example, a system may not have \e IPv6
+ * socket support.
+ *
+ * This file includes pre-processor defines used both within the library's
+ * headers and which you may use within your own code to help determine how
+ * the library is compiled.
+ */
+
 //! Define if your C++ STL 'string' has the clear() function
 @LIBAISUTIL_DEFINE__LIBAISUTIL_STL_STRING_CLEAR@
 

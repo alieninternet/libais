@@ -22,6 +22,12 @@
 #ifndef _INCLUDE_LIBAISUTIL_STRING_STRING_H_
 # define _INCLUDE_LIBAISUTIL_STRING_STRING_H_ 1
 
+/*! \file
+ * \brief Supplementary string routines (for std::string)
+ * 
+ * This file contains routines designed to supplement std::string.
+ */
+
 # include <aisutil/aisutilconf.h>
 
 # include <string>
@@ -36,7 +42,11 @@
 
 namespace AIS {
    namespace Util {
-      //! Our String class, which provides a few more handy procedures
+      /*!
+       * \brief Our String class, which provides a few more handy procedures
+       * 
+       * \ingroup Strings
+       */
       class String : public std::string {
        public:
 	 //! The magic constructors
@@ -55,51 +65,134 @@ namespace AIS {
 	 virtual ~String(void) 
 	   {};
 	 
-	 //! Convert the entire string to lower-case
+	 /*!
+	  * \brief Convert the entire string to lower-case
+	  * 
+	  * This will convert all letters within the string to lower case,
+	  * and return a new string reflecting it as such.
+	  * 
+	  * \return The string, converted to lower-case
+	  */
 	 const String toLower(void) const;
 	 
-	 //! Convert the entire string to upper-case
+	 /*!
+	  * \brief Convert the entire string to upper-case
+	  * 
+	  * Similar to toLower(), this will change the case of all letters
+	  * within the string to upper case.
+	  * 
+	  * \return The string, converted to upper-case
+	  */ 
 	 const String toUpper(void) const;
 	 
-	 //! Convert something via stringstream
+	 /*!
+	  * \brief Convert something to a std::string
+	  * 
+	  * Using std::ostringstream, this convenience routine will convert
+	  * almost anything provided as its \p input into a std::string.
+	  * 
+	  * \param input Something to convert to a string
+	  * \return A string representing whatever was giving as the \p input
+	  */
 	 template <class T>
-	   static const String convert(const T& in) 
+	   static const std::string convert(const T& input) 
 	     {
 		std::ostringstream out;
-		out << in;
+		out << input;
 		return out.str();
 	     };
 	 
-	 //! Convert to an integer
+	 /*!
+	  * \brief Convert to an integer
+	  * 
+	  * \copydoc std::atoi()
+	  * \warning Since this is merely a wrapper for std::atoi(), no
+	  *    error checking is provided.
+	  * \return An integer
+	  * \retval 0 The string could not be converted
+	  */
 	 const int toInt(void) const 
-	   { return atoi(c_str()); };
+	   { return std::atoi(c_str()); };
 	 
-	 //! Convert to a long integer
+	 /*! 
+	  * \brief Convert to a long integer
+	  * 
+	  * \copydoc std::atol()
+	  * \warning Since this is merely a wrapper for std::atol(), no
+	  *    error checking is provided.
+	  * \return An integer
+	  * \retval 0 The string could not be converted
+	  */
 	 const long toLong(void) const
-	   { return atol(c_str()); };
+	   { return std::atol(c_str()); };
 	 
-	 //! Convert to a double
+	 /*!
+	  * \brief Convert to a double
+	  * 
+	  * \copydoc std::atof()
+	  * \warning Since this is merely a wrapper for std::atoi(), no
+	  *    error checking is provided.
+	  * \return An integer
+	  * \retval 0 The string could not be converted
+	  */
 	 const double toDouble(void) const 
-	   { return atof(c_str()); };
+	   { return std::atof(c_str()); };
 	 
-	 //! Pad the beginning of the string so it equates to the given length
+	 /*!
+	  * \brief Pad the beginning of the string
+	  * 
+	  * This will pre-pad the beginning of the string with \p c characters
+	  * so that the length of the returned string is equal to or greater
+	  * than \p n characters.
+	  * 
+	  * If the string's length() is greater than \p n, the string returned
+	  * will be identical. No cropping will be performed.
+	  * 
+	  * \param n The number of characters the length of the string should
+	  *    <em>at least</em> be equal to.
+	  * \param c The character to pre-pad the string with. This defaults
+	  *    to using spaces.
+	  * \return The string (pre-padded)
+	  */
 	 const String prepad(const size_type n, const char c = ' ') const;
 	 
-	 //! Trim white-space from the string
+	 /*!
+	  * \brief Trim white-space
+	  * 
+	  * Remove all white-space from the beginning and the end of this
+	  * string (as determined by std::isspace()).
+	  * 
+	  * \return A new string with white-space trimmed from the beginning
+	  *    and the end of the string
+	  */
 	 const String trim(void) const;
 	 
-	 //! Trim quotes (", ' and `) from the string
+	 /*!
+	  * \brief Trim quotes
+	  * 
+	  * This will remove quotation marks from the file of various types,
+	  * such as \e ", \e ', and \e `.
+	  * 
+	  * \return A new string without its surrounding quotes
+	  */
 	 const String trimQuotes(void) const;
 	 
 # ifndef LIBAISUTIL_STL_STRING_CLEAR
-	 //! Supply the 'clear' function if it is unavailable on this system
+	 /*!
+	  * \brief Supply the 'clear' function
+	  * 
+	  * If the implementation of std::string on this system does not
+	  * include std::string::clear(), this dirty hack will replace it so
+	  * you can safely use it in your programs. Some older compilers do
+	  * not provide it.
+	  */
 	 void clear(void)
 	   { (*this) = ""; };
 # endif
       }; // class String
    }; // namespace Util
 }; // namespace AIS
-   
+
 
 # ifdef LIBAISUTIL_STL_HAS_HASH
 //! STL hash template specialisation for our String class

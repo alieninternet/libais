@@ -32,7 +32,11 @@ extern "C" {
 
 namespace AIS {
    namespace Util {
-      //! IPv6 socket class
+      /*! 
+       * \brief IPv6 socket class
+       * 
+       * \ingroup Sockets
+       */
       class SocketIPv6TCP : public SocketDomainIPv6, public SocketTypeSTREAM {
        private:
 	 //! Constructor used when creating a new connection via accept()

@@ -32,7 +32,11 @@ extern "C" {
 
 namespace AIS {
    namespace Util {
-      //! TCP/IPv4 socket class
+      /*!
+       * \brief TCP/IPv4 socket class
+       * 
+       * \ingroup Sockets
+       */
       class SocketIPv4TCP : public SocketDomainIPv4, public SocketTypeSTREAM {
        private:
 	 //! Constructor used when creating a new connection via accept()

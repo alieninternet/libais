@@ -22,29 +22,16 @@
 #ifndef _INCLUDE_LIBAISUTIL_VERSION_H_
 # define _INCLUDE_LIBAISUTIL_VERSION_H_ 1
 
-/* This file contains extra namespace documentation for DoxyGen for the
- * LibAISutil namespace. To avoid repeating it in every file, it's kept here
- * for convenience.
+/*! \file
+ * \brief Version information
+ *
+ * This file contains a list of \c extern symbols to assist in obtaining
+ * various version information from the library.
  */
- 
-/**
- * \brief The AIS namespace
- * 
- * This is the 'Alien Internet Services' namespace, used by the aforementioned
- * company in all their software. More information about the company can be
- * obtained at http://www.alien.net.au/
- */
+
 namespace AIS {
-   /**
-    * \brief Namespace for LibAISutil
-    * 
-    * This is the namespace for LibAISutil, the utility library used by
-    * 'Alien Internet Services'. For further information, including downloads
-    * and documentation, please visit the library's website at
-    * http://libais.sourceforge.net/
-    */
    namespace Util {
-      /**
+      /*!
        * \brief Version and compile-time information
        * 
        * This version information is for you to access in your own programs.
@@ -64,7 +51,7 @@ namespace AIS {
 	 //! The minor version number of the library
 	 extern const unsigned short versionMinor;
 	 
-	 /**
+	 /*!
 	  * \brief A string identifying the library and its version
 	  * 
 	  * This is a string including the library's name and its version
@@ -76,7 +63,7 @@ namespace AIS {
 	 extern const unsigned char libRevision;//!< Library API revision
 	 extern const unsigned char libAge;	//!< Library API age
 	 
-	 /**
+	 /*!
 	  * \brief Bug report e-mail address
 	  * 
 	  * This is an email address to contact to submit bug reports about

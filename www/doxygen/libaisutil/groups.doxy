@@ -1,0 +1,9 @@
+
+/*! \defgroup Config Configuration parser routines
+ */
+
+/*! \defgroup Strings String handling routines
+ */
+
+/*! \defgroup Sockets Socket routines
+ */

@@ -35,7 +35,11 @@ namespace AIS {
 
 namespace AIS {
    namespace Util {
-      //! Configuration data base class
+      /*!
+       * \brief Configuration data base class
+       * 
+       * \ingroup Config
+       */
       class ConfigData {
        public:
 	 typedef std::vector < String > textBuffer_type;

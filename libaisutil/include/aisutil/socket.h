@@ -22,6 +22,14 @@
 #ifndef _INCLUDE_LIBAISUTIL_SOCKET_H_
 # define _INCLUDE_LIBAISUTIL_SOCKET_H_ 1
 
+/*! \file
+ * \brief Backwards-compatibility socket include file
+ * 
+ * This file will include all the socket header files available on this system.
+ * It's provided mainly for backwards compatibility, and for those who are
+ * lazy!
+ */
+
 # include <aisutil/socket/socket.h>
 # include <aisutil/socket/sockets.h>
 

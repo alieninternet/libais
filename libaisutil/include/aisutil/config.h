@@ -22,6 +22,14 @@
 #ifndef _INCLUDE_LIBAISUTIL_CONFIG_H_
 # define _INCLUDE_LIBAISUTIL_CONFIG_H_ 1
 
+/*! \file
+ * \brief Backwards-compatibility config parser include file
+ * 
+ * This file will include all the header files related to the configuration
+ * parser. It's provided mainly for backwards compatibility, and for those
+ * who are lazy!
+ */
+
 # include <aisutil/config/data.h>
 # include <aisutil/config/parser.h>
 

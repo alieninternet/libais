@@ -22,15 +22,22 @@
 #ifndef _INCLUDE_AISUTIL_UTILS_H_
 # define _INCLUDE_AISUTIL_UTILS_H_ 1
 
+/*! \file
+ * \brief Miscellaneous utilities
+ * 
+ * This is a collection of miscellaneous utilities which don't fit in
+ * elsewhere.
+ */ 
+
 # include <string>
 # include <aisutil/string.h>
 
 namespace AIS {
    namespace Util {
-      /*! \brief Miscellaneous utilities
+      /*!
+       * \brief Miscellaneous utilities
        * 
-       * This is a collection of miscellaneous utilities which don't fit in
-       * elsewhere.
+       * \copydoc utils.h
        */
       namespace Utils {
 	 /*! \brief Confirm the given string, encoded in \e UTF-8, is valid
@@ -81,7 +88,7 @@ namespace AIS {
 	  * The resultant string is guaranteed to be \e ASCII compatible 
 	  * (7-bit).
 	  * 
-	  * Please be aware that this is \b not \e RFC3548 compliant
+	  * Please be aware that this is \b not \e RFC-3548 compliant
 	  * (\e Base16, \e Base32 or \e Base64).
 	  *
 	  * \param number The number you wish to convert to another base

@@ -22,50 +22,117 @@
 #ifndef _INCLUDE_LIBAISUTIL_STRING_STRINGTOKENS_H_
 # define _INCLUDE_LIBAISUTIL_STRING_STRINGTOKENS_H_ 1
 
-# include <aisutil/string/string.h>
+/*! \file
+ * \brief String tokeniser routines
+ * 
+ * This file contains routines designed to break \e tokens out of a string.
+ */
 
+# include <aisutil/string/string.h>
 
 namespace AIS {
    namespace Util {
-      //! String tokeniser class for the String class
+      /*!
+       * \brief String tokeniser class for the String class
+       * 
+       * \ingroup Strings
+       */
       class StringTokens : public String {
-       private:
+       protected:
 	 //! Our position, usually pointing to the first char of the next token
 	 size_type position;
 	 
        public:
-	 //! Constructor
+	 /*! 
+	  * \brief Constructor
+	  * 
+	  * Create a new string, ready to be tokenised!
+	  * 
+	  * \param string A string to hold
+	  * \param pos A location within the \p string to begin tokenisation.
+	  *    If this is not provided, tokenisation will begin at the start
+	  *    of the string.
+	  */ 
 	 template <class T>
-	   StringTokens(const T& s, 
-			const String::size_type p = 0)
+	   StringTokens(const T& string, 
+			const String::size_type pos = 0)
 	     : String(s),
-	       position(p)
+	       position(pos)
 	     {};
 	 
 	 //! Destructor
 	 ~StringTokens(void)
 	   {};
       
-	 //! Any more tokens left?
+	 /*!
+	  * \brief Any more tokens left?
+	  * 
+	  * By checking the position indicator, we can tell if there are any
+	  * more tokens left. At the very least, there may be one token left
+	  * if the position is not located at the end of the string.
+	  * 
+	  * \return Whether there are any more tokens left
+	  * \retval true There are more tokens
+	  * \retval false There are no more tokens left
+	  */
 	 const bool hasMoreTokens(void) const
 	   { return (position < length()); };
 	 
-	 //! Count the number of tokens
+	 /*!
+	  * \brief Count the number of tokens
+	  *
+	  * Count the total number of tokens contained within the string,
+	  * looking for a space or a tab delimiter.
+	  * 
+	  * \return The total number of tokens contained within the string
+	  */
 	 const unsigned int countTokens(void) const;
 	 
-	 //! Count the number of tokens, using the given delimiter
+	 /*!
+	  * \brief Count the number of tokens, using the given \p delimiter
+	  * 
+	  * Count the total number of tokens contained within the string,
+	  * using the given \p delimiter as the delimiter between the tokens.
+	  * 
+	  * \return The total number of tokens contained within the string
+	  */
 	 const unsigned int countTokens(const char delimiter) const;
 	 
-	 //! Get the next token
+	 /*! 
+	  * \brief Get the next token
+	  *
+	  * Return the next token, delimitered by either a space or a tab. The
+	  * position indicator will be moved to point to the beginning of the
+	  * next token following this one.
+	  * 
+	  * \return The next token
+	  */
 	 const String nextToken(void);
 	 
-	 //! Get the next token, using the given delimiter
+	 /*!
+	  * \brief Get the next token, using the given \p delimiter
+	  * 
+	  * Return the next token, delimitered by the given \p delimiter. The
+	  * position indicator will be moved to point to the beginning of the
+	  * next token following this one.
+	  * 
+	  * \return The next token
+	  */
 	 const String nextToken(const char delimiter);
 	 
 	 //! Get next IRC style token
 	 const String nextColonToken(void);
 	 
-	 //! Get the rest of the line (without displacing the current position)
+	 /*!
+	  * \brief Get the rest of the data from the string
+	  * 
+	  * This will take the \e rest of the data left in the string and
+	  * return it as a new string. It will not displace the position
+	  * indicator, so any further nextToken() calls will act as normal.
+	  * 
+	  * \return Everything from the last point a token was taken from, up
+	  *    up until the end of the string
+	  */
 	 const String rest(void) const
 	   { return substr(position, length() - position); };
       }; // class StringTokens

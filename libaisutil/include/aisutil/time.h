@@ -22,20 +22,28 @@
 #ifndef _INCLUDE_AISUTIL_TIME_H_
 # define _INCLUDE_AISUTIL_TIME_H_ 1
 
+/*! \file
+ * \brief Rudimentary time routines
+ * 
+ * Basic time routines
+ */ 
+
 # include <string>
 # include <ctime>
 # include <sys/time.h>
 
 namespace AIS {
    namespace Util {
-      /**
+      /*!
        * \brief Basic time routines
        * 
        * These basic time routines are intended to be extremely simplistic.
+       * The main goal for these time routines has been for time-stamping
+       * purposes.
        * 
        * Intentionally, this class doesn't offer any special date formatting
-       * routines, since such routines are already provided by \e Standard-C
-       * and \e POSIX \e 1003.1-2001.
+       * routines, since such routines are already provided by <em>Standard
+       * C</em> and <em>POSIX 1003.1-2001</em>.
        * 
        * The class offers the ability to store time in \a seconds and 
        * \a nanoseconds, however the precision of the \a nanoseconds field is
@@ -65,7 +73,7 @@ namespace AIS {
 	 
 	 
        protected:
-	 /**
+	 /*!
 	  * \brief The number of nanoseconds in a second
 	  * 
 	  * This represents the number of nanoseconds in a second, and is here
@@ -75,7 +83,7 @@ namespace AIS {
 	  */
 	 static const nanoseconds_type max_nsec = 1000000000;
 	 
-	 /**
+	 /*!
 	  * \brief Number of seconds
 	  *
 	  * This is the number of \a seconds field. If the time set from the
@@ -84,7 +92,7 @@ namespace AIS {
 	  */
 	 seconds_type seconds;
 	 
-	 /**
+	 /*!
 	  * \brief Number of nanoseconds
 	  * 
 	  * This is the number of \a nanoseconds, following the \a seconds
@@ -95,7 +103,7 @@ namespace AIS {
 	 
 	 
        public:
-	 /**
+	 /*!
 	  * \brief Default constructor
 	  *
 	  * This is a blank constructor, and will initialise the structure to
@@ -106,7 +114,7 @@ namespace AIS {
 	     nanoseconds(0)
 	   {};
       
-	 /**
+	 /*!
 	  * \brief Constructor
 	  * 
 	  * Create a new Time structure with the given \p _seconds and also
@@ -114,8 +122,8 @@ namespace AIS {
 	  * variable must represent a \e fraction of a second, it will be
 	  * checked and overflowed as required to avoid misrepresentation.
 	  * 
-	  * \param _seconds
-	  * \param _nanoseconds
+	  * \param _seconds The \a seconds initialiser
+	  * \param _nanoseconds The \a nanoseconds initialiser
 	  */
 	 explicit Time(const seconds_type _seconds,
 		       const nanoseconds_type _nanoseconds = 0)
@@ -133,7 +141,7 @@ namespace AIS {
 	      }
 	   };
 	 
-	 /**
+	 /*!
 	  * \brief Copy constructor
 	  * 
 	  * Creates a brand new copy of another Time structure
@@ -145,7 +153,7 @@ namespace AIS {
 	     nanoseconds(time.nanoseconds)
 	   {};
       
-	 /**
+	 /*!
 	  * \brief Current time constructor
 	  * 
 	  * For convenience, passing a boolean value of \c true here will
@@ -162,7 +170,7 @@ namespace AIS {
 	      }
 	   };
       
-	 /**
+	 /*!
 	  * \brief Constructor (from a '\c time_t')
 	  * 
 	  * Convert a time of the \c time_t type into a new Time structure.
@@ -174,7 +182,7 @@ namespace AIS {
 	     nanoseconds(0)
 	   {};
       
-	 /**
+	 /*!
 	  * \brief Constructor (from a '\c struct \c timespec')
 	  * 
 	  * This will convert a \c struct \c timespec time structure into a
@@ -187,7 +195,7 @@ namespace AIS {
 	     nanoseconds(time.tv_nsec)
 	   {};
       
-	 /**
+	 /*!
 	  * \brief Constructor (from a '\c struct \c timeval')
 	  * 
 	  * This will convert a \c struct \c timeval structure to a Time
@@ -207,7 +215,7 @@ namespace AIS {
 	   {};
 
 	 
-	 /**
+	 /*!
 	  * \brief Return the seconds count
 	  * 
 	  * \return The number of \a seconds
@@ -215,7 +223,7 @@ namespace AIS {
 	 const seconds_type getSeconds(void) const
 	   { return seconds; };
 	 
-	 /**
+	 /*!
 	  * \brief Return the nanoseconds count
 	  *
 	  * \return The number of \a nanoseconds
@@ -224,7 +232,7 @@ namespace AIS {
 	   { return nanoseconds; };
 	 
 	 
-	 /**
+	 /*!
 	  * \brief Addition operator
 	  * 
 	  * Add the given time (\p rhs) to this time. If \a nanoseconds
@@ -237,7 +245,7 @@ namespace AIS {
 	  */
 	 const Time operator+(const Time& rhs) const;
 	 
-	 /**
+	 /*!
 	  * \brief Addition assignment operator
 	  * 
 	  * \param rhs The time to add to this time
@@ -248,7 +256,7 @@ namespace AIS {
 	   { return ((*this) = (*this) + rhs); };
 
 
-	 /**
+	 /*!
 	  * \brief Subtraction operator
 	  *
 	  * Subtract the given time (\p rhs) from this time. If the
@@ -261,7 +269,7 @@ namespace AIS {
 	  */
 	 const Time operator-(const Time& rhs) const;
 	 
-	 /**
+	 /*!
 	  * \brief Subtraction assignment operator
 	  * 
 	  * \param rhs The time to subtract from this time
@@ -272,7 +280,7 @@ namespace AIS {
 	   { return ((*this) = (*this) - rhs); };
 
 	 
-	 /**
+	 /*!
 	  * \brief Division operator (nanosecond fractions)
 	  * 
 	  * This will divide this time by the given time (\p rhs) and return
@@ -285,7 +293,7 @@ namespace AIS {
 	  */
 	 const double operator/(const Time& rhs) const;
 	 
-	 /**
+	 /*!
 	  * \brief Division operator (nanosecond fractions)
 	  * 
 	  * This will divide this time by the given number (\p rhs) and return
@@ -303,7 +311,7 @@ namespace AIS {
 		      rhs);
 	   };
 	 
-	 /**
+	 /*!
 	  * \brief Division operator (Time amounts)
 	  * 
 	  * \param rhs The amount to divide this time by
@@ -316,7 +324,7 @@ namespace AIS {
 	      return Time((result / max_nsec), (result % max_nsec));
 	   };
 	 
-	 /**
+	 /*!
 	  * \brief Division assignment operator
 	  * 
 	  * \param rhs The amount to divide from this time
@@ -327,7 +335,7 @@ namespace AIS {
 	   { return ((*this) = (*this) / rhs); };
 
 	 
-	 /** 
+	 /*! 
 	  * \brief Equality operator
 	  * 
 	  * Check if two times are equal
@@ -343,7 +351,7 @@ namespace AIS {
 		      (nanoseconds == rhs.nanoseconds));
 	   };
 	 
-	 /** 
+	 /*! 
 	  * \brief Not equal-to operator
 	  * 
 	  * Check if two times are not equal
@@ -359,7 +367,7 @@ namespace AIS {
 	   { return (!((*this) == rhs)); };
 	 
 	 
-	 /** 
+	 /*! 
 	  * \brief Greater-than operator
 	  * 
 	  * Check if the given time is greater than this time
@@ -379,7 +387,7 @@ namespace AIS {
 	      return false;
 	   };
 	 
-	 /**
+	 /*!
 	  * \brief Less-than operator
 	  * 
 	  * Check if the given time is less than this time
@@ -400,7 +408,7 @@ namespace AIS {
 	      return false;
 	   };
 	 
-	 /**
+	 /*!
 	  * /brief Greater-than or equal to operator
 	  * 
 	  * Check if the given value is greater than or equal to this time
@@ -414,7 +422,7 @@ namespace AIS {
 	   const bool operator>=(const T& rhs) const
 	   { return (!((*this) < rhs)); };
 	 
-	 /**
+	 /*!
 	  * /brief Less-than or equal to operator
 	  * 
 	  * Check if the given value is less than or equal to this time
@@ -429,7 +437,7 @@ namespace AIS {
 	   { return (!((*this) > rhs)); };
 	 
 	 
-	 /**
+	 /*!
 	  * \brief Convert this to a '\c time_t'
 	  * 
 	  * \warning Be aware that due to the limitations of the \c time_t
@@ -439,7 +447,7 @@ namespace AIS {
 	 operator time_t(void) const
 	   { return time_t(seconds); };
 	 
-	 /**
+	 /*!
 	  * \brief Convert this to a '\c struct \c timespec'
 	  *
 	  * \return The time represented as a \c struct \c timespec
@@ -452,11 +460,11 @@ namespace AIS {
 	      return result;
 	   };
 	 
-	 /**
+	 /*!
 	  * \brief Convert this to a '\c struct \c timeval'
 	  * 
 	  * \warning Because the \c struct \c timeval type can only store
-	  *    time down to the \e microsecond (&micro;s) resolution, the
+	  *    time down to the \e microsecond resolution, the
 	  *    \a nanoseconds will be floored.
 	  * \return The time represented as a \c struct \c timeval
 	  */
@@ -469,7 +477,7 @@ namespace AIS {
 	   };
 	 
 	 
-	 /**
+	 /*!
 	  * \brief Assignment operator
 	  * 
 	  * \return A reference to this time, after the reassignment is made
@@ -481,7 +489,7 @@ namespace AIS {
 	      return (*this);
 	   };
 	 
-	 /**
+	 /*!
 	  * \brief Assignment operator (from a '\c time_t')
 	  *
 	  * \warning Since the \c time_t type cannot store any time of a
@@ -496,7 +504,7 @@ namespace AIS {
 	      return (*this);
 	   };
 	 
-	 /**
+	 /*!
 	  * \brief Assignment operator (from a '\c struct \c timespec')
 	  * 
 	  * \return A reference to this time, after the reassignment is made
@@ -508,7 +516,7 @@ namespace AIS {
 	      return (*this);
 	   };
 	 
-	 /**
+	 /*!
 	  * \brief Assignment operator (from a '\c struct \c timeval')
 	  * 
 	  * \return A reference to this time, after the reassignment is made
@@ -521,7 +529,7 @@ namespace AIS {
 	   };
 	 
 	 
-	 /**
+	 /*!
 	  * \brief Set the time to the time now
 	  * 
 	  * \return A boolean representing the success of setting the time

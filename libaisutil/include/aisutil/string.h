@@ -22,6 +22,13 @@
 #ifndef _INCLUDE_LIBAISUTIL_STRING_H_
 # define _INCLUDE_LIBAISUTIL_STRING_H_ 1
 
+/*! \file
+ * \brief Backwards-compatibility string include file
+ * 
+ * This file will include all the string header files. It's provided mainly
+ * for backwards compatibility, and for those who are lazy!
+ */
+
 # include <aisutil/string/string.h>
 # include <aisutil/string/mask.h>
 # include <aisutil/string/tokens.h>

@@ -32,7 +32,11 @@ extern "C" {
 
 namespace AIS {
    namespace Util {
-      //! Unix socket class
+      /*!
+       * \brief Unix socket class
+       * 
+       * \ingroup Sockets
+       */
       class SocketUNIX : public SocketDomainUNIX, public SocketTypeSTREAM {
        private:
 	 //! Constructor used when creating a new connection via accept()
