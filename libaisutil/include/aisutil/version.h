@@ -22,18 +22,55 @@
 #ifndef _INCLUDE_LIBAISUTIL_VERSION_H_
 # define _INCLUDE_LIBAISUTIL_VERSION_H_ 1
 
+// This file contains extra namespace documentation for DoxyGen
+ 
+//! The AIS namespace
+/*! This is the 'Alien Internet Services' namespace, used by the aforementioned
+ * company in all their software. More information about the company can be
+ * obtained at http://www.alien.net.au/
+ */
 namespace AIS {
+   //! Namespace for LibAISutil
+   /*! This is the namespace for LibAISutil, the utility library used by
+    * 'Alien Internet Services'. For further information, including downloads
+    * and documentation, please visit the library's website at
+    * http://libais.sourceforge.net/
+    */
    namespace Util {
       //! Version and compile-time information
+      /*! This version information is for you to access in your own programs.
+       * It's used quite often as supplementary and/or extended information
+       * about programs which use the library in order to assist end users
+       * in debugging faults. Software using an older version of the library
+       * installed on the system can be easily identified, should there be a
+       * problem with that particular version.
+       */
       namespace Version {
-	 extern const char* const programName;		//!< Program name
-	 extern const unsigned short versionMajor;	//!< Version major number
-	 extern const unsigned short versionMinor;	//!< Version minor number
-	 extern const char* const version;		//!< Version identity
-	 extern const unsigned char libVersion;		//!< Library API version
-	 extern const unsigned char libRevision;	//!< Library API revision
-	 extern const unsigned char libAge;		//!< Library API age
-	 extern const char* const bugsEmail;		//!< Bug report e-mail
+	 //! The library's name
+	 extern const char* const libraryName;
+	 
+	 //! The major version number of the library
+	 extern const unsigned short versionMajor;
+	 
+	 //! The minor version number of the library
+	 extern const unsigned short versionMinor;
+	 
+	 //! A string identifying the library and its version
+	 /*! This is a string including the library's name and its version
+	  * number in the 'preferred' display format.
+	  */
+	 extern const char* const version;
+	 
+	 extern const unsigned char libVersion;	//!< Library API version
+	 extern const unsigned char libRevision;//!< Library API revision
+	 extern const unsigned char libAge;	//!< Library API age
+	 
+	 //! Bug report e-mail address
+	 /*! This is an email address to contact to submit bug reports about
+	  * the library. No support can be provided for software using the
+	  * library at this address, though.
+	  */
+	 extern const char* const bugsEmail;
       }; // namespace Version
    }; // namespace Util
 }; // namespace AIS

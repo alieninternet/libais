@@ -31,8 +31,8 @@
 namespace AIS {
    namespace Util {
       namespace Version {
-	 // Program name
-	 const char* const programName = LIBAISUTIL_VERSION_NAME;
+	 // Library name
+	 const char* const libraryName = LIBAISUTIL_VERSION_NAME;
 	 
 	 // Program version numbers (raw)
 	 const unsigned short versionMajor = LIBAISUTIL_VERSION_MAJOR;
