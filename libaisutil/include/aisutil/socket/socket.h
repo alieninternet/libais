@@ -67,7 +67,7 @@ namespace AIS {
 	   { setErrorMessage(sys_errlist[errno]); };
 	 
 	 //! Get a protocol's number (really only valid for IP protocols)
-	 static int getProtocol(const char* const name);
+	 static const int getProtocol(const char* const name);
 	 
 	 //! Set socket NON-BLOCKING so it doesn't slow us down
 	 void setNonBlocking(void);
@@ -86,11 +86,11 @@ namespace AIS {
 	   { return (fd >= 0); };
 	 
 	 //! Turn on re-usable address to save binding time (USE WITH CAUTION!)
-	 bool setReuseAddress(void);
+	 const bool setReuseAddress(void);
 	 
 	 //! Listen on socket (only valid on SOCK_STREAM and SOCK_SEQPACKET types)
-	 virtual bool listen(int backlog =
-			     LIBAISUTIL_SOCKET_DEFAULT_LISTEN_BACKLOG);
+	 virtual const bool listen(const int backlog =
+				   LIBAISUTIL_SOCKET_DEFAULT_LISTEN_BACKLOG);
 	 
 	 //! Close the socket
 	 virtual const bool close(void)
@@ -103,34 +103,34 @@ namespace AIS {
 	 virtual const sockaddr& getRemoteAddress(socklen_t& addrlen) const = 0;
 	 
 	 //! Return the local address (as a string)
-	 virtual std::string getLocalAddress(void) const = 0;
+	 virtual const std::string getLocalAddress(void) const = 0;
 	 
 	 //! Return the remote address (as a string)
-	 virtual std::string getRemoteAddress(void) const = 0;
+	 virtual const std::string getRemoteAddress(void) const = 0;
 	 
 	 //! Return the local port
-	 virtual int getLocalPort(void) const = 0;
+	 virtual const int getLocalPort(void) const = 0;
 	 
 	 //! Return the remote port
-	 virtual int getRemotePort(void) const = 0;
+	 virtual const int getRemotePort(void) const = 0;
 	 
 	 //! Set the local address
-	 virtual bool setLocalAddress(const std::string& address) = 0;
+	 virtual const bool setLocalAddress(const std::string& address) = 0;
 	 
 	 //! Set the remote address
-	 virtual bool setRemoteAddress(const std::string& address) = 0;
+	 virtual const bool setRemoteAddress(const std::string& address) = 0;
 	 
 	 //! Set the local port
-	 virtual bool setLocalPort(const int port) = 0;
+	 virtual const bool setLocalPort(const int port) = 0;
 	 
 	 //! Set the remote port
-	 virtual bool setRemotePort(const int port) = 0;
+	 virtual const bool setRemotePort(const int port) = 0;
 	 
 	 //! Bind a socket its port
-	 virtual bool bind(void) = 0;
+	 virtual const bool bind(void) = 0;
 	 
 	 //! Connect this socket
-	 virtual bool connect(void) = 0;
+	 virtual const bool connect(void) = 0;
 	 
 	 /*! Accept a connection on this socket (Don't forget to delete after
 	  * use!) Warning! This will return a NULL pointer (value of 0) if
@@ -142,13 +142,13 @@ namespace AIS {
 	 virtual const int write(const std::string& data) = 0;
 	 
 	 //! Read data from this socket
-	 virtual bool read(std::ostream& databuff) = 0;
+	 virtual const bool read(std::ostream& databuff) = 0;
 	 
 	 //! Return the block size per read
-	 virtual blockSize_type getReadBlockSize(void) const = 0;
+	 virtual const blockSize_type getReadBlockSize(void) const = 0;
 	 
 	 //! Return some information about this socket, if any
-	 virtual std::string getInfo(void) const
+	 virtual const std::string getInfo(void) const
 	   { return std::string(); };
 	 
 	 //! Return the error message

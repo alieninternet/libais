@@ -83,7 +83,7 @@ SocketDomainIPv6::SocketDomainIPv6(const sockaddr_in6& newLocalAddress,
 /* getRemoteAddressStr - Return the remote address as a string
  * Original 19/08/2001 pickle
  */
-std::string SocketDomainIPv6::getRemoteAddress(void) const
+const std::string SocketDomainIPv6::getRemoteAddress(void) const
 {
    return inet_ntop(AF_INET6, &remoteAddress.sin6_addr, addrbuff,
 		    INET6_ADDRSTRLEN + 1);
@@ -93,7 +93,7 @@ std::string SocketDomainIPv6::getRemoteAddress(void) const
 /* getLocalAddressStr - Return the local address as a string
  * Original 19/08/2001 pickle
  */
-std::string SocketDomainIPv6::getLocalAddress(void) const
+const std::string SocketDomainIPv6::getLocalAddress(void) const
 {
    return inet_ntop(AF_INET6, &localAddress.sin6_addr, addrbuff,
 		    INET6_ADDRSTRLEN + 1);
@@ -103,8 +103,8 @@ std::string SocketDomainIPv6::getLocalAddress(void) const
 /* setAddress - Set the given address in the given address structure
  * Original 03/07/2002 pickle
  */
-bool SocketDomainIPv6::setAddress(sockaddr_in6& addr, 
-				  const std::string& addrstr)
+const bool SocketDomainIPv6::setAddress(sockaddr_in6& addr, 
+					const std::string& addrstr)
 {
    // Try to process the IP, checking if it worked okay
    if (inet_pton(AF_INET6, addrstr.c_str(), &addr.sin6_addr) != 0) {
@@ -119,8 +119,8 @@ bool SocketDomainIPv6::setAddress(sockaddr_in6& addr,
 /* setAddress - Copy the given address over the given address structure
  * Original 03/07/2002 pickle
  */
-bool SocketDomainIPv6::setAddress(sockaddr_in6& addr,
-				  const sockaddr_in6& newaddr)
+const bool SocketDomainIPv6::setAddress(sockaddr_in6& addr,
+					const sockaddr_in6& newaddr)
 {
    // Copy it!
    (void)memcpy(&addr, &newaddr, sizeof(addr));
@@ -133,7 +133,8 @@ bool SocketDomainIPv6::setAddress(sockaddr_in6& addr,
 /* setAddress - Copy the given address over the given address structure's
  * Original 05/07/2002 pickle
  */
-bool SocketDomainIPv6::setAddress(sockaddr_in6& addr, const in6_addr& newaddr)
+const bool SocketDomainIPv6::setAddress(sockaddr_in6& addr,
+					const in6_addr& newaddr)
 {
    // Copy it!
    (void)memcpy(&addr.sin6_addr, &newaddr, sizeof(addr.sin6_addr));
@@ -146,7 +147,7 @@ bool SocketDomainIPv6::setAddress(sockaddr_in6& addr, const in6_addr& newaddr)
 /* setPort - Set the given port in the given address structure
  * Original 03/07/2002 pickle
  */
-bool SocketDomainIPv6::setPort(sockaddr_in6& addr, const int port)
+const bool SocketDomainIPv6::setPort(sockaddr_in6& addr, const int port)
 {
    // Make sure the port is within an acceptable range (0..65534)
    if ((port >= 0) && (port <= 65534)) {
@@ -162,7 +163,7 @@ bool SocketDomainIPv6::setPort(sockaddr_in6& addr, const int port)
 /* bind - Bind a socket to its port
  * Original 03/07/2002 pickle
  */
-bool SocketDomainIPv6::bind(void)
+const bool SocketDomainIPv6::bind(void)
 {
    if (::bind(getFD(), (sockaddr*)&localAddress, sizeof(localAddress)) == 0) {
       return true;
@@ -176,7 +177,7 @@ bool SocketDomainIPv6::bind(void)
 /* connect - Connect this socket
  * Original 03/07/2002 pickle
  */
-bool SocketDomainIPv6::connect(void)
+const bool SocketDomainIPv6::connect(void)
 {
    if (::connect(getFD(), (sockaddr*)&remoteAddress,
 		 sizeof(localAddress)) == 0) {

@@ -65,7 +65,7 @@ const int SocketTypeSEQPACKET::write(const std::string& data)
  * Original 09/02/1999 pickle
  * 03/07/2002 pickle - Sort-of rewrote for SOCK_SEQPACKET types
  */
-bool SocketTypeSEQPACKET::read(std::ostream& databuff)
+const bool SocketTypeSEQPACKET::read(std::ostream& databuff)
 {
 #ifdef LIBAISUTIL_DEBUG_ASSERT
    // Make sure the file descriptor is really valid

@@ -75,8 +75,8 @@ SocketDomainIPv4::SocketDomainIPv4(const sockaddr_in& newLocalAddress,
 /* setAddress - Set the given address in the given address structure
  * Original 03/07/2002 pickle
  */
-bool SocketDomainIPv4::setAddress(sockaddr_in& addr, 
-				  const std::string& addrstr)
+const bool SocketDomainIPv4::setAddress(sockaddr_in& addr, 
+					const std::string& addrstr)
 {
    // Try to process the IP, checking if it worked okay
    if (inet_aton(addrstr.c_str(), &addr.sin_addr) != 0) {
@@ -91,8 +91,8 @@ bool SocketDomainIPv4::setAddress(sockaddr_in& addr,
 /* setAddress - Copy the given address over the given address structure
  * Original 03/07/2002 pickle
  */
-bool SocketDomainIPv4::setAddress(sockaddr_in& addr,
-				  const sockaddr_in& newaddr)
+const bool SocketDomainIPv4::setAddress(sockaddr_in& addr,
+					const sockaddr_in& newaddr)
 {
    // Copy it!
    (void)memcpy(&addr, &newaddr, sizeof(addr));
@@ -105,7 +105,8 @@ bool SocketDomainIPv4::setAddress(sockaddr_in& addr,
 /* setAddress - Copy the given address over the given address structure's
  * Original 05/07/2002 pickle
  */
-bool SocketDomainIPv4::setAddress(sockaddr_in& addr, const in_addr& newaddr)
+const bool SocketDomainIPv4::setAddress(sockaddr_in& addr,
+					const in_addr& newaddr)
 {
    // Copy it!
    (void)memcpy(&addr.sin_addr, &newaddr, sizeof(addr.sin_addr));
@@ -118,7 +119,7 @@ bool SocketDomainIPv4::setAddress(sockaddr_in& addr, const in_addr& newaddr)
 /* setPort - Set the given port in the given address structure
  * Original 03/07/2002 pickle
  */
-bool SocketDomainIPv4::setPort(sockaddr_in& addr, const int port)
+const bool SocketDomainIPv4::setPort(sockaddr_in& addr, const int port)
 {
    // Make sure the port is within an acceptable range (0..65534)
    if ((port >= 0) && (port <= 65534)) {
@@ -134,7 +135,7 @@ bool SocketDomainIPv4::setPort(sockaddr_in& addr, const int port)
 /* bind - Bind a socket to its port
  * Original 03/07/2002 pickle
  */
-bool SocketDomainIPv4::bind(void)
+const bool SocketDomainIPv4::bind(void)
 {
    if (::bind(getFD(), (sockaddr*)&localAddress, sizeof(localAddress)) == 0) {
       return true;
@@ -148,7 +149,7 @@ bool SocketDomainIPv4::bind(void)
 /* connect - Connect this socket
  * Original 03/07/2002 pickle
  */
-bool SocketDomainIPv4::connect(void)
+const bool SocketDomainIPv4::connect(void)
 {
    if (::connect(getFD(), (sockaddr*)&remoteAddress,
 		 sizeof(localAddress)) == 0) {

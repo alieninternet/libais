@@ -59,10 +59,10 @@ namespace AIS {
 	 const int write(const std::string& data);
 	 
 	 //! Read data from this socket
-	 bool read(std::ostream& databuff);
+	 const bool read(std::ostream& databuff);
 	 
 	 //! Return the block size per read
-	 blockSize_type getReadBlockSize(void) const
+	 const blockSize_type getReadBlockSize(void) const
 	   { return bufferSize; };
       }; // class SocketTypeSTREAM
    }; // namespace Util

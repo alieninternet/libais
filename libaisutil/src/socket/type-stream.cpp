@@ -65,7 +65,7 @@ const int SocketTypeSTREAM::write(const std::string& data)
  * Original 09/02/1999 pickle
  * 03/07/2002 pickle - Rewrote to read in chunks, as it should have originally!
  */
-bool SocketTypeSTREAM::read(std::ostream& databuff)
+const bool SocketTypeSTREAM::read(std::ostream& databuff)
 {
 #ifdef LIBAISUTIL_DEBUG_ASSERT
    // Make sure the file descriptor is really valid

@@ -73,8 +73,8 @@ SocketDomainUNIX::SocketDomainUNIX(const sockaddr_un& newLocalAddress,
 /* setAddress - Set the given address in the given address structure
  * Original 03/07/2002 pickle
  */
-bool SocketDomainUNIX::setAddress(sockaddr_un& addr, 
-				  const std::string& addrstr)
+const bool SocketDomainUNIX::setAddress(sockaddr_un& addr, 
+					const std::string& addrstr)
 {
    // Make sure the length is appropriate
    if (addrstr.length() <= UNIX_PATH_MAX) {
@@ -93,7 +93,7 @@ bool SocketDomainUNIX::setAddress(sockaddr_un& addr,
 /* bind - Bind a socket to its port
  * Original 03/07/2002 pickle
  */
-bool SocketDomainUNIX::bind(void)
+const bool SocketDomainUNIX::bind(void)
 {
    if (::bind(getFD(), (sockaddr*)&localAddress, sizeof(localAddress)) == 0) {
       return true;
@@ -107,7 +107,7 @@ bool SocketDomainUNIX::bind(void)
 /* connect - Connect this socket
  * Original 03/07/2002 pickle
  */
-bool SocketDomainUNIX::connect(void)
+const bool SocketDomainUNIX::connect(void)
 {
    if (::connect(getFD(), (sockaddr*)&remoteAddress,
 		 sizeof(localAddress)) == 0) {

@@ -49,7 +49,7 @@ using namespace AIS::Util;
 /* Get a protocol's number (really only valid for IP protocols)
  * Original 04/07/2002 pickle
  */
-int Socket::getProtocol(const char* const name)
+const int Socket::getProtocol(const char* const name)
 {
    protoent prot;
    prot = *getprotobyname(name);
@@ -76,7 +76,7 @@ void Socket::setNonBlocking(void)
 /* setReuseAddress - Set socket SO_REUSEADDR to save binding time :)
  * Original 09/01/2001 pickle
  */
-bool Socket::setReuseAddress(void)
+const bool Socket::setReuseAddress(void)
 {
    int sockopts = 1;
    
@@ -93,7 +93,7 @@ bool Socket::setReuseAddress(void)
 /* listen - Listen on a socket (valid on SOCK_STREAM and SOCK_SEQPACKET types)
  * Original 09/01/2001 pickle
  */
-bool Socket::listen(int backlog)
+const bool Socket::listen(const int backlog)
 { 
    if (::listen(fd, backlog) == 0) {
       return true;

@@ -41,7 +41,7 @@ namespace AIS {
 	 sockaddr_un remoteAddress;
 	 
 	 //! Set the given address in the given address structure
-	 bool setAddress(sockaddr_un& addr, const std::string& addrstr);
+	 const bool setAddress(sockaddr_un& addr, const std::string& addrstr);
 	 
        protected:
 	 //! Constructor
@@ -73,26 +73,26 @@ namespace AIS {
 	   { addrlen = sizeof(remoteAddress); return (sockaddr&)remoteAddress; };
 	 
 	 //! Return the local address (as a string)
-	 std::string getLocalAddress(void) const
+	 const std::string getLocalAddress(void) const
 	   { return localAddress.sun_path; };
 	 
 	 //! Return the remote address (as a string)
-	 std::string getRemoteAddress(void) const
+	 const std::string getRemoteAddress(void) const
 	   { return remoteAddress.sun_path; };
 	 
 	 //! Set the local address
-	 bool setLocalAddress(const std::string& address)
+	 const bool setLocalAddress(const std::string& address)
 	   { return setAddress(localAddress, address); };
 	 
 	 //! Set the remote address
-	 bool setRemoteAddress(const std::string& address)
+	 const bool setRemoteAddress(const std::string& address)
 	   { return setAddress(remoteAddress, address); };
 	 
 	 //! Bind a socket its port
-	 bool bind(void);
+	 const bool bind(void);
 	 
 	 //! Connect this socket (unavailable on some socket types)
-	 bool connect(void);
+	 const bool connect(void);
 	 
 	 //! Close the socket
 	 const bool close(void);

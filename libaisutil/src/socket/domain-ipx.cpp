@@ -74,7 +74,7 @@ SocketDomainIPX::SocketDomainIPX(const sockaddr_ipx& newLocalAddress,
  * Original 02/07/2002 pickle
  * Note: This uses the popular address format "network:node" - fully padded
  */
-std::string SocketDomainIPX::makeAddressStr(const sockaddr_ipx& addr)
+const std::string SocketDomainIPX::makeAddressStr(const sockaddr_ipx& addr)
 {
    std::ostringstream out;
    
@@ -93,8 +93,8 @@ std::string SocketDomainIPX::makeAddressStr(const sockaddr_ipx& addr)
 /* setAddress - Set the given address in the given address structure
  * Original 03/07/2002 pickle
  */
-bool SocketDomainIPX::setAddress(sockaddr_ipx& addr, 
-				 const std::string& addrstr)
+const bool SocketDomainIPX::setAddress(sockaddr_ipx& addr, 
+				       const std::string& addrstr)
 {
    // Duh. Me dumb. Me fix later.
    return false;
@@ -104,8 +104,8 @@ bool SocketDomainIPX::setAddress(sockaddr_ipx& addr,
 /* setAddress - Copy the given address over the given address structure
  * Original 03/07/2002 pickle
  */
-bool SocketDomainIPX::setAddress(sockaddr_ipx& addr, 
-				 const sockaddr_ipx& newaddr)
+const bool SocketDomainIPX::setAddress(sockaddr_ipx& addr, 
+				       const sockaddr_ipx& newaddr)
 {
    // Copy it!
    (void)memcpy(&addr, &newaddr, sizeof(addr));
@@ -118,7 +118,7 @@ bool SocketDomainIPX::setAddress(sockaddr_ipx& addr,
 /* setPort - Set the given port in the given address structure
  * Original 03/07/2002 pickle
  */
-bool SocketDomainIPX::setPort(sockaddr_ipx& addr, const int port)
+const bool SocketDomainIPX::setPort(sockaddr_ipx& addr, const int port)
 {
    // Make sure the port is within an acceptable range (0x0001..0xFFFE)
    if ((port >= 0x0001) && (port <= 0xFFFE)) {
@@ -134,7 +134,7 @@ bool SocketDomainIPX::setPort(sockaddr_ipx& addr, const int port)
 /* bind - Bind a socket to its port
  * Original 03/07/2002 pickle
  */
-bool SocketDomainIPX::bind(void)
+const bool SocketDomainIPX::bind(void)
 {
    if (::bind(getFD(), (sockaddr*)&localAddress, sizeof(localAddress)) == 0) {
       return true;
@@ -148,7 +148,7 @@ bool SocketDomainIPX::bind(void)
 /* connect - Connect this socket
  * Original 03/07/2002 pickle
  */
-bool SocketDomainIPX::connect(void)
+const bool SocketDomainIPX::connect(void)
 {
    if (::connect(getFD(), (sockaddr*)&remoteAddress,
 		 sizeof(localAddress)) == 0) {

@@ -38,19 +38,19 @@ namespace AIS {
 	   {};
 	 
 	 //! Return the local port
-	 virtual int getLocalPort(void) const
+	 virtual const int getLocalPort(void) const
 	   { return -1; };
 	 
 	 //! Return the remote port
-	 virtual int getRemotePort(void) const
+	 virtual const int getRemotePort(void) const
 	   { return -1; };
 	 
 	 //! Set the local port
-	 virtual bool setLocalPort(const int port)
+	 virtual const bool setLocalPort(const int port)
 	   { return false; };
 	 
 	 //! Set the remote port
-	 virtual bool setRemotePort(const int port)
+	 virtual const bool setRemotePort(const int port)
 	   { return false; };
       }; // class SocketDomain
    }; // namespace Util
