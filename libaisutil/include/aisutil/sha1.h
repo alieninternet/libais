@@ -29,51 +29,57 @@
 namespace AIS {
    namespace Util {
       //! SHA1 routines
-      struct SHA1 {
-	 //! A digest. SHA1 returns 160 bits, this makes it easier to manage.
-	 union digest_type {
-	    unsigned char u_char[20];
-	    signed char s_char[20];
-	    unsigned long u_long[5];
-	    
-	    
-	    //! Boolean equality operator
-	    const bool operator==(const digest_type& rhs) const
-	      {
-		 return ((u_long[0] == rhs.u_long[0]) &&
-			 (u_long[1] == rhs.u_long[1]) &&
-			 (u_long[2] == rhs.u_long[2]) &&
-			 (u_long[3] == rhs.u_long[3]) &&
-			 (u_long[4] == rhs.u_long[4]));
-	      };
-	    
-	    //! Not equal-to operator
-	    const bool operator!=(const digest_type& rhs) const
-	      { return (!((*this) == rhs)); };
+      struct SHA1_Digest {
+	 union {
+	    //! SHA1 returns 160 bits, this makes it easier to manage.
+	    unsigned char u_char[20];		//!< 20 unsigned chars
+	    signed char s_char[20];		//!< 20 signed chars
+	    unsigned long u_long[5];		//!< 5 unsigned longs
+	 }; // union {anonymous}
 
 	 
-	    //! Assignment operator (from a 'time_t')
-	    const digest_type& operator=(const digest_type& rhs)
-	      {
-		 return 
-		   *((const digest_type*)
-		     (memcpy((void*)this, (const void*)&rhs, 20)));
-	      };
-	    
+	 //! Blank constructor (nobody should want a null digest, though)
+	 SHA1_Digest(void);
+	 
+	 //! Constructor (from a string)
+	 SHA1_Digest(const std::string& line);
 
-	    //! Convert an SHA1 digest output to particular base
-	    const std::string toStr(const unsigned char base,
-				    const std::string::size_type pad);
-	 };
+	 //! Destructor
+	 ~SHA1_Digest(void)
+	   {};
 	 
-	 //! An empty digest
-	 static const digest_type nullDigest;
 	 
-	 //! SHA1 digest from a string
-	 static digest_type generate(const std::string& line);
-      }; // namespace SHA1
+	 //! Boolean equality operator
+	 const bool operator==(const SHA1_Digest& rhs) const
+	   {
+	      return ((u_long[0] == rhs.u_long[0]) &&
+		      (u_long[1] == rhs.u_long[1]) &&
+		      (u_long[2] == rhs.u_long[2]) &&
+		      (u_long[3] == rhs.u_long[3]) &&
+		      (u_long[4] == rhs.u_long[4]));
+	   };
+	    
+	 //! Not equal-to operator
+	 const bool operator!=(const SHA1_Digest& rhs) const
+	   { return (!((*this) == rhs)); };
+	 
+
+	 //! Return true if we are null (empty)
+	 const bool isNull(void) const
+	   { 
+	      return ((u_long[0] == 0) &&
+		      (u_long[1] == 0) &&
+		      (u_long[2] == 0) &&
+		      (u_long[3] == 0) &&
+		      (u_long[4] == 0));
+	   };
+
+	 
+	 //! Convert an SHA1 digest output to particular base
+	 const std::string toStr(const unsigned char base,
+				 const std::string::size_type pad);
+      }; // struct SHA1_Digest
    }; // namespace Util
 }; // namespace AIS
    
 #endif // _INCLUDE_AISUTIL_SHA1_H_
-   

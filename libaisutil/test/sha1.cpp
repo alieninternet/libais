@@ -26,6 +26,8 @@
 #include <aisutil/sha1.h>
 #include <iostream>
 #include <iomanip>
+#include <string>
+#include <cstring>
 
 #include "tests.h"
 
@@ -50,7 +52,7 @@ struct {
 struct {
    const char* const string;
    const std::string::size_type stringLength;
-   const SHA1::digest_type expectedDigest;
+   const unsigned char expectedDigest[20];
    const char* const expectedDigestStrings[baseCheckCount];
 } static const testData[] = {
    // Null test
@@ -150,20 +152,20 @@ struct {
 	     "ED92AE83"
 	  }
      },
-     { 0, 0, SHA1::nullDigest, { 0 } }
+     { 0, 0, { 0 }, { 0 } }
 };
 
 
 int main(int argc, char **argv)
 {
    TEST_STATUS("Creating two dummy digests");
-   SHA1::digest_type digest1;
+   SHA1_Digest digest1;
    digest1.u_long[0] = 0x00011122;
    digest1.u_long[1] = 0x23334445;
    digest1.u_long[2] = 0x55666777;
    digest1.u_long[3] = 0x888999AA;
    digest1.u_long[4] = 0xABBBCCCD;
-   SHA1::digest_type digest2;
+   SHA1_Digest digest2;
    digest2.u_long[0] = 0xDDEEEFFF;
    digest2.u_long[1] = 0xEEEDDDCC;
    digest2.u_long[2] = 0xCBBBAAA9;
@@ -176,22 +178,26 @@ int main(int argc, char **argv)
 		!(digest1 != digest2) ||
 		!(digest2 != digest1));
    
-   TEST_STATUS("Checking that the null digest is really empty");
-   TEST_ASSERT((SHA1::nullDigest.u_long[0] == 0) &&
-	       (SHA1::nullDigest.u_long[1] == 0) &&
-	       (SHA1::nullDigest.u_long[2] == 0) &&
-	       (SHA1::nullDigest.u_long[3] == 0) &&
-	       (SHA1::nullDigest.u_long[4] == 0));
+   TEST_STATUS("Checking that a null digest is really empty");
+   SHA1_Digest nullDigest;
+   TEST_ASSERT((nullDigest.u_long[0] == 0) &&
+	       (nullDigest.u_long[1] == 0) &&
+	       (nullDigest.u_long[2] == 0) &&
+	       (nullDigest.u_long[3] == 0) &&
+	       (nullDigest.u_long[4] == 0));
    
-   TEST_STATUS("Making a third dummy digest (null)");
-   SHA1::digest_type digest3(SHA1::nullDigest);
+   TEST_STATUS("Checking that the null digest knows it's empty");
+   TEST_ASSERT(nullDigest.isNull());
+   
+   TEST_STATUS("Making a third dummy digest (from the null digest)");
+   SHA1_Digest digest3(nullDigest);
    TEST_ASSERT((digest3.u_long[0] == 0) &&
 	       (digest3.u_long[1] == 0) &&
 	       (digest3.u_long[2] == 0) &&
 	       (digest3.u_long[3] == 0) &&
 	       (digest3.u_long[4] == 0));
    
-   TEST_STATUS("Reassigning third digest (with the first)");
+   TEST_STATUS("Reassigning third digest (with the first dummy)");
    digest3 = digest1;
    TEST_ASSERT((digest3 == digest1) &&
 	       (digest3 != digest2));
@@ -199,19 +205,19 @@ int main(int argc, char **argv)
    
    for (unsigned int i = 0; testData[i].string != 0; ++i) {
       TEST_STATUS("Hashing '" << testData[i].string << '\'');
-      SHA1::digest_type digest =
-	SHA1::generate(std::string(testData[i].string,
-				   testData[i].stringLength));
+      const std::string testString(testData[i].string,
+				   testData[i].stringLength);
+      SHA1_Digest digest(testString);
       
-      TEST_STATUS("\tMaking sure this is not a null return");
-      TEST_ASSERT(digest != SHA1::nullDigest);
+      TEST_STATUS("\tMaking sure the return was not null/empty");
+      TEST_FAIL_IF(digest.isNull());
       
       TEST_STATUS("\tChecking hash");
       if (argc > 1) {
 	 std::cout << std::setfill('0') << "\t  Want: ";
 	 for (unsigned int j = 0; j < 20; ++j) {
 	    std::cout << std::hex << std::setw(2) <<
-	      (unsigned int)testData[i].expectedDigest.u_char[j] << 
+	      (unsigned int)testData[i].expectedDigest[j] << 
 	      (((j % 4) == 3) ? ' ' : '.');
 	 }
 	 std::cout << "\n\t   Got: ";
@@ -222,7 +228,9 @@ int main(int argc, char **argv)
 	 }
 	 std::cout << std::endl;
       }
-      TEST_ASSERT(digest == testData[i].expectedDigest);
+      TEST_ASSERT(::memcmp((const void*)&digest.u_char,
+			   (const void*)&testData[i].expectedDigest,
+			   20) == 0);
       
       TEST_STATUS("\tChecking digestToStr() output");
       for (unsigned int j = 0; j < baseCheckCount; ++j) {

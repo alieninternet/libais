@@ -8,8 +8,9 @@ Version 1.3
     value given to it
   * AISutil:: namespace is now AIS::util::. It's advised to change/add 'using
     namespace' to reflect this change.
-  * Added a not-equal to operator to SHA1::digest_type for convenience
-  * SHA1::digestToStr() is now a member of SHA1::digest_type (as toStr())
+  * SHA1:: routines have changed dramatically, it's advised to read the header
+    or the DoxyGen documentation to see all changes. SHA1:: is now
+    SHA1_Digest::.
   * Utils::baseXStr() now has network byte ordering
   * Other very minor bugfixes and sprinkles of documentation :)
 
