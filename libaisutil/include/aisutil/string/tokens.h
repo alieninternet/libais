@@ -47,26 +47,26 @@ namespace AIS {
 	   {};
       
 	 //! Any more tokens left?
-	 bool hasMoreTokens(void) const
+	 const bool hasMoreTokens(void) const
 	   { return (position < length()); };
 	 
 	 //! Count the number of tokens
-	 unsigned int countTokens(void) const;
+	 const unsigned int countTokens(void) const;
 	 
 	 //! Count the number of tokens, using the given delimiter
-	 unsigned int countTokens(const char delimiter) const;
+	 const unsigned int countTokens(const char delimiter) const;
 	 
 	 //! Get the next token
-	 String nextToken(void);
+	 const String nextToken(void);
 	 
 	 //! Get the next token, using the given delimiter
-	 String nextToken(const char delimiter);
+	 const String nextToken(const char delimiter);
 	 
 	 //! Get next IRC style token
-	 String nextColonToken(void);
+	 const String nextColonToken(void);
 	 
 	 //! Get the rest of the line (without displacing the current position)
-	 String rest(void) const
+	 const String rest(void) const
 	   { return substr(position, length() - position); };
       }; // class StringTokens
    }; // namespace Util

@@ -58,7 +58,7 @@ struct tokenCounter {
  * Original 08/02/1999 pickle
  * 23/09/2002 pickle - Switch to for_each()
  */
-unsigned int StringTokens::countTokens(void) const
+const unsigned int StringTokens::countTokens(void) const
 {
    if (empty()) {
       return 0;
@@ -94,7 +94,7 @@ struct tokenCounterGeneric {
  * Original 08/02/1999 pickle
  * 23/09/2002 pickle - Switch to for_each()
  */
-unsigned int StringTokens::countTokens(const char delimiter) const
+const unsigned int StringTokens::countTokens(const char delimiter) const
 {
    if (empty()) {
       return 0;
@@ -110,7 +110,7 @@ unsigned int StringTokens::countTokens(const char delimiter) const
  * 08/02/2000 mro0 - Fixed -1 bug
  * 11/03/2002 pickle - Converted for std::string
  */
-String StringTokens::nextToken(void)
+const String StringTokens::nextToken(void)
 {
    String::size_type startPosition = position;
    
@@ -130,7 +130,7 @@ String StringTokens::nextToken(void)
    return substr(startPosition, length() - startPosition);
 }
 
-String StringTokens::nextToken(const char delimiter)
+const String StringTokens::nextToken(const char delimiter)
 {
    // Save our existing location
    String::size_type startPosition = position;
@@ -151,7 +151,7 @@ String StringTokens::nextToken(const char delimiter)
 /* nextColonToken - Get the next token, or the rest, depending on a :
  * Original 11/08/2001 pickle
  */
-String StringTokens::nextColonToken(void)
+const String StringTokens::nextColonToken(void)
 {
    if (position == length()) {
       return "";
