@@ -25,7 +25,7 @@
 
 #include <cctype>
 
-# ifdef HAVE_FNMATCH
+# ifdef HAVE_FNMATCH_H
 // Define this if you want to use fnmatch() instead of our match() routines
 // .. which we want to do, because I broke our match() routines and cbf'd
 // fixing them for now :(
