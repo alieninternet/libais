@@ -1,0 +1,7 @@
+This is where the socket code for the LibAISutil library is kept. Classes here
+are combined to form a transport type. Only socket handlers are here (for
+transport layer protocols such as tcp/ipv4, tcp/ipv6 etc).
+
+Summary:
+  domain* are for socket domains (i.e. protocols like IPv4, IPX etc)
+  type* are for socket types (i.e. sub-protocol formats like STREAM, etc)

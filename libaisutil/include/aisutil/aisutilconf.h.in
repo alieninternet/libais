@@ -1,0 +1,46 @@
+/* $Id$
+ * Configuration file pertaining to the LibAISutil package
+ * 
+ * Copyright (c) 2002 Alien Internet Services
+ *
+ * This file is a part of LibAISutil.
+ * 
+ * LibAISutil is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * LibAISutil is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with LibAISutil; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+
+#ifndef _INCLUDE_LIBAISUTIL_LIBAISCONF_H_
+# define _INCLUDE_LIBAISUTIL_LIBAISCONF_H_ 1
+
+/* Define if your C++ STL 'string' has the clear() function */
+@LIBAISUTIL_DEFINE__LIBAISUTIL_STL_STRING_CLEAR@
+
+/* Define if your C++ STL has the SGI-compatible hashing extensions */
+@LIBAISUTIL_DEFINE__LIBAISUTIL_STL_HAS_HASH@
+
+/* Define if you want TCP/IPv4 transport */
+@LIBAISUTIL_DEFINE__LIBAISUTIL_HAVE_SOCKET_IPV4_TCP@
+
+/* Define if you want TCP/IPv6 transport */
+@LIBAISUTIL_DEFINE__LIBAISUTIL_HAVE_SOCKET_IPV6_TCP@
+
+/* Define if you want IPX/SPX transport */
+@LIBAISUTIL_DEFINE__LIBAISUTIL_HAVE_SOCKET_IPX_SPX@
+
+/* Define if you want UNIX sockets transport */
+@LIBAISUTIL_DEFINE__LIBAISUTIL_HAVE_SOCKET_UNIX@
+
+#endif // _INCLUDE_LIBAISUTIL_LIBAISCONF_H_
+   
+   

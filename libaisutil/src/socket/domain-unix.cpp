@@ -1,0 +1,113 @@
+/* $Id$
+ * UNIX sockets domain
+ * 
+ * Copyright (c) 2002 Alien Internet Services
+ *
+ * This file is a part of LibAISutil.
+ * 
+ * LibAISutil is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * LibAISutil is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with LibAISutil; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+
+#include "config.h"
+
+#include <cstring>
+
+extern "C" {
+#include <sys/socket.h>
+#include <sys/un.h>
+};
+
+#include "aisutil/socket/domain-unix.h"
+
+using namespace AISutil;
+
+// If UNIX_PATH_MAX is still undefined, presume the normal 108 char value
+#ifndef UNIX_PATH_MAX
+# define UNIX_PATH_MAX 108
+#endif
+
+
+/* SocketDomainUNIX - Blank boring constructor!
+ * Original 13/05/2002 simonb
+ */
+SocketDomainUNIX::SocketDomainUNIX(void)
+{
+   // Clean the addresses
+   (void)memset(&remoteAddress, 0, sizeof(remoteAddress));
+   (void)memset(&localAddress, 0, sizeof(localAddress));
+   
+   // Fix the address family types
+   remoteAddress.sun_family = localAddress.sun_family = AF_UNIX;
+}
+
+
+/* SocketDomainUNIX - Constructor used when accept()ing a connection
+ * Original 06/07/2002 simonb
+ */
+SocketDomainUNIX::SocketDomainUNIX(const sockaddr_un& newLocalAddress,
+				   const sockaddr_un& newRemoteAddress)
+{
+   (void)memcpy(&localAddress, &newLocalAddress, sizeof(localAddress));
+   (void)memcpy(&remoteAddress, &newRemoteAddress, sizeof(remoteAddress));
+}
+
+
+/* setAddress - Set the given address in the given address structure
+ * Original 03/07/2002 simonb
+ */
+bool SocketDomainUNIX::setAddress(sockaddr_un& addr, 
+				  const std::string& addrstr)
+{
+   // Make sure the length is appropriate
+   if (addrstr.length() <= UNIX_PATH_MAX) {
+      // Set the address
+      (void)memcpy(addr.sun_path, addrstr.c_str(), addrstr.length());
+      
+      // The address was OK, return happily
+      return true;
+   }
+
+   setErrorMessage("Address is too long");
+   return false;
+}
+
+
+/* bind - Bind a socket to its port
+ * Original 03/07/2002 simonb
+ */
+bool SocketDomainUNIX::bind(void)
+{
+   if (::bind(getFD(), (sockaddr*)&localAddress, sizeof(localAddress)) == 0) {
+      return true;
+   }
+   
+   setErrorMessage();
+   return false;
+}
+
+
+/* connect - Connect this socket
+ * Original 03/07/2002 simonb
+ */
+bool SocketDomainUNIX::connect(void)
+{
+   if (::connect(getFD(), (sockaddr*)&remoteAddress,
+		 sizeof(localAddress)) == 0) {
+      return true;
+   }
+   
+   setErrorMessage();
+   return false;
+}
