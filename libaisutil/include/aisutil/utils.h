@@ -24,6 +24,7 @@
 # define _INCLUDE_AISUTIL_UTILS_H_ 1
 
 # include <string>
+# include <aisutil/string.h>
 
 namespace AISutil {
    namespace Utils {
@@ -35,8 +36,8 @@ namespace AISutil {
 			       const bool defaultValue = true);
       
       //! Convert the given integer to another base (up to base 85)
-      extern const std::string baseXStr(unsigned long number,
-					const unsigned char base);
+      extern const String baseXStr(unsigned long number,
+				   const unsigned char base);
    }; // namespace Utils
 }; // namespace AISutil
    

@@ -140,8 +140,7 @@ const bool Utils::toBool(const std::string& word, const bool defaultValue)
  * Note: The output is NOT mime/base64-encoding compatible!!!
  */
 #define MAXBASE 85
-const std::string Utils::baseXStr(unsigned long number,
-				  const unsigned char base)
+const String Utils::baseXStr(unsigned long number, const unsigned char base)
 {
    static const char baseChrs[MAXBASE + 1] =
      "0123456789"				// 10 +
@@ -153,7 +152,7 @@ const std::string Utils::baseXStr(unsigned long number,
    assert((base > 1) && (base <= MAXBASE));
    
    long digit;
-   std::string tempStr;
+   String tempStr;
    
    while (number > 0) {
       digit = number % base;
