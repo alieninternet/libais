@@ -39,7 +39,7 @@ namespace AISutil {
       const unsigned short versionMinor = LIBAISUTIL_VERSION_MINOR;
 
       // Version information (program name and version number, in its entirity)
-      const char *version = PACKAGE LIBAISUTIL_VERSION_STRING;
+      const char *version = PACKAGE "-" LIBAISUTIL_VERSION_STRING;
       
       // Library version information (raw)
       const unsigned char libVersion = LIBAISUTIL_LIB_VERSION;
