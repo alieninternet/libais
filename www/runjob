@@ -12,7 +12,7 @@ cvs -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/libais co www
 popd
 
 # Remove old docs
-rm -rf htdocs/docs/*
+rm -rf ./htdocs/manual
 
 # Process the files
 doxygen ./doxygen.conf
