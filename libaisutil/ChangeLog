@@ -1,3 +1,6 @@
 
+Version 1.1
+  * Fixed makefile issues pertaining to the installation of headers.. Oops!
+
 Version 1.0
   * First public release *shock-horror* :)
