@@ -1,7 +1,7 @@
 /* $Id$
  * Version and Compile information
  * 
- * Copyright (c) 2002 Alien Internet Services
+ * Copyright (c) 2002,2003 Alien Internet Services
  *
  * This file is a part of LibAISutil.
  * 
@@ -32,19 +32,19 @@
 namespace AISutil {
    namespace Version {
       // Program name
-      const char *programName = KINEIRCD_VERSION_NAME;
+      const char *programName = LIBAISUTIL_VERSION_NAME;
       
       // Program version numbers (raw)
-      const unsigned short versionMajor = KINEIRCD_VERSION_MAJOR;
-      const unsigned short versionMinor = KINEIRCD_VERSION_MINOR;
+      const unsigned short versionMajor = LIBAISUTIL_VERSION_MAJOR;
+      const unsigned short versionMinor = LIBAISUTIL_VERSION_MINOR;
 
       // Version information (program name and version number, in its entirity)
-      const char *version = PACKAGE KINEIRCD_VERSION_STRING;
+      const char *version = PACKAGE LIBAISUTIL_VERSION_STRING;
       
       // Library version information (raw)
-      const unsigned char libVersion = KINEIRCD_LIB_VERSION;
-      const unsigned char libRevision = KINEIRCD_LIB_REVISION;
-      const unsigned char libAge = KINEIRCD_LIB_AGE;
+      const unsigned char libVersion = LIBAISUTIL_LIB_VERSION;
+      const unsigned char libRevision = LIBAISUTIL_LIB_REVISION;
+      const unsigned char libAge = LIBAISUTIL_LIB_AGE;
       
       // E-mail address to where bug reports should wind up
       const char *bugsEmail = PACKAGE_BUGREPORT;

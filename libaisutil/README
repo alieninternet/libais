@@ -1,0 +1,32 @@
+  ----------------------
+    LibAIS (utilities)            Public Release:   version 1.0
+  ----------------------
+  
+This is the first public release of LibAIS. This is not a complete release,
+however, since many components of the original LibAIS library have been
+removed, pending rewrites.
+
+This release is considered stable, but most likely not highly mature. If you
+discover bugs, please submit as much information about it at the following
+website. Please include information about your operating system, compiler,
+and any other information you feel may be useful - don't be shy :)
+
+   http://sourceforge.net/tracker/?func=add&group_id=76286&atid=546636
+
+
+There are three main components of this package:
+
+ * String functions, which supplement std::string;
+ 
+ * Configuration parser, which is designed to be highly flexible, module,
+   and easy to use; and
+   
+ * Socket routines, which are supposed to make socket stuff easy to implement
+   within software. Note that OpenSSL support was removed from this version,
+   as was a handful of other transport types which have not yet been rewritten
+   for the new socket base (circa 2001).
+
+
+This public release was prompted by the development of a handful of projects,
+primarily KineIRCd (http://kineircd.sf.net/) and various administrative
+utilities within the o0ix Linux distribution (http://www.o0ix.org/).

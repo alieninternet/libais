@@ -1,7 +1,7 @@
 /* $Id$
  * StringMask class
  * 
- * Copyright (c) 1996,1998,2001 Alien Internet Services
+ * Copyright (c) 1996,1998,2001,2003 Alien Internet Services
  *
  * This file is a part of LibAISutil.
  * 

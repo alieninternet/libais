@@ -1,7 +1,7 @@
 /* $Id$
  * Sequential datagram packet type
  * 
- * Copyright (c) 2002 Alien Internet Services
+ * Copyright (c) 2002,2003 Alien Internet Services
  * 
  * This file is a part of LibAISutil.
  * 

@@ -1,7 +1,7 @@
 /* $Id$
  * Socket base utilities (handy little things go here)
  * 
- * Copyright (c) 2000,2001,2002 Alien Internet Services
+ * Copyright (c) 2000,2001,2002,2003 Alien Internet Services
  *
  * This file is a part of LibAISutil.
  * 

@@ -1,7 +1,7 @@
 /* $Id$
  * IPv4 domain
  * 
- * Copyright (c) 1999,2002 Alien Internet Services
+ * Copyright (c) 1999,2002,2003 Alien Internet Services
  *
  * This file is a part of LibAISutil.
  * 

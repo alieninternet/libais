@@ -1,7 +1,7 @@
 /* $Id$
  * UNIX sockets transport
  * 
- * Copyright (c) 2001 Alien Internet Services
+ * Copyright (c) 2001,2003 Alien Internet Services
  *
  * This file is a part of LibAISutil.
  * 
