@@ -1,4 +1,8 @@
 Version 1.4
+  * Time:: is now a class to implement protection of the seconds/nanoseconds
+    fields. Use getSeconds() and getNanoseconds() to return the fields.
+  * Time:: includes some more arithmetic operations. See the manual for more
+    details
 
 Version 1.3
   * Unix sockets now remove their file upon close() call
