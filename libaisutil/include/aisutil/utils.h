@@ -38,7 +38,7 @@ namespace AIS {
 	 //! Convert the given integer to another base (up to base 85)
 	 extern const String baseXStr(unsigned long number,
 				      const unsigned char base,
-				      const bool networkByteOrder = true);
+				      const bool networkByteOrder = false);
       }; // namespace Utils
    }; // namespace Util
 }; // namespace AIS
