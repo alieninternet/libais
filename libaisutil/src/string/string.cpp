@@ -35,7 +35,7 @@ using namespace AIS::Util;
  * Original ??/07/1996 pickle
  * 26/02/2002 pickle - Converted for use with std::string
  */
-String String::toLower() const
+const String String::toLower() const
 {
    String result(length(), 0);
    (void)std::transform(begin(), end(), result.begin(), tolower);
@@ -47,7 +47,7 @@ String String::toLower() const
  * Original ??/07/1996 pickle
  * 26/02/2002 pickle - Converted for use with std::string
  */
-String String::toUpper() const
+const String String::toUpper() const
 {
    String result(length(), 0);
    (void)std::transform(begin(), end(), result.begin(), toupper);
@@ -59,7 +59,7 @@ String String::toUpper() const
  * Original 06/03/1999 pickle
  * 27/02/2002 pickle - Converted for std::string
  */
-String String::prepad(const size_type n, const char c) const
+const String String::prepad(const size_type n, const char c) const
 {
    std::string result(*this);
 
@@ -75,7 +75,7 @@ String String::prepad(const size_type n, const char c) const
  * Original 06/03/1999 pickle
  * 10/03/2002 pickle - Converted for std::string
  */
-String String::trim(void) const
+const String String::trim(void) const
 {
    size_type s = 0;
    size_type e = length();
@@ -104,7 +104,7 @@ String String::trim(void) const
  * Original 11/08/2001 pickle
  * 10/03/2002 pickle - Converted for std::string
  */
-String String::trimQuotes(void) const
+const String String::trimQuotes(void) const
 {
    size_type s = 0;
    size_type e = length();
