@@ -65,38 +65,35 @@ const int TypeSTREAM::write(const std::string& data)
  * Original 09/02/1999 pickle
  * 03/07/2002 pickle - Rewrote to read in chunks, as it should have originally!
  */
-const bool TypeSTREAM::read(std::ostream& databuff)
+const std::string::size_type TypeSTREAM::read(std::string& buffer)
 {
 #ifdef LIBAISUTIL_DEBUG_ASSERT
    // Make sure the file descriptor is really valid
    assert(isOkay());
-   
-   // Make sure the stringstream is happy to deal with I/O operators
-   assert(databuff.good());
 #endif
 
    // Read a slab
-   int count = ::read(getFD(), buffer, bufferSize);
+   int count = ::read(getFD(), TypeSTREAM::buffer, bufferSize);
 
    // Did we read anything?
    if (count > 0) {
-      // Append the buffer to the string stream
-      (void)databuff.write(buffer, count);
+      // Append to the given buffer
+      (void)buffer.append(TypeSTREAM::buffer, count);
       
       // Smile at our calling function
-      return true;
+      return count;
+   } else if (count == -1) {
+      // Work out what happened..
+      switch (errno) {
+       case EINTR: // We got interrupted by a signal, but that is okay
+       case EAGAIN: // There was nothing to read - odd, but also okay
+	 // We read nothing, but no harm done
+	 return 0;
+      }
    }
    
-   // Work out what happened..
-   switch (count) {
-    case EINTR: // We got interrupted by a signal, but that is okay
-    case EAGAIN: // There was nothing to read - odd, but also okay
-      // We read nothing, but no harm done
-      return true;
-   }
-
    // Presume an unhappy ending.. (make pouty faces)
    setErrorMessage();
-   return false;
+   return std::string::npos;
 }
 

@@ -55,7 +55,7 @@ namespace AIS {
 	    const int write(const std::string& data);
 	    
 	    // Read data from this socket
-	    const bool read(std::ostream& databuff);
+	    const std::string::size_type read(std::string& buffer);
 	    
 	    // Return the block size per read
 	    const blockSize_type getReadBlockSize(void) const

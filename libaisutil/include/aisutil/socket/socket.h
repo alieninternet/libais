@@ -358,10 +358,28 @@ namespace AIS {
 	     */
 	    virtual const int write(const std::string& data) = 0;
 	    
-	    //! Read data from this socket
-	    virtual const bool read(std::ostream& databuff) = 0;
+	    /*!
+	     * \breif Read data from this socket
+	     * 
+	     * This will read any pending data from the socket and place it
+	     * in the given \p buffer parameter. The new data will be
+	     * \e appended to the end of the \p buffer.
+	     * 
+	     * If the socket is set as non-blocking, and no data is waiting to
+	     * be read on the socket, this operation will wait until there is
+	     * at least an octet to read from the socket before returning.
+	     * 
+	     * \param buffer The buffer to \e append the read data to
+	     * \return The number of bytes read (the length of \p databuff)
+	     * \retval -1 The operation was unsuccessful
+	     */
+	    virtual const std::string::size_type read(std::string& buffer) = 0;
 	    
-	    //! Return the block size per read
+	    /*!
+	     * \brief Return the block size per read
+	     * 
+	     * \return The maximum chunk of data per read() call
+	     */
 	    virtual const blockSize_type getReadBlockSize(void) const = 0;
 	    
 	    /*!
