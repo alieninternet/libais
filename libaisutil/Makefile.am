@@ -107,6 +107,7 @@ dist-hook:
 TESTS=\
 	test-sha1 \
 	test-string \
+	test-stringmask \
 	test-stringtokens \
 	test-time \
 	test-utils
@@ -121,6 +122,8 @@ test_sha1_SOURCES=\
 	test/tests.h test/sha1.cpp
 test_string_SOURCES=\
 	test/tests.h test/string.cpp
+test_stringmask_SOURCES=\
+	test/tests.h test/stringmask.cpp
 test_stringtokens_SOURCES=\
 	test/tests.h test/stringtokens.cpp
 test_time_SOURCES=\
@@ -133,6 +136,8 @@ test_utils_SOURCES=\
 test_sha1_LDADD=\
 	libaisutil.la
 test_string_LDADD=\
+	libaisutil.la
+test_stringmask_LDADD=\
 	libaisutil.la
 test_stringtokens_LDADD=\
 	libaisutil.la
