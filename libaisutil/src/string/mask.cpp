@@ -28,6 +28,8 @@
 
 # ifdef HAVE_FNMATCH
 // Define this if you want to use fnmatch() instead of our match() routines
+// .. which we want to do, because I broke our match() routines and cbf'd
+// fixing them for now :(
 #  define USING_FNMATCH
 #  ifdef USING_FNMATCH
 extern "C" {
