@@ -5,8 +5,8 @@ pushd .
 cd ..
 
 # Check out two modules we need (the includes and the web site modules)
-cvs -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/libais co libaisutil/include
-cvs -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/libais co www
+cvs -d:pserver:anonymous@cvs1:/cvsroot/libais co libaisutil/include
+cvs -d:pserver:anonymous@cvs1:/cvsroot/libais co www
 
 # Return to the directory we were in
 popd
