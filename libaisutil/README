@@ -1,5 +1,5 @@
   ----------------------
-    LibAIS (utilities)            Public Release:   version 1.1
+    LibAIS (utilities)            Public Release:   version 1.2
   ----------------------
   
 This is the first public release of LibAIS. This is not a complete release,
@@ -14,17 +14,27 @@ and any other information you feel may be useful - don't be shy :)
    http://sourceforge.net/tracker/?func=add&group_id=76286&atid=546636
 
 
-There are three main components of this package:
+This package includes the following components:
 
- * String functions, which supplement std::string;
+ * String functions, which supplement std::string. Includes a basic tokeniser
+   and mask matching routines.
  
  * Configuration parser, which is designed to be highly flexible, module,
-   and easy to use; and
+   and easy to use
    
  * Socket routines, which are supposed to make socket stuff easy to implement
-   within software. Note that OpenSSL support was removed from this version,
-   as was a handful of other transport types which have not yet been rewritten
-   for the new socket base (circa 2001).
+   within software. Socket routines are designed to be simple, not powerful. 
+   Note that OpenSSL support was removed from this version, as was a handful
+   of other transport types which have not yet been rewritten for the new
+   socket base (circa 2001).
+
+ * Very basic time routines, used only to perform basic math on time. It
+   includes addition and subtraction of time, plus convertion to popular
+   formats.
+   
+ * SHA1 routine, only because it kept popping up in our code for various
+   reasons :)
+
 
 
 This public release was prompted by the development of a handful of projects,
@@ -32,4 +42,6 @@ primarily KineIRCd (http://kineircd.sf.net/) and various administrative
 utilities within the o0ix Linux distribution (http://www.o0ix.org/).
 
 
-.. Documentation? Uhh, not just yet, sorry :)
+No documentation has been written for the library yet, however minor
+documentation including the class structures may be found at
+http://libais.sf.net/manual
