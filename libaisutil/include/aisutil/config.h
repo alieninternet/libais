@@ -1,6 +1,6 @@
 /* $Id$
  * 
- * Copyright (c) 2002,2003 Alien Internet Services
+ * Copyright (c) 2002,2003,2004 Alien Internet Services
  *
  * This file is a part of LibAISutil.
  * 
@@ -30,8 +30,7 @@
  * who are lazy!
  */
 
-# include <aisutil/config/data.h>
-# include <aisutil/config/parser.h>
+# include <aisutil/config/config.h>
 
 #endif // _INCLUDE_LIBAISUTIL_CONFIG_H_
    

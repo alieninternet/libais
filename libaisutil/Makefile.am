@@ -57,8 +57,8 @@ endif
 
 # Source files..
 libaisutil_la_SOURCES=\
-	src/config/data.cpp \
-	src/config/parser.cpp \
+	src/config/config.cpp \
+	src/config/handle-misc.cpp \
 	src/socket/socket.cpp \
 	src/socket/stateful-type.cpp \
 	$(LIBAISUTIL_FILE_SOCKET_DOMAIN_IPV4) \
@@ -90,7 +90,8 @@ libaisutil_la_LDFLAGS=\
 # Stuff that needs to go into the distribution but isn't implied
 EXTRA_DIST=\
 	include/aisutil/aisutilconf.h.in \
-	test/README
+	test/README \
+	test/test.conf
 
 
 	
@@ -106,6 +107,7 @@ dist-hook:
 
 # The tests to run
 TESTS=\
+	test-config \
 	test-peakcount \
 	test-sha1 \
 	test-string \
@@ -120,6 +122,8 @@ check_PROGRAMS=$(TESTS)
 
 
 # Test programs' source files
+test_config_SOURCES=\
+	test/tests.h test/config.cpp
 test_peakcount_SOURCES=\
 	test/tests.h test/peakcount.cpp
 test_sha1_SOURCES=\
@@ -137,6 +141,8 @@ test_utils_SOURCES=\
 
 
 # Test programs' libraries
+test_config_LDADD=\
+	libaisutil.la
 #test_peakcount_LDADD=\
 #	libaisutil.la
 test_sha1_LDADD=\

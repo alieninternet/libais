@@ -5,8 +5,14 @@
 
 # Include files..
 nobase_include_HEADERS=\
-	aisutil/config/data.h \
-	aisutil/config/parser.h \
+	aisutil/config/handlers/bool.h \
+	aisutil/config/handlers/integers.h \
+	aisutil/config/config.h \
+	aisutil/config/definitions.h \
+	aisutil/config/errors.h \
+	aisutil/config/handler.h \
+	aisutil/config/seg-handler.h \
+	aisutil/config/var-handler.h \
 	aisutil/socket/domain-ip.h \
 	aisutil/socket/domain-ipv4.h \
 	aisutil/socket/domain-ipv6.h \

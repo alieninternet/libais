@@ -1,6 +1,6 @@
 /* $Id$
- * 
- * Copyright (c) 2003,2004 Alien Internet Services
+ *
+ * Copyright (c) 2004 Alien Internet Services
  *
  * This file is a part of LibAISutil.
  * 
@@ -19,36 +19,29 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#define TEST_RETURN_PASS	0
-#define TEST_RETURN_FAIL	1
-#define TEST_RETURN_IGNORE	77	// AutoMake will ignore this return
+#ifndef _INCLUDE_LIBAISUTIL_CONFIG_HANDLER_H_
+# define _INCLUDE_LIBAISUTIL_CONFIG_HANDLER_H_ 1
 
-#include <iostream>
+namespace AIS {
+   namespace Util {
+      namespace Config {
+	 /*!
+	  * \brief Configuration data handler functoid base class
+	  * 
+	  */
+	 class Handler {
+	  protected:
+	    //! Default constructor
+	    Handler(void)
+	      {};
 
-#define TEST_VERBOSE \
-     (argc > 1)
+	  public:
+	    //! Destructor
+	    virtual ~Handler(void)
+	      {};
+	 }; // class Handler
+      }; // namespace Config
+   }; // namespace Util
+}; // namespace AIS
 
-#define TEST_STATUS(x) \
-     if (TEST_VERBOSE) { \
-	std::cout << x << std::endl; \
-     }
-
-#define TEST_FAIL_IF(x) \
-     if (x) { \
-	return TEST_RETURN_FAIL; \
-     }
-
-#define TEST_IGNORE_IF(x) \
-     if (x) { \
-	return TEST_RETURN_IGNORE; \
-     }
-
-#define TEST_ASSERT(x) \
-     if (!(x)) { \
-	return TEST_RETURN_FAIL; \
-     }
-
-#define TEST_END \
-     TEST_STATUS("All tests were successful"); \
-     return TEST_RETURN_PASS
-   
+#endif // _INCLUDE_LIBAISUTIL_CONFIG_HANDLER_H_
