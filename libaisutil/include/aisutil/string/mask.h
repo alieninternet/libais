@@ -27,10 +27,6 @@
 namespace AISutil {
    //! String mask class, used to match strings using metachars (* and ?)
    class StringMask : public String {
-    private:
-      //! Match checker
-      static bool match(char const* const m, char const* const n);
-      
     public:
       //! Blank Constructor
       StringMask(void)
@@ -46,13 +42,21 @@ namespace AISutil {
       ~StringMask(void)
 	{};
       
-      //! Check string match (using the STL's string)
-      bool matches(const std::string& s) const 
-	{ return match(c_str(), s.c_str()); };
       
-      //! Check string match (using a c-style string)
-      bool matches(const char* const s) const
-	{ return match(c_str(), s); };
+      //! Check string match
+      const bool matchesCase(const char* str) const;
+      
+      //! Check string match
+      const bool matchesCase(const std::string& str) const
+	{ return matchesCase(str.c_str()); };
+      
+      
+      //! Check string match (case-insensitive)
+      const bool matches(const char* str) const;
+      
+      //! Check string match (case-insensitive)
+      const bool matches(const std::string& str) const
+	{ return matches(str.c_str()); }
    };
 }; // namespace AISutil
 

@@ -42,75 +42,89 @@ extern "C" {
 using namespace AISutil;
 
 
-/* match - Do the actual match check
+/* matches - Do a mask check (case-insensitive)
+ * Original 28/04/2003 pickle
+ */
+const bool StringMask::matches(const char* str) const
+{
+#ifdef USING_FNMATCH
+   return (fnmatch(data(), str, FNM_CASEFOLD) == 0);
+#else
+   abort(); // eek.
+#endif
+}
+
+
+/* matchesCase - Do a mask check (case-sensitive)
  * Original 15/02/1996 pickle
  * 18/07/1998 pickle - Ported from pascal to C++
  * 20/07/1998 pickle - Changed String to char const
  * 07/09/2001 pickle - Partial rewrite for more speed (no damned recursion!!)
  */
-bool StringMask::match(char const *m, char const *n)
+const bool StringMask::matchesCase(const char* str) const
 {
 #ifdef USING_FNMATCH
-   return (fnmatch(m, n, 0) == 0);
+   return (fnmatch(data(), str, 0) == 0);
 #else
+   const char* me = data();
    bool escaped = false;
    
    // sanity check for strings, the neat way returning true/false
-   if (!*m) {
+   if (!*me) {
       // Of course if they are both null then this is a match
-      if (!*n) {
+      if (!*str) {
 	 return true;
       } else {
 	 return false;
       }
    } else {
-      if (!*n) {
+      if (!*str) {
 	 return false;
       }
    }
    
    // While the string is valid, run through it
-   while (*m) {
+   while (*me) {
       // Check if this is being escaped
       if (escaped) {
 	 // Next character for both strings
-	 ++m;
-	 ++n;
+	 ++me;
+	 ++str;
 	 
 	 escaped = false;
       } else {
 	 // Check what to do with this character
-	 switch (*m) {
+	 switch (*me) {
 	  case '*': // Anything goes metacharacter
 	    // Loop until the next character is NOT the astericks metacharacter
-	    while (*m && (*m == '*')) {
-	       ++m;
+	    while (*me && (*me == '*')) {
+	       ++me;
 	    }
 	    
 	    // Loop until the given string ends or we find a matching char
-	    while (*n && (*n != *m)) {
-	       ++n;
+	    while (*str && (*str != *me)) {
+	       ++str;
 	    }
 	    
 	    /* If the next char is the null, bail out now and say true since the
 	     * rest of the line will of course match
 	     */
-	    if (!*m && !*n) {
+	    if (!*me && !*str) {
 	       return true;
 	    }
 	    
 	    continue;
 	  case '?': // Skip one char metacharacter
 	    // If the string is broken already, this cannot count as a char.
-	    if (!*n) {
+	    if (!*str) {
 	       return false;
 	    }
 	    
-	    ++m;
-	    ++n;
+	    ++me;
+	    ++str;
 	    
 	    // If both the next chars are nulls, this obviously worked OK
-	    if (!*m && !*n) {
+	    if (!*me && !*str) {
 	       return true;
 	    }
 
@@ -119,16 +133,16 @@ bool StringMask::match(char const *m, char const *n)
 	    escaped = true;
 	  default:
 	    // Check if these two characters match in both strings
-	    if (*m != *n) {
+	    if (*me != *str) {
 	       return false;
 	    }
 	    
 	    // Next character for both strings
-	    ++m;
-	    ++n;
+	    ++me;
+	    ++str;
 	    
 	    // If both of these are at the end of line, naturally they are OK!
-	    if (!*m && !*n) {
+	    if (!*me && !*str) {
 	       return true;
 	    }
 	 }
