@@ -53,6 +53,15 @@ namespace AISutil {
           nanoseconds(time.nanoseconds)
 	{};
       
+      //! Constructor (pass a 'true' here and the time will be set now)
+      Time(const bool setTimeNow)
+	: seconds(0), nanoseconds(0)
+	{
+	   if (setTimeNow) {
+	      setTime();
+	   }
+	};
+      
       //! Constructor (from a 'time_t')
       Time(const time_t& time)
 	: seconds(time),
