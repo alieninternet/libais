@@ -15,6 +15,7 @@ Version 1.4
   * Socket::* classes now have a much more flexible flag system. Check the
     manual for more details.
   * SHA1_Digest:: can natively deal with raw data, and std::wstring's
+  * Added PeakCount:: template class
   * Minor bug fixes
     
 

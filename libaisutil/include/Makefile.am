@@ -24,8 +24,9 @@ nobase_include_HEADERS=\
 	aisutil/string/mask.h \
 	aisutil/string/string.h \
 	aisutil/string/tokens.h \
+	aisutil/aisutilconf.h \	
 	aisutil/config.h \
-	aisutil/aisutilconf.h \
+	aisutil/peakcount.h \
 	aisutil/sha1.h \
 	aisutil/socket.h \
 	aisutil/string.h \
