@@ -27,9 +27,12 @@
 # include <iostream>
 
 
-/* Define the length of the read buffer. This is also the number of bytes to
- * attempt to grab per read() call. This can easily be changed using the
- * constructor properly..
+/*!
+ * \brief Default length of the read buffer
+ *
+ * This is the \e default length of the read buffer. This is also the number
+ * of bytes to attempt to grab per read() call. This can easily be changed
+ * using the constructor, and is defined for convenience.
  */
 # define LIBAISUTIL_SOCKET_STREAM_DEFAULT_BUFFER_SIZE	2048
 

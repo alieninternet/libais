@@ -31,19 +31,22 @@ extern "C" {
 # include <aisutil/socket/domain-ipx.h>
 # include <aisutil/socket/type-seqpacket.h>
 
-/*! If the SPX protocol number is not defined, define it.. This value was
- * sourced from the Novell developer website
- */
+// If the SPX protocol number is not defined, define it!
 # ifndef NSPROTO_SPX
+/*!
+ * \brief The SPX protocol number
+ * 
+ * This value was sourced from the Novell developer website
+ */
 #  define NSPROTO_SPX	1256
 # endif
 
-/*! Define the length of the read buffer. This SEEMS low but it's really the
+/*!
+ * \brief The IPX/SPX packet size
+ * 
+ * This is the length of the read buffer. This SEEMS low but it's really the
  * safest value to use with IPX/SPX (especially passing through very old IPX
- * routers, etc). This is ALSO the original IRC line length (including \\r\\n)
- * and hense works out neatly with the IRC on IPX/SPX plans. In bog-standard
- * IRC2 protocol mode, each line MUST be a single packet. Other protocols
- * won't have this annoying limit.
+ * routers, etc).
  * 
  * Because we use SOCK_SEQPACKET here, we must read this size no matter what.
  * 
