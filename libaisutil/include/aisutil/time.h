@@ -29,11 +29,17 @@
 namespace AISutil {
    //! Basic time routines (supposed to be simplistic)
    struct Time {
+      //! Type of the seconds variable
+      typedef signed long seconds_type;
+      
       //! Seconds (since the UNIX Epoch; 1970-01-01 00:00)
-      signed long seconds;
+      seconds_type seconds;
 
+      //! Type of the nanoseconds variable
+      typedef signed long nanoseconds_type;
+      
       //! Nanoseconds (additional to 'seconds')
-      signed long nanoseconds;
+      nanoseconds_type nanoseconds;
 
       
       //! Default constructor
