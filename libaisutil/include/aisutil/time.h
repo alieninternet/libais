@@ -28,55 +28,130 @@
 
 namespace AIS {
    namespace Util {
-      //! Basic time routines (supposed to be simplistic)
+      /**
+       * \brief Basic time routines
+       * 
+       * These basic time routines are intended to be extremely simplistic.
+       * 
+       * Intentionally, this class doesn't offer any special date formatting
+       * routines, since such routines are already provided by \e Standard-C
+       * and \e POSIX \e 1003.1-2001.
+       * 
+       * The class offers the ability to store time in seconds and nanoseconds,
+       * however the precision of the nanoseconds field is based primarily on
+       * the operating system and architecture of the machine you compile the
+       * library on.
+       * 
+       * The time routines also offer a convenient way to convert between
+       * common time types, such as \c time_t, \c struct \c timespec and
+       * \c struct \c timeval (if they are available).
+       * 
+       * The two most important factors of these routines are the arithmetic
+       * functions and the boolean functions. Times can be easily added,
+       * subtracted, and divided, with nanoseconds overflowing into seconds
+       * appropriately. Comparisons between times are equally simplified.
+       * 
+       * The ability to obtain the current system time has been provided
+       * purely for convenience.
+       */
       struct Time {
 	 //! Type of the seconds variable
 	 typedef signed long seconds_type;
 	 
-	 //! Seconds (since the UNIX Epoch; 1970-01-01 00:00)
-	 seconds_type seconds;
-	 
 	 //! Type of the nanoseconds variable
 	 typedef signed long nanoseconds_type;
 	 
-	 //! Nanoseconds (additional to 'seconds')
+	 /**
+	  * \brief Number of seconds
+	  *
+	  * This is the number of seconds field. If the time set from the
+	  * system, this represents the number of seconds since the \e UNIX
+	  * \e Epoch (1970-01-01 00:00:00.0)
+	  */
+	 seconds_type seconds;
+	 
+	 /**
+	  * \brief Number of nanoseconds
+	  * 
+	  * This is the number of nanoseconds, following the \p seconds count.
+	  */
 	 nanoseconds_type nanoseconds;
 	 
 	 
-	 //! Default constructor
+	 /**
+	  * \brief Default constructor
+	  *
+	  * This is a blank constructor, and will initialise the structure to
+	  * zeros.
+	  */
 	 Time(void)
-	   : seconds(0), nanoseconds(0)
+	   : seconds(0),
+	     nanoseconds(0)
 	   {};
       
-	 //! Copy constructor
+	 /**
+	  * \brief Copy constructor
+	  * 
+	  * Creates a brand new copy of another Time structure
+	  * 
+	  * \param time The Time structure to create a copy from
+	  */
 	 Time(const Time& time)
 	   : seconds(time.seconds),
 	     nanoseconds(time.nanoseconds)
 	   {};
       
-	 //! Constructor (pass a 'true' here and the time will be set now)
+	 /**
+	  * \brief Current time constructor
+	  * 
+	  * For convenience, passing a boolean value of \c true here will
+	  * cause the current system time to be set on this object when it is
+	  * created. The result will be a Time structure representing the time
+	  * it was created.
+	  */
 	 explicit Time(const bool setTimeNow)
 	   : seconds(0), nanoseconds(0)
 	   {
 	      if (setTimeNow) {
-		 setTime();
+		 (void)setTime();
 	      }
 	   };
       
-	 //! Constructor (from a 'time_t')
+	 /**
+	  * \brief Constructor (from a '\c time_t')
+	  * 
+	  * Convert a time of the \c time_t type into a new Time structure.
+	  * 
+	  * \param time The time you wish to convert, of \c time_t type
+	  */
 	 Time(const time_t& time)
 	   : seconds(time),
 	     nanoseconds(0)
 	   {};
       
-	 //! Constructor (from a 'struct timespec')
-	 Time(const timespec& time)
+	 /**
+	  * \brief Constructor (from a '\c struct \c timespec')
+	  * 
+	  * This will convert a \c struct \c timespec time structure into a
+	  * Time structure.
+	  * 
+	  * \param time The \c struct \c timespec time you wish to convert
+	  */
+	 Time(const struct timespec& time)
 	   : seconds(time.tv_sec),
 	     nanoseconds(time.tv_nsec)
 	   {};
       
-	 //! Constructor (from a 'struct timeval')
-	 Time(const timeval& time)
+	 /**
+	  * \brief Constructor (from a '\c struct \c timeval')
+	  * 
+	  * This will convert a \c struct \c timeval structure to a Time
+	  * structure. Note that the precision of the \c timeval structure is
+	  * only as small as \e microseconds.
+	  * 
+	  * \param time A \c struct \c timeval time to convert
+	  */
+	 Time(const struct timeval& time)
 	   : seconds(time.tv_sec),
 	     nanoseconds(time.tv_usec * 1000)
 	   {};
@@ -152,18 +227,18 @@ namespace AIS {
 	   { return time_t(seconds); };
 	 
 	 //! Convert this to a 'struct timespec'
-	 operator timespec(void) const
+	 operator struct timespec(void) const
 	   {
-	      timespec result;
+	      struct timespec result;
 	      result.tv_sec = seconds;
 	      result.tv_nsec = nanoseconds;
 	      return result;
 	   };
 	 
 	 //! Convert this to a 'struct timeval'
-	 operator timeval(void) const
+	 operator struct timeval(void) const
 	   {
-	      timeval result;
+	      struct timeval result;
 	      result.tv_sec = seconds;
 	      result.tv_usec = nanoseconds / 1000;
 	      return result;
@@ -179,7 +254,7 @@ namespace AIS {
 	   };
 	 
 	 //! Assignment operator (from a 'struct timespec')
-	 const Time& operator=(const timespec& time)
+	 const Time& operator=(const struct timespec& time)
 	   {
 	      this->seconds = time.tv_sec;
 	      this->nanoseconds = time.tv_nsec;
@@ -187,7 +262,7 @@ namespace AIS {
 	   };
 	 
 	 //! Assignment operator (from a 'struct timeval')
-	 const Time& operator=(const timeval& time)
+	 const Time& operator=(const struct timeval& time)
 	   {
 	      this->seconds = time.tv_sec;
 	      this->nanoseconds = time.tv_usec * 1000;
