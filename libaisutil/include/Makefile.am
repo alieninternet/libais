@@ -26,6 +26,7 @@ nobase_include_HEADERS=\
 	aisutil/string/tokens.h \
 	aisutil/config.h \
 	aisutil/aisutilconf.h \
+	aisutil/sha1.h \
 	aisutil/socket.h \
 	aisutil/string.h \
 	aisutil/utils.h \

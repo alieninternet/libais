@@ -2,6 +2,8 @@
 Version 1.1
   * Fixed makefile issues pertaining to the installation of headers.. Oops!
   * Merged in Utils::toBool(), Utils::baseXStr(), and Utils::validateUTF8()
+  * Merged in SHA1:: routines, however the OpenSSL integration is not yet
+    enabled
   * Other very minor bugfixes
 
 Version 1.0
