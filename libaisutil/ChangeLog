@@ -3,6 +3,7 @@ Version 1.3
   * close() call now returning a boolean
   * Added Time::Time(bool) - pass 'true' here and the time will be set upon
     construction.
+  * A rudimentary test suite has been added ('make check')
 
 Version 1.2
   * StringMask:: now inherits from String::, as was originally intended, and
