@@ -1,6 +1,6 @@
 /* $Id$
  * 
- * Copyright (c) 1996,1998,2001,2003 Alien Internet Services
+ * Copyright (c) 1996,1998,2001,2003,2004 Alien Internet Services
  *
  * This file is a part of LibAISutil.
  * 
@@ -59,7 +59,7 @@ namespace AIS {
 	  * 
 	  * \param mask A string to be stored (should be a mask)
 	  */
-	 template <class T>
+	 template <typename T>
 	   StringMask(const T& mask)
 	     : String(mask)
 	     {};

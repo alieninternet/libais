@@ -231,7 +231,7 @@ namespace AIS {
 	  * \param rhs The time to add to this time
 	  * \return A reference to this time instance after the addition
 	  */
-	 template <class T>
+	 template <typename T>
 	   const Time& operator+=(const T& rhs)
 	   { return ((*this) = (*this) + rhs); };
 
@@ -255,7 +255,7 @@ namespace AIS {
 	  * \param rhs The time to subtract from this time
 	  * \return A reference to this time instance after the subtraction
 	  */
-	 template <class T>
+	 template <typename T>
 	   const Time& operator-=(const T& rhs)
 	   { return ((*this) = (*this) - rhs); };
 
@@ -297,7 +297,7 @@ namespace AIS {
 	  * \param rhs The amount to divide this time by
 	  * \return The divided time as a Time structure
 	  */
-	 template <class T>
+	 template <typename T>
 	   const Time operator/(const T& rhs) const
 	   {
 	      const double result = (*this) / rhs;
@@ -311,7 +311,7 @@ namespace AIS {
 	  * \param rhs The amount to divide from this time
 	  * \return A reference to this time instance after the division
 	  */
-	 template <class T>
+	 template <typename T>
 	   const Time& operator/=(const T& rhs)
 	   { return ((*this) = (*this) / rhs); };
 
@@ -343,7 +343,7 @@ namespace AIS {
 	  *    time
 	  * \retval false The given parameter is considered equal to this time
 	  */
-	 template <class T>
+	 template <typename T>
 	   const bool operator!=(const T& rhs) const
 	   { return (!((*this) == rhs)); };
 	 
@@ -399,7 +399,7 @@ namespace AIS {
 	  * \retval true The given value is greater than or equal to this Time
 	  * \retval false The given value is less than this Time
 	  */
-	 template <class T>
+	 template <typename T>
 	   const bool operator>=(const T& rhs) const
 	   { return (!((*this) < rhs)); };
 	 
@@ -413,7 +413,7 @@ namespace AIS {
 	  * \retval true The given value is less than or equal to this Time
 	  * \retval false The given value is greater than this Time
 	  */
-	 template <class T>
+	 template <typename T>
 	   const bool operator<=(const T& rhs) const
 	   { return (!((*this) > rhs)); };
 	 

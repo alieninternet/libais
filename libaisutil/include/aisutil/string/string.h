@@ -1,6 +1,6 @@
 /* $Id$
  * 
- * Copyright (c) 1996,1999,2001,2002,2003 Alien Internet Services
+ * Copyright (c) 1996,1999,2001,2002,2003,2004 Alien Internet Services
  *
  * This file is a part of LibAISutil.
  * 
@@ -52,11 +52,11 @@ namespace AIS {
 	 //! The magic constructors
 	 String(void) : std::string("") {};
 	 String(char c) : std::string(&c) {};
-	 template <class Ta>
+	 template <typename Ta>
 	   String(const Ta& a) 
 	     : std::string(a) 
 	     {};
-	 template <class Ta, class Tb>
+	 template <typename Ta, typename Tb>
 	   String(const Ta& a, const Tb& b) 
 	     : std::string(a, b)
 	     {};
@@ -94,7 +94,7 @@ namespace AIS {
 	  * \param input Something to convert to a string
 	  * \return A string representing whatever was giving as the \p input
 	  */
-	 template <class T>
+	 template <typename T>
 	   static const std::string convert(const T& input) 
 	     {
 		std::ostringstream out;

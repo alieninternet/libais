@@ -1,6 +1,6 @@
 /* $Id$
  * 
- * Copyright (c) 1999,2000,2002,2003 Alien Internet Services
+ * Copyright (c) 1999,2000,2002,2003,2004 Alien Internet Services
  *
  * This file is a part of LibAISutil.
  * 
@@ -53,7 +53,7 @@ namespace AIS {
 	  *    If this is not provided, tokenisation will begin at the start
 	  *    of the string.
 	  */ 
-	 template <class T>
+	 template <typename T>
 	   StringTokens(const T& string,
 			const String::size_type pos = 0)
 	     : String(string),

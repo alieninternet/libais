@@ -1,6 +1,6 @@
 /* $Id$
  * 
- * Copyright (c) 2002,2003 Alien Internet Services
+ * Copyright (c) 2002,2003,2004 Alien Internet Services
  * 
  * This file is a part of LibAISutil.
  * 
@@ -156,7 +156,7 @@ namespace AIS {
 	     * \overload
 	     * \copydoc setLocalAddress(const std::string& address)
 	     */
-	    template <class T>
+	    template <typename T>
 	      const bool setLocalAddress(const T& address)
 		{ return setAddress(localAddress, address); };
 
@@ -170,7 +170,7 @@ namespace AIS {
 	     * \overload
 	     * \copydoc setRemoteAddress(const std::string& address)
 	     */
-	    template <class T>
+	    template <typename T>
 	      const bool setRemoteAddress(const T& address)
 		{ return setAddress(remoteAddress, address); };
 
