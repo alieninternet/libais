@@ -35,7 +35,7 @@
 #include "aisutil/config/data.h"
 #include "aisutil/config/parser.h"
 
-using namespace AISutil;
+using namespace AIS::Util;
 
 
 /* This is our 'magic marker char' used to, heh, 'encode' a string of text

@@ -25,7 +25,7 @@
 
 #include "aisutil/time.h"
 
-using namespace AISutil;
+using namespace AIS::Util;
 
 
 /* Addition operator

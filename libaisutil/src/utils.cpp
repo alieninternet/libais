@@ -29,7 +29,7 @@
 #include "aisutil/utils.h"
 #include "aisutil/string/string.h"
 
-using namespace AISutil;
+using namespace AIS::Util;
 
 
 /* validateUTF8 - Determine if the given UTF-8 sequence is valid

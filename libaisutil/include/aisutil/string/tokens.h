@@ -25,49 +25,51 @@
 # include <aisutil/string/string.h>
 
 
-namespace AISutil {
-   //! String tokeniser class for the String class
-   class StringTokens : public String {
-    private:
-      //! Our position, usually pointing to the first char of the next token
-      size_type position;
+namespace AIS {
+   namespace Util {
+      //! String tokeniser class for the String class
+      class StringTokens : public String {
+       private:
+	 //! Our position, usually pointing to the first char of the next token
+	 size_type position;
+	 
+       public:
+	 //! Constructor
+	 template <class T>
+	   StringTokens(const T& s, 
+			const String::size_type p = 0)
+	     : String(s),
+	       position(p)
+	     {};
+	 
+	 //! Destructor
+	 ~StringTokens(void)
+	   {};
       
-    public:
-      //! Constructor
-      template <class T>
-	StringTokens(const T& s, 
-		     const String::size_type p = 0)
-	: String(s),
-          position(p)
-	{};
-      
-      //! Destructor
-      ~StringTokens(void)
-	{};
-      
-      //! Any more tokens left?
-      bool hasMoreTokens(void) const
-	{ return (position < length()); };
-
-      //! Count the number of tokens
-      unsigned int countTokens(void) const;
-      
-      //! Count the number of tokens, using the given delimiter
-      unsigned int countTokens(const char delimiter) const;
-      
-      //! Get the next token
-      String nextToken(void);
-      
-      //! Get the next token, using the given delimiter
-      String nextToken(const char delimiter);
-      
-      //! Get next IRC style token
-      String nextColonToken(void);
-      
-      //! Get the rest of the line (without displacing the current position)
-      String rest(void) const
-	{ return substr(position, length() - position); };
-   }; // class StringTokens
-}; // namespace AISutil
+	 //! Any more tokens left?
+	 bool hasMoreTokens(void) const
+	   { return (position < length()); };
+	 
+	 //! Count the number of tokens
+	 unsigned int countTokens(void) const;
+	 
+	 //! Count the number of tokens, using the given delimiter
+	 unsigned int countTokens(const char delimiter) const;
+	 
+	 //! Get the next token
+	 String nextToken(void);
+	 
+	 //! Get the next token, using the given delimiter
+	 String nextToken(const char delimiter);
+	 
+	 //! Get next IRC style token
+	 String nextColonToken(void);
+	 
+	 //! Get the rest of the line (without displacing the current position)
+	 String rest(void) const
+	   { return substr(position, length() - position); };
+      }; // class StringTokens
+   }; // namespace Util
+}; // namespace AIS
 
 #endif // _INCLUDE_LIBAISUTIL_STRING_STRINGTOKENS_H_

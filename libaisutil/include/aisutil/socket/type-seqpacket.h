@@ -30,35 +30,37 @@ extern "C" {
 # include <unistd.h>
 };
 
-namespace AISutil {
-   //! Sequential packet socket type
-   class SocketTypeSEQPACKET : public SocketType {
-    private:
-      const Socket::blockSize_type bufferSize;
-      char* buffer;
-
-    protected:
-      //! Constructor
-      SocketTypeSEQPACKET(const Socket::blockSize_type bs)
-	: bufferSize(bs), 
-          buffer(0)
-	{ buffer = new char[bs]; };
-      
-    public:
-      //! Destructor
-      virtual ~SocketTypeSEQPACKET(void)
-	{ delete[] buffer; };
-      
-      //! Write data to this socket
-      const int write(const std::string& data);
-
-      //! Read data from this socket
-      bool read(std::ostream& databuff);
-      
-      //! Return the block size per read
-      size_t getReadBlockSize(void) const
-	{ return bufferSize; };
-   }; // class SocketTypeSEQPACKET
-}; // namespace AISutil
+namespace AIS {
+   namespace Util {
+      //! Sequential packet socket type
+      class SocketTypeSEQPACKET : public SocketType {
+       private:
+	 const Socket::blockSize_type bufferSize;
+	 char* buffer;
+	 
+       protected:
+	 //! Constructor
+	 SocketTypeSEQPACKET(const Socket::blockSize_type bs)
+	   : bufferSize(bs), 
+	     buffer(0)
+	   { buffer = new char[bs]; };
+	 
+       public:
+	 //! Destructor
+	 virtual ~SocketTypeSEQPACKET(void)
+	   { delete[] buffer; };
+	 
+	 //! Write data to this socket
+	 const int write(const std::string& data);
+	 
+	 //! Read data from this socket
+	 bool read(std::ostream& databuff);
+	 
+	 //! Return the block size per read
+	 size_t getReadBlockSize(void) const
+	   { return bufferSize; };
+      }; // class SocketTypeSEQPACKET
+   }; // namespace Util
+}; // namespace AIS
    
 #endif // _INCLUDE_LIBAISUTIL_SOCKET_TYPE_SEQPACKET_H_

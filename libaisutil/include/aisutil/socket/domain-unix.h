@@ -32,70 +32,72 @@ extern "C" {
 # include <sys/un.h>
 };
 
-namespace AISutil {
-   //! Unix Socket Domain
-   class SocketDomainUNIX : public SocketDomain {
-    private:
-      sockaddr_un localAddress;
-      sockaddr_un remoteAddress;
-
-      //! Set the given address in the given address structure
-      bool setAddress(sockaddr_un& addr, const std::string& addrstr);
-      
-    protected:
-      //! Constructor
-      SocketDomainUNIX(void);
-      
-      //! Constructor used when creating a new connection via accept()
-      SocketDomainUNIX(const sockaddr_un& newLocalAddress, 
-		       const sockaddr_un& newRemoteAddress);
-      
-    public:
-      //! Destructor
-      virtual ~SocketDomainUNIX(void)
-	{};
-      
-      //! Return the local address
-      const sockaddr_un& getLocalAddressRef(void) const
-	{ return localAddress; };
-      
-      //! Return the remote address
-      const sockaddr_un& getRemoteAddressRef(void) const
-	{ return remoteAddress; };
-      
-      //! Return the local address
-      const sockaddr& getLocalAddress(socklen_t& addrlen) const
-	{ addrlen = sizeof(localAddress); return (sockaddr&)localAddress; };
-      
-      //! Return the remote address
-      const sockaddr& getRemoteAddress(socklen_t& addrlen) const
-	{ addrlen = sizeof(remoteAddress); return (sockaddr&)remoteAddress; };
-      
-      //! Return the local address (as a string)
-      std::string getLocalAddress(void) const
-	{ return localAddress.sun_path; };
-      
-      //! Return the remote address (as a string)
-      std::string getRemoteAddress(void) const
-	{ return remoteAddress.sun_path; };
-      
-      //! Set the local address
-      bool setLocalAddress(const std::string& address)
-	{ return setAddress(localAddress, address); };
-
-      //! Set the remote address
-      bool setRemoteAddress(const std::string& address)
-	{ return setAddress(remoteAddress, address); };
-      
-      //! Bind a socket its port
-      bool bind(void);
-
-      //! Connect this socket (unavailable on some socket types)
-      bool connect(void);
-      
-      //! Close the socket
-      const bool close(void);
-   }; // class SocketDomainUNIX
-}; // namespace AISutil
+namespace AIS {
+   namespace Util {
+      //! Unix Socket Domain
+      class SocketDomainUNIX : public SocketDomain {
+       private:
+	 sockaddr_un localAddress;
+	 sockaddr_un remoteAddress;
+	 
+	 //! Set the given address in the given address structure
+	 bool setAddress(sockaddr_un& addr, const std::string& addrstr);
+	 
+       protected:
+	 //! Constructor
+	 SocketDomainUNIX(void);
+	 
+	 //! Constructor used when creating a new connection via accept()
+	 SocketDomainUNIX(const sockaddr_un& newLocalAddress, 
+			  const sockaddr_un& newRemoteAddress);
+	 
+       public:
+	 //! Destructor
+	 virtual ~SocketDomainUNIX(void)
+	   {};
+	 
+	 //! Return the local address
+	 const sockaddr_un& getLocalAddressRef(void) const
+	   { return localAddress; };
+	 
+	 //! Return the remote address
+	 const sockaddr_un& getRemoteAddressRef(void) const
+	   { return remoteAddress; };
+	 
+	 //! Return the local address
+	 const sockaddr& getLocalAddress(socklen_t& addrlen) const
+	   { addrlen = sizeof(localAddress); return (sockaddr&)localAddress; };
+	 
+	 //! Return the remote address
+	 const sockaddr& getRemoteAddress(socklen_t& addrlen) const
+	   { addrlen = sizeof(remoteAddress); return (sockaddr&)remoteAddress; };
+	 
+	 //! Return the local address (as a string)
+	 std::string getLocalAddress(void) const
+	   { return localAddress.sun_path; };
+	 
+	 //! Return the remote address (as a string)
+	 std::string getRemoteAddress(void) const
+	   { return remoteAddress.sun_path; };
+	 
+	 //! Set the local address
+	 bool setLocalAddress(const std::string& address)
+	   { return setAddress(localAddress, address); };
+	 
+	 //! Set the remote address
+	 bool setRemoteAddress(const std::string& address)
+	   { return setAddress(remoteAddress, address); };
+	 
+	 //! Bind a socket its port
+	 bool bind(void);
+	 
+	 //! Connect this socket (unavailable on some socket types)
+	 bool connect(void);
+	 
+	 //! Close the socket
+	 const bool close(void);
+      }; // class SocketDomainUNIX
+   }; // namespace Util
+}; // namespace AIS
    
 #endif // _INCLUDE_AISUTIL_SOCKET_DOMAIN_UNIX_H_

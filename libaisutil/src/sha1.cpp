@@ -29,7 +29,7 @@ extern "C" {
 #include "aisutil/utils.h"
 #include "aisutil/sha1.h"
 
-using namespace AISutil;
+using namespace AIS::Util;
 
 // If we have OpenSSL, we can just use their SHA1 function -- YAY!
 #ifndef HAVE_OPENSSL

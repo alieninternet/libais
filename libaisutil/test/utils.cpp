@@ -27,6 +27,8 @@
 
 #include "tests.h"
 
+using namespace AIS::Util;
+
 
 int main(int argc, char **argv)
 {
@@ -54,12 +56,12 @@ int main(int argc, char **argv)
    };
    for (unsigned int i = 0; toBoolTests[i].string != 0; ++i) {
       TEST_STATUS(" -=> " << toBoolTests[i].string);
-      TEST_FAIL_IF(AISutil::Utils::toBool(toBoolTests[i].string) !=
+      TEST_FAIL_IF(Utils::toBool(toBoolTests[i].string) !=
 		   toBoolTests[i].expectedValue);
    }
    
    TEST_STATUS("toBool(): Checking unknown boolean strings");
-   TEST_FAIL_IF(AISutil::Utils::toBool("this should break") != -1);
+   TEST_FAIL_IF(Utils::toBool("this should break") != -1);
    
    
    TEST_STATUS("baseXStr(): Checking value to string");
@@ -155,8 +157,7 @@ int main(int argc, char **argv)
    };
    for (unsigned int i = 2; baseXStrTestResults[i] != 0; ++i) {
       TEST_STATUS(" -=> Base " << i);
-      TEST_FAIL_IF(AISutil::Utils::baseXStr(number, i) !=
-		   baseXStrTestResults[i]);
+      TEST_FAIL_IF(Utils::baseXStr(number, i) != baseXStrTestResults[i]);
    }
 
 

@@ -28,7 +28,7 @@
 
 #include "aisutil/string/tokens.h"
 
-using namespace AISutil;
+using namespace AIS::Util;
 
 
 /* tokenCounter - Helper for the countTokens function below

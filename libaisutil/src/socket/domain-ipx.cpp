@@ -38,7 +38,7 @@ extern "C" {
 
 #include "aisutil/socket/domain-ipx.h"
 
-using namespace AISutil;
+using namespace AIS::Util;
 
 
 /* SocketDomainIPX - Blank boring constructor!

@@ -39,7 +39,7 @@ extern "C" {
 
 #include "aisutil/string/mask.h"
 
-using namespace AISutil;
+using namespace AIS::Util;
 
 
 /* matches - Do a mask check (case-insensitive)

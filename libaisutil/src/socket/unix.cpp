@@ -38,7 +38,7 @@ extern "C" {
 
 #include "aisutil/socket/unix.h"
 
-using namespace AISutil;
+using namespace AIS::Util;
 
 
 /* accept - Accept a new connection on a socket

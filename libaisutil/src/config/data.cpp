@@ -34,7 +34,7 @@
 #include "aisutil/config/data.h"
 #include "aisutil/utils.h"
 
-using namespace AISutil;
+using namespace AIS::Util;
 
 
 /* varHandleBoolean - Handle a 'bool' (use first value)

@@ -35,7 +35,7 @@ extern "C" {
 
 #include "aisutil/socket/domain-unix.h"
 
-using namespace AISutil;
+using namespace AIS::Util;
 
 // If UNIX_PATH_MAX is still undefined, presume the normal 108 char value
 #ifndef UNIX_PATH_MAX

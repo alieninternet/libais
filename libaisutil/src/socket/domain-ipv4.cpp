@@ -39,7 +39,7 @@ extern "C" {
 
 #include "aisutil/socket/domain-ipv4.h"
 
-using namespace AISutil;
+using namespace AIS::Util;
 
 
 /* SocketDomainIPv4 - Blank boring constructor!

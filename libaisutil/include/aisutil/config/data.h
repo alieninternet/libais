@@ -24,40 +24,44 @@
 
 # include <vector>
 
-namespace AISutil {
-   class ConfigData;
+namespace AIS {
+   namespace Util {
+      class ConfigData;
+   };
 };
 
 # include <aisutil/string/string.h>
 # include <aisutil/config/parser.h>
 
-namespace AISutil {
-   //! Configuration data base class
-   class ConfigData {
-    public:
-      typedef std::vector < String > textBuffer_type;
-
-      //! Constructor
-      ConfigData(void) 
-	{};
-      
-      //! Destructor
-      virtual ~ConfigData(void)
-	{};
-      
-      // Variable definition handlers
-      static LIBAISUTIL_CONFIG_VARIABLE_HANDLER(varHandleBoolean);
-      static LIBAISUTIL_CONFIG_VARIABLE_HANDLER(varHandleHostName);
-      static LIBAISUTIL_CONFIG_VARIABLE_HANDLER(varHandleString);
-      static LIBAISUTIL_CONFIG_VARIABLE_HANDLER(varHandleStringOneWord);
-      static LIBAISUTIL_CONFIG_VARIABLE_HANDLER(varHandleUnsignedChar);
-      static LIBAISUTIL_CONFIG_VARIABLE_HANDLER(varHandleUnsignedCharNoZero);
-      static LIBAISUTIL_CONFIG_VARIABLE_HANDLER(varHandleUnsignedShort);
-      static LIBAISUTIL_CONFIG_VARIABLE_HANDLER(varHandleUnsignedShortNoZero);
-      static LIBAISUTIL_CONFIG_VARIABLE_HANDLER(varHandleUnsignedLong);
-      static LIBAISUTIL_CONFIG_VARIABLE_HANDLER(varHandleUnsignedLongNoZero);
-   }; // class ConfigData
-}; // namespace AISutil
+namespace AIS {
+   namespace Util {
+      //! Configuration data base class
+      class ConfigData {
+       public:
+	 typedef std::vector < String > textBuffer_type;
+	 
+	 //! Constructor
+	 ConfigData(void) 
+	   {};
+	 
+	 //! Destructor
+	 virtual ~ConfigData(void)
+	   {};
+	 
+	 // Variable definition handlers
+	 static LIBAISUTIL_CONFIG_VARIABLE_HANDLER(varHandleBoolean);
+	 static LIBAISUTIL_CONFIG_VARIABLE_HANDLER(varHandleHostName);
+	 static LIBAISUTIL_CONFIG_VARIABLE_HANDLER(varHandleString);
+	 static LIBAISUTIL_CONFIG_VARIABLE_HANDLER(varHandleStringOneWord);
+	 static LIBAISUTIL_CONFIG_VARIABLE_HANDLER(varHandleUnsignedChar);
+	 static LIBAISUTIL_CONFIG_VARIABLE_HANDLER(varHandleUnsignedCharNoZero);
+	 static LIBAISUTIL_CONFIG_VARIABLE_HANDLER(varHandleUnsignedShort);
+	 static LIBAISUTIL_CONFIG_VARIABLE_HANDLER(varHandleUnsignedShortNoZero);
+	 static LIBAISUTIL_CONFIG_VARIABLE_HANDLER(varHandleUnsignedLong);
+	 static LIBAISUTIL_CONFIG_VARIABLE_HANDLER(varHandleUnsignedLongNoZero);
+      }; // class ConfigData
+   }; // namespace Util
+}; // namespace AIS
 
 #endif // _INCLUDE_LIBAISUTIL_CONFIG_DATA_H_
    

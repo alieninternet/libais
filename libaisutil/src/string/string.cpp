@@ -28,7 +28,7 @@
 
 #include "aisutil/string/string.h"
 
-using namespace AISutil;
+using namespace AIS::Util;
 
 
 /* toLower - Convert an entire string to lower case

@@ -37,7 +37,7 @@ extern "C" {
 
 #include "aisutil/socket/type-seqpacket.h"
 
-using namespace AISutil;
+using namespace AIS::Util;
 
 
 /* write - Write text to a socket

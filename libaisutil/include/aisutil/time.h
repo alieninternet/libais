@@ -26,177 +26,179 @@
 # include <ctime>
 # include <sys/time.h>
 
-namespace AISutil {
-   //! Basic time routines (supposed to be simplistic)
-   struct Time {
-      //! Type of the seconds variable
-      typedef signed long seconds_type;
+namespace AIS {
+   namespace Util {
+      //! Basic time routines (supposed to be simplistic)
+      struct Time {
+	 //! Type of the seconds variable
+	 typedef signed long seconds_type;
+	 
+	 //! Seconds (since the UNIX Epoch; 1970-01-01 00:00)
+	 seconds_type seconds;
+	 
+	 //! Type of the nanoseconds variable
+	 typedef signed long nanoseconds_type;
+	 
+	 //! Nanoseconds (additional to 'seconds')
+	 nanoseconds_type nanoseconds;
+	 
+	 
+	 //! Default constructor
+	 Time(void)
+	   : seconds(0), nanoseconds(0)
+	   {};
       
-      //! Seconds (since the UNIX Epoch; 1970-01-01 00:00)
-      seconds_type seconds;
-
-      //! Type of the nanoseconds variable
-      typedef signed long nanoseconds_type;
+	 //! Copy constructor
+	 Time(const Time& time)
+	   : seconds(time.seconds),
+	     nanoseconds(time.nanoseconds)
+	   {};
       
-      //! Nanoseconds (additional to 'seconds')
-      nanoseconds_type nanoseconds;
-
+	 //! Constructor (pass a 'true' here and the time will be set now)
+	 Time(const bool setTimeNow)
+	   : seconds(0), nanoseconds(0)
+	   {
+	      if (setTimeNow) {
+		 setTime();
+	      }
+	   };
       
-      //! Default constructor
-      Time(void)
-	: seconds(0), nanoseconds(0)
-	{};
+	 //! Constructor (from a 'time_t')
+	 Time(const time_t& time)
+	   : seconds(time),
+	     nanoseconds(0)
+	   {};
       
-      //! Copy constructor
-      Time(const Time& time)
-	: seconds(time.seconds),
-          nanoseconds(time.nanoseconds)
-	{};
+	 //! Constructor (from a 'struct timespec')
+	 Time(const timespec& time)
+	   : seconds(time.tv_sec),
+	     nanoseconds(time.tv_nsec)
+	   {};
       
-      //! Constructor (pass a 'true' here and the time will be set now)
-      Time(const bool setTimeNow)
-	: seconds(0), nanoseconds(0)
-	{
-	   if (setTimeNow) {
-	      setTime();
-	   }
-	};
-      
-      //! Constructor (from a 'time_t')
-      Time(const time_t& time)
-	: seconds(time),
-          nanoseconds(0)
-	{};
-      
-      //! Constructor (from a 'struct timespec')
-      Time(const timespec& time)
-	: seconds(time.tv_sec),
-          nanoseconds(time.tv_nsec)
-	{};
-      
-      //! Constructor (from a 'struct timeval')
-      Time(const timeval& time)
-	: seconds(time.tv_sec),
-          nanoseconds(time.tv_usec * 1000)
-	{};
-      
-      
-      //! Destructor
-      ~Time(void)
-	{};
+	 //! Constructor (from a 'struct timeval')
+	 Time(const timeval& time)
+	   : seconds(time.tv_sec),
+	     nanoseconds(time.tv_usec * 1000)
+	   {};
       
       
-      //! Addition operator
-      const Time operator+(const Time& rhs) const;
-
-      //! Addition assignment operator
-      const Time& operator+=(const Time& rhs)
-	{ return ((*this) = (*this) + rhs); };
-      
-      //! Subtraction operator
-      const Time operator-(const Time& rhs) const;
-
-      //! Subtraction assignment operator
-      const Time& operator-=(const Time& rhs)
-	{ return ((*this) = (*this) - rhs); };
-      
-      //! Division operator
-      const double operator/(const Time& rhs) const;
-
-
-      //! Equality operator
-      const bool operator==(const Time& rhs) const
-	{
-	   return ((seconds == rhs.seconds) &&
-		   (nanoseconds == rhs.nanoseconds));
-	};
-      
-      //! Not equal-to operator
-      const bool operator!=(const Time& rhs) const
-	{ return (!((*this) == rhs)); };
-      
-      //! Greater-than operator
-      const bool operator>(const Time& rhs) const
-	{
-	   if ((seconds > rhs.seconds) ||
-	       ((seconds == rhs.seconds) &&
-		(nanoseconds > rhs.nanoseconds))) {
-	      return true;
-	   }
-	   return false;
-	};
-      
-      //! Less-than operator
-      const bool operator<(const Time& rhs) const
-	{
-	   if ((seconds < rhs.seconds) ||
-	       ((seconds == rhs.seconds) &&
-		(nanoseconds < rhs.nanoseconds))) {
-	      return true;
-	   }
-	   return false;
-	};
-      
-      //! Greater-than or equal to operator
-      const bool operator>=(const Time& rhs) const
-	{ return (!((*this) < rhs)); };
-      
-      //! Less-than or equal to operator
-      const bool operator<=(const Time& rhs) const
-	{ return (!((*this) > rhs)); };
-
-      
-      //! Convert this to a 'time_t' (we hope)
-      operator time_t(void) const
-	{ return time_t(seconds); };
-
-      //! Convert this to a 'struct timespec'
-      operator timespec(void) const
-	{
-	   timespec result;
-	   result.tv_sec = seconds;
-	   result.tv_nsec = nanoseconds;
-	   return result;
-	};
-
-      //! Convert this to a 'struct timeval'
-      operator timeval(void) const
-	{
-	   timeval result;
-	   result.tv_sec = seconds;
-	   result.tv_usec = nanoseconds / 1000;
-	   return result;
-	};
-
-      
-      //! Assignment operator (from a 'time_t')
-      const Time& operator=(const time_t& time)
-	{
-	   this->seconds = time;
-	   this->nanoseconds = 0;
-	   return (*this);
-	};
-
-      //! Assignment operator (from a 'struct timespec')
-      const Time& operator=(const timespec& time)
-	{
-	   this->seconds = time.tv_sec;
-	   this->nanoseconds = time.tv_nsec;
-	   return (*this);
-	};
-      
-      //! Assignment operator (from a 'struct timeval')
-      const Time& operator=(const timeval& time)
-	{
-	   this->seconds = time.tv_sec;
-	   this->nanoseconds = time.tv_usec * 1000;
-	   return (*this);
-	};
-
-      
-      //! Set the time to the time now (according to the local timezone)
-      const bool setTime(void);
-   }; // struct Time
-}; // namespace AISutil
+	 //! Destructor
+	 ~Time(void)
+	   {};
+	 
+	 
+	 //! Addition operator
+	 const Time operator+(const Time& rhs) const;
+	 
+	 //! Addition assignment operator
+	 const Time& operator+=(const Time& rhs)
+	   { return ((*this) = (*this) + rhs); };
+	 
+	 //! Subtraction operator
+	 const Time operator-(const Time& rhs) const;
+	 
+	 //! Subtraction assignment operator
+	 const Time& operator-=(const Time& rhs)
+	   { return ((*this) = (*this) - rhs); };
+	 
+	 //! Division operator
+	 const double operator/(const Time& rhs) const;
+	 
+	 
+	 //! Equality operator
+	 const bool operator==(const Time& rhs) const
+	   {
+	      return ((seconds == rhs.seconds) &&
+		      (nanoseconds == rhs.nanoseconds));
+	   };
+	 
+	 //! Not equal-to operator
+	 const bool operator!=(const Time& rhs) const
+	   { return (!((*this) == rhs)); };
+	 
+	 //! Greater-than operator
+	 const bool operator>(const Time& rhs) const
+	   {
+	      if ((seconds > rhs.seconds) ||
+		  ((seconds == rhs.seconds) &&
+		   (nanoseconds > rhs.nanoseconds))) {
+		 return true;
+	      }
+	      return false;
+	   };
+	 
+	 //! Less-than operator
+	 const bool operator<(const Time& rhs) const
+	   {
+	      if ((seconds < rhs.seconds) ||
+		  ((seconds == rhs.seconds) &&
+		   (nanoseconds < rhs.nanoseconds))) {
+		 return true;
+	      }
+	      return false;
+	   };
+	 
+	 //! Greater-than or equal to operator
+	 const bool operator>=(const Time& rhs) const
+	   { return (!((*this) < rhs)); };
+	 
+	 //! Less-than or equal to operator
+	 const bool operator<=(const Time& rhs) const
+	   { return (!((*this) > rhs)); };
+	 
+	 
+	 //! Convert this to a 'time_t' (we hope)
+	 operator time_t(void) const
+	   { return time_t(seconds); };
+	 
+	 //! Convert this to a 'struct timespec'
+	 operator timespec(void) const
+	   {
+	      timespec result;
+	      result.tv_sec = seconds;
+	      result.tv_nsec = nanoseconds;
+	      return result;
+	   };
+	 
+	 //! Convert this to a 'struct timeval'
+	 operator timeval(void) const
+	   {
+	      timeval result;
+	      result.tv_sec = seconds;
+	      result.tv_usec = nanoseconds / 1000;
+	      return result;
+	   };
+	 
+	 
+	 //! Assignment operator (from a 'time_t')
+	 const Time& operator=(const time_t& time)
+	   {
+	      this->seconds = time;
+	      this->nanoseconds = 0;
+	      return (*this);
+	   };
+	 
+	 //! Assignment operator (from a 'struct timespec')
+	 const Time& operator=(const timespec& time)
+	   {
+	      this->seconds = time.tv_sec;
+	      this->nanoseconds = time.tv_nsec;
+	      return (*this);
+	   };
+	 
+	 //! Assignment operator (from a 'struct timeval')
+	 const Time& operator=(const timeval& time)
+	   {
+	      this->seconds = time.tv_sec;
+	      this->nanoseconds = time.tv_usec * 1000;
+	      return (*this);
+	   };
+	 
+	 
+	 //! Set the time to the time now (according to the local timezone)
+	 const bool setTime(void);
+      }; // struct Time
+   }; // namespace Util
+}; // namespace AIS
    
 #endif // _INCLUDE_AISUTIL_TIME_H_

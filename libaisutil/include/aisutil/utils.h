@@ -25,19 +25,21 @@
 # include <string>
 # include <aisutil/string.h>
 
-namespace AISutil {
-   //! Utility stuff - little tid bits and what not..
-   namespace Utils {
-      //! Confirm that the given string, encoded in UTF-8, is valid
-      extern const bool validateUTF8(const std::string& str);
-      
-      //! Convert the given word (as a string) to a boolean value
-      extern const int toBool(const std::string& word);
-      
-      //! Convert the given integer to another base (up to base 85)
-      extern const String baseXStr(unsigned long number,
-				   const unsigned char base);
-   }; // namespace Utils
-}; // namespace AISutil
+namespace AIS {
+   namespace Util {
+      //! Utility stuff - little tid bits and what not..
+      namespace Utils {
+	 //! Confirm that the given string, encoded in UTF-8, is valid
+	 extern const bool validateUTF8(const std::string& str);
+	 
+	 //! Convert the given word (as a string) to a boolean value
+	 extern const int toBool(const std::string& word);
+	 
+	 //! Convert the given integer to another base (up to base 85)
+	 extern const String baseXStr(unsigned long number,
+				      const unsigned char base);
+      }; // namespace Utils
+   }; // namespace Util
+}; // namespace AIS
    
 #endif // _INCLUDE_AISUTIL_UTILS_H_

@@ -58,33 +58,35 @@ extern "C" {
  */
 # define LIBAISUTIL_SOCKET_IPX_SPX_PACKET_SIZE	512
 
-namespace AISutil {
-   //! IPX/SPX socket class
-   class SocketIPXSPX : public SocketDomainIPX, public SocketTypeSEQPACKET {
-    private:
-      //! Constructor used when creating a new connection via accept()
-      SocketIPXSPX(const int newFD,
-		   const sockaddr_ipx& newLocalAddress,
-		   const sockaddr_ipx& newRemoteAddress)
-	: Socket(newFD),
-          SocketDomainIPX(newLocalAddress, newRemoteAddress),
-          SocketTypeSEQPACKET(LIBAISUTIL_SOCKET_IPX_SPX_PACKET_SIZE)
-	{ setNonBlocking(); };
-      
-    public:
-      //! Standard constructor
-      SocketIPXSPX(void)
-	: Socket(::socket(PF_IPX, SOCK_SEQPACKET, NSPROTO_SPX)),
-          SocketTypeSEQPACKET(LIBAISUTIL_SOCKET_IPX_SPX_PACKET_SIZE)
-	{ setNonBlocking(); };
-
-      //! Destructor
-      ~SocketIPXSPX(void)
-	{};
-      
-      //! Accept a connection on this socket
-      Socket* accept(void);
-   }; // class SocketIPXSPX
-}; // namespace AISutil
+namespace AIS {
+   namespace Util {
+      //! IPX/SPX socket class
+      class SocketIPXSPX : public SocketDomainIPX, public SocketTypeSEQPACKET {
+       private:
+	 //! Constructor used when creating a new connection via accept()
+	 SocketIPXSPX(const int newFD,
+		      const sockaddr_ipx& newLocalAddress,
+		      const sockaddr_ipx& newRemoteAddress)
+	   : Socket(newFD),
+	     SocketDomainIPX(newLocalAddress, newRemoteAddress),
+	     SocketTypeSEQPACKET(LIBAISUTIL_SOCKET_IPX_SPX_PACKET_SIZE)
+	   { setNonBlocking(); };
+	 
+       public:
+	 //! Standard constructor
+	 SocketIPXSPX(void)
+	   : Socket(::socket(PF_IPX, SOCK_SEQPACKET, NSPROTO_SPX)),
+	     SocketTypeSEQPACKET(LIBAISUTIL_SOCKET_IPX_SPX_PACKET_SIZE)
+	   { setNonBlocking(); };
+	 
+	 //! Destructor
+	 ~SocketIPXSPX(void)
+	   {};
+	 
+	 //! Accept a connection on this socket
+	 Socket* accept(void);
+      }; // class SocketIPXSPX
+   }; // namespace Util
+}; // namespace AIS
    
 #endif // _INCLUDE_LIBAISUTIL_SOCKET_IPX_SPX_H_

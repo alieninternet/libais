@@ -22,19 +22,21 @@
 #ifndef _INCLUDE_LIBAISUTIL_VERSION_H_
 # define _INCLUDE_LIBAISUTIL_VERSION_H_ 1
 
-namespace AISutil {
-   //! Version and compile-time information
-   namespace Version {
-      extern const char* const programName;	//!< Program name
-      extern const unsigned short versionMajor;	//!< Version major number
-      extern const unsigned short versionMinor;	//!< Version minor number
-      extern const char* const version;		//!< Version identity
-      extern const unsigned char libVersion;	//!< Library API version
-      extern const unsigned char libRevision;	//!< Library API revision
-      extern const unsigned char libAge;	//!< Library API age
-      extern const char* const bugsEmail;	//!< Bug report e-mail
-   };
-};
+namespace AIS {
+   namespace Util {
+      //! Version and compile-time information
+      namespace Version {
+	 extern const char* const programName;		//!< Program name
+	 extern const unsigned short versionMajor;	//!< Version major number
+	 extern const unsigned short versionMinor;	//!< Version minor number
+	 extern const char* const version;		//!< Version identity
+	 extern const unsigned char libVersion;		//!< Library API version
+	 extern const unsigned char libRevision;	//!< Library API revision
+	 extern const unsigned char libAge;		//!< Library API age
+	 extern const char* const bugsEmail;		//!< Bug report e-mail
+      }; // namespace Version
+   }; // namespace Util
+}; // namespace AIS
    
 #endif // _INCLUDE_LIBAISUTIL_VERSION_H_
    

@@ -34,79 +34,79 @@
 #  include <hash_map>
 # endif
 
-namespace AISutil {
-   //! Our String class, which provides a few more handy procedures
-   class String : public std::string {
-    public:
-      //! The magic constructors
-      String(void) : std::string("") {};
-      String(char c) : std::string(&c) {};
-      template <class Ta>
-	String(const Ta& a) 
-	  : std::string(a) 
-	  {};
-      template <class Ta, class Tb>
-	String(const Ta& a, const Tb& b) 
-	  : std::string(a, b)
-	  {};
-      
-      //! Destructor
-      virtual ~String(void) 
-	{};
-      
-      //! Convert the entire string to lower-case
-      String toLower(void) const;
-      
-      //! Convert the entire string to upper-case
-      String toUpper(void) const;
-      
-      //! Convert something via stringstream
-      template <class T>
-	static String convert(const T& in) {
-	 std::ostringstream out;
-	 out << in;
-	 return out.str();
-      };
-      
-      //! Convert to an integer
-      int toInt(void) const {
-	 return atoi(c_str());
-      };
-      
-      //! Convert to a long integer
-      long toLong(void) const {
-	 return atol(c_str());
-      };
-      
-      //! Convert to a double
-      double toDouble(void) const {
-	 return atof(c_str());
-      };
-      
-      //! Pad the beginning of the string so it equates to the given length
-      String prepad(const size_type n, const char c = ' ') const;
-      
-      //! Trim white-space from the string
-      String trim(void) const;
-      
-      //! Trim quotes (", ' and `) from the string
-      String trimQuotes(void) const;
-
+namespace AIS {
+   namespace Util {
+      //! Our String class, which provides a few more handy procedures
+      class String : public std::string {
+       public:
+	 //! The magic constructors
+	 String(void) : std::string("") {};
+	 String(char c) : std::string(&c) {};
+	 template <class Ta>
+	   String(const Ta& a) 
+	     : std::string(a) 
+	     {};
+	 template <class Ta, class Tb>
+	   String(const Ta& a, const Tb& b) 
+	     : std::string(a, b)
+	     {};
+	 
+	 //! Destructor
+	 virtual ~String(void) 
+	   {};
+	 
+	 //! Convert the entire string to lower-case
+	 String toLower(void) const;
+	 
+	 //! Convert the entire string to upper-case
+	 String toUpper(void) const;
+	 
+	 //! Convert something via stringstream
+	 template <class T>
+	   static String convert(const T& in) 
+	     {
+		std::ostringstream out;
+		out << in;
+		return out.str();
+	     };
+	 
+	 //! Convert to an integer
+	 int toInt(void) const 
+	   { return atoi(c_str()); };
+	 
+	 //! Convert to a long integer
+	 long toLong(void) const
+	   { return atol(c_str()); };
+	 
+	 //! Convert to a double
+	 double toDouble(void) const 
+	   { return atof(c_str()); };
+	 
+	 //! Pad the beginning of the string so it equates to the given length
+	 String prepad(const size_type n, const char c = ' ') const;
+	 
+	 //! Trim white-space from the string
+	 String trim(void) const;
+	 
+	 //! Trim quotes (", ' and `) from the string
+	 String trimQuotes(void) const;
+	 
 # ifndef LIBAISUTIL_STL_STRING_CLEAR
-      //! Supply the 'clear' function if it is unavailable on this system
-      void clear(void)
-	{ (*this) = ""; };
+	 //! Supply the 'clear' function if it is unavailable on this system
+	 void clear(void)
+	   { (*this) = ""; };
 # endif
-   }; // class String
-}; // namespace AISutil
- 
+      }; // class String
+   }; // namespace Util
+}; // namespace AIS
+   
 
 # ifdef LIBAISUTIL_STL_HAS_HASH
 //! STL hash template specialisation for our String class
-template<> struct std::hash<AISutil::String>
+template<> struct std::hash<AIS::Util::String>
 {
    // STL Hash operator
-   size_t operator()(AISutil::String const &str) const {
+   size_t operator()(AIS::Util::String const &str) const {
       char const *s = str.c_str();
       size_t size = 0; // Should we offset this?
       

@@ -42,7 +42,7 @@ extern "C" {
 
 #include "aisutil/socket/domain-ipv6.h"
 
-using namespace AISutil;
+using namespace AIS::Util;
 
 
 // This is used by the address to string translators (not very thread safe?)

@@ -43,7 +43,7 @@ extern "C" {
 
 # include "aisutil/socket/domain-ipv4.h"
 
-using namespace AISutil;
+using namespace AIS::Util;
 
 
 /* Get a protocol's number (really only valid for IP protocols)
