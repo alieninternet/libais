@@ -54,9 +54,9 @@ namespace AIS {
 	  *    of the string.
 	  */ 
 	 template <class T>
-	   StringTokens(const T& string, 
+	   StringTokens(const T& string,
 			const String::size_type pos = 0)
-	     : String(s),
+	     : String(string),
 	       position(pos)
 	     {};
 	 
