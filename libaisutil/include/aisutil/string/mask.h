@@ -61,7 +61,7 @@ namespace AIS {
 	  */
 	 template <class T>
 	   explicit StringMask(const T& mask)
-	     : String(a) 
+	     : String(mask)
 	       {};
 	 
 	 //! Destructor
