@@ -37,8 +37,8 @@ dnl These should not be touched as they define the version of this software
 dnl from an 'official' standpoint - only the developers who should touch 
 dnl them .. uhh.. should touch them :)
 VERSION_MAJOR=1
-VERSION_MINOR=0
-VERSION_EXTRA=
+VERSION_MINOR=1
+VERSION_EXTRA=.pre
 
 LIB_VERSION=0
 LIB_REVISION=0
