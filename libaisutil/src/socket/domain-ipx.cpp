@@ -46,9 +46,11 @@ using namespace AISutil;
  */
 SocketDomainIPX::SocketDomainIPX(void)
 {
+#ifdef HAVE_MEMSET
    // Clean the addresses
    (void)memset(&remoteAddress, 0, sizeof(remoteAddress));
    (void)memset(&localAddress, 0, sizeof(localAddress));
+#endif
    
    // Fix the address family types
    remoteAddress.sipx_family = localAddress.sipx_family = AF_IPX;

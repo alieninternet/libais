@@ -54,9 +54,11 @@ static char addrbuff[INET6_ADDRSTRLEN + 1];
  */
 SocketDomainIPv6::SocketDomainIPv6(void)
 {
+#ifdef HAVE_MEMSET
    // Clean the addresses
    (void)memset(&remoteAddress, 0, sizeof(remoteAddress));
    (void)memset(&localAddress, 0, sizeof(localAddress));
+#endif
    
    // Fix the address family types
    remoteAddress.sin6_family = localAddress.sin6_family = AF_INET6;

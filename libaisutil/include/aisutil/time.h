@@ -186,7 +186,7 @@ namespace AISutil {
 
       
       //! Set the time to the time now (according to the local timezone)
-      bool setTime(void);
+      const bool setTime(void);
    }; // struct Time
 }; // namespace AISutil
    

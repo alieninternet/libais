@@ -85,8 +85,9 @@ const double Time::operator/(const Time& rhs) const
 /* setTime - Set the time (according to the time locally)
  * Original 20/05/1996 pickle
  */
-bool Time::setTime(void)
+const bool Time::setTime(void)
 {  
+#ifdef HAVE_GETTIMEOFDAY
    struct timeval time;
 
    // Obtain the time
@@ -95,7 +96,11 @@ bool Time::setTime(void)
       (*this) = time;
       return true;
    }
-   
+#else
+   // Cheap, low resolution copy
+   (*this) = time(NULL);
+#endif
+  
    // Something went wrong..
    return false;
 }

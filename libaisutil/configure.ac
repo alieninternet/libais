@@ -116,6 +116,7 @@ dnl  Checking for header files
 dnl -------------------------------------------------------------------------
 AC_HEADER_STDC
 AC_HEADER_DIRENT
+AC_HEADER_TIME
 AC_CHECK_HEADERS( \
 	arpa/inet.h \
 	fcntl.h \
@@ -123,6 +124,7 @@ AC_CHECK_HEADERS( \
 	netdb.h \
 	netinet/in.h \
 	netipx/ipx.h \
+	sys/times.h \
 	sys/types.h \
 	sys/socket.h \
 	sys/un.h \
@@ -134,11 +136,14 @@ AC_CACHE_SAVE
 dnl -------------------------------------------------------------------------
 dnl  Checking for libraries and specific library functions
 dnl -------------------------------------------------------------------------
-AC_FUNC_FNMATCH
+AC_FUNC_FNMATCH_GNU
 AC_CHECK_FUNCS(
+	gettimeofday \
 	inet_ntoa \
 	memset \
 	socket \
+	strtol \
+	strtoul \
 		)
 
 AC_CACHE_CHECK([for a working C++ Standard Template Library],

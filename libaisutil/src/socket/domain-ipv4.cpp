@@ -37,7 +37,7 @@ extern "C" {
 #endif
 };
 
-# include "aisutil/socket/domain-ipv4.h"
+#include "aisutil/socket/domain-ipv4.h"
 
 using namespace AISutil;
 
@@ -47,9 +47,11 @@ using namespace AISutil;
  */
 SocketDomainIPv4::SocketDomainIPv4(void)
 {
+#ifdef HAVE_MEMSET
    // Clean the addresses
    (void)memset(&remoteAddress, 0, sizeof(remoteAddress));
    (void)memset(&localAddress, 0, sizeof(localAddress));
+#endif
    
    // Fix the address family types
    remoteAddress.sin_family = localAddress.sin_family = AF_INET;

@@ -24,8 +24,12 @@
 #include <cstring>
 
 extern "C" {
-#include <sys/socket.h>
-#include <sys/un.h>
+#ifdef HAVE_SYS_SOCKET_H
+# include <sys/socket.h>
+#endif
+#ifdef HAVE_SYS_UN_H
+# include <sys/un.h>
+#endif
 };
 
 #include "aisutil/socket/domain-unix.h"
@@ -43,9 +47,11 @@ using namespace AISutil;
  */
 SocketDomainUNIX::SocketDomainUNIX(void)
 {
+#ifdef HAVE_MEMSET
    // Clean the addresses
    (void)memset(&remoteAddress, 0, sizeof(remoteAddress));
    (void)memset(&localAddress, 0, sizeof(localAddress));
+#endif
    
    // Fix the address family types
    remoteAddress.sun_family = localAddress.sun_family = AF_UNIX;
