@@ -32,36 +32,38 @@ extern "C" {
 
 namespace AIS {
    namespace Util {
-      /*!
-       * \brief Unix socket class
-       * 
-       * \ingroup Sockets
-       */
-      class SocketUNIX : public SocketDomainUNIX, public SocketTypeSTREAM {
-       private:
-	 //! Constructor used when creating a new connection via accept()
-	 explicit SocketUNIX(const int newFD, 
-			     const Socket::blockSize_type newReadBlockSize,
-			     const sockaddr_un& newLocalAddress, 
-			     const sockaddr_un& newRemoteAddress)
-	   : Socket(newFD),
-	     SocketDomainUNIX(newLocalAddress, newRemoteAddress),
-	     SocketTypeSTREAM(newReadBlockSize)
-	   { setNonBlocking(); };
+      namespace Socket {
+	 /*!
+	  * \brief Unix socket class
+	  * 
+	  * \ingroup Sockets
+	  */
+	 class SocketUNIX : public DomainUNIX, public TypeSTREAM {
+	  private:
+	    //! Constructor used when creating a new connection via accept()
+	    explicit SocketUNIX(const int newFD, 
+				const Socket::blockSize_type newReadBlockSize,
+				const sockaddr_un& newLocalAddress, 
+				const sockaddr_un& newRemoteAddress)
+	      : Socket(newFD),
+	        DomainUNIX(newLocalAddress, newRemoteAddress),
+	        TypeSTREAM(newReadBlockSize)
+	      { setNonBlocking(); };
 	 
-       public:
-	 //! Standard constructor
-	 SocketUNIX(void)
-	   : Socket(::socket(PF_UNIX, SOCK_STREAM, 0))
-	   { setNonBlocking(); };
-	 
-	 //! Destructor
-	 ~SocketUNIX(void)
-	   {};
-	 
-	 //! Accept a connection on this socket
-	 Socket* accept(void);
+	  public:
+	    //! Standard constructor
+	    SocketUNIX(void)
+	      : Socket(::socket(PF_UNIX, SOCK_STREAM, 0))
+	      { setNonBlocking(); };
+	    
+	    //! Destructor
+	    ~SocketUNIX(void)
+	      {};
+	    
+	    //! Accept a connection on this socket
+	    Socket* accept(void);
       }; // class SocketUNIX
+      }; // namespace Socket
    }; // namespace Util
 }; // namespace AIS
    

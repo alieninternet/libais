@@ -38,7 +38,7 @@ extern "C" {
 
 #include "aisutil/socket/ipx-spx.h"
 
-using namespace AIS::Util;
+using namespace AIS::Util::Socket;
 
 
 /* accept - Accept a new connection on a socket

@@ -38,13 +38,13 @@ extern "C" {
 
 #include "aisutil/socket/domain-ipx.h"
 
-using namespace AIS::Util;
+using namespace AIS::Util::Socket;
 
 
-/* SocketDomainIPX - Blank boring constructor!
+/* DomainIPX - Blank boring constructor!
  * Original 19/08/2001 pickle
  */
-SocketDomainIPX::SocketDomainIPX(void)
+DomainIPX::DomainIPX(void)
 {
 #ifdef HAVE_MEMSET
    // Clean the addresses
@@ -59,11 +59,11 @@ SocketDomainIPX::SocketDomainIPX(void)
 }
 
 
-/* SocketDomainIPX - Constructor used when accept()ing a connection
+/* DomainIPX - Constructor used when accept()ing a connection
  * Original 06/07/2002 pickle
  */
-SocketDomainIPX::SocketDomainIPX(const sockaddr_ipx& newLocalAddress, 
-				 const sockaddr_ipx& newRemoteAddress)
+DomainIPX::DomainIPX(const sockaddr_ipx& newLocalAddress, 
+		     const sockaddr_ipx& newRemoteAddress)
 {
    (void)memcpy(&localAddress, &newLocalAddress, sizeof(localAddress));
    (void)memcpy(&remoteAddress, &newRemoteAddress, sizeof(remoteAddress));
@@ -74,7 +74,7 @@ SocketDomainIPX::SocketDomainIPX(const sockaddr_ipx& newLocalAddress,
  * Original 02/07/2002 pickle
  * Note: This uses the popular address format "network:node" - fully padded
  */
-const std::string SocketDomainIPX::makeAddressStr(const sockaddr_ipx& addr)
+const std::string DomainIPX::makeAddressStr(const sockaddr_ipx& addr)
 {
    std::ostringstream out;
    
@@ -93,8 +93,8 @@ const std::string SocketDomainIPX::makeAddressStr(const sockaddr_ipx& addr)
 /* setAddress - Set the given address in the given address structure
  * Original 03/07/2002 pickle
  */
-const bool SocketDomainIPX::setAddress(sockaddr_ipx& addr, 
-				       const std::string& addrstr)
+const bool DomainIPX::setAddress(sockaddr_ipx& addr, 
+				 const std::string& addrstr)
 {
    // Duh. Me dumb. Me fix later.
    return false;
@@ -104,8 +104,8 @@ const bool SocketDomainIPX::setAddress(sockaddr_ipx& addr,
 /* setAddress - Copy the given address over the given address structure
  * Original 03/07/2002 pickle
  */
-const bool SocketDomainIPX::setAddress(sockaddr_ipx& addr, 
-				       const sockaddr_ipx& newaddr)
+const bool DomainIPX::setAddress(sockaddr_ipx& addr, 
+				 const sockaddr_ipx& newaddr)
 {
    // Copy it!
    (void)memcpy(&addr, &newaddr, sizeof(addr));
@@ -118,7 +118,7 @@ const bool SocketDomainIPX::setAddress(sockaddr_ipx& addr,
 /* setPort - Set the given port in the given address structure
  * Original 03/07/2002 pickle
  */
-const bool SocketDomainIPX::setPort(sockaddr_ipx& addr, const int port)
+const bool DomainIPX::setPort(sockaddr_ipx& addr, const int port)
 {
    // Make sure the port is within an acceptable range (0x0001..0xFFFE)
    if ((port >= 0x0001) && (port <= 0xFFFE)) {
@@ -134,7 +134,7 @@ const bool SocketDomainIPX::setPort(sockaddr_ipx& addr, const int port)
 /* bind - Bind a socket to its port
  * Original 03/07/2002 pickle
  */
-const bool SocketDomainIPX::bind(void)
+const bool DomainIPX::bind(void)
 {
    if (::bind(getFD(), (sockaddr*)&localAddress, sizeof(localAddress)) == 0) {
       return true;
@@ -148,7 +148,7 @@ const bool SocketDomainIPX::bind(void)
 /* connect - Connect this socket
  * Original 03/07/2002 pickle
  */
-const bool SocketDomainIPX::connect(void)
+const bool DomainIPX::connect(void)
 {
    if (::connect(getFD(), (sockaddr*)&remoteAddress,
 		 sizeof(localAddress)) == 0) {

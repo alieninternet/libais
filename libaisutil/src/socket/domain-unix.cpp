@@ -35,7 +35,7 @@ extern "C" {
 
 #include "aisutil/socket/domain-unix.h"
 
-using namespace AIS::Util;
+using namespace AIS::Util::Socket;
 
 // If UNIX_PATH_MAX is still undefined, presume the normal 108 char value
 #ifndef UNIX_PATH_MAX
@@ -43,10 +43,10 @@ using namespace AIS::Util;
 #endif
 
 
-/* SocketDomainUNIX - Blank boring constructor!
+/* DomainUNIX - Blank boring constructor!
  * Original 13/05/2002 pickle
  */
-SocketDomainUNIX::SocketDomainUNIX(void)
+DomainUNIX::DomainUNIX(void)
 {
 #ifdef HAVE_MEMSET
    // Clean the addresses
@@ -59,11 +59,11 @@ SocketDomainUNIX::SocketDomainUNIX(void)
 }
 
 
-/* SocketDomainUNIX - Constructor used when accept()ing a connection
+/* DomainUNIX - Constructor used when accept()ing a connection
  * Original 06/07/2002 pickle
  */
-SocketDomainUNIX::SocketDomainUNIX(const sockaddr_un& newLocalAddress,
-				   const sockaddr_un& newRemoteAddress)
+DomainUNIX::DomainUNIX(const sockaddr_un& newLocalAddress,
+		       const sockaddr_un& newRemoteAddress)
 {
    (void)memcpy(&localAddress, &newLocalAddress, sizeof(localAddress));
    (void)memcpy(&remoteAddress, &newRemoteAddress, sizeof(remoteAddress));
@@ -73,8 +73,8 @@ SocketDomainUNIX::SocketDomainUNIX(const sockaddr_un& newLocalAddress,
 /* setAddress - Set the given address in the given address structure
  * Original 03/07/2002 pickle
  */
-const bool SocketDomainUNIX::setAddress(sockaddr_un& addr, 
-					const std::string& addrstr)
+const bool DomainUNIX::setAddress(sockaddr_un& addr, 
+				  const std::string& addrstr)
 {
    // Make sure the length is appropriate
    if (addrstr.length() <= UNIX_PATH_MAX) {
@@ -93,7 +93,7 @@ const bool SocketDomainUNIX::setAddress(sockaddr_un& addr,
 /* bind - Bind a socket to its port
  * Original 03/07/2002 pickle
  */
-const bool SocketDomainUNIX::bind(void)
+const bool DomainUNIX::bind(void)
 {
    if (::bind(getFD(), (sockaddr*)&localAddress, sizeof(localAddress)) == 0) {
       return true;
@@ -107,7 +107,7 @@ const bool SocketDomainUNIX::bind(void)
 /* connect - Connect this socket
  * Original 03/07/2002 pickle
  */
-const bool SocketDomainUNIX::connect(void)
+const bool DomainUNIX::connect(void)
 {
    if (::connect(getFD(), (sockaddr*)&remoteAddress,
 		 sizeof(localAddress)) == 0) {
@@ -122,7 +122,7 @@ const bool SocketDomainUNIX::connect(void)
 /* close - Close the socket
  * Original 16/07/2003 pickle
  */
-const bool SocketDomainUNIX::close(void)
+const bool DomainUNIX::close(void)
 {
    // Close the socket
    const bool happy = (::close(getFD()) == 0);

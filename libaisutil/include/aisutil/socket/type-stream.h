@@ -22,7 +22,7 @@
 #ifndef _INCLUDE_LIBAISUTIL_SOCKET_TYPE_STREAM_H_
 # define _INCLUDE_LIBAISUTIL_SOCKET_TYPE_STREAM_H_ 1
 
-# include <aisutil/socket/type.h>
+# include <aisutil/socket/stateful-type.h>
 
 # include <iostream>
 
@@ -36,35 +36,37 @@
 
 namespace AIS {
    namespace Util {
-      //! Stream socket type
-      class SocketTypeSTREAM : public SocketType {
-       private:
-	 const Socket::blockSize_type bufferSize;
-	 char* buffer;
+      namespace Socket {
+	 //! Stream socket type
+	 class TypeSTREAM : public StatefulType {
+	  private:
+	    const Socket::blockSize_type bufferSize;
+	    char* buffer;
+	    
+	  protected:
+	    //! Constructor
+	    explicit TypeSTREAM(const Socket::blockSize_type bs =
+				LIBAISUTIL_SOCKET_STREAM_DEFAULT_BUFFER_SIZE)
+	      : bufferSize(bs), 
+	        buffer(0)
+	      { buffer = new char[bs]; };
 	 
-       protected:
-	 //! Constructor
-	 explicit SocketTypeSTREAM(const Socket::blockSize_type bs =
-				   LIBAISUTIL_SOCKET_STREAM_DEFAULT_BUFFER_SIZE)
-	   : bufferSize(bs), 
-	     buffer(0)
-	   { buffer = new char[bs]; };
-	 
-       public:
-	 //! Destructor
-	 virtual ~SocketTypeSTREAM(void)
-	   { delete[] buffer; };
-	 
-	 //! Write data to this socket
-	 const int write(const std::string& data);
-	 
-	 //! Read data from this socket
-	 const bool read(std::ostream& databuff);
-	 
-	 //! Return the block size per read
-	 const blockSize_type getReadBlockSize(void) const
-	   { return bufferSize; };
-      }; // class SocketTypeSTREAM
+	  public:
+	    //! Destructor
+	    virtual ~TypeSTREAM(void)
+	      { delete[] buffer; };
+	    
+	    //! Write data to this socket
+	    const int write(const std::string& data);
+	    
+	    //! Read data from this socket
+	    const bool read(std::ostream& databuff);
+	    
+	    //! Return the block size per read
+	    const blockSize_type getReadBlockSize(void) const
+	      { return bufferSize; };
+	 }; // class TypeSTREAM
+      }; // namespace Socket
    }; // namespace Util
 }; // namespace AIS
    

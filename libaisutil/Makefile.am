@@ -60,6 +60,7 @@ libaisutil_la_SOURCES=\
 	src/config/data.cpp \
 	src/config/parser.cpp \
 	src/socket/socket.cpp \
+	src/socket/stateful-type.cpp \
 	$(LIBAISUTIL_FILE_SOCKET_DOMAIN_IPV4) \
 	$(LIBAISUTIL_FILE_SOCKET_DOMAIN_IPV6) \
 	$(LIBAISUTIL_FILE_SOCKET_DOMAIN_IPX) \

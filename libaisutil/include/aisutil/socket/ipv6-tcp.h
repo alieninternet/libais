@@ -32,36 +32,40 @@ extern "C" {
 
 namespace AIS {
    namespace Util {
-      /*! 
-       * \brief IPv6 socket class
-       * 
-       * \ingroup Sockets
-       */
-      class SocketIPv6TCP : public SocketDomainIPv6, public SocketTypeSTREAM {
-       private:
-	 //! Constructor used when creating a new connection via accept()
-	 explicit SocketIPv6TCP(const int newFD, 
-				const Socket::blockSize_type newReadBlockSize,
-				const sockaddr_in6& newLocalAddress,
-				const sockaddr_in6& newRemoteAddress)
-	   : Socket(newFD),
-	     SocketDomainIPv6(newLocalAddress, newRemoteAddress),
-	     SocketTypeSTREAM(newReadBlockSize)
-	   { setNonBlocking(); };
-	 
-       public:
-	 //! Standard constructor
-	 SocketIPv6TCP(void)
-	   : Socket(::socket(PF_INET6, SOCK_STREAM, Socket::getProtocol("TCP")))
-	   { setNonBlocking(); };
-	 
-	 //! Destructor
-	 ~SocketIPv6TCP(void)
-	   {};
-	 
-	 //! Accept a connection on this socket
-	 Socket* accept(void);
-      }; // class SocketIPv6TCP
+      namespace Socket {
+	 /*! 
+	  * \brief IPv6 socket class
+	  * 
+	  * \ingroup Sockets
+	  */
+	 class SocketIPv6TCP : public DomainIPv6, public TypeSTREAM {
+	  private:
+	    //! Constructor used when creating a new connection via accept()
+	    explicit
+	      SocketIPv6TCP(const int newFD, 
+			    const Socket::blockSize_type newReadBlockSize,
+			    const sockaddr_in6& newLocalAddress,
+			    const sockaddr_in6& newRemoteAddress)
+	      : Socket(newFD),
+	        DomainIPv6(newLocalAddress, newRemoteAddress),
+	        TypeSTREAM(newReadBlockSize)
+	      { setNonBlocking(); };
+	    
+	  public:
+	    //! Standard constructor
+	    SocketIPv6TCP(void)
+	      : Socket(::socket(PF_INET6, SOCK_STREAM,
+				Socket::getProtocol("TCP")))
+	      { setNonBlocking(); };
+	    
+	    //! Destructor
+	    ~SocketIPv6TCP(void)
+	      {};
+	    
+	    //! Accept a connection on this socket
+	    Socket* accept(void);
+	 }; // class SocketIPv6TCP
+      }; // namespace Socket
    }; // namespace Util
 }; // namespace AIS
    

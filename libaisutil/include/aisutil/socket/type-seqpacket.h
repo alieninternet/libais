@@ -22,7 +22,7 @@
 #ifndef _INCLUDE_LIBAISUTIL_SOCKET_TYPE_SEQPACKET_H_
 # define _INCLUDE_LIBAISUTIL_SOCKET_TYPE_SEQPACKET_H_ 1
 
-# include <aisutil/socket/type.h>
+# include <aisutil/socket/stateful-type.h>
 
 # include <iostream>
 
@@ -32,34 +32,36 @@ extern "C" {
 
 namespace AIS {
    namespace Util {
-      //! Sequential packet socket type
-      class SocketTypeSEQPACKET : public SocketType {
-       private:
-	 const Socket::blockSize_type bufferSize;
-	 char* buffer;
+      namespace Socket {
+	 //! Sequential packet socket type
+	 class TypeSEQPACKET : public StatefulType {
+	  private:
+	    const Socket::blockSize_type bufferSize;
+	    char* buffer;
+	    
+	  protected:
+	    //! Constructor
+	    explicit TypeSEQPACKET(const Socket::blockSize_type bs)
+	      : bufferSize(bs), 
+	        buffer(0)
+	      { buffer = new char[bs]; };
 	 
-       protected:
-	 //! Constructor
-	 explicit SocketTypeSEQPACKET(const Socket::blockSize_type bs)
-	   : bufferSize(bs), 
-	     buffer(0)
-	   { buffer = new char[bs]; };
-	 
-       public:
-	 //! Destructor
-	 virtual ~SocketTypeSEQPACKET(void)
-	   { delete[] buffer; };
-	 
-	 //! Write data to this socket
-	 const int write(const std::string& data);
-	 
-	 //! Read data from this socket
-	 const bool read(std::ostream& databuff);
-	 
-	 //! Return the block size per read
-	 const blockSize_type getReadBlockSize(void) const
-	   { return bufferSize; };
-      }; // class SocketTypeSEQPACKET
+	  public:
+	    //! Destructor
+	    virtual ~TypeSEQPACKET(void)
+	      { delete[] buffer; };
+	    
+	    //! Write data to this socket
+	    const int write(const std::string& data);
+	    
+	    //! Read data from this socket
+	    const bool read(std::ostream& databuff);
+	    
+	    //! Return the block size per read
+	    const blockSize_type getReadBlockSize(void) const
+	      { return bufferSize; };
+	 }; // class TypeSEQPACKET
+      }; // namespace Socket
    }; // namespace Util
 }; // namespace AIS
    

@@ -37,13 +37,13 @@ extern "C" {
 
 #include "aisutil/socket/type-stream.h"
 
-using namespace AIS::Util;
+using namespace AIS::Util::Socket;
 
 
 /* write - Write text to a socket
  * Original 07/02/1999 pickle
  */
-const int SocketTypeSTREAM::write(const std::string& data)
+const int TypeSTREAM::write(const std::string& data)
 {
 #ifdef LIBAISUTIL_DEBUG_ASSERT
    // Make sure the file descriptor is really valid
@@ -65,7 +65,7 @@ const int SocketTypeSTREAM::write(const std::string& data)
  * Original 09/02/1999 pickle
  * 03/07/2002 pickle - Rewrote to read in chunks, as it should have originally!
  */
-const bool SocketTypeSTREAM::read(std::ostream& databuff)
+const bool TypeSTREAM::read(std::ostream& databuff)
 {
 #ifdef LIBAISUTIL_DEBUG_ASSERT
    // Make sure the file descriptor is really valid

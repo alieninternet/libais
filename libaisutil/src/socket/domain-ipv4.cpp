@@ -39,13 +39,13 @@ extern "C" {
 
 #include "aisutil/socket/domain-ipv4.h"
 
-using namespace AIS::Util;
+using namespace AIS::Util::Socket;
 
 
-/* SocketDomainIPv4 - Blank boring constructor!
+/* DomainIPv4 - Blank boring constructor!
  * Original 06/02/1999 pickle
  */
-SocketDomainIPv4::SocketDomainIPv4(void)
+DomainIPv4::DomainIPv4(void)
 {
 #ifdef HAVE_MEMSET
    // Clean the addresses
@@ -61,11 +61,11 @@ SocketDomainIPv4::SocketDomainIPv4(void)
 }
 
 
-/* SocketDomainIPv4 - Constructor used when accept()ing a connection
+/* DomainIPv4 - Constructor used when accept()ing a connection
  * Original 06/07/2002 pickle
  */
-SocketDomainIPv4::SocketDomainIPv4(const sockaddr_in& newLocalAddress,
-				   const sockaddr_in& newRemoteAddress)
+DomainIPv4::DomainIPv4(const sockaddr_in& newLocalAddress,
+		       const sockaddr_in& newRemoteAddress)
 {
    (void)memcpy(&localAddress, &newLocalAddress, sizeof(localAddress));
    (void)memcpy(&remoteAddress, &newRemoteAddress, sizeof(remoteAddress));
@@ -75,7 +75,7 @@ SocketDomainIPv4::SocketDomainIPv4(const sockaddr_in& newLocalAddress,
 /* setAddress - Set the given address in the given address structure
  * Original 03/07/2002 pickle
  */
-const bool SocketDomainIPv4::setAddress(sockaddr_in& addr, 
+const bool DomainIPv4::setAddress(sockaddr_in& addr, 
 					const std::string& addrstr)
 {
    // Try to process the IP, checking if it worked okay
@@ -91,8 +91,8 @@ const bool SocketDomainIPv4::setAddress(sockaddr_in& addr,
 /* setAddress - Copy the given address over the given address structure
  * Original 03/07/2002 pickle
  */
-const bool SocketDomainIPv4::setAddress(sockaddr_in& addr,
-					const sockaddr_in& newaddr)
+const bool DomainIPv4::setAddress(sockaddr_in& addr,
+				  const sockaddr_in& newaddr)
 {
    // Copy it!
    (void)memcpy(&addr, &newaddr, sizeof(addr));
@@ -105,8 +105,8 @@ const bool SocketDomainIPv4::setAddress(sockaddr_in& addr,
 /* setAddress - Copy the given address over the given address structure's
  * Original 05/07/2002 pickle
  */
-const bool SocketDomainIPv4::setAddress(sockaddr_in& addr,
-					const in_addr& newaddr)
+const bool DomainIPv4::setAddress(sockaddr_in& addr,
+				  const in_addr& newaddr)
 {
    // Copy it!
    (void)memcpy(&addr.sin_addr, &newaddr, sizeof(addr.sin_addr));
@@ -119,7 +119,7 @@ const bool SocketDomainIPv4::setAddress(sockaddr_in& addr,
 /* setPort - Set the given port in the given address structure
  * Original 03/07/2002 pickle
  */
-const bool SocketDomainIPv4::setPort(sockaddr_in& addr, const int port)
+const bool DomainIPv4::setPort(sockaddr_in& addr, const int port)
 {
    // Make sure the port is within an acceptable range (0..65534)
    if ((port >= 0) && (port <= 65534)) {
@@ -135,7 +135,7 @@ const bool SocketDomainIPv4::setPort(sockaddr_in& addr, const int port)
 /* bind - Bind a socket to its port
  * Original 03/07/2002 pickle
  */
-const bool SocketDomainIPv4::bind(void)
+const bool DomainIPv4::bind(void)
 {
    if (::bind(getFD(), (sockaddr*)&localAddress, sizeof(localAddress)) == 0) {
       return true;
@@ -149,7 +149,7 @@ const bool SocketDomainIPv4::bind(void)
 /* connect - Connect this socket
  * Original 03/07/2002 pickle
  */
-const bool SocketDomainIPv4::connect(void)
+const bool DomainIPv4::connect(void)
 {
    if (::connect(getFD(), (sockaddr*)&remoteAddress,
 		 sizeof(localAddress)) == 0) {

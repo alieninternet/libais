@@ -60,36 +60,38 @@ extern "C" {
 
 namespace AIS {
    namespace Util {
-      /*!
-       * \brief IPX/SPX socket class
-       * 
-       * \ingroup Sockets
-       */
-      class SocketIPXSPX : public SocketDomainIPX, public SocketTypeSEQPACKET {
-       private:
-	 //! Constructor used when creating a new connection via accept()
-	 explicit SocketIPXSPX(const int newFD,
-			       const sockaddr_ipx& newLocalAddress,
-			       const sockaddr_ipx& newRemoteAddress)
-	   : Socket(newFD),
-	     SocketDomainIPX(newLocalAddress, newRemoteAddress),
-	     SocketTypeSEQPACKET(LIBAISUTIL_SOCKET_IPX_SPX_PACKET_SIZE)
-	   { setNonBlocking(); };
+      namespace Socket {
+	 /*!
+	  * \brief IPX/SPX socket class
+	  * 
+	  * \ingroup Sockets
+	  */
+	 class SocketIPXSPX : public DomainIPX, public TypeSEQPACKET {
+	  private:
+	    //! Constructor used when creating a new connection via accept()
+	    explicit SocketIPXSPX(const int newFD,
+				  const sockaddr_ipx& newLocalAddress,
+				  const sockaddr_ipx& newRemoteAddress)
+	      : Socket(newFD),
+	        DomainIPX(newLocalAddress, newRemoteAddress),
+	        TypeSEQPACKET(LIBAISUTIL_SOCKET_IPX_SPX_PACKET_SIZE)
+	      { setNonBlocking(); };
 	 
-       public:
-	 //! Standard constructor
-	 SocketIPXSPX(void)
-	   : Socket(::socket(PF_IPX, SOCK_SEQPACKET, NSPROTO_SPX)),
-	     SocketTypeSEQPACKET(LIBAISUTIL_SOCKET_IPX_SPX_PACKET_SIZE)
-	   { setNonBlocking(); };
-	 
-	 //! Destructor
-	 ~SocketIPXSPX(void)
-	   {};
-	 
-	 //! Accept a connection on this socket
-	 Socket* accept(void);
-      }; // class SocketIPXSPX
+	  public:
+	    //! Standard constructor
+	    SocketIPXSPX(void)
+	      : Socket(::socket(PF_IPX, SOCK_SEQPACKET, NSPROTO_SPX)),
+	        TypeSEQPACKET(LIBAISUTIL_SOCKET_IPX_SPX_PACKET_SIZE)
+	      { setNonBlocking(); };
+	    
+	    //! Destructor
+	    ~SocketIPXSPX(void)
+	      {};
+	    
+	    //! Accept a connection on this socket
+	    Socket* accept(void);
+	 }; // class SocketIPXSPX
+      }; // namespace Socket
    }; // namespace Util
 }; // namespace AIS
    

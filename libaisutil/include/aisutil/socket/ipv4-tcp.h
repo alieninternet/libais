@@ -32,36 +32,40 @@ extern "C" {
 
 namespace AIS {
    namespace Util {
-      /*!
-       * \brief TCP/IPv4 socket class
-       * 
-       * \ingroup Sockets
-       */
-      class SocketIPv4TCP : public SocketDomainIPv4, public SocketTypeSTREAM {
-       private:
-	 //! Constructor used when creating a new connection via accept()
-	 explicit SocketIPv4TCP(const int newFD, 
-				const Socket::blockSize_type newReadBlockSize,
-				const sockaddr_in& newLocalAddress, 
-				const sockaddr_in& newRemoteAddress)
-	   : Socket(newFD),
-	     SocketDomainIPv4(newLocalAddress, newRemoteAddress),
-	     SocketTypeSTREAM(newReadBlockSize)
-	   { setNonBlocking(); };
-	 
-       public:
-	 //! Standard constructor
-	 SocketIPv4TCP(void)
-	   : Socket(::socket(PF_INET, SOCK_STREAM, Socket::getProtocol("TCP")))
-	   { setNonBlocking(); };
-	 
-	 //! Destructor
-	 ~SocketIPv4TCP(void)
-	   {};
-	 
-	 //! Accept a connection on this socket
-	 Socket* accept(void);
-      }; // class SocketIPv4TCP
+      namespace Socket {
+	 /*!
+	  * \brief TCP/IPv4 socket class
+	  * 
+	  * \ingroup Sockets
+	  */
+	 class SocketIPv4TCP : public DomainIPv4, public TypeSTREAM {
+	  private:
+	    //! Constructor used when creating a new connection via accept()
+	    explicit
+	      SocketIPv4TCP(const int newFD, 
+			    const Socket::blockSize_type newReadBlockSize,
+			    const sockaddr_in& newLocalAddress, 
+			    const sockaddr_in& newRemoteAddress)
+	      : Socket(newFD),
+	        DomainIPv4(newLocalAddress, newRemoteAddress),
+	        TypeSTREAM(newReadBlockSize)
+	      { setNonBlocking(); };
+	    
+	  public:
+	    //! Standard constructor
+	    SocketIPv4TCP(void)
+	      : Socket(::socket(PF_INET, SOCK_STREAM,
+				Socket::getProtocol("TCP")))
+	      { setNonBlocking(); };
+	    
+	    //! Destructor
+	    ~SocketIPv4TCP(void)
+	      {};
+	    
+	    //! Accept a connection on this socket
+	    Socket* accept(void);
+	 }; // class SocketIPv4TCP
+      }; // namespace Socket
    }; // namespace Util
 }; // namespace AIS
    

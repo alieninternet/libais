@@ -41,9 +41,9 @@ extern "C" {
 #endif
 };
 
-# include "aisutil/socket/domain-ipv4.h"
+# include "aisutil/socket/socket.h"
 
-using namespace AIS::Util;
+using namespace AIS::Util::Socket;
 
 
 /* Get a protocol's number (really only valid for IP protocols)
@@ -82,20 +82,6 @@ const bool Socket::setReuseAddress(void)
    
    if (setsockopt(fd, SOL_SOCKET, SO_REUSEADDR,
 		  (char*)&sockopts, sizeof(sockopts)) == 0) {
-      return true;
-   }
-   
-   setErrorMessage();
-   return false;
-}
-
-
-/* listen - Listen on a socket (valid on SOCK_STREAM and SOCK_SEQPACKET types)
- * Original 09/01/2001 pickle
- */
-const bool Socket::listen(const int backlog)
-{ 
-   if (::listen(fd, backlog) == 0) {
       return true;
    }
    

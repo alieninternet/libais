@@ -17,6 +17,7 @@ nobase_include_HEADERS=\
 	aisutil/socket/ipx-spx.h \
 	aisutil/socket/socket.h \
 	aisutil/socket/sockets.h \
+	aisutil/socket/stateful-type.h \
 	aisutil/socket/type-seqpacket.h \
 	aisutil/socket/type-stream.h \
 	aisutil/socket/type.h \

@@ -30,34 +30,36 @@ extern "C" {
 
 namespace AIS {
    namespace Util {
-      //! Socket domain base class
-      class SocketDomain : virtual public Socket {
-       protected:
-	 //! Constructor
-	 SocketDomain(void)
-	   {};
-
-       public:
-	 //! Destructor
-	 virtual ~SocketDomain(void)
-	   {};
-	 
-	 //! Return the local port
-	 virtual const int getLocalPort(void) const
-	   { return -1; };
-	 
-	 //! Return the remote port
-	 virtual const int getRemotePort(void) const
-	   { return -1; };
-	 
-	 //! Set the local port
-	 virtual const bool setLocalPort(const int port)
-	   { return false; };
-	 
-	 //! Set the remote port
-	 virtual const bool setRemotePort(const int port)
-	   { return false; };
-      }; // class SocketDomain
+      namespace Socket {
+	 //! Socket domain base class
+	 class Domain : virtual public Socket {
+	  protected:
+	    //! Constructor
+	    Domain(void)
+	      {};
+	    
+	  public:
+	    //! Destructor
+	    virtual ~Domain(void)
+	      {};
+	    
+	    //! Return the local port
+	    virtual const int getLocalPort(void) const
+	      { return -1; };
+	    
+	    //! Return the remote port
+	    virtual const int getRemotePort(void) const
+	      { return -1; };
+	    
+	    //! Set the local port
+	    virtual const bool setLocalPort(const int port)
+	      { return false; };
+	    
+	    //! Set the remote port
+	    virtual const bool setRemotePort(const int port)
+	      { return false; };
+	 }; // class Domain
+      }; // namespace Socket
    }; // namespace Util
 }; // namespace AIS
    

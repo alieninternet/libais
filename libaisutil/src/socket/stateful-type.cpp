@@ -1,7 +1,7 @@
 /* $Id$
  * 
- * Copyright (c) 2002,2003 Alien Internet Services
- * 
+ * Copyright (c) 2000,2001,2002,2003 Alien Internet Services
+ *
  * This file is a part of LibAISutil.
  * 
  * LibAISutil is free software; you can redistribute it and/or modify
@@ -19,30 +19,30 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef _INCLUDE_LIBAISUTIL_SOCKET_TYPE_H_
-# define _INCLUDE_LIBAISUTIL_SOCKET_TYPE_H_ 1
+#ifdef HAVE_CONFIG_H
+# include "config.h"
+#endif
 
-# include <aisutil/socket/socket.h>
+extern "C" {
+#ifdef HAVE_SYS_SOCKET_H
+# include <sys/socket.h>
+#endif
+};
 
-namespace AIS {
-   namespace Util {
-      namespace Socket {
-	 //! Socket type base class
-	 class Type : virtual public Socket {
-	  protected:
-	    //! Constructor
-	    Type(void)
-	      {};
-	    
-	  public:
-	    //! Destructor
-	    virtual ~Type(void)
-	      {};
-	    
-	    // Nothing else here yet..
-	 }; // class Type
-      }; // namespace Socket
-   }; // namespace Util
-}; // namespace AIS
+# include "aisutil/socket/stateful-type.h"
+
+using namespace AIS::Util::Socket;
+
+
+/* listen - Listen on a socket (valid on SOCK_STREAM and SOCK_SEQPACKET types)
+ * Original 09/01/2001 pickle
+ */
+const bool StatefulType::listen(const int backlog)
+{ 
+   if (::listen(getFD(), backlog) == 0) {
+      return true;
+   }
    
-#endif // _INCLUDE_LIBAISUTIL_SOCKET_TYPE_H_
+   setErrorMessage();
+   return false;
+}

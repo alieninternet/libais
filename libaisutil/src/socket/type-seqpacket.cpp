@@ -37,13 +37,13 @@ extern "C" {
 
 #include "aisutil/socket/type-seqpacket.h"
 
-using namespace AIS::Util;
+using namespace AIS::Util::Socket;
 
 
 /* write - Write text to a socket
  * Original 03/07/2002 pickle
  */
-const int SocketTypeSEQPACKET::write(const std::string& data)
+const int TypeSEQPACKET::write(const std::string& data)
 {
 #ifdef LIBAISUTIL_DEBUG_ASSERT
    // Make sure the file descriptor is really valid
@@ -65,7 +65,7 @@ const int SocketTypeSEQPACKET::write(const std::string& data)
  * Original 09/02/1999 pickle
  * 03/07/2002 pickle - Sort-of rewrote for SOCK_SEQPACKET types
  */
-const bool SocketTypeSEQPACKET::read(std::ostream& databuff)
+const bool TypeSEQPACKET::read(std::ostream& databuff)
 {
 #ifdef LIBAISUTIL_DEBUG_ASSERT
    // Make sure the file descriptor is really valid

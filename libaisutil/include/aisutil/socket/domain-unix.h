@@ -34,69 +34,78 @@ extern "C" {
 
 namespace AIS {
    namespace Util {
-      //! Unix Socket Domain
-      class SocketDomainUNIX : public SocketDomain {
-       private:
-	 sockaddr_un localAddress;
-	 sockaddr_un remoteAddress;
+      namespace Socket {
+	 //! Unix Socket Domain
+	 class DomainUNIX : public Domain {
+	  private:
+	    sockaddr_un localAddress;
+	    sockaddr_un remoteAddress;
+	    
+	    //! Set the given address in the given address structure
+	    const bool setAddress(sockaddr_un& addr,
+				  const std::string& addrstr);
+	    
+	  protected:
+	    //! Constructor
+	    DomainUNIX(void);
+	    
+	    //! Constructor used when creating a new connection via accept()
+	    explicit DomainUNIX(const sockaddr_un& newLocalAddress, 
+				const sockaddr_un& newRemoteAddress);
+	    
+	  public:
+	    //! Destructor
+	    virtual ~DomainUNIX(void)
+	      {};
+	    
+	    //! Return the local address
+	    const sockaddr_un& getLocalAddressRef(void) const
+	      { return localAddress; };
+	    
+	    //! Return the remote address
+	    const sockaddr_un& getRemoteAddressRef(void) const
+	      { return remoteAddress; };
+	    
+	    //! Return the local address
+	    const sockaddr& getLocalAddress(socklen_t& addrlen) const
+	      {
+		 addrlen = sizeof(localAddress);
+		 return (sockaddr&)localAddress;
+	      };
 	 
-	 //! Set the given address in the given address structure
-	 const bool setAddress(sockaddr_un& addr, const std::string& addrstr);
-	 
-       protected:
-	 //! Constructor
-	 SocketDomainUNIX(void);
-	 
-	 //! Constructor used when creating a new connection via accept()
-	 explicit SocketDomainUNIX(const sockaddr_un& newLocalAddress, 
-				   const sockaddr_un& newRemoteAddress);
-	 
-       public:
-	 //! Destructor
-	 virtual ~SocketDomainUNIX(void)
-	   {};
-	 
-	 //! Return the local address
-	 const sockaddr_un& getLocalAddressRef(void) const
-	   { return localAddress; };
-	 
-	 //! Return the remote address
-	 const sockaddr_un& getRemoteAddressRef(void) const
-	   { return remoteAddress; };
-	 
-	 //! Return the local address
-	 const sockaddr& getLocalAddress(socklen_t& addrlen) const
-	   { addrlen = sizeof(localAddress); return (sockaddr&)localAddress; };
-	 
-	 //! Return the remote address
-	 const sockaddr& getRemoteAddress(socklen_t& addrlen) const
-	   { addrlen = sizeof(remoteAddress); return (sockaddr&)remoteAddress; };
-	 
-	 //! Return the local address (as a string)
-	 const std::string getLocalAddress(void) const
-	   { return localAddress.sun_path; };
-	 
-	 //! Return the remote address (as a string)
-	 const std::string getRemoteAddress(void) const
-	   { return remoteAddress.sun_path; };
-	 
-	 //! Set the local address
-	 const bool setLocalAddress(const std::string& address)
-	   { return setAddress(localAddress, address); };
-	 
-	 //! Set the remote address
-	 const bool setRemoteAddress(const std::string& address)
-	   { return setAddress(remoteAddress, address); };
-	 
-	 //! Bind a socket its port
-	 const bool bind(void);
-	 
-	 //! Connect this socket (unavailable on some socket types)
-	 const bool connect(void);
-	 
-	 //! Close the socket
-	 const bool close(void);
-      }; // class SocketDomainUNIX
+	    //! Return the remote address
+	    const sockaddr& getRemoteAddress(socklen_t& addrlen) const
+	      {
+		 addrlen = sizeof(remoteAddress);
+		 return (sockaddr&)remoteAddress;
+	      };
+	    
+	    //! Return the local address (as a string)
+	    const std::string getLocalAddress(void) const
+	      { return localAddress.sun_path; };
+	    
+	    //! Return the remote address (as a string)
+	    const std::string getRemoteAddress(void) const
+	      { return remoteAddress.sun_path; };
+	    
+	    //! Set the local address
+	    const bool setLocalAddress(const std::string& address)
+	      { return setAddress(localAddress, address); };
+	    
+	    //! Set the remote address
+	    const bool setRemoteAddress(const std::string& address)
+	      { return setAddress(remoteAddress, address); };
+	    
+	    //! Bind a socket its port
+	    const bool bind(void);
+	    
+	    //! Connect this socket (unavailable on some socket types)
+	    const bool connect(void);
+	    
+	    //! Close the socket
+	    const bool close(void);
+	 }; // class DomainUNIX
+      }; // namespace Socket
    }; // namespace Util
 }; // namespace AIS
    
