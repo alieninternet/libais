@@ -38,7 +38,7 @@ String String::toLower() const
 {
    char *temp = new char[length() + 1];
    
-   for (register unsigned int i = (length() + 1); i != 0; --i) {
+   for (register unsigned int i = (length() + 1); i--;) {
       temp[i] = tolower(data()[i]);
    }
    
@@ -57,7 +57,7 @@ String String::toUpper() const
 {
    char *temp = new char[length() + 1];
    
-   for (register unsigned int i = (length() + 1); i != 0; --i) {
+   for (register unsigned int i = (length() + 1); i--;) {
       temp[i] = toupper(data()[i]);
    }
    
