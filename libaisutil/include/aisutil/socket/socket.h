@@ -140,36 +140,50 @@ namespace AIS {
 	    static const int getProtocol(const char* const name);
 
 	    
+	    //@{
 	    /*!
+	     * \brief Set a socket option (an integer)
 	     * 
-	     * \param option The flag to set using setsockopt()
-	     * \param level The level to set the option/flag at. The default
-	     *    is to set the flag at the socket level. Check the
-	     *    setsockopt() <em>man page</em> for more details.
+	     * \param option The option to set using setsockopt()
+	     * \param level The level to set the option at. The default is to
+	     *    set the option at the socket level. Check the setsockopt()
+	     *    <em>man page</em> for more details.
 	     * \return The status of the operation
-	     * \retval true The flag was set successfully
-	     * \retval false The flag could not be set
+	     * \retval true The option was set successfully
+	     * \retval false The option could not be set
 	     */
+	    const bool setSockoptInt(const int option,
+				     const int value,
+				     const int level = SOL_SOCKET);
 	    const bool setSockoptFlag(const int option,
 				      const bool toggle,
-				      const int level = SOL_SOCKET);
+				      const int level = SOL_SOCKET)
+	      { return setSockoptInt(option, (toggle ? 1 : 0), level); };
+	    //@}
 	    
+	    //@{
 	    /*!
-	     * \brief Retrieve the the status of the given sockopts flag
+	     * \brief Retrieve the the status of the given sockopts option
 	     * 
-	     * \param option The flag to check using getsockopt()
-	     * \param level The level to check for the flag. The default is
+	     * \param option The option to check using getsockopt()
+	     * \param level The level to check for the option. The default is
 	     *    the socket level. See the getsockopt() <em>man page</em>
 	     *    for more info.
-	     * \return The boolean value of the flag
-	     * \retval 1 The flag is set (on)
-	     * \retval 0 The flag is not set (off)
-	     * \retval -1 The status of the flag is indeterminate or an error
-	     *    occurred
+	     * \return The boolean value of the option
+	     * \retval 1 The option is set (on)
+	     * \retval 0 The option is not set (off)
+	     * \retval -1 The status of the option is indeterminate or an
+	     *    error occurred
 	     */
-	    const signed int
-	      getSockoptFlag(const int flag,
-			     const int level = SOL_SOCKET) const;
+	    const int getSockoptInt(const int flag,
+				    const int level = SOL_SOCKET) const;
+	    const signed int getSockoptFlag(const int flag,
+					    const int level = SOL_SOCKET) const
+	      {
+		 const int value = getSockoptInt(flag, level);
+		 return ((value > 0) ? 1 : value);
+	      };
+	    //@}
 
 
 	  public:

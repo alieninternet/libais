@@ -106,46 +106,43 @@ const signed int Socket::getNonBlockingFlag(void) const
 }
 
 
-/* setReuseAddress - Set the given flag on the socket
+/* setSockoptInt - Set the given integer on the socket
  * Original 09/01/2001 pickle
  */
-const bool Socket::setSockoptFlag(const int option, const bool toggle,
-				  const int level)
+const bool Socket::setSockoptInt(const int option, const int value,
+				 const int level)
 {
-   // Determine what the flag should be set to
-   const int sockopts = (toggle ? 1 : 0);
-   
    // Set the flag
    if (setsockopt(getFD(), level, option,
-		  (void*)&sockopts, sizeof(sockopts)) == 0) {
+		  (void*)&value, sizeof(value)) == 0) {
       return true;
    }
-   
+
    // Presume there was an error..
    setErrorMessage();
    return false;
 }
 
 
-/* getSockoptFlag - Return the status of the given socket flag
+/* getSockoptInt - Return the status of the given socket flag
  * Original 07/08/2003 pickle
  */
-const signed int
-  Socket::getSockoptFlag(const int option, const int level) const
+const int
+  Socket::getSockoptInt(const int option, const int level) const
 {
    int sockopts;
    socklen_t sockopts_len;
-   
+
    // Try to obtain the flag
    if (getsockopt(getFD(), level, option,
 		  (void*)&sockopts, &sockopts_len) == 0) {
-      // Make sure this really is a flag.. the size should be an 'integer'
+      // Make sure this really is a flag.. the size should be of an 'integer'
       if (sockopts_len == sizeof(sockopts)) {
 	 // Return the value of the flag, quantised down to a simple boolean
-	 return ((sockopts > 0) ? 1 : 0);
+	 return sockopts;
       }
    }
-   
+
    // We couldn't get the flag..
    return -1;
 }
