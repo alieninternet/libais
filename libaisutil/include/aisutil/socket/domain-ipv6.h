@@ -22,7 +22,7 @@
 #ifndef _INCLUDE_AISUTIL_SOCKET_DOMAIN_IPV6_H_
 # define _INCLUDE_AISUTIL_SOCKET_DOMAIN_IPV6_H_ 1
 
-# include <aisutil/socket/socket.h>
+# include <aisutil/socket/domain-ip.h>
 
 # include <iostream>
 
@@ -36,7 +36,7 @@ namespace AIS {
    namespace Util {
       namespace Socket {
 	 //! IPv6 Socket Domain
-	 class DomainIPv6 : virtual public Socket {
+	 class DomainIPv6 : public DomainIP {
 	  private:
 	    //! The local address of this socket
 	    sockaddr_in6 localAddress;

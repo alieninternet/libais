@@ -22,7 +22,7 @@
 #ifndef _INCLUDE_AISUTIL_SOCKET_DOMAIN_IPV4_H_
 # define _INCLUDE_AISUTIL_SOCKET_DOMAIN_IPV4_H_
 
-# include <aisutil/socket/socket.h>
+# include <aisutil/socket/domain-ip.h>
 
 # include <iostream>
 
@@ -37,7 +37,7 @@ namespace AIS {
    namespace Util {
       namespace Socket {
 	 //! IPv4 Socket Domain
-	 class DomainIPv4 : virtual public Socket {
+	 class DomainIPv4 : public DomainIP {
 	  private:
 	    //! The local address of this socket
 	    sockaddr_in localAddress;

@@ -7,6 +7,7 @@
 nobase_include_HEADERS=\
 	aisutil/config/data.h \
 	aisutil/config/parser.h \
+	aisutil/socket/domain-ip.h \
 	aisutil/socket/domain-ipv4.h \
 	aisutil/socket/domain-ipv6.h \
 	aisutil/socket/domain-ipx.h \
