@@ -44,6 +44,43 @@ namespace AIS {
 	    //! Destructor
 	    virtual ~DomainIP(void)
 	      {};
+	    
+	    
+	    /*!
+	     * \brief Change the maximum hop count (TTL) on this socket
+	     *
+	     * This will modify the maximum hop counter, or <em>Time To
+	     * Live</em> (\e TTL), sent on packets \e sent from this socket.
+	     * 
+	     * Since this counter is decreased by \e 1 each time it passes
+	     * through another host or router, this counter determines the
+	     * maximum number of hosts the packet can be sent through before
+	     * it expires. When the counter reaches \e 0, the packet is
+	     * destroyed.
+	     *
+	     * \warning Setting this too high can cause dangerous circular
+	     *    problems if there are routing problems. Setting this too low
+	     *    will cause unnecessary packet destruction (and failed
+	     *    transmission).
+	     * \param hops The new maximum hop count to set on this socket.
+	     *    Setting a value of -1 \e may reset the hop count back to the
+	     *    system default.
+	     * \return The status of the operation
+	     * \retval The hop count was changed successfully
+	     * \retval The hop count could not be changed, or it was invalid
+	     */
+	    virtual const bool setMaximumHopCount(const int hops) = 0;
+	    
+	    /*!
+	     * \brief Return the maximum hop count (TTL) on this socket
+	     * 
+	     * This will return the maximum hops, or <em>Time To Live</em>
+	     * (\e TTL), set on packets sent from this socket.
+	     * 
+	     * \return The maximum hop count currently set on this socket
+	     * \retval -1 The hop count could not be determined
+	     */
+	    virtual const int getMaximumHopCount(void) const = 0;
 	 }; // class DomainIP
       }; // namespace Socket
    }; // namespace Util

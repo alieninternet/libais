@@ -79,7 +79,17 @@ namespace AIS {
 	    //! Destructor
 	    virtual ~DomainIPv6(void)
 	      {};
-	    
+
+
+	    // Change the maximum hop count (TTL) on this socket
+	    const bool setMaximumHopCount(const int hops)
+	      { return setSockoptInt(IPV6_UNICAST_HOPS, hops, IPPROTO_IPV6); };
+
+	    // Return the maximum hop count (TTL) on this socket
+	    const int getMaximumHopCount(void) const
+	      { return getSockoptInt(IPV6_UNICAST_HOPS, IPPROTO_IPV6); };
+
+
 	    /*!
 	     * \brief Return the local address
 	     * 
@@ -95,27 +105,30 @@ namespace AIS {
 	     */
 	    const sockaddr_in6& getRemoteAddressRef(void) const
 	      { return remoteAddress; };
-	    
+
+
 	    // Return the local address
 	    const sockaddr& getLocalAddress(socklen_t& addrlen) const
 	      {
 		 addrlen = sizeof(localAddress);
 		 return (sockaddr&)localAddress;
 	      };
-	    
+
 	    // Return the remote address
 	    const sockaddr& getRemoteAddress(socklen_t& addrlen) const
 	      {
 		 addrlen = sizeof(remoteAddress);
 		 return (sockaddr&)remoteAddress;
 	      };
-	    
+
+
 	    // Return the local address (as a string)
 	    const std::string getLocalAddress(void) const;
 	    
 	    // Return the remote address (as a string)
 	    const std::string getRemoteAddress(void) const;
-	    
+
+
 	    // Return the local port
 	    const int getLocalPort(void) const
 	      { return ntohs(localAddress.sin6_port); };
@@ -123,7 +136,8 @@ namespace AIS {
 	    // Return the remote port
 	    const int getRemotePort(void) const
 	      { return ntohs(remoteAddress.sin6_port); };
-	    
+
+
 	    // Set the local address
 	    const bool setLocalAddress(const std::string& address)
 	      { return setAddress(localAddress, address); };
@@ -137,7 +151,7 @@ namespace AIS {
 	    template <class T>
 	      const bool setLocalAddress(const T& address)
 		{ return setAddress(localAddress, address); };
-	    
+
 	    // Set the remote address
 	    const bool setRemoteAddress(const std::string& address)
 	      { return setAddress(remoteAddress, address); };
@@ -151,7 +165,8 @@ namespace AIS {
 	    template <class T>
 	      const bool setRemoteAddress(const T& address)
 		{ return setAddress(remoteAddress, address); };
-	    
+
+
 	    // Set the local port
 	    const bool setLocalPort(const int port)
 	      { return setPort(localAddress, port); };
@@ -159,10 +174,12 @@ namespace AIS {
 	    // Set the remote port
 	    const bool setRemotePort(const int port)
 	      { return setPort(remoteAddress, port); };
-	    
+
+
 	    // Bind a socket its port
 	    const bool bind(void);
-	    
+
+
 	    // Connect this socket (unavailable on some socket types)
 	    const bool connect(void);
 	 }; // class DomainIPv6
