@@ -44,7 +44,7 @@ using namespace AIS::Util::Socket;
 /* accept - Accept a new connection on a socket
  * Original 02/01/2001 pickle
  */
-Socket* SocketUNIX::accept(void)
+StatefulType* const SocketUNIX::accept(void)
 {
 #ifdef LIBAISUTIL_DEBUG_ASSERT
    // Make sure our file descriptor is real..

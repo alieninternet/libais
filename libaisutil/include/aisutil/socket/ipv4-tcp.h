@@ -62,8 +62,8 @@ namespace AIS {
 	    ~SocketIPv4TCP(void)
 	      {};
 	    
-	    //! Accept a connection on this socket
-	    Socket* accept(void);
+	    // Accept a connection on this socket
+	    StatefulType* const accept(void);
 	 }; // class SocketIPv4TCP
       }; // namespace Socket
    }; // namespace Util

@@ -59,9 +59,9 @@ namespace AIS {
 	    //! Destructor
 	    ~SocketUNIX(void)
 	      {};
-	    
-	    //! Accept a connection on this socket
-	    Socket* accept(void);
+
+	    // Accept a connection on this socket
+	    StatefulType* const accept(void);
       }; // class SocketUNIX
       }; // namespace Socket
    }; // namespace Util

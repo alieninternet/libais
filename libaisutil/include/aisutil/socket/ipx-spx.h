@@ -88,8 +88,8 @@ namespace AIS {
 	    ~SocketIPXSPX(void)
 	      {};
 	    
-	    //! Accept a connection on this socket
-	    Socket* accept(void);
+	    // Accept a connection on this socket
+	    StatefulType* const accept(void);
 	 }; // class SocketIPXSPX
       }; // namespace Socket
    }; // namespace Util

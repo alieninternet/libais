@@ -62,7 +62,7 @@ namespace AIS {
 	     * \return A newly allocated socket, of the same type and similar
 	     * \retval 0 Accepting a new connection failed
 	     */
-	    virtual Socket* accept(void) = 0;
+	    virtual StatefulType* const accept(void) = 0;
 	 }; // class StatefulType
       }; // namespace Socket
    }; // namespace Util

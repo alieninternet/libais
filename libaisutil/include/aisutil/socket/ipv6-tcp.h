@@ -62,8 +62,8 @@ namespace AIS {
 	    ~SocketIPv6TCP(void)
 	      {};
 	    
-	    //! Accept a connection on this socket
-	    Socket* accept(void);
+	    // Accept a connection on this socket
+	    StatefulType* const accept(void);
 	 }; // class SocketIPv6TCP
       }; // namespace Socket
    }; // namespace Util
