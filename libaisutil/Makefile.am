@@ -88,10 +88,35 @@ libaisutil_la_LDFLAGS=\
 
 # Stuff that needs to go into the distribution but isn't implied
 EXTRA_DIST=\
-	include/aisutil/aisutilconf.h.in
+	include/aisutil/aisutilconf.h.in \
+	test/README
 
 
 	
 # Stuff we don't want distributed
 dist-hook:
 	rm -rf $(distdir)/include/aisutil/aisutilconf.h
+
+
+
+##
+##  Test suite
+##
+
+# The tests to run
+TESTS=\
+	test-time
+
+
+# All of our tests are programs we need to build..
+check_PROGRAMS=$(TESTS)
+
+
+# Test parameters
+test_time_SOURCES=\
+	test/tests.h test/time.cpp
+
+
+# Test libraries
+test_time_LDADD=\
+	libaisutil.la
