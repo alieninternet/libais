@@ -68,7 +68,8 @@ namespace AIS {
 	 ~StringMask(void)
 	   {};
 	 
-	 
+
+	 //@{
 	 /*!
 	  * \brief Check string match (case-sensitive)
 	  * 
@@ -81,12 +82,13 @@ namespace AIS {
 	  * \retval false The given \p string does not match the mask
 	  */
 	 const bool matchesCase(const char* string) const;
-	 
-	 /*! \overload */
+
 	 const bool matchesCase(const std::string& string) const
 	   { return matchesCase(string.c_str()); };
+	 //@}
 	 
 	 
+	 //@{
 	 /*!
 	  * \brief Check string match (case-insensitive)
 	  * 
@@ -95,16 +97,16 @@ namespace AIS {
 	  * a \b case-insensitive match (ie. 'A' and 'a' will be considered
 	  * equal).
 	  * 
-	  * \param str A string to check against the stored mask
+	  * \param string A string to check against the stored mask
 	  * \return A value representing whether the match was successful
 	  * \retval true The given \p string matches the mask
 	  * \retval false The given \p string does not match the mask
 	  */
 	 const bool matches(const char* string) const;
-	 
-	 /*! \overload */
+
 	 const bool matches(const std::string& string) const
 	   { return matches(string.c_str()); }
+	 //@}
       }; // class StringMask
    }; // namespace Util
 }; // namespace AIS
