@@ -78,14 +78,14 @@ namespace AIS {
 	      : Socket(newFD),
 	        DomainIPX(newLocalAddress, newRemoteAddress),
 	        TypeSEQPACKET(LIBAISUTIL_SOCKET_IPX_SPX_PACKET_SIZE)
-	      { setNonBlocking(); };
+	      {};
 	 
 	  public:
 	    //! Standard constructor
 	    SocketIPXSPX(void)
 	      : Socket(::socket(PF_IPX, SOCK_SEQPACKET, NSPROTO_SPX)),
 	        TypeSEQPACKET(LIBAISUTIL_SOCKET_IPX_SPX_PACKET_SIZE)
-	      { setNonBlocking(); };
+	      {};
 	    
 	    //! Destructor
 	    ~SocketIPXSPX(void)

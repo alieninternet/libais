@@ -29,13 +29,13 @@
  */
 
 // We should simply include ostream here, but some compilers do not have it?
-# include <iostream>
 # include <string>
 # include <cerrno>
 # include <cstring>
 # include <cstdio>
 
 extern "C" {
+# include <sys/types.h>
 # include <sys/socket.h>
 # include <unistd.h>
 };
@@ -100,7 +100,8 @@ namespace AIS {
 	    explicit Socket(const int newFD = -1)
 	      : fd(newFD),
 	        errorMessage("No error")
-	      {};
+	      { (void)setNonBlocking(); };
+	    
 	    
 	    /*!
 	     * \brief Set the error message to the given string
@@ -123,6 +124,7 @@ namespace AIS {
 	    void setErrorMessage(void)
 	      { setErrorMessage(sys_errlist[errno]); };
 	    
+	    
 	    /*!
 	     * \brief Get a protocol's number
 	     * 
@@ -135,17 +137,40 @@ namespace AIS {
 	     * \return The protocol number
 	     */
 	    static const int getProtocol(const char* const name);
+
 	    
 	    /*!
-	     * \brief Set socket as \e non-blocking
 	     * 
-	     * This is to set the socket as \e non-blocking as not to slow down
-	     * operations.
-	     * 
-	     * \deprecated This will possibly change to be a public function.
+	     * \param option The flag to set using setsockopt()
+	     * \param level The level to set the option/flag at. The default
+	     *    is to set the flag at the socket level. Check the
+	     *    setsockopt() <em>man page</em> for more details.
+	     * \return The status of the operation
+	     * \retval true The flag was set successfully
+	     * \retval false The flag could not be set
 	     */
-	    void setNonBlocking(void);
+	    const bool setSockoptFlag(const int option,
+				      const bool toggle,
+				      const int level = SOL_SOCKET);
 	    
+	    /*!
+	     * \brief Retrieve the the status of the given sockopts flag
+	     * 
+	     * \param option The flag to check using getsockopt()
+	     * \param level The level to check for the flag. The default is
+	     *    the socket level. See the getsockopt() <em>man page</em>
+	     *    for more info.
+	     * \return The boolean value of the flag
+	     * \retval 1 The flag is set (on)
+	     * \retval 0 The flag is not set (off)
+	     * \retval -1 The status of the flag is indeterminate or an error
+	     *    occurred
+	     */
+	    const signed int
+	      getSockoptFlag(const int flag,
+			     const int level = SOL_SOCKET) const;
+
+
 	  public:
 	    /*!
 	     * \brief Destructor
@@ -155,6 +180,7 @@ namespace AIS {
 	     */
 	    virtual ~Socket(void)
 	      { (void)::close(fd); };
+
 	    
 	    /*!
 	     * \brief Get the file descriptor
@@ -183,7 +209,35 @@ namespace AIS {
 	     */
 	    const bool isOkay(void) const
 	      { return (fd >= 0); };
+
 	    
+	    /*!
+	     * \brief Set socket as \e non-blocking
+	     * 
+	     * This is to set the socket as \e non-blocking as not to slow down
+	     * operations.
+	     * 
+	     * \note Non-blocking is the default behavior for Socket's.
+	     * 
+	     * \param toggle Whether you want non-blocking mode on or off
+	     * \return The status of the operation
+	     * \retval true The operation was successful
+	     * \retval false The operation was unsuccessful, or the feature is
+	     *    unsupported on this system
+	     */
+	    const bool setNonBlocking(const bool toggle = true);
+
+	    /*!
+	     * \brief Determine if the socket is in \e non-blocking mode
+	     * 
+	     * \return Whether the socket is in non-blocking mode
+	     * \retval 1 Operations performed on the socket will not block
+	     * \retval 0 Operations performed on the socket will block
+	     * \retval -1 Unable to determine the non-blocking status
+	     */
+	    const signed int getNonBlocking(void) const;
+
+
 	    /*!
 	     * \brief Turn on re-usable addresses
 	     * 
@@ -197,13 +251,30 @@ namespace AIS {
 	     * With this unset, the socket may not bind() to an address/port
 	     * without the address/port being totally unused.
 	     * 
+	     * \param toggle Whether you want \e SO_REUSEADDR on or off
 	     * \return The status of the operation
 	     * \retval true The operation was successful
 	     * \retval false The operation was unsuccessful, or the feature is
 	     *    unsupported on this system
 	     */
-	    const bool setReuseAddress(void);
-	    
+	    const bool setReuseAddress(const bool toggle = true)
+	      { return setSockoptFlag(SO_REUSEADDR, toggle); };
+
+	    /*!
+	     * \brief Determine if the socket may reuse 
+	     * 
+	     * \return Whether the socket can reuse local addresses when
+	     *    bind()ing
+	     * \retval 1 bind() operations are allowed so long as no socket
+	     *    is already listening on the local address and/or port set
+	     * \retval 0 bind() operations are only allowed when nothing is
+	     *    currently using the set local address and/or port
+	     * \retval -1 Unable to determine the status of this flag
+	     */
+	    const signed int getReuseAddress(void) const
+	      { getSockoptFlag(SO_REUSEADDR); };
+
+
 	    /*!
 	     * \brief Close the socket
 	     * 
@@ -226,6 +297,7 @@ namespace AIS {
 		 }
 		 return false;
 	      };
+
 	    
 	    /*!
 	     * \brief Return the local address
@@ -243,6 +315,7 @@ namespace AIS {
 	    virtual const sockaddr&
 	      getRemoteAddress(socklen_t& addrlen) const = 0;
 	    
+	    
 	    /*!
 	     * \brief Return the local address (as a string)
 	     *
@@ -257,6 +330,7 @@ namespace AIS {
 	     */
 	    virtual const std::string getRemoteAddress(void) const = 0;
 	    
+
 	    /*!
 	     * \brief Return the local port
 	     * 
@@ -274,6 +348,7 @@ namespace AIS {
 	     */
 	    virtual const int getRemotePort(void) const
 	      { return -1; };
+	    
 	    
 	    /*!
 	     * \brief Set the local address
@@ -298,6 +373,7 @@ namespace AIS {
 	     */
 	    virtual const bool
 	      setRemoteAddress(const std::string& address) = 0;
+
 	    
 	    /*!
 	     * \brief Set the local port
@@ -321,6 +397,7 @@ namespace AIS {
 	    virtual const bool setRemotePort(const int port)
 	      { return false; };
 	    
+	    
 	    /*!
 	     * \brief Bind a socket
 	     * 
@@ -335,6 +412,7 @@ namespace AIS {
 	     *    or the socket cannot be bound.
 	     */
 	    virtual const bool bind(void) = 0;
+	    
 	    
 	    /*!
 	     * \brief Connect this socket
@@ -353,6 +431,7 @@ namespace AIS {
 	     * \retval false The socket could not connect.
 	     */
 	    virtual const bool connect(void) = 0;
+	    
 	    
 	    /*! 
 	     * \brief Write data to this socket
@@ -382,12 +461,14 @@ namespace AIS {
 	     */
 	    virtual const std::string::size_type read(std::string& buffer) = 0;
 	    
+	    
 	    /*!
 	     * \brief Return the block size per read
 	     * 
 	     * \return The maximum chunk of data per read() call
 	     */
 	    virtual const blockSize_type getReadBlockSize(void) const = 0;
+	    
 	    
 	    /*!
 	     * \brief Has an error occured?

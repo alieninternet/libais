@@ -60,31 +60,92 @@ const int Socket::getProtocol(const char* const name)
 /* setNonBlocking - Set socket NON-BLOCKING so it doesn't slow us down
  * Original 18/12/2000 pickle
  * 05/07/2002 pickle - Cut down, the socket class now always sets non-blocking
+ * 07/08/2003 pickle - Un-cut-down :) Users may revert back to blocking mode
  */
-void Socket::setNonBlocking(void)
+const bool Socket::setNonBlocking(const bool toggle)
 {
    long flags = 0;
    
    // We first get the file descriptor flags
-   fcntl(fd, F_GETFL, &flags);
+   if (fcntl(fd, F_GETFL, &flags) != 0) {
+      if (toggle) {
+	 // Set it
+	 flags |= O_NONBLOCK;
+      } else {
+	 // Unset it
+	 flags &= ~O_NONBLOCK;
+      }
+      
+      // Do the change
+      if (fcntl(fd, F_SETFL, flags) != -1) {
+	 return true;
+      }
+   }
    
-   // Set it
-   fcntl(fd, F_SETFL, flags | O_NONBLOCK);
+   // Presume an error occurred..
+   setErrorMessage();
+   return false;
 }
 
 
-/* setReuseAddress - Set socket SO_REUSEADDR to save binding time :)
+/* getNonBlocking - Return the non-blocking setting
+ * Original 07/08/2003 pickle
+ */
+const signed int Socket::getNonBlocking(void) const
+{
+   long flags = 0;
+   
+   // Get the file descriptor flags
+   if (fcntl(fd, F_GETFL, &flags) == -1) {
+      // An error occurred, so presume non-blocking
+      return -1;
+   }
+   
+   // Return the status of the non-blocking flag
+   return ((flags & O_NONBLOCK) ? 1 : 0);
+}
+
+
+/* setReuseAddress - Set the given flag on the socket
  * Original 09/01/2001 pickle
  */
-const bool Socket::setReuseAddress(void)
+const bool Socket::setSockoptFlag(const int option, const bool toggle,
+				  const int level)
 {
-   int sockopts = 1;
+   // Determine what the flag should be set to
+   const int sockopts = (toggle ? 1 : 0);
    
-   if (setsockopt(fd, SOL_SOCKET, SO_REUSEADDR,
-		  (char*)&sockopts, sizeof(sockopts)) == 0) {
+   // Set the flag
+   if (setsockopt(getFD(), level, option,
+		  (void*)&sockopts, sizeof(sockopts)) == 0) {
       return true;
    }
    
+   // Presume there was an error..
    setErrorMessage();
    return false;
+}
+
+
+/* getSockoptFlag - Return the status of the given socket flag
+ * Original 07/08/2003 pickle
+ */
+const signed int
+  Socket::getSockoptFlag(const int option, const int level) const
+{
+   int sockopts;
+   socklen_t sockopts_len;
+   
+   // Try to obtain the flag
+   if (getsockopt(getFD(), level, option,
+		  (void*)&sockopts, &sockopts_len) == 0) {
+      // Make sure this really is a flag.. the size should be an 'integer'
+      if (sockopts_len == sizeof(sockopts)) {
+	 // Return the value of the flag, quantised down to a simple boolean
+	 return ((sockopts > 0) ? 1 : 0);
+      }
+   }
+   
+   // We couldn't get the flag..
+   return -1;
 }

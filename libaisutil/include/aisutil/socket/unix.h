@@ -48,13 +48,13 @@ namespace AIS {
 	      : Socket(newFD),
 	        DomainUNIX(newLocalAddress, newRemoteAddress),
 	        TypeSTREAM(newReadBlockSize)
-	      { setNonBlocking(); };
+	      {};
 	 
 	  public:
 	    //! Standard constructor
 	    SocketUNIX(void)
 	      : Socket(::socket(PF_UNIX, SOCK_STREAM, 0))
-	      { setNonBlocking(); };
+	      {};
 	    
 	    //! Destructor
 	    ~SocketUNIX(void)

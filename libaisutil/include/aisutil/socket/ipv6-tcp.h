@@ -49,14 +49,14 @@ namespace AIS {
 	      : Socket(newFD),
 	        DomainIPv6(newLocalAddress, newRemoteAddress),
 	        TypeSTREAM(newReadBlockSize)
-	      { setNonBlocking(); };
+	      {};
 	    
 	  public:
 	    //! Standard constructor
 	    SocketIPv6TCP(void)
 	      : Socket(::socket(PF_INET6, SOCK_STREAM,
 				Socket::getProtocol("TCP")))
-	      { setNonBlocking(); };
+	      {};
 	    
 	    //! Destructor
 	    ~SocketIPv6TCP(void)
