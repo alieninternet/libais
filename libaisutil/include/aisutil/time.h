@@ -35,22 +35,105 @@ namespace AISutil {
       //! Nanoseconds (additional to 'seconds')
       signed long nanoseconds;
 
-
+      
+      //! Default constructor
+      Time(void)
+	: seconds(0), nanoseconds(0)
+	{};
+      
+      //! Copy constructor
+      Time(const Time& time)
+	: seconds(time.seconds),
+          nanoseconds(time.nanoseconds)
+	{};
+      
+      //! Constructor (from a 'time_t')
+      Time(const time_t& time)
+	: seconds(time),
+          nanoseconds(0)
+	{};
+      
+      //! Constructor (from a 'struct timespec')
+      Time(const timespec& time)
+	: seconds(time.tv_sec),
+          nanoseconds(time.tv_nsec)
+	{};
+      
+      //! Constructor (from a 'struct timeval')
+      Time(const timeval& time)
+	: seconds(time.tv_sec),
+          nanoseconds(time.tv_usec * 1000)
+	{};
+      
+      
+      //! Destructor
+      ~Time(void)
+	{};
+      
+      
       //! Addition operator
-      Time operator+(const Time& rhs) const;
+      const Time operator+(const Time& rhs) const;
 
+      //! Addition assignment operator
+      const Time& operator+=(const Time& rhs)
+	{ return ((*this) = (*this) + rhs); };
+      
       //! Subtraction operator
-      Time operator-(const Time& rhs) const;
+      const Time operator-(const Time& rhs) const;
 
+      //! Subtraction assignment operator
+      const Time& operator-=(const Time& rhs)
+	{ return ((*this) = (*this) - rhs); };
+      
       //! Division operator
-      double operator/(const Time& rhs) const;
+      const double operator/(const Time& rhs) const;
 
 
+      //! Equality operator
+      const bool operator==(const Time& rhs) const
+	{
+	   return ((seconds == rhs.seconds) &&
+		   (nanoseconds == rhs.nanoseconds));
+	};
+      
+      //! Not equal-to operator
+      const bool operator!=(const Time& rhs) const
+	{ return (!((*this) == rhs)); };
+      
+      //! Greater-than operator
+      const bool operator>(const Time& rhs) const
+	{
+	   if ((seconds > rhs.seconds) ||
+	       ((seconds == rhs.seconds) &&
+		(nanoseconds > rhs.nanoseconds))) {
+	      return true;
+	   }
+	   return false;
+	};
+      
+      //! Less-than operator
+      const bool operator<(const Time& rhs) const
+	{
+	   if ((seconds < rhs.seconds) ||
+	       ((seconds == rhs.seconds) &&
+		(nanoseconds < rhs.nanoseconds))) {
+	      return true;
+	   }
+	   return false;
+	};
+      
+      //! Greater-than or equal to operator
+      const bool operator>=(const Time& rhs) const
+	{ return (!((*this) < rhs)); };
+      
+      //! Less-than or equal to operator
+      const bool operator<=(const Time& rhs) const
+	{ return (!((*this) > rhs)); };
+
+      
       //! Convert this to a 'time_t' (we hope)
       operator time_t(void) const
-	{
-	   return time_t(seconds);
-	};
+	{ return time_t(seconds); };
 
       //! Convert this to a 'struct timespec'
       operator timespec(void) const
@@ -70,28 +153,32 @@ namespace AISutil {
 	   return result;
 	};
 
-
-      //! Set the time to the time given (as a 'time_t')
-      void setTime(const time_t& time)
+      
+      //! Assignment operator (from a 'time_t')
+      const Time& operator=(const time_t& time)
 	{
-	   seconds = time;
-	   nanoseconds = 0;
+	   this->seconds = time;
+	   this->nanoseconds = 0;
+	   return (*this);
 	};
 
-      //! Set the time to the time given (as a 'struct timespec')
-      void setTime(const timespec& time)
+      //! Assignment operator (from a 'struct timespec')
+      const Time& operator=(const timespec& time)
 	{
-	   seconds = time.tv_sec;
-	   nanoseconds = time.tv_nsec;
+	   this->seconds = time.tv_sec;
+	   this->nanoseconds = time.tv_nsec;
+	   return (*this);
+	};
+      
+      //! Assignment operator (from a 'struct timeval')
+      const Time& operator=(const timeval& time)
+	{
+	   this->seconds = time.tv_sec;
+	   this->nanoseconds = time.tv_usec * 1000;
+	   return (*this);
 	};
 
-      //! Set the time to the time given (as a 'struct timeval')
-      void setTime(const timeval& time)
-	{
-	   seconds = time.tv_sec;
-	   nanoseconds = time.tv_usec * 1000;
-	};
-
+      
       //! Set the time to the time now (according to the local timezone)
       bool setTime(void);
    }; // struct Time

@@ -31,7 +31,7 @@ using namespace AISutil;
 /* Addition operator
  * Original 21/05/1996 pickle
  */
-Time Time::operator+(const Time& rhs) const
+const Time Time::operator+(const Time& rhs) const
 {
    Time result;
    
@@ -52,7 +52,7 @@ Time Time::operator+(const Time& rhs) const
 /* Subtraction operator
  * Original 21/05/1996 pickle
  */
-Time Time::operator-(const Time& rhs) const
+const Time Time::operator-(const Time& rhs) const
 {
    Time result;
    
@@ -73,7 +73,7 @@ Time Time::operator-(const Time& rhs) const
 /* Division operator
  * Original 23/05/1996 pickle
  */
-double Time::operator/(const Time& rhs) const
+const double Time::operator/(const Time& rhs) const
 {
    unsigned long long a = (seconds * 1000000000) + nanoseconds;
    unsigned long long b = (rhs.seconds * 1000000000) + rhs.nanoseconds;
@@ -92,7 +92,7 @@ bool Time::setTime(void)
    // Obtain the time
    if (gettimeofday(&time, NULL) == 0) {
       // Copy the time across accordingly
-      setTime(time);
+      (*this) = time;
       return true;
    }
    
