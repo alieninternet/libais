@@ -59,6 +59,11 @@ namespace AIS {
 		   *(static_cast<const digest_type*>
 		     (memcpy((void*)this, (const void*)&rhs, 20)));
 	      };
+	    
+
+	    //! Convert an SHA1 digest output to particular base
+	    const std::string toStr(const unsigned char base,
+				    const std::string::size_type pad);
 	 };
 	 
 	 //! An empty digest
@@ -66,11 +71,6 @@ namespace AIS {
 	 
 	 //! SHA1 digest from a string
 	 static digest_type generate(const std::string& line);
-	 
-	 //! Convert an SHA1 digest output to particular base
-	 static std::string digestToStr(const digest_type& digest,
-					const unsigned char base,
-					const std::string::size_type pad);
       }; // namespace SHA1
    }; // namespace Util
 }; // namespace AIS

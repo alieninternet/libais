@@ -335,18 +335,18 @@ SHA1::digest_type SHA1::generate(const std::string &line)
 }
 
 
-/* digestToStr - Convert a digest into a string of digits in some base
+/* toStr - Convert a digest into a string of digits in some base
  * Original 22/01/2001 mro0
  * 07/04/2002 pickle - Separated from generate() function
+ * 20/07/2003 pickle - Became a member of digest_type
  */
-std::string SHA1::digestToStr(const digest_type &digest,
-			      const unsigned char base,
-			      const std::string::size_type pad)
+const std::string SHA1::digest_type::toStr(const unsigned char base,
+					   const std::string::size_type pad)
 {
    std::string output;
-
-   for (unsigned char i = 5; i; --i) {
-      output += Utils::baseXStr(digest.u_long[i], base).prepad(pad, '0');
+   
+   for (unsigned char i = 5; i != 0; --i) {
+      output += Utils::baseXStr(u_long[i], base).prepad(pad, '0');
    }
    
    return output;
