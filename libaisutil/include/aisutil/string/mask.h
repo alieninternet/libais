@@ -39,7 +39,7 @@ namespace AISutil {
       // Constructor
       template <class T>
 	StringMask(const T& a)
-	  : std::string(a) 
+	  : String(a) 
 	  {};
       
       // Destructor
