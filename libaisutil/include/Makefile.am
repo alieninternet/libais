@@ -28,6 +28,7 @@ nobase_include_HEADERS=\
 	aisutil/aisutilconf.h \
 	aisutil/socket.h \
 	aisutil/string.h \
+	aisutil/utils.h \
 	aisutil/version.h
 
 
