@@ -52,7 +52,7 @@ using namespace AISutil;
 bool StringMask::match(char const *m, char const *n)
 {
 #ifdef USING_FNMATCH
-   return fnmatch(m, n, 0);
+   return (fnmatch(m, n, 0) == 0);
 #else
    bool escaped = false;
    
