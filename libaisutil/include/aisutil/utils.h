@@ -27,13 +27,15 @@
 
 namespace AIS {
    namespace Util {
-      //! Miscellaneous utilities
-      /*! This is a collection of miscellaneous utilities which don't fit in
+      /*! \brief Miscellaneous utilities
+       * 
+       * This is a collection of miscellaneous utilities which don't fit in
        * elsewhere.
        */
       namespace Utils {
-	 //! Confirm that the given string, encoded in \e UTF-8, is valid
-	 /*! Validate a \e UTF-8 string. The given string must be encoded
+	 /*! \brief Confirm the given string, encoded in \e UTF-8, is valid
+	  * 
+	  * Validate a \e UTF-8 string. The given string must be encoded
 	  * using \e UTF-8. This will validate by looking for out-of-range
 	  * encodings, redundant encodings, or invalid and/or incomplete
 	  * sequences.
@@ -43,8 +45,9 @@ namespace AIS {
 	  */
 	 extern const bool validateUTF8(const std::string& str);
 	 
-	 //! Convert the given word (as a string) to a boolean value
-	 /*! Attempt to convert the given \p word into a boolean value. This
+	 /*! \brief Convert the given word (as a string) to a boolean value
+	  * 
+	  * Attempt to convert the given \p word into a boolean value. This
 	  * will convert words such as \e true, \e false, \e on, \e off,
 	  * \e yes, and \e no into their appropriate boolean counterparts.
 	  * If the string given is actually a number, a \e positive number
@@ -59,13 +62,15 @@ namespace AIS {
 	  * \retval 1 The given word should be interpreted as 'true'
 	  * \retval 0 The given word should be interpreted as 'false'
 	  * \retval -1 A word was given which was ambiguous, a string was
-	  * \retval -1 given, or the string given was empty
+	  *    given, or the string given was empty
 	  */
 	 extern const int toBool(const std::string& word);
 	 
-	 //! Convert the given \p number to another base (up to base-85)
-	 /*! This will convert the given integer into another base, and return
-	  * it as a string. Any base from 2 up to 85 can be used.
+	 /*! \brief Convert the given number to another base (up to base-85)
+	  *
+	  * This will convert the given \p number into a specified \p base,
+	  * and return it as a String. Any \p base from 2 up to 85 can be
+	  * used.
 	  *
 	  * Conversions beyond base-36 (\e sexatrigesimal) must be handled in a
 	  * case-sensitive manner, as latin digits and upper-case simple latin
@@ -81,9 +86,9 @@ namespace AIS {
 	  *
 	  * \param number The number you wish to convert to another base
 	  * \param base The base you wish to convert to. For obvious reasons,
-	  * \param base a base of 0 or 1 cannot be specified!
+	  *    a base of 0 or 1 cannot be specified!
 	  * \param networkByteOrder specify true here if you wish to convert
-	  * \param networkByteOrder the number into network byte order.
+	  *    the \p number into network byte order.
 	  * \return The converted number as a String, without any padding.
 	  */
 	 extern const String baseXStr(unsigned long number,
