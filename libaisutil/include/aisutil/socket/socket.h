@@ -40,6 +40,7 @@ extern "C" {
 # include <unistd.h>
 };
 
+
 namespace AIS {
    namespace Util {
       namespace Socket {
@@ -350,6 +351,37 @@ namespace AIS {
 	     */
 	    const signed int getSingleHopFlag(void) const
 	      { return getSockoptFlag(SO_DONTROUTE); };
+
+
+	    /*!
+	     * \brief Toggle socket closure lingering
+	     * 
+	     * When lingering is turned on, closing the socket will not close
+	     * and dump the data. Instead, the operating system will keep the
+	     * socket \e lingering whilst either all the data pending to be
+	     * sent on the socket is sent, or the maximum lingering time
+	     * (\p seconds) has passed.
+	     * 
+	     * \param seconds This is the number of seconds to \e linger.
+	     *    Specify \e 0 here to turn the flag off.
+	     * \return The status of the operation
+	     * \retval true The linger flag has been toggled and/or the linger
+	     *    time has been changed
+	     * \retval false The linger flag could not be changed, or the
+	     *    linger seconds is invalid
+	     */
+	    const bool setLingerFlag(const int seconds = 0);
+
+	    /*!
+	     * \brief Determine whether lingering is set on the socket
+	     *
+	     * \return If set, a number greater than zero representing the
+	     *    number of senders the socket will linger for after close()
+	     *    is called.
+	     * \retval 0 Lingering is turned off on this socket
+	     * \retval -1 The closure lingering status could not be determined
+	     */
+	    const int getLingerFlag(void) const;
 
 
 	    /*!

@@ -149,3 +149,59 @@ const signed int
    // We couldn't get the flag..
    return -1;
 }
+
+
+/* setLingerFlag - Set the SO_LINGER flag
+ * Original 07/08/2003 pickle
+ */
+const bool Socket::setLingerFlag(const int seconds)
+{
+   struct linger sockopts;
+
+   // Set up the linger structure
+   if (seconds > 0) {
+      sockopts.l_onoff = 1;
+      sockopts.l_linger = seconds;
+   } else {
+      sockopts.l_onoff = sockopts.l_linger = 0;
+   }
+   
+   // Set the flag
+   if (setsockopt(getFD(), SOL_SOCKET, SO_LINGER,
+		  (void*)&sockopts, sizeof(sockopts)) == 0) {
+      return true;
+   }
+   
+   // Presume there was an error..
+   setErrorMessage();
+   return false;
+}
+
+
+/* getLingerFlag - Return the value of the SO_LINGER flag (if set)
+ * Original 07/08/2003 pickle
+ */
+const int Socket::getLingerFlag(void) const
+{
+   struct linger sockopts;
+   socklen_t sockopts_len;
+   
+   // Try to obtain the info
+   if (getsockopt(getFD(), SOL_SOCKET, SO_LINGER,
+		  (void*)&sockopts, &sockopts_len) == 0) {
+      // Make sure this really is a flag.. the size should be an 'integer'
+      if (sockopts_len == sizeof(sockopts)) {
+	 // Is the linger flag turned on?
+	 if (sockopts.l_onoff) {
+	    // Return the number of seconds 'lingering' is set for
+	    return sockopts.l_linger;
+	 } else {
+	    // Return 0 (the flag is off)
+	    return 0;
+	 }
+      }
+   }
+   
+   // We couldn't get the info we wanted
+   return -1;
+}
