@@ -41,11 +41,13 @@ namespace AISutil {
       // The magic constructors
       String(void) : std::string("") {};
       String(char c) : std::string(&c) {};
-      template <class Ta> String(Ta const a) 
-	: std::string(a) 
+      template <class Ta>
+	String(const Ta& a) 
+	  : std::string(a) 
 	  {};
-      template <class Ta, class Tb> String(Ta const a, Tb const b) 
-	: std::string(a, b)
+      template <class Ta, class Tb>
+	String(const Ta& a, const Tb& b) 
+	  : std::string(a, b)
 	  {};
       
       // Destructor
@@ -59,7 +61,8 @@ namespace AISutil {
       String toUpper(void) const;
       
       // Convert something via stringstream
-      template <class T> static String convert(T const in) {
+      template <class T>
+	static String convert(const T& in) {
 	 std::ostringstream out;
 	 out << in;
 	 return out.str();
