@@ -45,7 +45,7 @@ namespace AIS {
 	  */
 	 extern const bool validateUTF8(const std::string& str);
 	 
-	 /*! \brief Convert the given word (as a string) to a boolean value
+	 /*! \brief Convert the given \p word (as a string) to a boolean value
 	  * 
 	  * Attempt to convert the given \p word into a boolean value. This
 	  * will convert words such as \e true, \e false, \e on, \e off,
@@ -66,7 +66,7 @@ namespace AIS {
 	  */
 	 extern const int toBool(const std::string& word);
 	 
-	 /*! \brief Convert the given number to another base (up to base-85)
+	 /*! \brief Convert the given \p number to another \p base
 	  *
 	  * This will convert the given \p number into a specified \p base,
 	  * and return it as a String. Any \p base from 2 up to 85 can be
