@@ -229,6 +229,9 @@ AC_CACHE_SAVE
 dnl -------------------------------------------------------------------------
 dnl  Determining compilation configuration parameters
 dnl -------------------------------------------------------------------------
+dnl Maintainer mode?
+AM_MAINTAINER_MODE
+
 dnl
 dnl Which transports do we require
 dnl
