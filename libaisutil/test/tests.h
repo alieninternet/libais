@@ -30,7 +30,17 @@
 	std::cout << x << std::endl; \
      }
 
-#define TEST_ASSERT(x) \
+#define TEST_FAIL_IF(x) \
      if (x) { \
+	return TEST_RETURN_FAIL; \
+     }
+
+#define TEST_IGNORE_IF(x) \
+     if (x) { \
+	return TEST_RETURN_IGNORE; \
+     }
+
+#define TEST_ASSERT(x) \
+     if (!(x)) { \
 	return TEST_RETURN_FAIL; \
      }
