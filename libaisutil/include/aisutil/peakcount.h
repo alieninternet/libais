@@ -47,7 +47,11 @@ namespace AIS {
        * twice the size of the given type.
        */
       template < class T > class PeakCount {
-       private:
+       public:
+	 //! The type used for the value and peak numbers
+	 typedef T value_type;
+	 
+       private:	
 	 //! My type
 	 typedef PeakCount < T > my_type;
 	 
@@ -125,6 +129,19 @@ namespace AIS {
 	   };
 	 
 	 /*!
+	  * \brief Addition operator
+	  * 
+	  * Note that adding two counters together will combine both
+	  * the values and peak values together, in effect merging the
+	  * two counters.
+	  * 
+	  * \param rhs Another counter to add to this counter
+	  * \return The result of the addition
+	  */
+	 const my_type operator+(const my_type& rhs)
+	   { return my_type(value + rhs.value, peak + rhs.peak); };
+	 
+	 /*!
 	  * \brief Addition assignment operator
 	  * 
 	  * \param rhs The number to add to the \a value
@@ -138,6 +155,20 @@ namespace AIS {
 	      return (*this);
 	   };
 	 
+	 /*!
+	  * \brief Addition assignment operator
+	  * 
+	  * \param rhs The counter to add to this one
+	  * \return A reference to this instance after the addition
+	  */
+	 const my_type& operator+=(const my_type& rhs)
+	   {
+	      value += rhs.value;
+	      peak += rhs.peak;
+	      return (*this);
+	   };
+
+
 	 /*!
 	  * \brief Prefix increment operator
 	  * 
@@ -173,6 +204,17 @@ namespace AIS {
 	   };
 	 
 	 /*!
+	  * \brief Subtraction operator
+	  *
+	  * \param rhs Another counter to subtract from this one
+	  * \return The result of the addition
+	  */
+	 const my_type operator-(const my_type& rhs)
+	   {
+	      return my_type(value - rhs.value, peak - rhs.peak);
+	   };
+	 
+	 /*!
 	  * \brief Subtraction assignment operator
 	  * 
 	  * \param rhs The number to subtract from the \a value
@@ -184,6 +226,20 @@ namespace AIS {
 	      return (*this);
 	   };
 	 
+	 /*!
+	  * \brief Subtraction assignment operator
+	  * 
+	  * \param rhs Another counter to subtract from this one
+	  * \return A reference to this instance after the subtraction
+	  */
+	 const my_type& operator-=(const my_type& rhs)
+	   {
+	      value -= rhs.value;
+	      peak -= rhs.peak;
+	      return (*this);
+	   };
+
+
 	 /*!
 	  * \brief Prefix decrement operator
 	  * 

@@ -78,5 +78,16 @@ int main(int argc, char **argv)
 		(pcA.getValue() != 135) ||
 		(pcA.getPeak() != 456));
    
+   TEST_STATUS("Creating a new PeakCount<int>:: object (initialised)");
+   PeakCount < int > pcB(654, 321); // peak is lower than value intentionally
+   TEST_FAIL_IF((pcB.getValue() != 654) ||
+		(pcB.getPeak() != 654) ||
+		(pcB != 654));
+
+   TEST_STATUS("Adding PeakCount's together");
+   PeakCount < int > pcC = pcA + pcB;
+   TEST_FAIL_IF((pcC.getValue() != (pcA.getValue() + pcB.getValue())) ||
+		(pcC.getPeak() != (pcA.getPeak() + pcB.getPeak())));
+   
    TEST_END;
 }
