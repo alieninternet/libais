@@ -91,7 +91,7 @@ LIBAISUTIL_CONFIG_VARIABLE_HANDLER(ConfigData::varHandleHostName)
    const char *name = values.front().c_str();
    const char *nameStart = name;
    
-   for (; *name != '\0'; name++) {
+   for (; *name != '\0'; ++name) {
       /* Check the hostname according to STD-0013 rules on host names. I am
        * unaware of how this effects the internationalisation of domain names
        * (IDN) such as names with extended characters...

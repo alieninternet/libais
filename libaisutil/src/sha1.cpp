@@ -224,7 +224,7 @@ void SHA1update(context_type &context, unsigned char *data, unsigned int len)
    j = (context.count[0] >> 3) & 63;
    
    if ((context.count[0] += len << 3) < (len << 3)) {
-      context.count[1]++;
+      ++context.count[1];
    }
    
    context.count[1] += (len >> 29);
@@ -260,7 +260,7 @@ void SHA1final(unsigned char digest[20], context_type &context)
    unsigned long i, j;
    unsigned char finalcount[8];
    
-   for (i = 0; i < 8; i++) {
+   for (i = 0; i < 8; ++i) {
       finalcount[i] = (char)
 	((context.count[(i >= 4 ? 0 : 1)] >> ((3-(i & 3)) * 8)) & 255);
    }
@@ -273,7 +273,7 @@ void SHA1final(unsigned char digest[20], context_type &context)
 
    SHA1update(context, finalcount, 8); 
 
-   for (i = 0; i < 20; i++) {
+   for (i = 0; i < 20; ++i) {
 # ifdef WORDS_BIGENDIAN
       digest[i] = (char)
 	((context.state[i >> 2] >> (((i & 3)) * 8)) & 255);
@@ -343,8 +343,8 @@ std::string SHA1::digestToStr(const digest_type &digest,
 			      const std::string::size_type pad)
 {
    std::string output;
-   
-   for (unsigned char i = 5; i--;) {
+
+   for (unsigned char i = 5; i; --i) {
       output += Utils::baseXStr(digest.u_long[i], base).prepad(pad, '0');
    }
    

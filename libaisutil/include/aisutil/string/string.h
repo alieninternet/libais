@@ -115,7 +115,7 @@ template<> struct std::hash<AISutil::String>
        * magic number 17 as a generic prime, so I have followed the 
        * fashion :)
        */
-      for (; *s; s++) {
+      for (; *s != 0; ++s) {
 	 size = (size * 17) ^ *s;
       }
       

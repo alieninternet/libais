@@ -41,7 +41,7 @@ using namespace AISutil;
  */
 const bool Utils::validateUTF8(const std::string& str)
 {
-   for (std::string::size_type i = 0; i < str.length(); i++) {
+   for (std::string::size_type i = 0; i < str.length(); ++i) {
       // 0x00000000 -> 0x0000007F (one octet sequence)
       if ((str[i] & 0x80) == 0) {
 	 // This is a single octet, so we know it's okay
@@ -51,7 +51,7 @@ const bool Utils::validateUTF8(const std::string& str)
       // 0x00000080 -> 0x000007FF (two octet sequences)
       if ((str[i] >= '\302') && (str[i] <= '\337') &&
 	  (str.length() >= (i + 1))) {
-	 i++;
+	 ++i;
 	 
 	 // Check the second octet
 	 if ((str[i] >= '\200') && (str[i] <= '\277')) {
@@ -62,13 +62,13 @@ const bool Utils::validateUTF8(const std::string& str)
       // 0x00000800 -> 0x00001000 (three octet sequences)
       if ((str[i] >= '\340') && (str[i] <= '\357') &&
 	  (str.length() >= (i + 2))) {
-	 i++;
+	 ++i;
 	 
 	 // Check the second octet
 	 if ((((str[i - 1] == '\340') && (str[i] >= '\240')) ||
 	      (str[i] >= '\200')) &&
 	     (str[i] <= '\277')) {
-	    i++;
+	    ++i;
 	    
 	    // Check the third octet
 	    if ((str[i] >= '\200') && (str[i] <= '\277')) {
@@ -80,7 +80,7 @@ const bool Utils::validateUTF8(const std::string& str)
       // 0x00010000 -> 0x00100000 (four octet sequences)
       if ((str[i] >= '\360') && (str[i] <= '\364') &&
 	  (str.length() >= (i + 3))) {
-	 i++;
+	 ++i;
 	 
 	 // Check the second octet
 	 if (((str[i - 1] == '\360') &&

@@ -109,7 +109,7 @@ const String ConfigParser::read(const String &filename)
       }
 
       // Increase the line counter
-      lineNum++;
+      ++lineNum;
 
       // Trim away leading/trailing whitespace
       line = line.trim();
@@ -123,7 +123,7 @@ const String ConfigParser::read(const String &filename)
        * to chew on later :)
        * Yes.. I know, bad pun, sorry. :( *hides from the pun police*
        */
-      for (String::size_type i = 0; i < line.length(); i++) {
+      for (String::size_type i = 0; i < line.length(); ++i) {
 	 /* Is this an escape char ('\') or not? If so, we copy this and
 	  * the next char literally unless the next three chars are numbers...
 	  * If they are numbers, we process them into a real character, as
@@ -168,8 +168,8 @@ const String ConfigParser::read(const String &filename)
 	       /* Copy the two chars (the escape char and the char being 
 		* escaped) over...
 		*/
-	       temp += line[i++];
 	       temp += line[i];
+	       temp += line[++i];
 	    }
 	    
 	    continue;
@@ -200,7 +200,7 @@ const String ConfigParser::read(const String &filename)
 	    if ((line[i] == '*') &&
 		(line.length() > (i + 1)) &&
 		(line[i + 1] == '/')) {
-	       i++;
+	       ++i;
 	       inComment = false;
 	    }
 
@@ -324,7 +324,7 @@ bool ConfigParser::parse(String &configData, String::size_type &position,
 #endif
 
    // Run through the generated line...
-   for (; position != configData.length(); position++) {
+   for (; position != configData.length(); ++position) {
       switch (configData[position]) {
        case MAGIC_MARKER_CHAR: // Magic character for segment information
 	   {
@@ -342,7 +342,7 @@ bool ConfigParser::parse(String &configData, String::size_type &position,
 	 // Make sure there is another char after this..
 	 if (configData.length() > position) {
 	    // Jump to the character being escaped so it can be copied
-	    position++;
+	    ++position;
 	 } else {
 	    complain(segment,
 		     "Cannot complete escape beyond end of configuration");
@@ -378,12 +378,12 @@ bool ConfigParser::parse(String &configData, String::size_type &position,
        case '{': // Note - no break intentionally
 	 // Are we skipping a class, or is this class without a name?
 	 if (classSkipDepth) {
-	    classSkipDepth++;
+	    ++classSkipDepth;
 	    continue;
 	 } else if (definition.empty()) {
 	    complain(segment, "Skipping nameless class");
 	    readDef = false;
-	    classSkipDepth++;
+	    ++classSkipDepth;
 	    continue;
 	 }
 
@@ -418,7 +418,7 @@ bool ConfigParser::parse(String &configData, String::size_type &position,
 		 }
 	      } else {
 		 // Look up the definition in the current definitions table
-		 for (i = 0; (*currentDefs)[i].name != 0; i++) {
+		 for (i = 0; (*currentDefs)[i].name != 0; ++i) {
 		    // Work out how many characters we should check
 		    int checkChars = ((fixedDefinition.length() > 
 				       (*currentDefs)[i].relevantChars) ?
@@ -451,8 +451,8 @@ bool ConfigParser::parse(String &configData, String::size_type &position,
 				   "Error at '" + definition + "': " +
 				   (errString.empty() ?
 				    "Incompletely processed" : errString));
-			  classSkipDepth++;
-			  position--;
+			  ++classSkipDepth;
+			  --position;
 		       } else if (!errString.empty()) {
 			  complain(segment,
 				   "Warning at '" + definition + "': " +
@@ -497,7 +497,7 @@ bool ConfigParser::parse(String &configData, String::size_type &position,
 		 switch (configData[position]) {
 		  case '{': // Class
 		    // Increment classSkipDepth to force a depth change
-		    classSkipDepth++;
+		    ++classSkipDepth;
 		    complain(segment,
 			     "Skipping unknown class '" + definition + '\'');
 		    break;
@@ -520,7 +520,7 @@ bool ConfigParser::parse(String &configData, String::size_type &position,
        case '}': // End of a class
 	 // If we are skipping this class, we need only to do a depth change
 	 if (classSkipDepth) {
-	    classSkipDepth--;
+	    --classSkipDepth;
 	 } else {
 	    // Return to a previous call of ourselves happily
 	    return true;

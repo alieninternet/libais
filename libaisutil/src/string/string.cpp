@@ -38,7 +38,7 @@ String String::toLower() const
 {
    char *temp = new char[length() + 1];
    
-   for (register unsigned int i = (length() + 1); i--;) {
+   for (register unsigned int i = (length() + 1); i != 0; --i) {
       temp[i] = tolower(c_str()[i]);
    }
    
@@ -57,7 +57,7 @@ String String::toUpper() const
 {
    char *temp = new char[length() + 1];
    
-   for (register unsigned int i = (length() + 1); i--;) {
+   for (register unsigned int i = (length() + 1); i != 0; --i) {
       temp[i] = toupper(c_str()[i]);
    }
    
@@ -98,7 +98,7 @@ String String::trim(void) const
 	   (c_str()[s] == '\t') || 
 	   (c_str()[s] == '\r') ||
 	   (c_str()[s] == '\n'))) {
-      s++;
+      ++s;
    }
    
    while ((e > s) && 
@@ -106,7 +106,7 @@ String String::trim(void) const
 	   (c_str()[e - 1] == '\t') ||
 	   (c_str()[e - 1] == '\r') ||
 	   (c_str()[e - 1] == '\n'))) {
-      e--;
+      --e;
    }
 
    return substr(s, e - s);
@@ -126,14 +126,14 @@ String String::trimQuotes(void) const
 	  ((c_str()[s] == ' ') ||
 	   (c_str()[s] == '\'') || 
 	   (c_str()[s] == '"'))) {
-      s++;
+      ++s;
    }
    
    while ((e > s) && 
 	  ((c_str()[e - 1] == ' ') ||
 	   (c_str()[e - 1] == '\'') ||
 	   (c_str()[e - 1] == '"'))) {
-      e--;
+      --e;
    }
    
    return substr(s, e - s);

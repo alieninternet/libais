@@ -47,7 +47,7 @@ struct tokenCounter {
    // The function that does all the work.. sort of..
    inline void operator()(const char& thisChar) {
       if (isspace(thisChar) && !isspace(lastChar)) {
-	 counter++;
+	 ++counter;
       }
       lastChar = thisChar;
    }
@@ -84,7 +84,7 @@ struct tokenCounterGeneric {
    // The function that does all the work.. sort of..
    inline void operator()(const char& c) {
       if (c == delimiter) {
-	 counter++;
+	 ++counter;
       }
    }
 };
@@ -115,11 +115,11 @@ String StringTokens::nextToken(void)
    String::size_type startPosition = position;
    
    while ((startPosition < length()) && isspace(data()[startPosition])) {
-      startPosition++;
+      ++startPosition;
    }
    
    for (String::size_type endPosition = startPosition; endPosition < length(); 
-	endPosition++) {
+	++endPosition) {
       if (isspace(data()[endPosition])) {
 	 position = endPosition + 1;
 	 return substr(startPosition, endPosition - startPosition);

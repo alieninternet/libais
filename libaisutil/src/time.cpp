@@ -41,7 +41,7 @@ const Time Time::operator+(const Time& rhs) const
    
    // Replace the overflowed nanoseconds (if any)
    while (result.nanoseconds >= 1000000000) {
-      result.seconds++;
+      ++result.seconds;
       result.nanoseconds -= 1000000000;
    }
    
@@ -62,7 +62,7 @@ const Time Time::operator-(const Time& rhs) const
    
    // Replace the overflowed nanoseconds (if any)
    while (result.nanoseconds < 0) {
-      result.seconds--;
+      --result.seconds;
       result.nanoseconds += 1000000000;
    }
    

@@ -74,8 +74,8 @@ bool StringMask::match(char const *m, char const *n)
       // Check if this is being escaped
       if (escaped) {
 	 // Next character for both strings
-	 m++;
-	 n++;
+	 ++m;
+	 ++n;
 	 
 	 escaped = false;
       } else {
@@ -84,12 +84,12 @@ bool StringMask::match(char const *m, char const *n)
 	  case '*': // Anything goes metacharacter
 	    // Loop until the next character is NOT the astericks metacharacter
 	    while (*m && (*m == '*')) {
-	       m++;
+	       ++m;
 	    }
 	    
 	    // Loop until the given string ends or we find a matching char
 	    while (*n && (*n != *m)) {
-	       n++;
+	       ++n;
 	    }
 	    
 	    /* If the next char is the null, bail out now and say true since the
@@ -106,8 +106,8 @@ bool StringMask::match(char const *m, char const *n)
 	       return false;
 	    }
 	    
-	    m++;
-	    n++;
+	    ++m;
+	    ++n;
 	    
 	    // If both the next chars are nulls, this obviously worked OK
 	    if (!*m && !*n) {
@@ -124,8 +124,8 @@ bool StringMask::match(char const *m, char const *n)
 	    }
 	    
 	    // Next character for both strings
-	    m++;
-	    n++;
+	    ++m;
+	    ++n;
 	    
 	    // If both of these are at the end of line, naturally they are OK!
 	    if (!*m && !*n) {
