@@ -140,14 +140,14 @@ namespace AIS {
 	    static const int getProtocol(const char* const name);
 
 	    
-	    //@{
 	    /*!
 	     * \brief Set a socket option (an integer)
 	     * 
 	     * \param option The option to set using setsockopt()
-	     * \param level The level to set the option at. The default is to
-	     *    set the option at the socket level. Check the setsockopt()
-	     *    <em>man page</em> for more details.
+	     * \param value The value to set the option to. 
+	     * \param level The layer level the \p option corresponds to. The
+	     *    default is to set the option at the socket level. Check the
+	     *    setsockopt() <em>man page</em> for more details.
 	     * \return The status of the operation
 	     * \retval true The option was set successfully
 	     * \retval false The option could not be set
@@ -155,17 +155,31 @@ namespace AIS {
 	    const bool setSockoptInt(const int option,
 				     const int value,
 				     const int level = SOL_SOCKET);
+	    
+	    
+	    /*!
+	     * \brief Set a socket option (an boolean)
+	     * 
+	     * \param option The option to set using setsockopt()
+	     * \param toggle The option's flag setting (true/on or false/off)
+	     * \param level The layer level the \p option corresponds to. The
+	     *    default is to set the option at the socket level. Check the
+	     *    setsockopt() <em>man page</em> for more details.
+	     * \return The status of the operation
+	     * \retval true The option was set successfully
+	     * \retval false The option could not be set
+	     */
 	    const bool setSockoptFlag(const int option,
 				      const bool toggle,
 				      const int level = SOL_SOCKET)
 	      { return setSockoptInt(option, (toggle ? 1 : 0), level); };
-	    //@}
-	    
+
+
 	    //@{
 	    /*!
 	     * \brief Retrieve the the status of the given sockopts option
 	     * 
-	     * \param option The option to check using getsockopt()
+	     * \param flag The option to check using getsockopt()
 	     * \param level The level to check for the option. The default is
 	     *    the socket level. See the getsockopt() <em>man page</em>
 	     *    for more info.
@@ -568,7 +582,7 @@ namespace AIS {
 	    virtual const int write(const std::string& data) = 0;
 	    
 	    /*!
-	     * \breif Read data from this socket
+	     * \brief Read data from this socket
 	     * 
 	     * This will read any pending data from the socket and place it
 	     * in the given \p buffer parameter. The new data will be
