@@ -38,11 +38,11 @@ dnl from an 'official' standpoint - only the developers who should touch
 dnl them .. uhh.. should touch them :)
 VERSION_MAJOR=1
 VERSION_MINOR=3
-VERSION_EXTRA=.pre
+VERSION_EXTRA=
 
-LIB_VERSION=1
-LIB_REVISION=1
-LIB_AGE=0
+LIB_VERSION=2
+LIB_REVISION=0
+LIB_AGE=1
 
 dnl Export our version information
 AC_DEFINE(LIBAISUTIL_VERSION_NAME, "LibAISutil",

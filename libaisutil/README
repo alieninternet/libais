@@ -1,26 +1,14 @@
   ----------------------
-    LibAIS (utilities)            Public Release:   version 1.2
+    LibAIS (utilities)            Public Release:   version 1.3
   ----------------------
   
-This is the first public release of LibAIS. This is not a complete release,
-however, since many components of the original LibAIS library have been
-removed, pending rewrites.
-
-This release is considered stable, but most likely not highly mature. If you
-discover bugs, please submit as much information about it at the following
-website. Please include information about your operating system, compiler,
-and any other information you feel may be useful - don't be shy :)
-
-   http://sourceforge.net/tracker/?func=add&group_id=76286&atid=546636
-
-
-This package includes the following components:
+This package currently includes the following components:
 
  * String functions, which supplement std::string. Includes a basic tokeniser
    and mask matching routines.
  
  * Configuration parser, which is designed to be highly flexible, module,
-   and easy to use
+   and easy to use.
    
  * Socket routines, which are supposed to make socket stuff easy to implement
    within software. Socket routines are designed to be simple, not powerful. 
@@ -33,15 +21,28 @@ This package includes the following components:
    formats.
    
  * SHA1 routine, only because it kept popping up in our code for various
-   reasons :)
+   reasons
 
 
+The library is still missing:
 
-This public release was prompted by the development of a handful of projects,
-primarily KineIRCd (http://kineircd.sf.net/) and various administrative
-utilities within the o0ix Linux distribution (http://www.o0ix.org/).
+ * SSL sockets
+ 
+ * UDP and other unreliable package based sockets
+
+ * The configuration parser has some known caveats which still need addressing
+
+
+This release is considered stable, but not considered very mature. If you
+discover bugs, please collect as much information about the bug as you can,
+including your operating system, compiler, and submit a bug report at the
+following URL:
+
+   http://sourceforge.net/tracker/?func=add&group_id=76286&atid=546636
+
+Don't be shy, all bug reports are most welcome!
 
 
 No documentation has been written for the library yet, however minor
 documentation including the class structures may be found at
-http://libais.sf.net/manual
+http://libais.sourceforge.net/manual
