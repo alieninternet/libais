@@ -36,9 +36,6 @@ using namespace AIS::Util;
 
 # define SHA_DIGEST_LENGTH	20	// 160 bits.
 
-// This stuff should move..
-# define USE_LITTLE_ENDIAN /* This should be #define'd if true. */
-
 
 typedef struct {
    unsigned long state[5];
@@ -53,13 +50,13 @@ typedef struct {
 /* blk0() and blk() perform the initial expand.
  * I got the idea of expanding during the round function from SSLeay
  */
-# ifdef USE_LITTLE_ENDIAN
+# ifdef WORDS_BIGENDIAN
+#  define blk0(i) \
+	block->u_long[i]
+# else
 #  define blk0(i) \
 	(block->u_long[i] = (rol(block->u_long[i], 24) & 0xFF00FF00) | \
 	(rol(block->u_long[i], 8) & 0x00FF00FF))
-# else
-#  define blk0(i) \
-	block->u_long[i]
 # endif
 # define blk(i) \
 	(block->u_long[i & 15] = rol(block->u_long[(i + 13) & 15] ^ \
@@ -254,7 +251,6 @@ void SHA1update(context_type &context, unsigned char *data, unsigned int len)
  * 12/08/2001 pickle - Modified for KineIRCd use
  * 06/04/2002 pickle - Fixed char -> unsigned char flaw
  * 07/04/2002 pickle - Cleaned up a bit, made it a little safer..
- * 07/04/2002 pickle - Fixed word order endian reversal, eek!
  */
 void SHA1final(unsigned char digest[20], context_type &context)
 {
@@ -275,13 +271,8 @@ void SHA1final(unsigned char digest[20], context_type &context)
    SHA1update(context, finalcount, 8); 
 
    for (i = 0; i < 20; ++i) {
-# ifdef WORDS_BIGENDIAN
-      digest[i] = (char)
-	((context.state[i >> 2] >> (((i & 3)) * 8)) & 255);
-# else
       digest[i] = (char)
 	((context.state[i >> 2] >> ((3 - (i & 3)) * 8)) & 255);
-# endif      
    }
 
    i = j = 0;
