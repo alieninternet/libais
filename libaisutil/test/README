@@ -1,0 +1,8 @@
+This is the test suite for the LibAISutil library. It's designed to be
+called from the top Makefile. To run these tests, run "make check" from the
+top directory of this package.
+
+If you experience a failure responce from these tests, further information
+may be drawn about which tests are running by adding a parameter to the
+program (anything will do). The testing stages, and information about what's
+being tested, will be outputted to the console.
