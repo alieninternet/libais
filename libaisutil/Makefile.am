@@ -3,6 +3,13 @@
 #
 
 
+# Subdirs..
+SUBDIRS=\
+	include \
+	.
+
+
+
 # Include dir
 INCLUDES=\
 	-I$(top_builddir)/include
@@ -46,34 +53,6 @@ endif
 if LIBAISUTIL_COMPILE_SOCKET_UNIX
  LIBAISUTIL_FILE_SOCKET_UNIX=src/socket/unix.cpp
 endif
-
-
-# Include files..
-include_HEADERS=\
-	include/aisutil/config/data.h \
-	include/aisutil/config/parser.h \
-	include/aisutil/socket/domain-ipv4.h \
-	include/aisutil/socket/domain-ipv6.h \
-	include/aisutil/socket/domain-ipx.h \
-	include/aisutil/socket/domain-unix.h \
-	include/aisutil/socket/domain.h \
-	include/aisutil/socket/ipv4-tcp.h \
-	include/aisutil/socket/ipv6-tcp.h \
-	include/aisutil/socket/ipx-spx.h \
-	include/aisutil/socket/socket.h \
-	include/aisutil/socket/sockets.h \
-	include/aisutil/socket/type-seqpacket.h \
-	include/aisutil/socket/type-stream.h \
-	include/aisutil/socket/type.h \
-	include/aisutil/socket/unix.h \
-	include/aisutil/string/mask.h \
-	include/aisutil/string/string.h \
-	include/aisutil/string/tokens.h \
-	include/aisutil/config.h \
-	include/aisutil/aisutilconf.h \
-	include/aisutil/socket.h \
-	include/aisutil/string.h \
-	include/aisutil/version.h
 
 
 # Source files..

@@ -362,4 +362,5 @@ AC_SUBST(INCDIRS)
 AC_OUTPUT([
 	include/aisutil/aisutilconf.h
 	Makefile
+	include/Makefile
 	])
