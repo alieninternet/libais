@@ -1,3 +1,6 @@
+Version 1.2
+  * StringMask:: now inherits from String::, as it should have originally
+  * Removed IRC related stuff
 
 Version 1.1
   * Fixed makefile issues pertaining to the installation of headers.. Oops!
