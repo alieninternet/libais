@@ -74,6 +74,7 @@ libaisutil_la_SOURCES=\
 	src/string/tokens.cpp \
 	src/string/mask.cpp \
 	src/sha1.cpp \
+	src/time.cpp \
 	src/utils.cpp \
 	src/version.cpp
 
