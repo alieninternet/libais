@@ -24,6 +24,7 @@
 # define _INCLUDE_AISUTIL_SHA1_H_ 1
 
 # include <string>
+# include <cstring>
 
 namespace AIS {
    namespace Util {
@@ -35,18 +36,29 @@ namespace AIS {
 	    signed char s_char[20];
 	    unsigned long u_long[5];
 	    
+	    
 	    //! Boolean equality operator
-	    const bool operator==(const digest_type& rhs) const {
-	       return ((u_long[0] == rhs.u_long[0]) &&
-		       (u_long[1] == rhs.u_long[1]) &&
-		       (u_long[2] == rhs.u_long[2]) &&
-		       (u_long[3] == rhs.u_long[3]) &&
-		       (u_long[4] == rhs.u_long[4]));
-	    };
+	    const bool operator==(const digest_type& rhs) const
+	      {
+		 return ((u_long[0] == rhs.u_long[0]) &&
+			 (u_long[1] == rhs.u_long[1]) &&
+			 (u_long[2] == rhs.u_long[2]) &&
+			 (u_long[3] == rhs.u_long[3]) &&
+			 (u_long[4] == rhs.u_long[4]));
+	      };
 	    
 	    //! Not equal-to operator
 	    const bool operator!=(const digest_type& rhs) const
 	      { return (!((*this) == rhs)); };
+
+	 
+	    //! Assignment operator (from a 'time_t')
+	    const digest_type& operator=(const digest_type& rhs)
+	      {
+		 return 
+		   *(static_cast<const digest_type*>
+		     (memcpy((void*)this, (const void*)&rhs, 20)));
+	      };
 	 };
 	 
 	 //! An empty digest
