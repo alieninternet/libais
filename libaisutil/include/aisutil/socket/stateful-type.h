@@ -48,7 +48,43 @@ namespace AIS {
 	    //! Destructor
 	    virtual ~StatefulType(void)
 	      {};
-	    
+
+
+	    /*!
+	     * \brief Toggle sending keep-alive packets for this socket
+	     * 
+	     * Keep-alive packets can be sent to literally keep a connection
+	     * alive. Almost all transport implementations simply send a 'ping'
+	     * keep-alive packet, and expect a 'pong' to be returned sometime
+	     * soon after. Most implementations will only send these packets
+	     * if the connection has gone quiet, to reduce unnecessary traffic.
+	     * 
+	     * Keep-alives can generate slightly more traffic on a connection,
+	     * but can be invaluable on potentially quiet socket connections
+	     * which may be terminated by a peer system if they are determined
+	     * to be \e too quiet.
+	     * 
+	     * \param toggle The new value for the keep-alive flag
+	     * \return The status of the operation
+	     * \retval true The keep-alive flag was changed successfully
+	     * \retval false The flag could not be changed, or is unsupported
+	     *    on this system
+	     */
+	    const bool setKeepAliveFlag(const bool toggle = true)
+	      { return setSockoptFlag(SO_KEEPALIVE, toggle); };
+
+	    /*!
+	     * \brief Determine if keep-alive packets are being sent
+	     * 
+	     * \return The current value of the keep-alives flag
+	     * \retval 1 Keep-alive packets will be sent on this socket
+	     * \retval 0 Keep-alive packets are not enabled for this socket
+	     * \retval -1 Unable to determine the status of this flag
+	     */
+	    const signed int getKeepAliveFlag(void) const
+	      { return getSockoptFlag(SO_KEEPALIVE); };
+
+
 	    /*!
 	     * \brief Start listening on the socket
 	     * 
