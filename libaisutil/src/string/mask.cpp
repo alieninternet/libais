@@ -56,99 +56,13 @@ const bool StringMask::matches(const char* str) const
 
 
 /* matchesCase - Do a mask check (case-sensitive)
- * Original 15/02/1996 pickle
- * 18/07/1998 pickle - Ported from pascal to C++
- * 20/07/1998 pickle - Changed String to char const
- * 07/09/2001 pickle - Partial rewrite for more speed (no damned recursion!!)
+ * Original 28/04/2003 pickle
  */
 const bool StringMask::matchesCase(const char* str) const
 {
 #ifdef USING_FNMATCH
    return (fnmatch(data(), str, 0) == 0);
 #else
-   const char* me = data();
-   bool escaped = false;
-   
-   // sanity check for strings, the neat way returning true/false
-   if (!*me) {
-      // Of course if they are both null then this is a match
-      if (!*str) {
-	 return true;
-      } else {
-	 return false;
-      }
-   } else {
-      if (!*str) {
-	 return false;
-      }
-   }
-   
-   // While the string is valid, run through it
-   while (*me) {
-      // Check if this is being escaped
-      if (escaped) {
-	 // Next character for both strings
-	 ++me;
-	 ++str;
-	 
-	 escaped = false;
-      } else {
-	 // Check what to do with this character
-	 switch (*me) {
-	  case '*': // Anything goes metacharacter
-	    // Loop until the next character is NOT the astericks metacharacter
-	    while (*me && (*me == '*')) {
-	       ++me;
-	    }
-	    
-	    // Loop until the given string ends or we find a matching char
-	    while (*str && (*str != *me)) {
-	       ++str;
-	    }
-	    
-	    /* If the next char is the null, bail out now and say true since the
-	     * rest of the line will of course match
-	     */
-	    if (!*me && !*str) {
-	       return true;
-	    }
-	    
-	    continue;
-	  case '?': // Skip one char metacharacter
-	    // If the string is broken already, this cannot count as a char.
-	    if (!*str) {
-	       return false;
-	    }
-	    
-	    ++me;
-	    ++str;
-	    
-	    // If both the next chars are nulls, this obviously worked OK
-	    if (!*me && !*str) {
-	       return true;
-	    }
-
-	    continue;
-	  case '\\': // Escape character
-	    escaped = true;
-	  default:
-	    // Check if these two characters match in both strings
-	    if (*me != *str) {
-	       return false;
-	    }
-	    
-	    // Next character for both strings
-	    ++me;
-	    ++str;
-	    
-	    // If both of these are at the end of line, naturally they are OK!
-	    if (!*me && !*str) {
-	       return true;
-	    }
-	 }
-      }
-   }
-   
-   return false;
+   abort();
 #endif
 }
