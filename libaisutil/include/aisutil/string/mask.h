@@ -60,9 +60,9 @@ namespace AIS {
 	  * \param mask A string to be stored (should be a mask)
 	  */
 	 template <class T>
-	   explicit StringMask(const T& mask)
+	   StringMask(const T& mask)
 	     : String(mask)
-	       {};
+	     {};
 	 
 	 //! Destructor
 	 ~StringMask(void)
