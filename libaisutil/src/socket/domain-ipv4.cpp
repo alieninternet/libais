@@ -119,7 +119,7 @@ const bool DomainIPv4::setAddress(sockaddr_in& addr,
 /* setPort - Set the given port in the given address structure
  * Original 03/07/2002 pickle
  */
-const bool DomainIPv4::setPort(sockaddr_in& addr, const int port)
+const bool DomainIPv4::setPort(sockaddr_in& addr, const port_type port)
 {
    // Make sure the port is within an acceptable range (0..65534)
    if ((port >= 0) && (port <= 65534)) {

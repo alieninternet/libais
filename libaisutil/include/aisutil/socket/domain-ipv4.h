@@ -59,7 +59,7 @@ namespace AIS {
 	    //@}
 	    
 	    //! Set the given port in the given address structure
-	    const bool setPort(sockaddr_in& addr, const int port);
+	    const bool setPort(sockaddr_in& addr, const port_type port);
 	    
 	  protected:
 	    //! Constructor
@@ -176,11 +176,11 @@ namespace AIS {
 
 
 	    // Set the local port
-	    const bool setLocalPort(const int port)
+	    const bool setLocalPort(const port_type port)
 	      { return setPort(localAddress, port); };
 	    
 	    // Set the remote port
-	    const bool setRemotePort(const int port)
+	    const bool setRemotePort(const port_type port)
 	      { return setPort(remoteAddress, port); };
 
 

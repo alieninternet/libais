@@ -118,7 +118,7 @@ const bool DomainIPX::setAddress(sockaddr_ipx& addr,
 /* setPort - Set the given port in the given address structure
  * Original 03/07/2002 pickle
  */
-const bool DomainIPX::setPort(sockaddr_ipx& addr, const int port)
+const bool DomainIPX::setPort(sockaddr_ipx& addr, const port_type port)
 {
    // Make sure the port is within an acceptable range (0x0001..0xFFFE)
    if ((port >= 0x0001) && (port <= 0xFFFE)) {

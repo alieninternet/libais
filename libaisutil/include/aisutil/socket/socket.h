@@ -66,6 +66,13 @@ namespace AIS {
 	     * This defines a standard type for block lengths.
 	     */
 	    typedef unsigned int blockSize_type;
+
+	    /*!
+	     * \brief A port type.
+	     * 
+	     * A type of a port (a number)
+	     */
+	    typedef int port_type;
 	    
 	  private:
 	    /*!
@@ -520,7 +527,7 @@ namespace AIS {
 	     * \retval false There was an error in setting the port, such
 	     *    as the port number was out of range for this socket domain
 	     */
-	    virtual const bool setLocalPort(const int port)
+	    virtual const bool setLocalPort(const port_type port)
 	      { return false; };
 	    
 	    /*!
@@ -531,7 +538,7 @@ namespace AIS {
 	     * \retval false There was an error in setting the port, such
 	     *    as the port number was out of range for this socket domain
 	     */
-	    virtual const bool setRemotePort(const int port)
+	    virtual const bool setRemotePort(const port_type port)
 	      { return false; };
 	    
 	    
