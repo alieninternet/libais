@@ -26,29 +26,32 @@
 # include <aisutil/string/string.h>
 
 namespace AISutil {
+   //! String mask class, used to match strings using metachars (* and ?)
    class StringMask : public String {
     private:
-      // Match checker
+      //! Match checker
       static bool match(char const* const m, char const* const n);
       
     public:
-      // Blank Constructor
+      //! Blank Constructor
       StringMask(void)
 	{};
 
-      // Constructor
+      //! Constructor
       template <class T>
 	StringMask(const T& a)
 	  : String(a) 
 	  {};
       
-      // Destructor
+      //! Destructor
       ~StringMask(void)
 	{};
       
-      // Check string match
-      bool matches(const String& s) const 
+      //! Check string match (using the STL's string)
+      bool matches(const std::string& s) const 
 	{ return match(c_str(), s.c_str()); };
+      
+      //! Check string match (using a c-style string)
       bool matches(const char* const s) const
 	{ return match(c_str(), s); };
    };

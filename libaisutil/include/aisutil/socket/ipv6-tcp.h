@@ -32,9 +32,10 @@ extern "C" {
 # include <aisutil/socket/type-stream.h>
 
 namespace AISutil {
+   //! IPv6 socket class
    class SocketIPv6TCP : public SocketDomainIPv6, public SocketTypeSTREAM {
     private:
-      // Constructor used when creating a new connection via accept()
+      //! Constructor used when creating a new connection via accept()
       SocketIPv6TCP(const int newFD, 
 		    const Socket::blockSize_type newReadBlockSize,
 		    const sockaddr_in6& newLocalAddress,
@@ -45,18 +46,18 @@ namespace AISutil {
 	{ setNonBlocking(); };
       
     public:
-      // Standard constructor
+      //! Standard constructor
       SocketIPv6TCP(void)
 	: Socket(::socket(PF_INET6, SOCK_STREAM, Socket::getProtocol("TCP")))
 	{ setNonBlocking(); };
 
-      // Destructor
+      //! Destructor
       ~SocketIPv6TCP(void)
 	{};
       
-      // Accept a connection on this socket
+      //! Accept a connection on this socket
       Socket* accept(void);
-   };
-};
+   }; // class SocketIPv6TCP
+}; // namespace AISutil
    
 #endif // _INCLUDE_AISUTIL_SOCKET_IPV6_TCP_H_

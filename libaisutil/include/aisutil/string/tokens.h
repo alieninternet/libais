@@ -27,14 +27,14 @@
 
 
 namespace AISutil {
-   // String tokeniser class for the String class
+   //! String tokeniser class for the String class
    class StringTokens : public String {
     private:
-      // Our position, usually pointing to the first char of the next token
-      String::size_type position;
+      //! Our position, usually pointing to the first char of the next token
+      size_type position;
       
     public:
-      // Constructor
+      //! Constructor
       template <class T>
 	StringTokens(const T& s, 
 		     const String::size_type p = 0)
@@ -42,29 +42,33 @@ namespace AISutil {
           position(p)
 	{};
       
-      // Destructor
+      //! Destructor
       ~StringTokens(void)
 	{};
       
-      // Any more tokens left?
+      //! Any more tokens left?
       bool hasMoreTokens(void) const
 	{ return (position < length()); };
 
-      // Count the number of tokens
+      //! Count the number of tokens
       unsigned int countTokens(void) const;
+      
+      //! Count the number of tokens, using the given delimiter
       unsigned int countTokens(const char delimiter) const;
       
-      // Get the next token
+      //! Get the next token
       String nextToken(void);
+      
+      //! Get the next token, using the given delimiter
       String nextToken(const char delimiter);
       
-      // Get next IRC style token
+      //! Get next IRC style token
       String nextColonToken(void);
       
-      // Get the rest of the line (without displacing the current position)
+      //! Get the rest of the line (without displacing the current position)
       String rest(void) const
 	{ return substr(position, length() - position); };
-   };
+   }; // class StringTokens
 }; // namespace AISutil
 
 #endif // _INCLUDE_LIBAISUTIL_STRING_STRINGTOKENS_H_

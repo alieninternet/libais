@@ -25,14 +25,14 @@
 
 namespace AISutil {
    namespace Version {
-      extern const char *programName;			// Program name
-      extern const unsigned short versionMajor;		// Version major number
-      extern const unsigned short versionMinor;		// Version minor number
-      extern const char *version;			// Version identity
-      extern const unsigned char libVersion;		// Library API version
-      extern const unsigned char libRevision;		// Library API revision
-      extern const unsigned char libAge;		// Library API age
-      extern const char *bugsEmail;			// Bug report e-mail
+      extern const char* const programName;	//!< Program name
+      extern const unsigned short versionMajor;	//!< Version major number
+      extern const unsigned short versionMinor;	//!< Version minor number
+      extern const char* const version;		//!< Version identity
+      extern const unsigned char libVersion;	//!< Library API version
+      extern const unsigned char libRevision;	//!< Library API revision
+      extern const unsigned char libAge;	//!< Library API age
+      extern const char* const bugsEmail;	//!< Bug report e-mail
    };
 };
    

@@ -32,32 +32,34 @@ extern "C" {
 };
 
 namespace AISutil {
+   //! Sequential packet socket type
    class SocketTypeSEQPACKET : public SocketType {
     private:
       const Socket::blockSize_type bufferSize;
       char* buffer;
 
     protected:
+      //! Constructor
       SocketTypeSEQPACKET(const Socket::blockSize_type bs)
 	: bufferSize(bs), 
           buffer(0)
 	{ buffer = new char[bs]; };
       
     public:
-      // Destructor
+      //! Destructor
       virtual ~SocketTypeSEQPACKET(void)
 	{ delete[] buffer; };
       
-      // Write data to this socket
+      //! Write data to this socket
       bool write(const std::string& data);
 
-      // Read data from this socket
+      //! Read data from this socket
       bool read(std::ostream& databuff);
       
-      // Return the block size per read
+      //! Return the block size per read
       size_t getReadBlockSize(void) const
 	{ return bufferSize; };
-   };
-};
+   }; // class SocketTypeSEQPACKET
+}; // namespace AISutil
    
 #endif // _INCLUDE_LIBAISUTIL_SOCKET_TYPE_SEQPACKET_H_

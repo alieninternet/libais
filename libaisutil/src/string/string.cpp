@@ -73,7 +73,7 @@ String String::toUpper() const
  * Original 06/03/1999 pickle
  * 27/02/2002 pickle - Converted for std::string
  */
-String String::prepad(size_type n, char c) const
+String String::prepad(const size_type n, const char c) const
 {
    std::string result = c_str();
 

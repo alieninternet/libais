@@ -32,9 +32,10 @@ extern "C" {
 # include <aisutil/socket/type-stream.h>
 
 namespace AISutil {
+   //! Unix socket class
    class SocketUNIX : public SocketDomainUNIX, public SocketTypeSTREAM {
     private:
-      // Constructor used when creating a new connection via accept()
+      //! Constructor used when creating a new connection via accept()
       SocketUNIX(const int newFD, 
 		 const Socket::blockSize_type newReadBlockSize,
 		 const sockaddr_un& newLocalAddress, 
@@ -45,18 +46,18 @@ namespace AISutil {
 	{ setNonBlocking(); };
       
     public:
-      // Standard constructor
+      //! Standard constructor
       SocketUNIX(void)
 	: Socket(::socket(PF_UNIX, SOCK_STREAM, 0))
         { setNonBlocking(); };
       
-      // Destructor
+      //! Destructor
       ~SocketUNIX(void)
 	{};
 
-      // Accept a connection on this socket
+      //! Accept a connection on this socket
       Socket* accept(void);
-   };
-};
+   }; // class SocketUNIX
+}; // namespace AISutil
    
 #endif // _INCLUDE_LIBAISUTIL_SOCKET_UNIX_H_

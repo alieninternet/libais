@@ -36,12 +36,14 @@
 
 
 namespace AISutil {
+   //! Stream socket type
    class SocketTypeSTREAM : public SocketType {
     private:
       const Socket::blockSize_type bufferSize;
       char* buffer;
 
     protected:
+      //! Constructor
       SocketTypeSTREAM(const Socket::blockSize_type bs =
 		       LIBAISUTIL_SOCKET_STREAM_DEFAULT_BUFFER_SIZE)
 	: bufferSize(bs), 
@@ -49,20 +51,20 @@ namespace AISutil {
 	{ buffer = new char[bs]; };
       
     public:
-      // Destructor
+      //! Destructor
       virtual ~SocketTypeSTREAM(void)
 	{ delete[] buffer; };
       
-      // Write data to this socket
+      //! Write data to this socket
       bool write(const std::string& data);
 
-      // Read data from this socket
+      //! Read data from this socket
       bool read(std::ostream& databuff);
       
-      // Return the block size per read
+      //! Return the block size per read
       size_t getReadBlockSize(void) const
 	{ return bufferSize; };
-   };
-};
+   }; // class SocketTypeSTREAM
+}; // namespace AISutil
    
 #endif // _INCLUDE_LIBAISUTIL_SOCKET_TYPE_STREAM_H_

@@ -36,9 +36,10 @@
 # endif
 
 namespace AISutil {
+   //! Our String class, which provides a few more handy procedures
    class String : public std::string {
     public:
-      // The magic constructors
+      //! The magic constructors
       String(void) : std::string("") {};
       String(char c) : std::string(&c) {};
       template <class Ta>
@@ -50,17 +51,17 @@ namespace AISutil {
 	  : std::string(a, b)
 	  {};
       
-      // Destructor
+      //! Destructor
       virtual ~String(void) 
 	{};
       
-      // Convert the entire string to lower-case
+      //! Convert the entire string to lower-case
       String toLower(void) const;
       
-      // Convert the entire string to upper-case
+      //! Convert the entire string to upper-case
       String toUpper(void) const;
       
-      // Convert something via stringstream
+      //! Convert something via stringstream
       template <class T>
 	static String convert(const T& in) {
 	 std::ostringstream out;
@@ -68,37 +69,41 @@ namespace AISutil {
 	 return out.str();
       };
       
-      // Convert to an integer
+      //! Convert to an integer
       int toInt(void) const {
 	 return atoi(c_str());
       };
       
-      // Convert to a long integer
+      //! Convert to a long integer
       long toLong(void) const {
 	 return atol(c_str());
       };
       
-      // Convert to a double
+      //! Convert to a double
       double toDouble(void) const {
 	 return atof(c_str());
       };
       
-      String prepad(size_type, char) const;
+      //! Pad the beginning of the string so it equates to the given length
+      String prepad(const size_type n, const char c = ' ') const;
       
+      //! Trim white-space from the string
       String trim(void) const;
+      
+      //! Trim quotes (", ' and `) from the string
       String trimQuotes(void) const;
 
 # ifndef LIBAISUTIL_STL_STRING_CLEAR
-      // Supply the 'clear' function if it is unavailable on this system
+      //! Supply the 'clear' function if it is unavailable on this system
       void clear(void)
 	{ (*this) = ""; };
 # endif
-   };
+   }; // class String
 }; // namespace AISutil
  
 
 # ifdef LIBAISUTIL_STL_HAS_HASH
-// STL hash template specialisation for our String class
+//! STL hash template specialisation for our String class
 template<> struct std::hash<AISutil::String>
 {
    // STL Hash operator

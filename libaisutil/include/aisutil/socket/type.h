@@ -26,14 +26,20 @@
 # include "aisutil/socket/socket.h"
 
 namespace AISutil {
+   //! Socket type base class
    class SocketType : virtual public Socket {
+    protected:
+      //! Constructor
+      SocketType(void)
+	{};
+      
     public:
-      // Destructor
+      //! Destructor
       virtual ~SocketType(void)
 	{};
       
       // Nothing else here yet..
-   };
-};
+   }; // class SocketType
+}; // namespace AISutil
    
 #endif // _INCLUDE_LIBAISUTIL_SOCKET_TYPE_H_

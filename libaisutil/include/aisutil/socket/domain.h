@@ -30,28 +30,29 @@ extern "C" {
 # include <aisutil/socket/socket.h>
 
 namespace AISutil {
+   //! Socket domain base class
    class SocketDomain : virtual public Socket {
     public:
-      // Destructor
+      //! Destructor
       virtual ~SocketDomain(void)
 	{};
       
-      // Return the local port
+      //! Return the local port
       virtual int getLocalPort(void) const
 	{ return -1; };
 
-      // Return the remote port
+      //! Return the remote port
       virtual int getRemotePort(void) const
 	{ return -1; };
       
-      // Set the local port
+      //! Set the local port
       virtual bool setLocalPort(const int port)
 	{ return false; };
       
-      // Set the remote port
+      //! Set the remote port
       virtual bool setRemotePort(const int port)
 	{ return false; };
-   };
-};
+   }; // class SocketDomain
+}; // namespace AISutil
    
 #endif // _INCLUDE_AISUTIL_SOCKET_DOMAIN_H_

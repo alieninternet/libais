@@ -23,22 +23,22 @@
 #ifndef _INCLUDE_LIBAISUTIL_LIBAISCONF_H_
 # define _INCLUDE_LIBAISUTIL_LIBAISCONF_H_ 1
 
-/* Define if your C++ STL 'string' has the clear() function */
+//! Define if your C++ STL 'string' has the clear() function
 @LIBAISUTIL_DEFINE__LIBAISUTIL_STL_STRING_CLEAR@
 
-/* Define if your C++ STL has the SGI-compatible hashing extensions */
+//! Define if your C++ STL has the SGI-compatible hashing extensions
 @LIBAISUTIL_DEFINE__LIBAISUTIL_STL_HAS_HASH@
 
-/* Define if you want TCP/IPv4 transport */
+//! Define if you want TCP/IPv4 transport
 @LIBAISUTIL_DEFINE__LIBAISUTIL_HAVE_SOCKET_IPV4_TCP@
 
-/* Define if you want TCP/IPv6 transport */
+//! Define if you want TCP/IPv6 transport
 @LIBAISUTIL_DEFINE__LIBAISUTIL_HAVE_SOCKET_IPV6_TCP@
 
-/* Define if you want IPX/SPX transport */
+//! Define if you want IPX/SPX transport
 @LIBAISUTIL_DEFINE__LIBAISUTIL_HAVE_SOCKET_IPX_SPX@
 
-/* Define if you want UNIX sockets transport */
+//! Define if you want UNIX sockets transport
 @LIBAISUTIL_DEFINE__LIBAISUTIL_HAVE_SOCKET_UNIX@
 
 #endif // _INCLUDE_LIBAISUTIL_LIBAISCONF_H_

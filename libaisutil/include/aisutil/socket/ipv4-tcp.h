@@ -32,9 +32,10 @@ extern "C" {
 # include <aisutil/socket/type-stream.h>
 
 namespace AISutil {
+   //! TCP/IPv4 socket class
    class SocketIPv4TCP : public SocketDomainIPv4, public SocketTypeSTREAM {
     private:
-      // Constructor used when creating a new connection via accept()
+      //! Constructor used when creating a new connection via accept()
       SocketIPv4TCP(const int newFD, 
 		    const Socket::blockSize_type newReadBlockSize,
 		    const sockaddr_in& newLocalAddress, 
@@ -45,18 +46,18 @@ namespace AISutil {
 	{ setNonBlocking(); };
       
     public:
-      // Standard constructor
+      //! Standard constructor
       SocketIPv4TCP(void)
 	: Socket(::socket(PF_INET, SOCK_STREAM, Socket::getProtocol("TCP")))
 	{ setNonBlocking(); };
 
-      // Destructor
+      //! Destructor
       ~SocketIPv4TCP(void)
 	{};
       
-      // Accept a connection on this socket
+      //! Accept a connection on this socket
       Socket* accept(void);
-   };
-};
+   }; // class SocketIPv4TCP
+}; // namespace AISutil
    
 #endif // _INCLUDE_AISUTIL_SOCKET_IPV4_TCP_H_

@@ -32,14 +32,14 @@ extern "C" {
 # include <aisutil/socket/domain-ipx.h>
 # include <aisutil/socket/type-seqpacket.h>
 
-/* If the SPX protocol number is not defined, define it.. This value was
+/*! If the SPX protocol number is not defined, define it.. This value was
  * sourced from the Novell developer website
  */
 # ifndef NSPROTO_SPX
 #  define NSPROTO_SPX	1256
 # endif
 
-/* Define the length of the read buffer. This SEEMS low but it's really the
+/*! Define the length of the read buffer. This SEEMS low but it's really the
  * safest value to use with IPX/SPX (especially passing through very old IPX
  * routers, etc). This is ALSO the original IRC line length (including \r\n)
  * and hense works out neatly with the IRC on IPX/SPX plans. In bog-standard
@@ -60,9 +60,10 @@ extern "C" {
 # define LIBAISUTIL_SOCKET_IPX_SPX_PACKET_SIZE	512
 
 namespace AISutil {
+   //! IPX/SPX socket class
    class SocketIPXSPX : public SocketDomainIPX, public SocketTypeSEQPACKET {
     private:
-      // Constructor used when creating a new connection via accept()
+      //! Constructor used when creating a new connection via accept()
       SocketIPXSPX(const int newFD,
 		   const sockaddr_ipx& newLocalAddress,
 		   const sockaddr_ipx& newRemoteAddress)
@@ -72,19 +73,19 @@ namespace AISutil {
 	{ setNonBlocking(); };
       
     public:
-      // Standard constructor
+      //! Standard constructor
       SocketIPXSPX(void)
 	: Socket(::socket(PF_IPX, SOCK_SEQPACKET, NSPROTO_SPX)),
           SocketTypeSEQPACKET(LIBAISUTIL_SOCKET_IPX_SPX_PACKET_SIZE)
 	{ setNonBlocking(); };
 
-      // Destructor
+      //! Destructor
       ~SocketIPXSPX(void)
 	{};
       
-      // Accept a connection on this socket
+      //! Accept a connection on this socket
       Socket* accept(void);
-   };
-};
+   }; // class SocketIPXSPX
+}; // namespace AISutil
    
 #endif // _INCLUDE_LIBAISUTIL_SOCKET_IPX_SPX_H_

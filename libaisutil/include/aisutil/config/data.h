@@ -33,15 +33,16 @@ namespace AISutil {
 # include <aisutil/config/parser.h>
 
 namespace AISutil {
+   //! Configuration data base class
    class ConfigData {
     public:
       typedef std::vector < String > textBuffer_type;
 
-      // Constructor
+      //! Constructor
       ConfigData(void) 
 	{};
       
-      // Destructor
+      //! Destructor
       virtual ~ConfigData(void)
 	{};
       
@@ -56,7 +57,7 @@ namespace AISutil {
       static LIBAISUTIL_CONFIG_VARIABLE_HANDLER(varHandleUnsignedShortNoZero);
       static LIBAISUTIL_CONFIG_VARIABLE_HANDLER(varHandleUnsignedLong);
       static LIBAISUTIL_CONFIG_VARIABLE_HANDLER(varHandleUnsignedLongNoZero);
-   };
+   }; // class ConfigData
 }; // namespace AISutil
 
 #endif // _INCLUDE_LIBAISUTIL_CONFIG_DATA_H_

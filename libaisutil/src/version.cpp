@@ -32,14 +32,14 @@
 namespace AISutil {
    namespace Version {
       // Program name
-      const char *programName = LIBAISUTIL_VERSION_NAME;
+      const char* const programName = LIBAISUTIL_VERSION_NAME;
       
       // Program version numbers (raw)
       const unsigned short versionMajor = LIBAISUTIL_VERSION_MAJOR;
       const unsigned short versionMinor = LIBAISUTIL_VERSION_MINOR;
 
       // Version information (program name and version number, in its entirity)
-      const char *version = PACKAGE "-" LIBAISUTIL_VERSION_STRING;
+      const char* const version = PACKAGE "-" LIBAISUTIL_VERSION_STRING;
       
       // Library version information (raw)
       const unsigned char libVersion = LIBAISUTIL_LIB_VERSION;
@@ -47,7 +47,7 @@ namespace AISutil {
       const unsigned char libAge = LIBAISUTIL_LIB_AGE;
       
       // E-mail address to where bug reports should wind up
-      const char *bugsEmail = PACKAGE_BUGREPORT;
+      const char* const bugsEmail = PACKAGE_BUGREPORT;
    };
 };
 

@@ -32,7 +32,7 @@ namespace AISutil {
 
 # include <aisutil/string/string.h>
 
-// Configuration class/variable handler template macro thingies
+//! Configuration class/variable handler template macro thingies
 # define LIBAISUTIL_CONFIG_CLASS_HANDLER(x) \
      bool x(AISutil::String& errString, \
 	    const AISutil::String& defName, \
@@ -49,23 +49,24 @@ namespace AISutil {
 	    const void* dataVariable)
 
 namespace AISutil {
+   //! Configuration file parsing routines
    class ConfigParser {
     public:
-      // This type is for sequences of values/parameters for variable defs
+      //! This type is for sequences of values/parameters for variable defs
       typedef std::vector <String> defValues_type;
       
-      // Our handler types (used for both variables and classes)
+      //! Our handler types (used for both variables and classes)
       typedef LIBAISUTIL_CONFIG_CLASS_HANDLER((*classHandlerPtr_type));
       typedef LIBAISUTIL_CONFIG_VARIABLE_HANDLER((*variableHandlerPtr_type));
       
-      // Forward declaration of the typedef so we can use it in the structure
+      //! Forward declaration of the typedef so we can use it in the structure
       struct def_type;
       
-      // Type definitions for the definition table stuff
+      //! Type definitions for the definition table stuff
       typedef const struct def_type (defTable_type)[];
       typedef const defTable_type* defTablePtr_type;
       
-      /* Definition table structure.
+      /*! Definition table structure.
        * 
        * USAGE NOTE:
        * 
@@ -100,54 +101,52 @@ namespace AISutil {
        * variable names etc.
        */
       struct def_type {
-	 const char* name;				// Name of definition
-	 const unsigned int relevantChars;		// Relevant chars in name
-	 const void* variablePtr;			// Data pointer
-	 const variableHandlerPtr_type variableHandler;	// Handler (variable)
-	 const defTablePtr_type defTable;		// Table (class)
-	 const classHandlerPtr_type classHandler;	// Handler (class)
+	 const char* name;				//!< Name of definition
+	 const unsigned int relevantChars;		//!< Relevant chars in name
+	 const void* variablePtr;			//!< Data pointer
+	 const variableHandlerPtr_type variableHandler;	//!< Handler (variable)
+	 const defTablePtr_type defTable;		//!< Table (class)
+	 const classHandlerPtr_type classHandler;	//!< Handler (class)
       };
       
     private:
-      ConfigData &dataClass;				// Data members' class
-      const defTablePtr_type topDefs;			// Top definition list
-      const String filename;				// Main config filename
+      ConfigData &dataClass;				//!< Data members' class
+      const defTablePtr_type topDefs;			//!< Top definition list
+      const String filename;				//!< Main config filename
       
       static void complain(const String& segment,
-			   const String line);		// Complain routine
+			   const String line);		//!< Complain routine
       
-      // Load a file and return it as a single string of text (our munger)
+      //! Load a file and return it as a single string of text (our munger)
       static const String read(const String& filename);
       
     public:
-      // Our constructor (this void really should be a defTablePtr_type?!?!!!!)
+      //! Our constructor (this void really should be a defTablePtr_type?!?!!!!)
       ConfigParser(ConfigData& dc, const void* t, const String& f)
 	: dataClass(dc),
           topDefs((const defTablePtr_type)t),
           filename(f)
 	{};
 
-      // Destructor
+      //! Destructor
       ~ConfigParser(void)
 	{};
       
-      // Grab the configuration file name
+      //! Grab the configuration file name
       const String getConfigFile(void) const {
 	 return filename;
       };
       
-      // Parse the given configuration data
+      //! Parse the given configuration data
       static bool parse(String &configData, String::size_type& position,
 			const void* definitionTable, ConfigData& dataClass);
       
-      // Load the configuration file(s) and pass them to the parser
+      //! Load the configuration file(s) and pass them to the parser
       bool configure(void) const;
-   };
+   }; // class ConfigParser
 }; // namespace LibAISutil
    
 // Complete forwarded declarations
 # include <aisutil/config/data.h>
    
 #endif // _INCLUDE_LIBAISUTIL_CONFIG_PARSER_H_
-   
-   
