@@ -87,7 +87,7 @@ namespace AIS {
 	     * 
 	     * This contains a pointer to an error message
 	     * 
-	     * \depreciated This will probably disappear sometime in the future
+	     * \deprecated This will probably disappear sometime in the future
 	     */
 	    const char* errorMessage;
 	    
@@ -108,7 +108,7 @@ namespace AIS {
 	     * Set the \a errorMessage to the given \p errorString.
 	     * 
 	     * \param errorString A \b static \b const string
-	     * \depreciated This will probably disappear sometime in the future
+	     * \deprecated This will probably disappear sometime in the future
 	     */
 	    void setErrorMessage(const char* const errorString)
 	      { errorMessage = errorString; };
@@ -118,7 +118,7 @@ namespace AIS {
 	     * 
 	     * Set the \a errorMessage to a message associated with errno.
 	     * 
-	     * \depreciated This will probably disappear sometime in the future
+	     * \deprecated This will probably disappear sometime in the future
 	     */
 	    void setErrorMessage(void)
 	      { setErrorMessage(sys_errlist[errno]); };
@@ -142,7 +142,7 @@ namespace AIS {
 	     * This is to set the socket as \e non-blocking as not to slow down
 	     * operations.
 	     * 
-	     * \depreciated This will possibly change to be a public function.
+	     * \deprecated This will possibly change to be a public function.
 	     */
 	    void setNonBlocking(void);
 	    
@@ -414,7 +414,7 @@ namespace AIS {
 	     *    message will be available.
 	     * \return Return a pointer to a string
 	     * \retval 0 There was no error
-	     * \depreciated This will probably disappear sometime in the future
+	     * \deprecated This will probably disappear sometime in the future
 	     */
 	    const char* const getErrorMessage(void) const
 	      { return errorMessage; };
