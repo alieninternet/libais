@@ -1,3 +1,4 @@
+/*! \dontinclude namespaces.doxy */
 
 /*! \namespace AIS
  * \brief The AIS namespace
@@ -15,3 +16,13 @@
  * and documentation, please visit the library's website at
  * http://libais.sourceforge.net/
  */
+
+/*! \namespace AIS::Util::Socket
+ * \brief %Socket routines
+ *
+ * Most of the classes within this namespace are actually components of an
+ * actual socket, so if you wish to see the sockets to use within your
+ * programs (except the base classes), have a look at the Sockets section of
+ * the manual.
+ */
+

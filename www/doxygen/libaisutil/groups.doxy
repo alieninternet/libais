@@ -1,3 +1,4 @@
+/*! \dontinclude groups.doxy */
 
 /*! \defgroup Config Configuration parser routines
  */
