@@ -24,6 +24,7 @@
 #endif
 
 #include <cassert>
+#include <cstdlib>
 
 #include "aisutil/utils.h"
 #include "aisutil/string/string.h"
@@ -110,25 +111,46 @@ const bool Utils::validateUTF8(const std::string& str)
 /* toBool - Convert a string like 'yes' 'no' 'true' 'false' etc into boolean
  * Original 21/09/2001 pickle
  * 24/02/2003 pickle - Updated to include numeric values (1 = true, 0 = false)
+ * 20/07/2003 pickle - Mostly rewritten as a table. Unknowns now return -1 okay
  */
 const int Utils::toBool(const std::string& word)
 {
-   String newWord = String(word).toUpper();
+   // Convert the boolean to a lower-case string
+   String newWord = static_cast<const String&>(word).toLower();
    
-   if ((newWord == "YES") ||
-       (newWord == "TRUE") ||
-       (newWord == "ON") ||
-       (newWord.toInt() > 0)) {
-      return 1;
+   // Table of 
+   struct {
+      const char* const string;
+      const int value;
+   } static const boolStrings[] = {
+      { "yes",		1 },
+      { "no",		0 },
+      { "true",		1 },
+      { "false",	0 },
+      { "on",		1 },
+      { "off",		0 },
+      { 0, 0 }
+   };
+   
+   // Check the table..
+   for (unsigned int i = 0; boolStrings[i].string != 0; ++i) {
+      // If it matches this row, return the known value
+      if (newWord == boolStrings[i].string) {
+	 return boolStrings[i].value;
+      }
+   }
+      
+   // Okay, if it is a number, we can probably convert it somehow!
+   const char* const nptr = word.c_str();
+   char* endptr = 0;
+   const long int number = strtol(nptr, &endptr, 0);
+   
+   // If the conversion worked okay, we can probably use the value given
+   if ((nptr != endptr) && (*endptr == '\0')) {
+      return ((number > 0) ? 1 : 0);
    }
    
-   if ((newWord == "NO") ||
-       (newWord == "FALSE") ||
-       (newWord == "OFF") ||
-       (newWord.toInt() == 0)) {
-      return 0;
-   }
-   
+   // No more ideas left, it's unknown to me..
    return -1;
 }
 
