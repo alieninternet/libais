@@ -1,5 +1,4 @@
 /* $Id$
- * Version and Compile information
  * 
  * Copyright (c) 2002,2003 Alien Internet Services
  *
@@ -24,6 +23,7 @@
 # define _INCLUDE_LIBAISUTIL_VERSION_H_ 1
 
 namespace AISutil {
+   //! Version and compile-time information
    namespace Version {
       extern const char* const programName;	//!< Program name
       extern const unsigned short versionMajor;	//!< Version major number

@@ -1,5 +1,4 @@
 /* $Id$
- * Protocol family (socket domain) virtuals
  * 
  * Copyright (c) 2002,2003 Alien Internet Services
  * 

@@ -1,5 +1,4 @@
 /* $Id$
- * Configuration Parser
  * 
  * Copyright (c) 1998,2002,2003 Alien Internet Services
  *

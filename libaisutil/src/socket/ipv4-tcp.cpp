@@ -1,5 +1,4 @@
 /* $Id$
- * TCP/IPv4 transport
  * 
  * Copyright (c) 2001,2003 Alien Internet Services
  *

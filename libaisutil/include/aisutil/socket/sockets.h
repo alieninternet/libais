@@ -1,5 +1,4 @@
 /* $Id$
- * General include file for the rest of the library (for convenience sake)
  * 
  * Copyright (c) 2002,2003 Alien Internet Services
  * 

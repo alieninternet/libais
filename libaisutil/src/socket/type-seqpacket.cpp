@@ -1,5 +1,4 @@
 /* $Id$
- * Sequential datagram socket type
  * 
  * Copyright (c) 1999,2002,2003 Alien Internet Services
  *

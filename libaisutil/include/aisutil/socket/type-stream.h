@@ -1,5 +1,4 @@
 /* $Id$
- * Streaming socket type
  * 
  * Copyright (c) 2002,2003 Alien Internet Services
  * 

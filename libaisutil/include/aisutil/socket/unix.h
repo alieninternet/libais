@@ -1,5 +1,4 @@
 /* $Id$
- * UNIX sockets transport
  * 
  * Copyright (c) 2002,2003 Alien Internet Services
  * 

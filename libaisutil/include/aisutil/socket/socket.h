@@ -1,5 +1,4 @@
 /* $Id$
- * Stubby class thing for the sockets (generalisation of them)
  *
  * Copyright (c) 2002,2003 Alien Internet Services
  * 

@@ -29,6 +29,7 @@ nobase_include_HEADERS=\
 	aisutil/sha1.h \
 	aisutil/socket.h \
 	aisutil/string.h \
+	aisutil/time.h \
 	aisutil/utils.h \
 	aisutil/version.h
 

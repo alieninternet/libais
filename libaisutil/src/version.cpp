@@ -1,5 +1,4 @@
 /* $Id$
- * Version and Compile information
  * 
  * Copyright (c) 2002,2003 Alien Internet Services
  *

@@ -1,5 +1,4 @@
 /* $Id$
- * Utility stuff - little tid bits and what not..
  * 
  * Copyright (c) 2002,2003 Alien Internet Services
  * 
@@ -27,6 +26,7 @@
 # include <aisutil/string.h>
 
 namespace AISutil {
+   //! Utility stuff - little tid bits and what not..
    namespace Utils {
       //! Confirm that the given string, encoded in UTF-8, is valid
       extern const bool validateUTF8(const std::string& str);

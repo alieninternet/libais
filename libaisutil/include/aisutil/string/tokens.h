@@ -1,5 +1,4 @@
 /* $Id$
- * StringTokens class
  * 
  * Copyright (c) 1999,2000,2002,2003 Alien Internet Services
  *

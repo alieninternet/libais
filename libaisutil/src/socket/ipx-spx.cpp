@@ -1,5 +1,4 @@
 /* $Id$
- * IPX/SPX transport
  * 
  * Copyright (c) 2001,2003 Alien Internet Services
  *

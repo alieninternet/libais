@@ -1,5 +1,4 @@
 /* $Id$
- * SHA1 routines
  * 
  * Copyright (c) 2001,2002,2003 KineIRCd Development Team
  * (See DEV-TEAM file for details)
@@ -27,6 +26,7 @@
 # include <string>
 
 namespace AISutil {
+   //! SHA1 routines
    struct SHA1 {
       //! A digest. SHA1 returns 160 bits, this makes it easier to manage.
       union digest_type {

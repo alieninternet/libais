@@ -1,5 +1,4 @@
 /* $Id$
- * Handy dandy include file
  * 
  * Copyright (c) 2002,2003 Alien Internet Services
  *

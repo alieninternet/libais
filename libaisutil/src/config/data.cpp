@@ -1,5 +1,4 @@
 /* $Id$
- * 'ConfigData' class definitions (variable handlers)
  *
  * Copyright (c) 2002,2003 Alien Internet Services
  *
