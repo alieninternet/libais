@@ -22,7 +22,10 @@
 #ifndef _INCLUDE_LIBAISUTIL_VERSION_H_
 # define _INCLUDE_LIBAISUTIL_VERSION_H_ 1
 
-// This file contains extra namespace documentation for DoxyGen
+/* This file contains extra namespace documentation for DoxyGen for the
+ * LibAISutil namespace. To avoid repeating it in every file, it's kept here
+ * for convenience.
+ */
  
 //! The AIS namespace
 /*! This is the 'Alien Internet Services' namespace, used by the aforementioned
