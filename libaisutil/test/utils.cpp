@@ -161,6 +161,5 @@ int main(int argc, char **argv)
    }
 
 
-   TEST_STATUS("All tests were successful");
-   return TEST_RETURN_PASS;
+   TEST_END;
 }

@@ -44,3 +44,8 @@
      if (!(x)) { \
 	return TEST_RETURN_FAIL; \
      }
+
+#define TEST_END \
+     TEST_STATUS("All tests were successful"); \
+     return TEST_RETURN_PASS
+   

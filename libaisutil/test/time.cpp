@@ -176,6 +176,5 @@ int main(int argc, char **argv)
 		 (timeval_timeC.tv_usec != timeval_timeB.tv_usec)));
    
 
-   TEST_STATUS("All tests were successful");
-   return TEST_RETURN_PASS;
+   TEST_END;
 }

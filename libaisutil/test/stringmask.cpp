@@ -102,6 +102,5 @@ int main(int argc, char **argv)
 		  testData[i].expectedResultCase);
    }
    
-   TEST_STATUS("All tests were successful");
-   return TEST_RETURN_PASS;
+   TEST_END;
 }
