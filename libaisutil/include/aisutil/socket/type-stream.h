@@ -56,13 +56,13 @@ namespace AIS {
 	    virtual ~TypeSTREAM(void)
 	      { delete[] buffer; };
 	    
-	    //! Write data to this socket
+	    // Write data to this socket
 	    const int write(const std::string& data);
 	    
-	    //! Read data from this socket
+	    // Read data from this socket
 	    const bool read(std::ostream& databuff);
 	    
-	    //! Return the block size per read
+	    // Return the block size per read
 	    const blockSize_type getReadBlockSize(void) const
 	      { return bufferSize; };
 	 }; // class TypeSTREAM
