@@ -1,5 +1,8 @@
 #! /bin/sh
 
+# Go 'home' :)
+cd /home/groups/l/li/libais/www
+
 # Go up a directory
 pushd .
 cd ..
