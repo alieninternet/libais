@@ -13,9 +13,6 @@ cd ..
 cvs -d$CVSROOT co www
 popd
 
-# Remove old docs
-rm -rf ./htdocs/manual/*
-
 # Make a temp dir :)
 mkdir tmp
 
