@@ -83,7 +83,13 @@ namespace AIS {
 
 	    // Change the maximum hop count (TTL) on this socket
 	    const bool setMaximumHopCount(const int hops)
-	      { return setSockoptInt(IPV6_UNICAST_HOPS, hops, IPPROTO_IPV6); };
+	      {
+		 if ((hops >= -1) && (hops < 256)) {
+		    return setSockoptInt(IPV6_UNICAST_HOPS, hops,
+					 IPPROTO_IPV6);
+		 }
+		 return false;
+	      };
 
 	    // Return the maximum hop count (TTL) on this socket
 	    const int getMaximumHopCount(void) const

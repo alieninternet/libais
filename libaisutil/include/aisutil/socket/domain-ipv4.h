@@ -84,7 +84,12 @@ namespace AIS {
 
 	    // Change the maximum hop count (TTL) on this socket
 	    const bool setMaximumHopCount(const int hops)
-	      { return setSockoptInt(IP_TTL, hops, SOL_IP); };
+	      { 
+		 if ((hops >= -1) && (hops < 256)) {
+		    return setSockoptInt(IP_TTL, hops, SOL_IP);
+		 }
+		 return false;
+	      };
 
 	    // Return the maximum hop count (TTL) on this socket
 	    const int getMaximumHopCount(void) const
