@@ -56,7 +56,7 @@ namespace AIS {
 	    const digest_type& operator=(const digest_type& rhs)
 	      {
 		 return 
-		   *(static_cast<const digest_type*>
+		   *((const digest_type*)
 		     (memcpy((void*)this, (const void*)&rhs, 20)));
 	      };
 	    
