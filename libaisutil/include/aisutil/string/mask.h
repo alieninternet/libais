@@ -25,48 +25,32 @@
 
 # include <aisutil/string/string.h>
 
-
 namespace AISutil {
-   class StringMask {
+   class StringMask : public String {
     private:
-      // The mask itself
-      const String mask;
-      
       // Match checker
-      static bool match(char const* m, char const* n);
+      static bool match(char const* const m, char const* const n);
       
     public:
       // Blank Constructor
       StringMask(void)
-	: mask("")
 	{};
 
-      // Constructor (from a string)
-      StringMask(const String& s)
-	: mask(s)
-	{};
+      // Constructor
+      template <class T>
+	StringMask(const T& a)
+	  : std::string(a) 
+	  {};
       
       // Destructor
       ~StringMask(void)
 	{};
       
-      // Boolean equals operator
-      bool operator==(const StringMask& sm) const 
-	{ return mask == sm.mask; };
-      
-      // Boolean not-equals operator
-      bool operator!=(const StringMask& sm) const 
-	{ return mask != sm.mask; };
-      
-      // Return the mask
-      const String& getMask(void) const 
-	{ return mask; };
-      
       // Check string match
       bool matches(const String& s) const 
-	{ return match(mask.c_str(), s.c_str()); };
-      bool matches(const char* s) const 
-	{ return match(mask.c_str(), s); };
+	{ return match(c_str(), s.c_str()); };
+      bool matches(const char* const s) const
+	{ return match(c_str(), s); };
    };
 }; // namespace AISutil
 
