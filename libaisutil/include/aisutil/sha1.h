@@ -35,15 +35,19 @@ namespace AIS {
 	    signed char s_char[20];
 	    unsigned long u_long[5];
 	    
-	    //! Boolean equals operator
-	    bool operator==(const digest_type &d) const {
-	       return ((u_long[0] == d.u_long[0]) &&
-		       (u_long[1] == d.u_long[1]) &&
-		       (u_long[2] == d.u_long[2]) &&
-		       (u_long[3] == d.u_long[3]) &&
-		       (u_long[4] == d.u_long[4]) &&
-		       (u_long[5] == d.u_long[5]));
+	    //! Boolean equality operator
+	    const bool operator==(const digest_type& rhs) const {
+	       return ((u_long[0] == rhs.u_long[0]) &&
+		       (u_long[1] == rhs.u_long[1]) &&
+		       (u_long[2] == rhs.u_long[2]) &&
+		       (u_long[3] == rhs.u_long[3]) &&
+		       (u_long[4] == rhs.u_long[4]) &&
+		       (u_long[5] == rhs.u_long[5]));
 	    };
+	    
+	    //! Not equal-to operator
+	    const bool operator!=(const digest_type& rhs) const
+	      { return (!((*this) == rhs)); };
 	 };
 	 
 	 //! An empty digest
