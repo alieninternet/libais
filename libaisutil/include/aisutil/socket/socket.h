@@ -22,7 +22,13 @@
 #ifndef _INCLUDE_LIBAISUTIL_SOCKET_SOCKET_H_
 # define _INCLUDE_LIBAISUTIL_SOCKET_SOCKET_H_ 1
 
-// We should simply include ostream here, but some compilers do not have it!!
+/*! \file
+ * \brief Socket base class
+ * 
+ * This file contains the base class for the socket classes.
+ */
+
+// We should simply include ostream here, but some compilers do not have it?
 # include <iostream>
 # include <string>
 # include <cerrno>
@@ -37,100 +43,319 @@ extern "C" {
 namespace AIS {
    namespace Util {
       namespace Socket {
-	 //! Socket base class
+	 /*!
+	  * \brief Socket base class
+	  * 
+	  * The Domain and Type bases are derived from this, the generic
+	  * interface to a socket. This does not take into consideration very
+	  * much about a socket, other than it has an address and data can be
+	  * sent/read from the socket.
+	  *
+	  * Note that this socket class does not include any functions
+	  * specific to reliable transport types, or stateful sockets. Being
+	  * a specific \e type of a socket, you should see StatefulType for
+	  * functions such as StatefulType::listen() and
+	  * StatefulType::accept().
+	  */
 	 class Socket {
 	  public:
 	    typedef unsigned int blockSize_type;
 	    
 	  private:
-	    //! File descriptor
-	    const int fd;
+	    /*!
+	     * \brief File descriptor
+	     * 
+	     * This is an \e integer which defines a \e file within this
+	     * current process. The Socket class takes control of the file
+	     * descriptor to avoid it being incorrectly dereferenced or
+	     * zeroed inappropriately.
+	     * 
+	     * Users of other platforms will need to understand that under
+	     * *NIX, <em>everything is a file</em>, since in generic terms a
+	     * file is something which can be read and written to. Under this
+	     * principle, sockets are so considered to be files.
+	     */
+	    int fd;
 	    
-	    //! An error message :)
+	    /*!
+	     * \brief An error message
+	     * 
+	     * This contains a pointer to an error message
+	     * 
+	     * \depreciated This will probably disappear sometime in the future
+	     */
 	    const char* errorMessage;
 	    
 	  protected:
-	    //! Constructor
-	    explicit Socket(int newFD = -1)
+	    /*!
+	     * \brief Constructor
+	     * 
+	     * Construct a new 'Socket' using the given file descriptor
+	     */
+	    explicit Socket(const int newFD = -1)
 	      : fd(newFD),
 	        errorMessage("No error")
 	      {};
 	    
-	    //! Set the error message to the given errno value's string
-	    void setErrorMessage(const char* errorString)
+	    /*!
+	     * \brief Set the error message to the given string
+	     *
+	     * Set the \a errorMessage to the given \p errorString.
+	     * 
+	     * \param errorString A \b static \b const string
+	     * \depreciated This will probably disappear sometime in the future
+	     */
+	    void setErrorMessage(const char* const errorString)
 	      { errorMessage = errorString; };
 	    
-	    //! The lazy way of setting the error message :)
+	    /*!
+	     * \brief The lazy way of setting the error message :)
+	     * 
+	     * Set the \a errorMessage to a message associated with errno.
+	     * 
+	     * \depreciated This will probably disappear sometime in the future
+	     */
 	    void setErrorMessage(void)
 	      { setErrorMessage(sys_errlist[errno]); };
 	    
-	    //! Get a protocol's number (really only valid for IP protocols)
+	    /*!
+	     * \brief Get a protocol's number
+	     * 
+	     * Return the protocol number as determined by the protocols file
+	     * (\e /etc/protocols or similar). This is essentially a neat
+	     * wrapper for getprotobyname().
+	     * 
+	     * \note This is really only valid for IP protocols
+	     * \param name The name of the protocol
+	     * \return The protocol number
+	     */
 	    static const int getProtocol(const char* const name);
 	    
-	    //! Set socket NON-BLOCKING so it doesn't slow us down
+	    /*!
+	     * \brief Set socket as \e non-blocking
+	     * 
+	     * This is to set the socket as \e non-blocking as not to slow down
+	     * operations.
+	     * 
+	     * \depreciated This will possibly change to be a public function.
+	     */
 	    void setNonBlocking(void);
 	    
 	  public:
-	    //! Destructor
+	    /*!
+	     * \brief Destructor
+	     * 
+	     * Destroy the socket. This will make sure the socket is closed
+	     * neatly by calling ::close().
+	     */
 	    virtual ~Socket(void)
-	      { (void)close(); };
+	      { (void)::close(fd); };
 	    
-	    //! Get the file descriptor
-	    int getFD(void) const
+	    /*!
+	     * \brief Get the file descriptor
+	     * 
+	     * Return the current value of the file descriptor (\a fd). The
+	     * file descriptor is protected to avoid it being dereferenced
+	     * or otherwise clobbered unintentionally.
+	     * 
+	     * \return The file descriptor
+	     * \retval -1 The file descriptor is \e invalid or \e uninitialised
+	     */
+	    const int getFD(void) const
 	      { return fd; };
 	    
-	    //! Still this socket okay? (Rough, only false if we are set up wrong)
+	    /*!
+	     * \brief Still this socket okay?
+	     *
+	     * This is a method to \b roughly determine whether or not the
+	     * socket is considered healthy. Essentially, it checks to see
+	     * if the file descriptor pointing to the \e real socket (as far
+	     * as the operating system is concerned) is valid.
+	     * 
+	     * \return Whether we are okay or not
+	     * \retval true The socket seems to be okay
+	     * \retval false The socket is not okay
+	     */
 	    const bool isOkay(void) const
 	      { return (fd >= 0); };
 	    
-	    //! Turn on re-usable address to save binding time (USE WITH CAUTION!)
+	    /*!
+	     * \brief Turn on re-usable addresses
+	     * 
+	     * This will enable the re-usable address flag (\e SO_REUSEADDR or
+	     * similar) if it is available, in order to save bind()ing time.
+	     * 
+	     * This allows a socket to bind() to its local address, except
+	     * when there is an active listening socket already bound to that
+	     * address.
+	     *
+	     * With this unset, the socket may not bind() to an address/port
+	     * without the address/port being totally unused.
+	     * 
+	     * \return The status of the operation
+	     * \retval true The operation was successful
+	     * \retval false The operation was unsuccessful, or the feature is
+	     *    unsupported on this system
+	     */
 	    const bool setReuseAddress(void);
 	    
-	    //! Close the socket
-	    virtual const bool close(void)
-	      { return (::close(fd) == 0); };
+	    /*!
+	     * \brief Close the socket
+	     * 
+	     * This will close the socket and make the file descriptor invalid
+	     * to avoid conflict with a future file description allocation
+	     * from the operating system.
+	     * 
+	     * \warning A successful closure of a socket does not guarantee
+	     *    that all data you wanted to send just prior to closure was
+	     *    sent, even using a reliable transport.
+	     * \return Whether the socket was closed or not
+	     * \retval true The socket closed successfully
+	     * \retval false The socket was not closed
+	     */
+	    const bool close(void)
+	      { 
+		 if (::close(fd) == 0) {
+		    fd = -1;
+		    return true;
+		 }
+		 return false;
+	      };
 	    
-	    //! Return the local address
+	    /*!
+	     * \brief Return the local address
+	     * 
+	     * \return The local address as a \e sockaddr structure
+	     */
 	    virtual const sockaddr&
 	      getLocalAddress(socklen_t& addrlen) const = 0;
 	    
-	    //! Return the remote address
+	    /*!
+	     * \brief Return the remote address
+	     * 
+	     * \return The remote address as a \e sockaddr structure
+	     */
 	    virtual const sockaddr&
 	      getRemoteAddress(socklen_t& addrlen) const = 0;
 	    
-	    //! Return the local address (as a string)
+	    /*!
+	     * \brief Return the local address (as a string)
+	     *
+	     * \return The local address, converted to a string
+	     */
 	    virtual const std::string getLocalAddress(void) const = 0;
 	    
-	    //! Return the remote address (as a string)
+	    /*!
+	     * \brief Return the remote address (as a string)
+	     * 
+	     * \return The remote address, converted to a string
+	     */
 	    virtual const std::string getRemoteAddress(void) const = 0;
 	    
-	    //! Return the local port
-	    virtual const int getLocalPort(void) const = 0;
+	    /*!
+	     * \brief Return the local port
+	     * 
+	     * \return The local port number
+	     * \retval -1 Ports have no meaning for this socket type
+	     */
+	    virtual const int getLocalPort(void) const
+	      { return -1; };
 	    
-	    //! Return the remote port
-	    virtual const int getRemotePort(void) const = 0;
+	    /*!
+	     * \brief Return the remote port
+	     * 
+	     * \return The remote port number
+	     * \retval -1 Ports have no meaning for this socket type
+	     */
+	    virtual const int getRemotePort(void) const
+	      { return -1; };
 	    
-	    //! Set the local address
+	    /*!
+	     * \brief Set the local address
+	     * 
+	     * \return The status of the operation
+	     * \retval true The address was set successfully
+	     * \retval false There was an error in setting the address, such
+	     *    as the address was invalid for this socket domain
+	     */
 	    virtual const bool
 	      setLocalAddress(const std::string& address) = 0;
 	    
-	    //! Set the remote address
+	    /*!
+	     * \brief Set the remote address
+	     * 
+	     * \return The status of the operation
+	     * \retval true The address was set successfully
+	     * \retval false There was an error in setting the port, such
+	     *    as the address was invalid for this socket domain
+	     */
 	    virtual const bool
 	      setRemoteAddress(const std::string& address) = 0;
 	    
-	    //! Set the local port
-	    virtual const bool setLocalPort(const int port) = 0;
+	    /*!
+	     * \brief Set the local port
+	     * 
+	     * \return The status of the operation
+	     * \retval true The address was set successfully
+	     * \retval false There was an error in setting the port, such
+	     *    as the port number was out of range for this socket domain
+	     */
+	    virtual const bool setLocalPort(const int port)
+	      { return false; };
 	    
-	    //! Set the remote port
-	    virtual const bool setRemotePort(const int port) = 0;
+	    /*!
+	     * \brief Set the remote port
+	     *
+	     * \return The status of the operation
+	     * \retval true The address was set successfully
+	     * \retval false There was an error in setting the port, such
+	     *    as the port number was out of range for this socket domain
+	     */
+	    virtual const bool setRemotePort(const int port)
+	      { return false; };
 	    
-	    //! Bind a socket its port
+	    /*!
+	     * \brief Bind a socket
+	     * 
+	     * This will bind the socket to its currently set local address
+	     * and port. If the socket is a StatefulType, it will then be ready
+	     * to StatefulType::listen() for new connections.
+	     * 
+	     * \return The status of the operation
+	     * \retval true The socket has been successfully
+	     * \retval false The socket could not be bound for some reason,
+	     *    such as the local address or port are invalid/uninitialised,
+	     *    or the socket cannot be bound.
+	     */
 	    virtual const bool bind(void) = 0;
 	    
-	    //! Connect this socket
+	    /*!
+	     * \brief Connect this socket
+	     * 
+	     * Connect from the local address and port to the remote address
+	     * and port.
+	     * 
+	     * \warning It's a common mistake to set a socket as non-blocking
+	     *    and use connect(), and consider the connection as being
+	     *    completed. In non-blocking mode, the return value of
+	     *    connect() being true simply means the connection is \b in
+	     *    \b progress, and not that it is complete.
+	     * \return The status of the operation
+	     * \retval true The socket is connected, or the connection is in
+	     *    progress
+	     * \retval false The socket could not connect.
+	     */
 	    virtual const bool connect(void) = 0;
 	    
-	    //! Write data to this socket (returns the number of octets written)
+	    /*! 
+	     * \brief Write data to this socket
+	     * 
+	     * Send the given \p data through the socket.
+	     * 
+	     * \param data Raw data to be send to the remote recipient
+	     * \return returns the number of \e octets written
+	     * \retval -1 No data could be sent, as an error occured
+	     */
 	    virtual const int write(const std::string& data) = 0;
 	    
 	    //! Read data from this socket
@@ -146,8 +371,12 @@ namespace AIS {
 	    /*!
 	     * \brief Has an error occured?
 	     * 
-	     * Determine whether an operation (the last operation performed)
-	     * caused an error
+	     * Determine whether an operation has caused an error.
+	     * 
+	     * \return Whether an error has occurred or not
+	     * \retval true The previous operation on the socket caused an
+	     *    error
+	     * \retval false There are no known errors.
 	     */
 	    const bool error(void) const
 	      { return (errorMessage != 0); };
@@ -164,6 +393,7 @@ namespace AIS {
 	     *    message will be available.
 	     * \return Return a pointer to a string
 	     * \retval 0 There was no error
+	     * \depreciated This will probably disappear sometime in the future
 	     */
 	    const char* const getErrorMessage(void) const
 	      { return errorMessage; };

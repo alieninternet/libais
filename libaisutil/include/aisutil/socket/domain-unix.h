@@ -65,40 +65,40 @@ namespace AIS {
 	    const sockaddr_un& getRemoteAddressRef(void) const
 	      { return remoteAddress; };
 	    
-	    //! Return the local address
+	    // Return the local address
 	    const sockaddr& getLocalAddress(socklen_t& addrlen) const
 	      {
 		 addrlen = sizeof(localAddress);
 		 return (sockaddr&)localAddress;
 	      };
 	 
-	    //! Return the remote address
+	    // Return the remote address
 	    const sockaddr& getRemoteAddress(socklen_t& addrlen) const
 	      {
 		 addrlen = sizeof(remoteAddress);
 		 return (sockaddr&)remoteAddress;
 	      };
 	    
-	    //! Return the local address (as a string)
+	    // Return the local address (as a string)
 	    const std::string getLocalAddress(void) const
 	      { return localAddress.sun_path; };
 	    
-	    //! Return the remote address (as a string)
+	    // Return the remote address (as a string)
 	    const std::string getRemoteAddress(void) const
 	      { return remoteAddress.sun_path; };
 	    
-	    //! Set the local address
+	    // Set the local address
 	    const bool setLocalAddress(const std::string& address)
 	      { return setAddress(localAddress, address); };
 	    
-	    //! Set the remote address
+	    // Set the remote address
 	    const bool setRemoteAddress(const std::string& address)
 	      { return setAddress(remoteAddress, address); };
 	    
-	    //! Bind a socket its port
+	    // Bind a socket its port
 	    const bool bind(void);
 	    
-	    //! Connect this socket (unavailable on some socket types)
+	    // Connect this socket (unavailable on some socket types)
 	    const bool connect(void);
 	 }; // class DomainUNIX
       }; // namespace Socket

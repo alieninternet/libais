@@ -22,9 +22,22 @@
 #ifndef _INCLUDE_LIBAISUTIL_SOCKET_SOCKETS_H_
 # define _INCLUDE_LIBAISUTIL_SOCKET_SOCKETS_H_ 1
 
+/*! \file
+ * \brief Include available socket class headers
+ * 
+ * Depending on the system this library is configured/compiled for, you may
+ * have support for all, some, or no socket types available within this
+ * library.
+ * 
+ * This header is intended to be an aide when you need to use more than just
+ * a specific type of socket, such as when you want to use IPv4 and/or IPv6
+ * sockets in a program. This header will include all headers pertaining to
+ * those socket types available within the library, as chosen at configuration
+ * time.
+ */
+
 # include <aisutil/aisutilconf.h>
 
-// Includes! These should be in ifdefs! :(
 # ifdef LIBAISUTIL_HAVE_SOCKET_IPV4_TCP
 #  include <aisutil/socket/ipv4-tcp.h>
 # endif

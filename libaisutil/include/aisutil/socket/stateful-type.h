@@ -37,7 +37,7 @@
 namespace AIS {
    namespace Util {
       namespace Socket {
-	 //! Socket base class
+	 //! Stateful/reliable socket type base class
 	 class StatefulType : public Type {
 	  protected:
 	    //! Constructor
