@@ -1,6 +1,7 @@
 Version 1.2
-  * StringMask:: now inherits from String::, as it should have originally
-  * Removed IRC related stuff
+  * StringMask:: now inherits from String::, as was originally intended, and
+    contains two match routines - matches() and matchesCase(), the former now
+    being case-insensitive.
 
 Version 1.1
   * Fixed makefile issues pertaining to the installation of headers.. Oops!
