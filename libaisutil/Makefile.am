@@ -77,6 +77,12 @@ libaisutil_la_SOURCES=\
 	src/version.cpp
 
 
+# Flags used when linking the library
+libaisutil_la_LDFLAGS=\
+	-version-info @LIB_VERSION@:@LIB_REVISION@:@LIB_AGE@
+
+
+
 
 # Stuff that needs to go into the distribution but isn't implied
 EXTRA_DIST=\
