@@ -105,7 +105,6 @@ namespace AIS {
 	 /*!
 	  * \brief Convert to an integer
 	  * 
-	  * \copydoc std::atoi()
 	  * \warning Since this is merely a wrapper for std::atoi(), no
 	  *    error checking is provided.
 	  * \return An integer
@@ -117,7 +116,6 @@ namespace AIS {
 	 /*! 
 	  * \brief Convert to a long integer
 	  * 
-	  * \copydoc std::atol()
 	  * \warning Since this is merely a wrapper for std::atol(), no
 	  *    error checking is provided.
 	  * \return An integer
@@ -129,7 +127,6 @@ namespace AIS {
 	 /*!
 	  * \brief Convert to a double
 	  * 
-	  * \copydoc std::atof()
 	  * \warning Since this is merely a wrapper for std::atoi(), no
 	  *    error checking is provided.
 	  * \return An integer
