@@ -22,7 +22,7 @@
 #ifndef _INCLUDE_AISUTIL_SOCKET_DOMAIN_UNIX_H_
 # define _INCLUDE_AISUTIL_SOCKET_DOMAIN_UNIX_H_ 1
 
-# include <aisutil/socket/domain.h>
+# include <aisutil/socket/socket.h>
 
 # include <iostream>
 
@@ -36,7 +36,7 @@ namespace AIS {
    namespace Util {
       namespace Socket {
 	 //! Unix Socket Domain
-	 class DomainUNIX : public Domain {
+	 class DomainUNIX : virtual public Socket {
 	  private:
 	    sockaddr_un localAddress;
 	    sockaddr_un remoteAddress;

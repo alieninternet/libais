@@ -22,7 +22,7 @@
 #ifndef _INCLUDE_LIBAISUTIL_SOCKET_STATEFUL_TYPE_H_
 # define _INCLUDE_LIBAISUTIL_SOCKET_STATEFUL_TYPE_H_ 1
 
-# include <aisutil/socket/type.h>
+# include <aisutil/socket/socket.h>
 
 /*!
  * \brief The default listen() backlog
@@ -38,7 +38,7 @@ namespace AIS {
    namespace Util {
       namespace Socket {
 	 //! Stateful/reliable socket type base class
-	 class StatefulType : public Type {
+	 class StatefulType : virtual public Socket {
 	  protected:
 	    //! Constructor
 	    explicit StatefulType(void)

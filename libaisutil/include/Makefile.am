@@ -11,7 +11,6 @@ nobase_include_HEADERS=\
 	aisutil/socket/domain-ipv6.h \
 	aisutil/socket/domain-ipx.h \
 	aisutil/socket/domain-unix.h \
-	aisutil/socket/domain.h \
 	aisutil/socket/ipv4-tcp.h \
 	aisutil/socket/ipv6-tcp.h \
 	aisutil/socket/ipx-spx.h \
@@ -20,7 +19,6 @@ nobase_include_HEADERS=\
 	aisutil/socket/stateful-type.h \
 	aisutil/socket/type-seqpacket.h \
 	aisutil/socket/type-stream.h \
-	aisutil/socket/type.h \
 	aisutil/socket/unix.h \
 	aisutil/string/mask.h \
 	aisutil/string/string.h \
