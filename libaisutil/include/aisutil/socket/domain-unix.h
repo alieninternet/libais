@@ -92,6 +92,9 @@ namespace AISutil {
 
       //! Connect this socket (unavailable on some socket types)
       bool connect(void);
+      
+      //! Close the socket
+      const bool close(void);
    }; // class SocketDomainUNIX
 }; // namespace AISutil
    

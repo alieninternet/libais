@@ -22,6 +22,7 @@
 #include "config.h"
 
 #include <cstring>
+#include <cstdio>
 
 extern "C" {
 #ifdef HAVE_SYS_SOCKET_H
@@ -115,4 +116,25 @@ bool SocketDomainUNIX::connect(void)
    
    setErrorMessage();
    return false;
+}
+
+
+/* close - Close the socket
+ * Original 16/07/2003 pickle
+ */
+const bool SocketDomainUNIX::close(void)
+{
+   // Close the socket
+   const bool happy = (::close(getFD()) == 0);
+
+   // If we're unhappy, set the errno appropriately
+   if (!happy) {
+      setErrorMessage();
+   }
+   
+   // Remove the unix file, if we can.. Should we ignore the return value?
+   (void)::remove(localAddress.sun_path);
+   
+   // Return our happiness level :)
+   return happy;
 }

@@ -74,7 +74,7 @@ namespace AISutil {
     public:
       //! Destructor
       virtual ~Socket(void)
-	{ close(); };
+	{ (void)close(); };
       
       //! Get the file descriptor
       int getFD(void) const
@@ -91,9 +91,9 @@ namespace AISutil {
       virtual bool listen(int backlog =
 			  LIBAISUTIL_SOCKET_DEFAULT_LISTEN_BACKLOG);
 
-      //! Close socket
-      virtual void close(void)
-	{ ::close(fd); };
+      //! Close the socket
+      virtual const bool close(void)
+	{ return (::close(fd) == 0); };
 
       //! Return the local address
       virtual const sockaddr& getLocalAddress(socklen_t& addrlen) const = 0;
