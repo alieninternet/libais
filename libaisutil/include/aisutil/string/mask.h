@@ -84,7 +84,7 @@ namespace AIS {
 	 
 	 /*! \overload */
 	 const bool matchesCase(const std::string& string) const
-	   { return matchesCase(str.c_str()); };
+	   { return matchesCase(string.c_str()); };
 	 
 	 
 	 /*!
@@ -104,7 +104,7 @@ namespace AIS {
 	 
 	 /*! \overload */
 	 const bool matches(const std::string& string) const
-	   { return matches(str.c_str()); }
+	   { return matches(string.c_str()); }
       }; // class StringMask
    }; // namespace Util
 }; // namespace AIS
