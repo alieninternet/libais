@@ -26,7 +26,7 @@ dnl -------------------------------------------------------------------------
 dnl Initialise the autoconf/automake things
 AC_INIT([LibAISutil], [1.3.pre], [libaisutil@alien.net.au])
 AM_INIT_AUTOMAKE([1.6.1 foreign no-installinfo no-installman nostdinc subdir-objects])
-AC_COPYRIGHT([Portions Copyright (c) 2001,2002 Alien Internet Services])
+AC_COPYRIGHT([Portions Copyright (c) 2001,2002,2003 Alien Internet Services])
 AC_PREREQ(2.57)
 AC_CONFIG_AUX_DIR(config)
 AM_CONFIG_HEADER(include/config.h)
