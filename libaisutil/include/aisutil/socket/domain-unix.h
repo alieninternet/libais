@@ -55,8 +55,7 @@ namespace AIS {
 	    
 	  public:
 	    //! Destructor
-	    virtual ~DomainUNIX(void)
-	      {};
+	    virtual ~DomainUNIX(void);
 	    
 	    //! Return the local address
 	    const sockaddr_un& getLocalAddressRef(void) const
@@ -101,9 +100,6 @@ namespace AIS {
 	    
 	    //! Connect this socket (unavailable on some socket types)
 	    const bool connect(void);
-	    
-	    //! Close the socket
-	    const bool close(void);
 	 }; // class DomainUNIX
       }; // namespace Socket
    }; // namespace Util

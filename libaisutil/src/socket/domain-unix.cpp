@@ -70,6 +70,19 @@ DomainUNIX::DomainUNIX(const sockaddr_un& newLocalAddress,
 }
 
 
+/* ~DomainUNIX - Destroy the pipe file
+ * Original 16/07/2003 pickle
+ */
+DomainUNIX::~DomainUNIX(void)
+{
+   // Close the socket
+   (void)::close(getFD());
+   
+   // Remove the unix file, if we can..
+   (void)::remove(localAddress.sun_path);
+}
+
+
 /* setAddress - Set the given address in the given address structure
  * Original 03/07/2002 pickle
  */
@@ -116,25 +129,4 @@ const bool DomainUNIX::connect(void)
    
    setErrorMessage();
    return false;
-}
-
-
-/* close - Close the socket
- * Original 16/07/2003 pickle
- */
-const bool DomainUNIX::close(void)
-{
-   // Close the socket
-   const bool happy = (::close(getFD()) == 0);
-
-   // If we're unhappy, set the errno appropriately
-   if (!happy) {
-      setErrorMessage();
-   }
-   
-   // Remove the unix file, if we can.. Should we ignore the return value?
-   (void)::remove(localAddress.sun_path);
-   
-   // Return our happiness level :)
-   return happy;
 }
