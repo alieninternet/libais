@@ -364,10 +364,6 @@ namespace AIS {
 	    //! Return the block size per read
 	    virtual const blockSize_type getReadBlockSize(void) const = 0;
 	    
-	    //! Return some information about this socket, if any
-	    virtual const std::string getInfo(void) const
-	      { return std::string(); };
-	    
 	    /*!
 	     * \brief Has an error occured?
 	     * 
