@@ -24,7 +24,7 @@ dnl -------------------------------------------------------------------------
 dnl  Getting ready to configure...
 dnl -------------------------------------------------------------------------
 dnl Initialise the autoconf/automake things
-AC_INIT([LibAISutil], [1.1.pre], [libaisutil@alien.net.au])
+AC_INIT([LibAISutil], [1.1], [libaisutil@alien.net.au])
 AM_INIT_AUTOMAKE([1.6.1 foreign no-installinfo no-installman nostdinc subdir-objects])
 AC_COPYRIGHT([Portions Copyright (c) 2001,2002 Alien Internet Services])
 AC_PREREQ(2.57)
@@ -38,7 +38,7 @@ dnl from an 'official' standpoint - only the developers who should touch
 dnl them .. uhh.. should touch them :)
 VERSION_MAJOR=1
 VERSION_MINOR=1
-VERSION_EXTRA=.pre
+VERSION_EXTRA=
 
 LIB_VERSION=0
 LIB_REVISION=1
