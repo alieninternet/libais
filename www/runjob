@@ -1,31 +1,44 @@
 #! /bin/sh
 
-# Go 'home' :)
+# Stuff to doxument (har har har.. *weak cough*)
+DOCUMENT=libaisutil
+CVSROOT=:pserver:anonymous@cvs1:/cvsroot/libais
+
+# Go 'home'
 cd /home/groups/l/li/libais/www
 
-# Go up a directory
+# Check out the website, cgi scripts, and some other stuff
 pushd .
 cd ..
-
-# Check out two modules we need (the includes and the web site modules)
-cvs -d:pserver:anonymous@cvs1:/cvsroot/libais co libaisutil/include
-cvs -d:pserver:anonymous@cvs1:/cvsroot/libais co www
-
-# Return to the directory we were in
+cvs -d$CVSROOT co www
 popd
 
 # Remove old docs
-rm -rf ./htdocs/manual
+rm -rf ./htdocs/manual/*
 
-# Process the files
-doxygen ./doxygen.conf
+# Make a temp dir :)
+mkdir tmp
 
-# Remove the source module, we don't need it to sit here, and the old web stuff
-echo "Removing source"
-rm -rf ../libaisutil ../cgi-bin/* ../htdocs/*
+# Process each doxygen thingy to generate
+for docdir in $DOCUMENT; do
+   echo "Doing $docdir.."
+   # Check out stuff we need (the includes from this module)
+   pushd .
+   cd tmp
+   cvs -d$CVSROOT co $docdir/include
+   popd
+
+   # Process the files
+   doxygen ./doxygen/$docdir/doxygen.conf
+
+   # Remove the source module, we don't need it to sit here, and the old web stuff
+   echo "Removing source"
+   rm -rf tmp/$docdir
+done
 
 # Move the new stuff over the old stuff (above)
 echo "Moving new stuff over old stuff"
+rm -rf ../cgi-bin/* ../htdocs/*
 mv cgi-bin/* ../cgi-bin/.
 mv htdocs/* ../htdocs/.
 
