@@ -1,6 +1,6 @@
 /* $Id$
  * 
- * Copyright (c) 1996,2003 Alien Internet Services
+ * Copyright (c) 1996,2003,2004 Alien Internet Services
  * 
  * This file is a part of LibAISutil.
  * 
@@ -301,7 +301,8 @@ namespace AIS {
 	   const Time operator/(const T& rhs) const
 	   {
 	      const double result = (*this) / rhs;
-	      return Time((result / max_nsec), (result % max_nsec));
+	      return Time((result / max_nsec), 
+			  ((const long int)result % max_nsec));
 	   };
 	 
 	 /*!
