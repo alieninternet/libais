@@ -39,7 +39,7 @@ String String::toLower() const
    char *temp = new char[length() + 1];
    
    for (register unsigned int i = (length() + 1); i != 0; --i) {
-      temp[i] = tolower(c_str()[i]);
+      temp[i] = tolower(data()[i]);
    }
    
    String result(temp);
@@ -58,7 +58,7 @@ String String::toUpper() const
    char *temp = new char[length() + 1];
    
    for (register unsigned int i = (length() + 1); i != 0; --i) {
-      temp[i] = toupper(c_str()[i]);
+      temp[i] = toupper(data()[i]);
    }
    
    String result(temp);
@@ -74,7 +74,7 @@ String String::toUpper() const
  */
 String String::prepad(const size_type n, const char c) const
 {
-   std::string result = c_str();
+   std::string result(*this);
 
    while (result.length() < n) {
       result = c + result;
@@ -94,18 +94,18 @@ String String::trim(void) const
    size_type e = length();
 
    while ((s < e) && 
-	  ((c_str()[s] == ' ') || 
-	   (c_str()[s] == '\t') || 
-	   (c_str()[s] == '\r') ||
-	   (c_str()[s] == '\n'))) {
+	  ((data()[s] == ' ') || 
+	   (data()[s] == '\t') || 
+	   (data()[s] == '\r') ||
+	   (data()[s] == '\n'))) {
       ++s;
    }
    
    while ((e > s) && 
-	  ((c_str()[e - 1] == ' ') || 
-	   (c_str()[e - 1] == '\t') ||
-	   (c_str()[e - 1] == '\r') ||
-	   (c_str()[e - 1] == '\n'))) {
+	  ((data()[e - 1] == ' ') || 
+	   (data()[e - 1] == '\t') ||
+	   (data()[e - 1] == '\r') ||
+	   (data()[e - 1] == '\n'))) {
       --e;
    }
 
@@ -123,16 +123,16 @@ String String::trimQuotes(void) const
    size_type e = length();
 
    while ((s < e) && 
-	  ((c_str()[s] == ' ') ||
-	   (c_str()[s] == '\'') || 
-	   (c_str()[s] == '"'))) {
+	  ((data()[s] == ' ') ||
+	   (data()[s] == '\'') || 
+	   (data()[s] == '"'))) {
       ++s;
    }
    
    while ((e > s) && 
-	  ((c_str()[e - 1] == ' ') ||
-	   (c_str()[e - 1] == '\'') ||
-	   (c_str()[e - 1] == '"'))) {
+	  ((data()[e - 1] == ' ') ||
+	   (data()[e - 1] == '\'') ||
+	   (data()[e - 1] == '"'))) {
       --e;
    }
    
