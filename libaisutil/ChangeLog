@@ -14,6 +14,8 @@ Version 1.4
   * Socket::read() has been reverted back to the old method (using a
     std::string) due to demand. A rewrite and reintegration of the iostreams
     wrapper for the Socket:: classes is planned eventually
+  * Socket::* classes now have a much more flexible flag system. Check the
+    manual for more details.
   * Minor bug fixes
     
 
