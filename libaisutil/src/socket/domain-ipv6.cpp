@@ -51,7 +51,7 @@ static char addrbuff[INET6_ADDRSTRLEN + 1];
 
 
 /* SocketDomainIPv6 - Blank boring constructor!
- * Original 19/08/2001 simonb
+ * Original 19/08/2001 pickle
  */
 SocketDomainIPv6::SocketDomainIPv6(void)
 {
@@ -69,7 +69,7 @@ SocketDomainIPv6::SocketDomainIPv6(void)
 
   
 /* SocketDomainIPv6 - Constructor used when accept()ing a connection
- * Original 06/07/2002 simonb
+ * Original 06/07/2002 pickle
  */
 SocketDomainIPv6::SocketDomainIPv6(const sockaddr_in6& newLocalAddress,
 				   const sockaddr_in6& newRemoteAddress)
@@ -80,7 +80,7 @@ SocketDomainIPv6::SocketDomainIPv6(const sockaddr_in6& newLocalAddress,
 
 
 /* getRemoteAddressStr - Return the remote address as a string
- * Original 19/08/2001 simonb
+ * Original 19/08/2001 pickle
  */
 std::string SocketDomainIPv6::getRemoteAddress(void) const
 {
@@ -90,7 +90,7 @@ std::string SocketDomainIPv6::getRemoteAddress(void) const
 
 
 /* getLocalAddressStr - Return the local address as a string
- * Original 19/08/2001 simonb
+ * Original 19/08/2001 pickle
  */
 std::string SocketDomainIPv6::getLocalAddress(void) const
 {
@@ -100,7 +100,7 @@ std::string SocketDomainIPv6::getLocalAddress(void) const
 
 
 /* setAddress - Set the given address in the given address structure
- * Original 03/07/2002 simonb
+ * Original 03/07/2002 pickle
  */
 bool SocketDomainIPv6::setAddress(sockaddr_in6& addr, 
 				  const std::string& addrstr)
@@ -116,7 +116,7 @@ bool SocketDomainIPv6::setAddress(sockaddr_in6& addr,
 
 
 /* setAddress - Copy the given address over the given address structure
- * Original 03/07/2002 simonb
+ * Original 03/07/2002 pickle
  */
 bool SocketDomainIPv6::setAddress(sockaddr_in6& addr,
 				  const sockaddr_in6& newaddr)
@@ -130,7 +130,7 @@ bool SocketDomainIPv6::setAddress(sockaddr_in6& addr,
 
 
 /* setAddress - Copy the given address over the given address structure's
- * Original 05/07/2002 simonb
+ * Original 05/07/2002 pickle
  */
 bool SocketDomainIPv6::setAddress(sockaddr_in6& addr, const in6_addr& newaddr)
 {
@@ -143,7 +143,7 @@ bool SocketDomainIPv6::setAddress(sockaddr_in6& addr, const in6_addr& newaddr)
 
 
 /* setPort - Set the given port in the given address structure
- * Original 03/07/2002 simonb
+ * Original 03/07/2002 pickle
  */
 bool SocketDomainIPv6::setPort(sockaddr_in6& addr, const int port)
 {
@@ -159,7 +159,7 @@ bool SocketDomainIPv6::setPort(sockaddr_in6& addr, const int port)
 
 
 /* bind - Bind a socket to its port
- * Original 03/07/2002 simonb
+ * Original 03/07/2002 pickle
  */
 bool SocketDomainIPv6::bind(void)
 {
@@ -173,7 +173,7 @@ bool SocketDomainIPv6::bind(void)
 
 
 /* connect - Connect this socket
- * Original 03/07/2002 simonb
+ * Original 03/07/2002 pickle
  */
 bool SocketDomainIPv6::connect(void)
 {

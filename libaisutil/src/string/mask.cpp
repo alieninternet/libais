@@ -44,10 +44,10 @@ using namespace AISutil;
 
 
 /* match - Do the actual match check
- * Original 15/02/1996 simonb
- * 18/07/1998 simonb - Ported from pascal to C++
- * 20/07/1998 simonb - Changed String to char const
- * 07/09/2001 simonb - Partial rewrite for more speed (no damned recursion!!)
+ * Original 15/02/1996 pickle
+ * 18/07/1998 pickle - Ported from pascal to C++
+ * 20/07/1998 pickle - Changed String to char const
+ * 07/09/2001 pickle - Partial rewrite for more speed (no damned recursion!!)
  */
 bool StringMask::match(char const *m, char const *n)
 {

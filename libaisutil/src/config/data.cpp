@@ -38,7 +38,7 @@ using namespace AISutil;
 
 
 /* varHandleBoolean - Handle a 'bool' (use first value)
- * Original 13/04/2002 simonb
+ * Original 13/04/2002 pickle
  */
 LIBAISUTIL_CONFIG_VARIABLE_HANDLER(ConfigData::varHandleBoolean)
 {
@@ -77,7 +77,7 @@ LIBAISUTIL_CONFIG_VARIABLE_HANDLER(ConfigData::varHandleBoolean)
 
 
 /* varHandleHostName - Handle a hostname (use first value + additional checks)
- * Original 13/04/2002 simonb
+ * Original 13/04/2002 pickle
  */
 LIBAISUTIL_CONFIG_VARIABLE_HANDLER(ConfigData::varHandleHostName)
 {
@@ -152,7 +152,7 @@ struct valuesToString {
 
 
 /* varHandleString - Handle a 'String' (uses all entries on the line)
- * Original 12/04/2002 simonb
+ * Original 12/04/2002 pickle
  */
 LIBAISUTIL_CONFIG_VARIABLE_HANDLER(ConfigData::varHandleString)
 {
@@ -175,7 +175,7 @@ LIBAISUTIL_CONFIG_VARIABLE_HANDLER(ConfigData::varHandleString)
 
 
 /* varHandleStringOneWord - Handle a single word from a string
- * Original 22/09/2002 simonb
+ * Original 22/09/2002 pickle
  */
 LIBAISUTIL_CONFIG_VARIABLE_HANDLER(ConfigData::varHandleStringOneWord)
 {
@@ -200,7 +200,7 @@ LIBAISUTIL_CONFIG_VARIABLE_HANDLER(ConfigData::varHandleStringOneWord)
 
 
 /* varHandleUnsignedChar - Handle an unsigned char
- * Original 13/04/2002 simonb
+ * Original 13/04/2002 pickle
  */
 LIBAISUTIL_CONFIG_VARIABLE_HANDLER(ConfigData::varHandleUnsignedChar)
 {
@@ -248,7 +248,7 @@ LIBAISUTIL_CONFIG_VARIABLE_HANDLER(ConfigData::varHandleUnsignedChar)
 
 
 /* varHandleUnsignedCharNoZero - Handle an unsigned char (0 is invalid)
- * Original 13/04/2002 simonb
+ * Original 13/04/2002 pickle
  */
 LIBAISUTIL_CONFIG_VARIABLE_HANDLER(ConfigData::varHandleUnsignedCharNoZero)
 {
@@ -296,7 +296,7 @@ LIBAISUTIL_CONFIG_VARIABLE_HANDLER(ConfigData::varHandleUnsignedCharNoZero)
 
 
 /* varHandleUnsignedShort - Handle an unsigned short
- * Original 13/04/2002 simonb
+ * Original 13/04/2002 pickle
  */
 LIBAISUTIL_CONFIG_VARIABLE_HANDLER(ConfigData::varHandleUnsignedShort)
 {
@@ -344,7 +344,7 @@ LIBAISUTIL_CONFIG_VARIABLE_HANDLER(ConfigData::varHandleUnsignedShort)
 
 
 /* varHandleUnsignedShortNoZero - Handle an unsigned short (0 is invalid)
- * Original 13/04/2002 simonb
+ * Original 13/04/2002 pickle
  */
 LIBAISUTIL_CONFIG_VARIABLE_HANDLER(ConfigData::varHandleUnsignedShortNoZero)
 {
@@ -393,7 +393,7 @@ LIBAISUTIL_CONFIG_VARIABLE_HANDLER(ConfigData::varHandleUnsignedShortNoZero)
 
 
 /* varHandleUnsignedLong - Handle an unsigned long
- * Original 13/04/2002 simonb
+ * Original 13/04/2002 pickle
  */
 LIBAISUTIL_CONFIG_VARIABLE_HANDLER(ConfigData::varHandleUnsignedLong)
 {
@@ -441,7 +441,7 @@ LIBAISUTIL_CONFIG_VARIABLE_HANDLER(ConfigData::varHandleUnsignedLong)
 
 
 /* varHandleUnsignedLongNoZero - Handle an unsigned long (0 is invalid)
- * Original 13/04/2002 simonb
+ * Original 13/04/2002 pickle
  */
 LIBAISUTIL_CONFIG_VARIABLE_HANDLER(ConfigData::varHandleUnsignedLongNoZero)
 {

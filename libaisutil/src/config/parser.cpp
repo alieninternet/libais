@@ -55,7 +55,7 @@ using namespace AISutil;
 
 
 /* complain - Complain about something to the appropriate place
- * Original 13/03/2002 simonb
+ * Original 13/03/2002 pickle
  */
 inline void ConfigParser::complain(const String &segment, const String line)
 {
@@ -65,7 +65,7 @@ inline void ConfigParser::complain(const String &segment, const String line)
 
 
 /* read - Load a file and return it as a single string of text (our munger)
- * Original 17/03/2002 simonb
+ * Original 17/03/2002 pickle
  */
 const String ConfigParser::read(const String &filename)
 {
@@ -297,7 +297,7 @@ const String ConfigParser::read(const String &filename)
 
 
 /* parse - Parse the given configuration data
- * Original 13/03/2002 simonb
+ * Original 13/03/2002 pickle
  */
 bool ConfigParser::parse(String &configData, String::size_type &position,
 			 const void *definitionTable, ConfigData &dataClass)
@@ -549,7 +549,7 @@ bool ConfigParser::parse(String &configData, String::size_type &position,
 
 
 /* configure - Load the configuration file(s) and pass them to the parser
- * Original 13/03/2002 simonb
+ * Original 13/03/2002 pickle
  */
 bool ConfigParser::configure(void) const
 {

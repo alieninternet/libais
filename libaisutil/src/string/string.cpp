@@ -32,8 +32,8 @@ using namespace AISutil;
 
 
 /* toLower - Convert an entire string to lower case
- * Original ??/07/1996 simonb
- * 26/02/2002 simonb - Converted for use with std::string
+ * Original ??/07/1996 pickle
+ * 26/02/2002 pickle - Converted for use with std::string
  */
 String String::toLower() const
 {
@@ -51,8 +51,8 @@ String String::toLower() const
 
 
 /* toUpper - Convert an entire string to upper case
- * Original ??/07/1996 simonb
- * 26/02/2002 simonb - Converted for use with std::string
+ * Original ??/07/1996 pickle
+ * 26/02/2002 pickle - Converted for use with std::string
  */
 String String::toUpper() const
 {
@@ -70,8 +70,8 @@ String String::toUpper() const
 
 
 /* IRCtoLower - Convert to lowercase while considering irc chars (eg {} and [])
- * Original 12/08/2001 simonb
- * 26/02/2002 simonb - Converted for use with std::string
+ * Original 12/08/2001 pickle
+ * 26/02/2002 pickle - Converted for use with std::string
  */
 String String::IRCtoLower() const
 {
@@ -105,8 +105,8 @@ String String::IRCtoLower() const
 
 
 /* prepad - Make string exactly n by cropping or adding spaces to the start
- * Original 06/03/1999 simonb
- * 27/02/2002 simonb - Converted for std::string
+ * Original 06/03/1999 pickle
+ * 27/02/2002 pickle - Converted for std::string
  */
 String String::prepad(size_type n, char c) const
 {
@@ -121,8 +121,8 @@ String String::prepad(size_type n, char c) const
 
 
 /* trim - Trim away spaces, tabs, and CR/LF's from the start/end of a string
- * Original 06/03/1999 simonb
- * 10/03/2002 simonb - Converted for std::string
+ * Original 06/03/1999 pickle
+ * 10/03/2002 pickle - Converted for std::string
  */
 String String::trim(void) const
 {
@@ -150,8 +150,8 @@ String String::trim(void) const
 
 
 /* trimQuotes - Same as regular trim(), but for removing ' and "'s
- * Original 11/08/2001 simonb
- * 10/03/2002 simonb - Converted for std::string
+ * Original 11/08/2001 pickle
+ * 10/03/2002 pickle - Converted for std::string
  */
 String String::trimQuotes(void) const
 {

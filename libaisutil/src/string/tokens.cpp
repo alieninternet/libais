@@ -33,7 +33,7 @@ using namespace AISutil;
 
 
 /* tokenCounter - Helper for the countTokens function below
- * Original 23/09/2002 simonb
+ * Original 23/09/2002 pickle
  */
 struct tokenCounter {
    unsigned int counter;			// Our counting integer
@@ -56,8 +56,8 @@ struct tokenCounter {
 
 
 /* countTokens - Count the number of tokens (checking for whitespace only)
- * Original 08/02/1999 simonb
- * 23/09/2002 simonb - Switch to for_each()
+ * Original 08/02/1999 pickle
+ * 23/09/2002 pickle - Switch to for_each()
  */
 unsigned int StringTokens::countTokens(void) const
 {
@@ -70,7 +70,7 @@ unsigned int StringTokens::countTokens(void) const
 
 
 /* tokenCounterGeneric - Helper for the countTokens() using a given delimiter
- * Original 23/09/2002 simonb
+ * Original 23/09/2002 pickle
  */
 struct tokenCounterGeneric {
    const char delimiter;			// The delimiter to look for
@@ -92,8 +92,8 @@ struct tokenCounterGeneric {
 
 
 /* countTokens - Count the number of tokens (using a specific delimiter)
- * Original 08/02/1999 simonb
- * 23/09/2002 simonb - Switch to for_each()
+ * Original 08/02/1999 pickle
+ * 23/09/2002 pickle - Switch to for_each()
  */
 unsigned int StringTokens::countTokens(const char delimiter) const
 {
@@ -107,9 +107,9 @@ unsigned int StringTokens::countTokens(const char delimiter) const
 
 
 /* nextToken - [Various Forms] Grab the next token
- * Original 08/02/1999 simonb
- * 08/02/2000 scottm - Fixed -1 bug
- * 11/03/2002 simonb - Converted for std::string
+ * Original 08/02/1999 pickle
+ * 08/02/2000 mro0 - Fixed -1 bug
+ * 11/03/2002 pickle - Converted for std::string
  */
 String StringTokens::nextToken(void)
 {
@@ -150,7 +150,7 @@ String StringTokens::nextToken(const char delimiter)
 
 
 /* nextColonToken - Get the next token, or the rest, depending on a :
- * Original 11/08/2001 simonb
+ * Original 11/08/2001 pickle
  */
 String StringTokens::nextColonToken(void)
 {

@@ -42,7 +42,7 @@ using namespace AISutil;
 
 
 /* write - Write text to a socket
- * Original 03/07/2002 simonb
+ * Original 03/07/2002 pickle
  */
 bool SocketTypeSEQPACKET::write(const std::string& data)
 {
@@ -63,8 +63,8 @@ bool SocketTypeSEQPACKET::write(const std::string& data)
 
 
 /* read - Read a line from the socket
- * Original 09/02/1999 simonb
- * 03/07/2002 simonb - Sort-of rewrote for SOCK_SEQPACKET types
+ * Original 09/02/1999 pickle
+ * 03/07/2002 pickle - Sort-of rewrote for SOCK_SEQPACKET types
  */
 bool SocketTypeSEQPACKET::read(std::ostream& databuff)
 {

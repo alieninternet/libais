@@ -48,7 +48,7 @@ using namespace AISutil;
 
 
 /* Get a protocol's number (really only valid for IP protocols)
- * Original 04/07/2002 simonb
+ * Original 04/07/2002 pickle
  */
 int Socket::getProtocol(const char* const name)
 {
@@ -59,8 +59,8 @@ int Socket::getProtocol(const char* const name)
 
       
 /* setNonBlocking - Set socket NON-BLOCKING so it doesn't slow us down
- * Original 18/12/2000 simonb
- * 05/07/2002 simonb - Cut down, the socket class now always sets non-blocking
+ * Original 18/12/2000 pickle
+ * 05/07/2002 pickle - Cut down, the socket class now always sets non-blocking
  */
 void Socket::setNonBlocking(void)
 {
@@ -75,7 +75,7 @@ void Socket::setNonBlocking(void)
 
 
 /* setReuseAddress - Set socket SO_REUSEADDR to save binding time :)
- * Original 09/01/2001 simonb
+ * Original 09/01/2001 pickle
  */
 bool Socket::setReuseAddress(void)
 {
@@ -92,7 +92,7 @@ bool Socket::setReuseAddress(void)
 
 
 /* listen - Listen on a socket (valid on SOCK_STREAM and SOCK_SEQPACKET types)
- * Original 09/01/2001 simonb
+ * Original 09/01/2001 pickle
  */
 bool Socket::listen(int backlog)
 { 

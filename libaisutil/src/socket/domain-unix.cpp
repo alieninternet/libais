@@ -40,7 +40,7 @@ using namespace AISutil;
 
 
 /* SocketDomainUNIX - Blank boring constructor!
- * Original 13/05/2002 simonb
+ * Original 13/05/2002 pickle
  */
 SocketDomainUNIX::SocketDomainUNIX(void)
 {
@@ -54,7 +54,7 @@ SocketDomainUNIX::SocketDomainUNIX(void)
 
 
 /* SocketDomainUNIX - Constructor used when accept()ing a connection
- * Original 06/07/2002 simonb
+ * Original 06/07/2002 pickle
  */
 SocketDomainUNIX::SocketDomainUNIX(const sockaddr_un& newLocalAddress,
 				   const sockaddr_un& newRemoteAddress)
@@ -65,7 +65,7 @@ SocketDomainUNIX::SocketDomainUNIX(const sockaddr_un& newLocalAddress,
 
 
 /* setAddress - Set the given address in the given address structure
- * Original 03/07/2002 simonb
+ * Original 03/07/2002 pickle
  */
 bool SocketDomainUNIX::setAddress(sockaddr_un& addr, 
 				  const std::string& addrstr)
@@ -85,7 +85,7 @@ bool SocketDomainUNIX::setAddress(sockaddr_un& addr,
 
 
 /* bind - Bind a socket to its port
- * Original 03/07/2002 simonb
+ * Original 03/07/2002 pickle
  */
 bool SocketDomainUNIX::bind(void)
 {
@@ -99,7 +99,7 @@ bool SocketDomainUNIX::bind(void)
 
 
 /* connect - Connect this socket
- * Original 03/07/2002 simonb
+ * Original 03/07/2002 pickle
  */
 bool SocketDomainUNIX::connect(void)
 {

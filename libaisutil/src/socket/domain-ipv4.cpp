@@ -44,7 +44,7 @@ using namespace AISutil;
 
 
 /* SocketDomainIPv4 - Blank boring constructor!
- * Original 06/02/1999 simonb
+ * Original 06/02/1999 pickle
  */
 SocketDomainIPv4::SocketDomainIPv4(void)
 {
@@ -61,7 +61,7 @@ SocketDomainIPv4::SocketDomainIPv4(void)
 
 
 /* SocketDomainIPv4 - Constructor used when accept()ing a connection
- * Original 06/07/2002 simonb
+ * Original 06/07/2002 pickle
  */
 SocketDomainIPv4::SocketDomainIPv4(const sockaddr_in& newLocalAddress,
 				   const sockaddr_in& newRemoteAddress)
@@ -72,7 +72,7 @@ SocketDomainIPv4::SocketDomainIPv4(const sockaddr_in& newLocalAddress,
 
 
 /* setAddress - Set the given address in the given address structure
- * Original 03/07/2002 simonb
+ * Original 03/07/2002 pickle
  */
 bool SocketDomainIPv4::setAddress(sockaddr_in& addr, 
 				  const std::string& addrstr)
@@ -88,7 +88,7 @@ bool SocketDomainIPv4::setAddress(sockaddr_in& addr,
 
 
 /* setAddress - Copy the given address over the given address structure
- * Original 03/07/2002 simonb
+ * Original 03/07/2002 pickle
  */
 bool SocketDomainIPv4::setAddress(sockaddr_in& addr,
 				  const sockaddr_in& newaddr)
@@ -102,7 +102,7 @@ bool SocketDomainIPv4::setAddress(sockaddr_in& addr,
 
 
 /* setAddress - Copy the given address over the given address structure's
- * Original 05/07/2002 simonb
+ * Original 05/07/2002 pickle
  */
 bool SocketDomainIPv4::setAddress(sockaddr_in& addr, const in_addr& newaddr)
 {
@@ -115,7 +115,7 @@ bool SocketDomainIPv4::setAddress(sockaddr_in& addr, const in_addr& newaddr)
 
 
 /* setPort - Set the given port in the given address structure
- * Original 03/07/2002 simonb
+ * Original 03/07/2002 pickle
  */
 bool SocketDomainIPv4::setPort(sockaddr_in& addr, const int port)
 {
@@ -131,7 +131,7 @@ bool SocketDomainIPv4::setPort(sockaddr_in& addr, const int port)
 
 
 /* bind - Bind a socket to its port
- * Original 03/07/2002 simonb
+ * Original 03/07/2002 pickle
  */
 bool SocketDomainIPv4::bind(void)
 {
@@ -145,7 +145,7 @@ bool SocketDomainIPv4::bind(void)
 
 
 /* connect - Connect this socket
- * Original 03/07/2002 simonb
+ * Original 03/07/2002 pickle
  */
 bool SocketDomainIPv4::connect(void)
 {

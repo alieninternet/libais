@@ -43,7 +43,7 @@ using namespace AISutil;
 
 
 /* accept - Accept a new connection on a socket
- * Original 02/01/2001 simonb
+ * Original 02/01/2001 pickle
  */
 Socket* SocketIPv6TCP::accept(void)
 {

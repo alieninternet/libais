@@ -42,7 +42,7 @@ using namespace AISutil;
 
 
 /* write - Write text to a socket
- * Original 07/02/1999 simonb
+ * Original 07/02/1999 pickle
  */
 bool SocketTypeSTREAM::write(const std::string& data)
 {
@@ -63,8 +63,8 @@ bool SocketTypeSTREAM::write(const std::string& data)
 
 
 /* read - Read a line from the socket
- * Original 09/02/1999 simonb
- * 03/07/2002 simonb - Rewrote to read in chunks, as it should have originally!
+ * Original 09/02/1999 pickle
+ * 03/07/2002 pickle - Rewrote to read in chunks, as it should have originally!
  */
 bool SocketTypeSTREAM::read(std::ostream& databuff)
 {

@@ -43,7 +43,7 @@ using namespace AISutil;
 
 
 /* SocketDomainIPX - Blank boring constructor!
- * Original 19/08/2001 simonb
+ * Original 19/08/2001 pickle
  */
 SocketDomainIPX::SocketDomainIPX(void)
 {
@@ -59,7 +59,7 @@ SocketDomainIPX::SocketDomainIPX(void)
 
 
 /* SocketDomainIPX - Constructor used when accept()ing a connection
- * Original 06/07/2002 simonb
+ * Original 06/07/2002 pickle
  */
 SocketDomainIPX::SocketDomainIPX(const sockaddr_ipx& newLocalAddress, 
 				 const sockaddr_ipx& newRemoteAddress)
@@ -70,7 +70,7 @@ SocketDomainIPX::SocketDomainIPX(const sockaddr_ipx& newLocalAddress,
 
 
 /* makeAddressStr - Return the given address as a string
- * Original 02/07/2002 simonb
+ * Original 02/07/2002 pickle
  * Note: This uses the popular address format "network:node" - fully padded
  */
 std::string SocketDomainIPX::makeAddressStr(const sockaddr_ipx& addr)
@@ -90,7 +90,7 @@ std::string SocketDomainIPX::makeAddressStr(const sockaddr_ipx& addr)
 
 
 /* setAddress - Set the given address in the given address structure
- * Original 03/07/2002 simonb
+ * Original 03/07/2002 pickle
  */
 bool SocketDomainIPX::setAddress(sockaddr_ipx& addr, 
 				 const std::string& addrstr)
@@ -101,7 +101,7 @@ bool SocketDomainIPX::setAddress(sockaddr_ipx& addr,
 
 
 /* setAddress - Copy the given address over the given address structure
- * Original 03/07/2002 simonb
+ * Original 03/07/2002 pickle
  */
 bool SocketDomainIPX::setAddress(sockaddr_ipx& addr, 
 				 const sockaddr_ipx& newaddr)
@@ -115,7 +115,7 @@ bool SocketDomainIPX::setAddress(sockaddr_ipx& addr,
 
 
 /* setPort - Set the given port in the given address structure
- * Original 03/07/2002 simonb
+ * Original 03/07/2002 pickle
  */
 bool SocketDomainIPX::setPort(sockaddr_ipx& addr, const int port)
 {
@@ -131,7 +131,7 @@ bool SocketDomainIPX::setPort(sockaddr_ipx& addr, const int port)
 
 
 /* bind - Bind a socket to its port
- * Original 03/07/2002 simonb
+ * Original 03/07/2002 pickle
  */
 bool SocketDomainIPX::bind(void)
 {
@@ -145,7 +145,7 @@ bool SocketDomainIPX::bind(void)
 
 
 /* connect - Connect this socket
- * Original 03/07/2002 simonb
+ * Original 03/07/2002 pickle
  */
 bool SocketDomainIPX::connect(void)
 {
