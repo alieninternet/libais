@@ -9,3 +9,4 @@ configure.scan
 install-sh
 libtool
 missing
+test-*
