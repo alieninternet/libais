@@ -50,7 +50,7 @@ namespace AISutil {
 	{ delete[] buffer; };
       
       //! Write data to this socket
-      bool write(const std::string& data);
+      const int write(const std::string& data);
 
       //! Read data from this socket
       bool read(std::ostream& databuff);

@@ -43,7 +43,7 @@ using namespace AISutil;
 /* write - Write text to a socket
  * Original 07/02/1999 pickle
  */
-bool SocketTypeSTREAM::write(const std::string& data)
+const int SocketTypeSTREAM::write(const std::string& data)
 {
 #ifdef LIBAISUTIL_DEBUG_ASSERT
    // Make sure the file descriptor is really valid
@@ -53,11 +53,11 @@ bool SocketTypeSTREAM::write(const std::string& data)
    // Send the data (making sure ALL of the data is sent)
    if (::write(getFD(),
 	       data.c_str(), data.length()) == (int)data.length()) {
-      return true;
+      return data.length();
    }
 
    setErrorMessage();
-   return false;
+   return 0;
 }
 
 

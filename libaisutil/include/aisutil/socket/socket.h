@@ -137,8 +137,8 @@ namespace AISutil {
        */
       virtual Socket* accept(void) = 0;
       
-      //! Write data to this socket
-      virtual bool write(const std::string& data) = 0;
+      //! Write data to this socket (returns the number of octets written)
+      virtual const int write(const std::string& data) = 0;
 
       //! Read data from this socket
       virtual bool read(std::ostream& databuff) = 0;
