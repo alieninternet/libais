@@ -28,14 +28,14 @@
 namespace AISutil {
    namespace Utils {
       //! Confirm that the given string, encoded in UTF-8, is valid
-      static const bool validateUTF8(const std::string& str);
+      extern const bool validateUTF8(const std::string& str);
       
       //! Convert the given word (as a string) to a boolean value
-      static const bool toBool(const std::string& word,
+      extern const bool toBool(const std::string& word,
 			       const bool defaultValue = true);
       
       //! Convert the given integer to another base (up to base 85)
-      static const std::string baseXStr(unsigned long number,
+      extern const std::string baseXStr(unsigned long number,
 					const unsigned char base);
    }; // namespace Utils
 }; // namespace AISutil
