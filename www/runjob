@@ -21,4 +21,5 @@ doxygen ./doxygen.conf
 rm -rf ../libaisutil
 
 # Move the new stuff over the old stuff (above)
-mv cgi-bin htdocs ../.
+mv cgi-bin/* ../cgi-bin/.
+mv htdocs/* ../htdocs/.
