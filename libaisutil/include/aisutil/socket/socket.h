@@ -318,7 +318,39 @@ namespace AIS {
 	     */
 	    const signed int getPriorityFlag(void) const
 	      { return getSockoptFlag(SO_PRIORITY); };
-	    
+
+
+	    /*!
+	     * \brief Toggle the single-hop flag
+	     *
+	     * When set, the single-hop flag restricts the packets sent via
+	     * this socket to only be sent a <em>"single hop"</em> away. This
+	     * means that packets can not be routed to remote destinations,
+	     * and will only be received by hosts <em>directly connected</em>
+	     * to this one.
+	     *
+	     * \param toggle The new status for the single hop flag
+	     * \return The status of the operation
+	     * \retval true The flag was successfully changed
+	     * \retval false The flag could not be set, or is unsupported on
+	     *    this system or socket type
+	     */
+	    const bool setSingleHopFlag(const bool toggle = false)
+	      { return setSockoptFlag(SO_DONTROUTE, toggle); };
+
+	    /*!
+	     * \brief Determine the status of the single-hop flag
+	     *
+	     * \return The status of the single-hop flag
+	     * \retval 1 Packets can only be sent to directly connected
+	     *    destinations
+	     * \retval 0 Packets are allowed to be routed to remote
+	     *    destinations
+	     * \retval -1 The status of the flag cannot be determined
+	     */
+	    const signed int getSingleHopFlag(void) const
+	      { return getSockoptFlag(SO_DONTROUTE); };
+
 
 	    /*!
 	     * \brief Close the socket
