@@ -105,18 +105,23 @@ dist-hook:
 
 # The tests to run
 TESTS=\
-	test-time
+	test-time \
+	test-utils
 
 
 # All of our tests are programs we need to build..
 check_PROGRAMS=$(TESTS)
 
 
-# Test parameters
+# Test programs' source files
 test_time_SOURCES=\
 	test/tests.h test/time.cpp
+test_utils_SOURCES=\
+	test/tests.h test/utils.cpp
 
 
-# Test libraries
+# Test programs' libraries
 test_time_LDADD=\
+	libaisutil.la
+test_utils_LDADD=\
 	libaisutil.la
