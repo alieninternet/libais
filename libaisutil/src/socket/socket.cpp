@@ -57,12 +57,12 @@ const int Socket::getProtocol(const char* const name)
 }
 
       
-/* setNonBlocking - Set socket NON-BLOCKING so it doesn't slow us down
+/* setNonBlockingFlag - Set socket NON-BLOCKING so it doesn't slow us down
  * Original 18/12/2000 pickle
  * 05/07/2002 pickle - Cut down, the socket class now always sets non-blocking
  * 07/08/2003 pickle - Un-cut-down :) Users may revert back to blocking mode
  */
-const bool Socket::setNonBlocking(const bool toggle)
+const bool Socket::setNonBlockingFlag(const bool toggle)
 {
    long flags = 0;
    
@@ -88,10 +88,10 @@ const bool Socket::setNonBlocking(const bool toggle)
 }
 
 
-/* getNonBlocking - Return the non-blocking setting
+/* getNonBlockingFlag - Return the non-blocking setting
  * Original 07/08/2003 pickle
  */
-const signed int Socket::getNonBlocking(void) const
+const signed int Socket::getNonBlockingFlag(void) const
 {
    long flags = 0;
    

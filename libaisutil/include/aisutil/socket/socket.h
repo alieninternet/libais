@@ -100,7 +100,7 @@ namespace AIS {
 	    explicit Socket(const int newFD = -1)
 	      : fd(newFD),
 	        errorMessage("No error")
-	      { (void)setNonBlocking(); };
+	      { (void)setNonBlockingFlag(); };
 	    
 	    
 	    /*!
@@ -225,7 +225,7 @@ namespace AIS {
 	     * \retval false The operation was unsuccessful, or the feature is
 	     *    unsupported on this system
 	     */
-	    const bool setNonBlocking(const bool toggle = true);
+	    const bool setNonBlockingFlag(const bool toggle = true);
 
 	    /*!
 	     * \brief Determine if the socket is in \e non-blocking mode
@@ -235,7 +235,7 @@ namespace AIS {
 	     * \retval 0 Operations performed on the socket will block
 	     * \retval -1 Unable to determine the non-blocking status
 	     */
-	    const signed int getNonBlocking(void) const;
+	    const signed int getNonBlockingFlag(void) const;
 
 
 	    /*!
@@ -257,7 +257,7 @@ namespace AIS {
 	     * \retval false The operation was unsuccessful, or the feature is
 	     *    unsupported on this system
 	     */
-	    const bool setReuseAddress(const bool toggle = true)
+	    const bool setReuseAddressFlag(const bool toggle = true)
 	      { return setSockoptFlag(SO_REUSEADDR, toggle); };
 
 	    /*!
@@ -271,7 +271,7 @@ namespace AIS {
 	     *    currently using the set local address and/or port
 	     * \retval -1 Unable to determine the status of this flag
 	     */
-	    const signed int getReuseAddress(void) const
+	    const signed int getReuseAddressFlag(void) const
 	      { return getSockoptFlag(SO_REUSEADDR); };
 
 	    
@@ -302,7 +302,7 @@ namespace AIS {
 	     * \retval true The priority flag was changed
 	     * \retval false The priority flag could not be changed
 	     */
-	    const bool setSendPriority(const bool toggle = false)
+	    const bool setPriorityFlag(const bool toggle = false)
 	      { return setSockoptFlag(SO_PRIORITY, toggle); };
 	    
 	    /*!
@@ -316,7 +316,7 @@ namespace AIS {
 	     * \retval -1 The status of the priority flag could not be
 	     *    determined
 	     */
-	    const signed int getSendPriority(void) const
+	    const signed int getPriorityFlag(void) const
 	      { return getSockoptFlag(SO_PRIORITY); };
 	    
 
