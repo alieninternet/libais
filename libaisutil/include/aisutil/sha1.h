@@ -70,10 +70,31 @@ namespace AIS {
 	  * 
 	  * Construct a new digest from the given \p data. The \p data will be
 	  * used to generate the digest contained within this structure.
-	  * 
+	  *
 	  * \param data A raw string of octets to \e hash
+	  * \param length The length of the data (in bytes)
+	  */
+	 explicit SHA1_Digest(const void* const data, unsigned int length);
+	 
+	 /*!
+	  * \brief Constructor
+	  * 
+	  * Construct a new digest from the given \p data. The \p data will be
+	  * used to generate the digest contained within this structure.
+	  * 
+	  * \param data A byte string of octets to \e hash
 	  */
 	 explicit SHA1_Digest(const std::string& data);
+	 
+	 /*!
+	  * \brief Constructor
+	  * 
+	  * Construct a new digest from the given \p data. The \p data will be
+	  * used to generate the digest contained within this structure.
+	  * 
+	  * \param data A wide-string of to \e hash
+	  */
+	 explicit SHA1_Digest(const std::wstring& data);
 
 	 //! Destructor
 	 ~SHA1_Digest(void)

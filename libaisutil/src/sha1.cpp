@@ -283,6 +283,31 @@ namespace {
 	memset(context.count, 0, 8);
 	memset(&finalcount, 0, 8);
      }
+
+   
+   /* generate - Construct/generate a SHA1 digest from the given string
+    * Original 22/01/2001 mro0
+    * 18/03/2002 pickle - Fixed char -> unsigned char flaw
+    * 06/04/2002 pickle - Outputting digest (string generation migrated out)
+    * 07/04/2002 pickle - Removed string output, now returns the digest itself.
+    * 22/07/2003 pickle - C++'ified :)
+    */
+   inline void generate(SHA1_Digest& digest, void* const data,
+			unsigned int length)
+     {
+#ifdef HAVE_OPENSSL
+	// Generate the SHA1 hash using OpenSSL routines
+	::SHA1((unsigned char *)data, length,
+	       (unsigned char *)&(digest.u_char));
+#else
+	// Generate the SHA1 hash using our own routines
+	context_type context;
+	
+	SHA1init(context);
+	SHA1update(context, (unsigned char *)data, length);
+	SHA1final(digest.u_char, context);
+#endif
+     }
 }; // {anonymous}
 #endif // !HAVE_OPENSSL
 
@@ -297,31 +322,48 @@ SHA1_Digest::SHA1_Digest(void)
 }
 
 
-/* SHA1_Digest - Construct/generate a SHA1 digest from the given string
- * Original 22/01/2001 mro0
- * 18/03/2002 pickle - Fixed char -> unsigned char flaw
- * 06/04/2002 pickle - Outputting digest (string generation migrated out)
- * 07/04/2002 pickle - Removed string output, now returns the digest itself.
- * 22/07/2003 pickle - C++'ified :)
+/* SHA1_Digest - Construct/generate a SHA1 digest from the given wide-string
+ * Original 26/10/2003 pickle
  */
-SHA1_Digest::SHA1_Digest(const std::string& line)
+SHA1_Digest::SHA1_Digest(const void* const data, unsigned int length)
+{
+   // Generate the hash
+   generate(*this, (void*)data, length);
+}
+
+
+/* SHA1_Digest - Construct/generate a SHA1 digest from the given string
+ * Original 22/07/2003 pickle
+ */
+SHA1_Digest::SHA1_Digest(const std::string& data)
 {
    /* Make sure we got something. The SHA1 generator doesn't like to be fed
     * nothings
     */
-   if (!line.empty()) {
-#ifdef HAVE_OPENSSL
-      // Generate the SHA1 hash using OpenSSL routines
-      ::SHA1((unsigned char *)line.c_str(), line.length(), 
-	     (unsigned char *)&u_char);
-#else
-      // Generate the SHA1 hash using our own routines
-      context_type context;
+   if (!data.empty()) {
+      // Generate the hash
+      generate(*this, (void*)data.data(), data.length());
       
-      SHA1init(context);
-      SHA1update(context, (unsigned char *)line.c_str(), line.length());
-      SHA1final(u_char, context);
-#endif
+      // Done
+      return;
+   }
+   
+   // Wipe ourself clean, we cannot generate a hash from an empty string
+   (void)memset((void*)&u_char, 0, 20);
+}
+
+
+/* SHA1_Digest - Construct/generate a SHA1 digest from the given wide-string
+ * Original 26/10/2003 pickle
+ */
+SHA1_Digest::SHA1_Digest(const std::wstring& data)
+{
+   /* Make sure we got something. The SHA1 generator doesn't like to be fed
+    * nothings
+    */
+   if (!data.empty()) {
+      // Generate the hash
+      generate(*this, (void*)data.data(), data.length() * sizeof(wchar_t));
       
       // Done
       return;
