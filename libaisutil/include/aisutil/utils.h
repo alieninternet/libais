@@ -32,8 +32,7 @@ namespace AISutil {
       extern const bool validateUTF8(const std::string& str);
       
       //! Convert the given word (as a string) to a boolean value
-      extern const bool toBool(const std::string& word,
-			       const bool defaultValue = true);
+      extern const int toBool(const std::string& word);
       
       //! Convert the given integer to another base (up to base 85)
       extern const String baseXStr(unsigned long number,

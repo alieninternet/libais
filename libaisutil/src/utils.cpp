@@ -112,7 +112,7 @@ const bool Utils::validateUTF8(const std::string& str)
  * Original 21/09/2001 pickle
  * 24/02/2003 pickle - Updated to include numeric values (1 = true, 0 = false)
  */
-const bool Utils::toBool(const std::string& word, const bool defaultValue)
+const int Utils::toBool(const std::string& word)
 {
    String newWord = String(word).toUpper();
    
@@ -120,17 +120,17 @@ const bool Utils::toBool(const std::string& word, const bool defaultValue)
        (newWord == "TRUE") ||
        (newWord == "ON") ||
        (newWord.toInt() > 0)) {
-      return true;
+      return 1;
    }
    
    if ((newWord == "NO") ||
        (newWord == "FALSE") ||
        (newWord == "OFF") ||
        (newWord.toInt() == 0)) {
-      return false;
+      return 0;
    }
    
-   return defaultValue;
+   return -1;
 }
 
 

@@ -33,6 +33,7 @@
 #endif
 
 #include "aisutil/config/data.h"
+#include "aisutil/utils.h"
 
 using namespace AISutil;
 
@@ -53,19 +54,15 @@ LIBAISUTIL_CONFIG_VARIABLE_HANDLER(ConfigData::varHandleBoolean)
       return true;
    }
    
-   String boolStr = values.front().toUpper();
+   String boolStr = values.front();
    
    // Try to (roughly) determine what boolean value this has
-   if ((boolStr == "YES") ||
-       (boolStr == "ON") ||
-       (boolStr == "TRUE") ||
-       (boolStr == "1")) {
+   switch (Utils::toBool(boolStr)) {
+    case 1: // True
       dataClass.*((bool ConfigData::*)dataVariable) = true;
       return true;
-   } else if ((boolStr == "NO") ||
-	      (boolStr == "OFF") ||
-	      (boolStr == "FALSE") ||
-	      (boolStr == "0")) {
+      
+    case 0: // False
       dataClass.*((bool ConfigData::*)dataVariable) = false;
       return true;
    }
