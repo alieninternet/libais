@@ -41,8 +41,7 @@ namespace AIS {
 		       (u_long[1] == rhs.u_long[1]) &&
 		       (u_long[2] == rhs.u_long[2]) &&
 		       (u_long[3] == rhs.u_long[3]) &&
-		       (u_long[4] == rhs.u_long[4]) &&
-		       (u_long[5] == rhs.u_long[5]));
+		       (u_long[4] == rhs.u_long[4]));
 	    };
 	    
 	    //! Not equal-to operator
