@@ -71,7 +71,7 @@ namespace AIS {
 	  * \retval -1 A word was given which was ambiguous, a string was
 	  *    given, or the string given was empty
 	  */
-	 extern const int toBool(const std::string& word);
+	 extern const signed int toBool(const std::string& word);
 	 
 	 /*! \brief Convert the given \p number to another \p base
 	  *

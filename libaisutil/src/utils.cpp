@@ -114,7 +114,7 @@ const bool Utils::validateUTF8(const std::string& str)
  * 24/02/2003 pickle - Updated to include numeric values (1 = true, 0 = false)
  * 20/07/2003 pickle - Mostly rewritten as a table. Unknowns now return -1 okay
  */
-const int Utils::toBool(const std::string& word)
+const signed int Utils::toBool(const std::string& word)
 {
    // Convert the boolean to a lower-case string
    String newWord = static_cast<const String&>(word).toLower();
