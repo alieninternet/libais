@@ -1,6 +1,4 @@
 Version 1.4
-  * Time:: is now a class to implement protection of the seconds/nanoseconds
-    fields. Use getSeconds() and getNanoseconds() to return the fields.
   * Time:: includes some more arithmetic operations. See the manual for more
     details
   * Socket routines are now contained the AIS::Util::Socket:: namespace. Some

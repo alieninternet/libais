@@ -38,19 +38,19 @@ int main(int argc, char **argv)
 {
    TEST_STATUS("Creating a new Time:: object (blank)");
    Time timeA;
-   TEST_FAIL_IF((timeA.getSeconds() != 0) ||
-		(timeA.getNanoseconds() != 0));
+   TEST_FAIL_IF((timeA.seconds != 0) ||
+		(timeA.nanoseconds != 0));
 
    TEST_STATUS("Setting the time");
    TEST_FAIL_IF(!timeA.setTime() ||
-		(timeA.getSeconds() == 0));
+		(timeA.seconds == 0));
 
    TEST_STATUS("Sleeping for a bit");
    TEST_FAIL_IF(sleep(3) != 0); // <=- we need to sleep for the next test..
 
    TEST_STATUS("Creating a new Time:: object (of the current time)");
    const Time timeB(true);
-   TEST_FAIL_IF(timeB.getSeconds() == 0);
+   TEST_FAIL_IF(timeB.seconds == 0);
 
 
    TEST_STATUS("Checking that times see themselves as being identical");
@@ -95,22 +95,22 @@ int main(int argc, char **argv)
    TEST_STATUS("Creating a new Time:: object (from a time_t)");
    static const time_t time_t_timeA = (time_t)0xAABBCCDD;
    Time time_t_time(time_t_timeA);
-   TEST_FAIL_IF((time_t_time.getSeconds() !=
+   TEST_FAIL_IF((time_t_time.seconds !=
 		 (Time::seconds_type)time_t_timeA) ||
-		(time_t_time.getNanoseconds() != 0));
+		(time_t_time.nanoseconds != 0));
 
    TEST_STATUS("Reassigning this time (from a time_t)");
    static const time_t time_t_timeB = (time_t)0xDDCCBBAA;
    time_t_time = time_t_timeB;
-   TEST_FAIL_IF((time_t_time.getSeconds() !=
+   TEST_FAIL_IF((time_t_time.seconds !=
 		 (Time::seconds_type)time_t_timeB) ||
-		(time_t_time.getNanoseconds() != 0));
+		(time_t_time.nanoseconds != 0));
 
    TEST_STATUS("Typecasting this time (to a time_t)");
    const time_t time_t_timeC =
      static_cast<time_t>(time_t_time);
    TEST_FAIL_IF(((Time::seconds_type)time_t_timeC !=
-		 time_t_time.getSeconds()) ||
+		 time_t_time.seconds) ||
 		(time_t_timeC != time_t_timeB));
 
    
@@ -119,9 +119,9 @@ int main(int argc, char **argv)
    timespec_timeA.tv_sec = 0x12345678;
    timespec_timeA.tv_nsec = 0x0000EEFF;
    Time timespec_time(timespec_timeA);
-   TEST_FAIL_IF((timespec_time.getSeconds() !=
+   TEST_FAIL_IF((timespec_time.seconds !=
 		 (Time::seconds_type)timespec_timeA.tv_sec) ||
-		(timespec_time.getNanoseconds() !=
+		(timespec_time.nanoseconds !=
 		 (Time::nanoseconds_type)timespec_timeA.tv_nsec));
 
    TEST_STATUS("Reassigning this time (from a timespec)");
@@ -129,18 +129,18 @@ int main(int argc, char **argv)
    timespec_timeB.tv_sec = 0xAABBAABB;
    timespec_timeB.tv_nsec = 0x00012345;
    timespec_time = timespec_timeB;
-   TEST_FAIL_IF((timespec_time.getSeconds() !=
+   TEST_FAIL_IF((timespec_time.seconds !=
 		 (Time::seconds_type)timespec_timeB.tv_sec) ||
-		(timespec_time.getNanoseconds() != 
+		(timespec_time.nanoseconds != 
 		 (Time::nanoseconds_type)timespec_timeB.tv_nsec));
 
    TEST_STATUS("Typecasting this time (to a timespec)");
    struct timespec timespec_timeC =
      static_cast<struct timespec>(timespec_time);
    TEST_FAIL_IF((((Time::seconds_type)timespec_timeC.tv_sec !=
-		  timespec_time.getSeconds()) ||
+		  timespec_time.seconds) ||
 		 ((Time::seconds_type)timespec_timeC.tv_nsec !=
-		  timespec_time.getNanoseconds())) ||
+		  timespec_time.nanoseconds)) ||
 		((timespec_timeC.tv_sec != timespec_timeB.tv_sec) ||
 		 (timespec_timeC.tv_nsec != timespec_timeB.tv_nsec)));
    
@@ -150,9 +150,9 @@ int main(int argc, char **argv)
    timeval_timeA.tv_sec = 0x22334455;
    timeval_timeA.tv_usec = 0x000000AB;
    Time timeval_time(timeval_timeA);
-   TEST_FAIL_IF((timeval_time.getSeconds() !=
+   TEST_FAIL_IF((timeval_time.seconds !=
 		 (Time::seconds_type)timeval_timeA.tv_sec) ||
-		(timeval_time.getNanoseconds() !=
+		(timeval_time.nanoseconds !=
 		 (Time::nanoseconds_type)(timeval_timeA.tv_usec * 1000)));
 
    TEST_STATUS("Reassigning this time (from a timeval)");
@@ -160,18 +160,18 @@ int main(int argc, char **argv)
    timeval_timeB.tv_sec = 0x99887766;
    timeval_timeB.tv_usec = 0x00000123;
    timeval_time = timeval_timeB;
-   TEST_FAIL_IF((timeval_time.getSeconds() !=
+   TEST_FAIL_IF((timeval_time.seconds !=
 		 (Time::seconds_type)timeval_timeB.tv_sec) ||
-		(timeval_time.getNanoseconds() !=
+		(timeval_time.nanoseconds !=
 		 (Time::nanoseconds_type)(timeval_timeB.tv_usec * 1000)));
 
    TEST_STATUS("Typecasting this time (to a timespec)");
    struct timeval timeval_timeC =
      static_cast<struct timeval>(timeval_time);
    TEST_FAIL_IF((((Time::seconds_type)timeval_timeC.tv_sec !=
-		  timeval_time.getSeconds()) ||
+		  timeval_time.seconds) ||
 		 ((Time::seconds_type)(timeval_timeC.tv_usec * 1000) !=
-		  timeval_time.getNanoseconds())) ||
+		  timeval_time.nanoseconds)) ||
 		((timeval_timeC.tv_sec != timeval_timeB.tv_sec) ||
 		 (timeval_timeC.tv_usec != timeval_timeB.tv_usec)));
    

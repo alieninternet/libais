@@ -63,8 +63,7 @@ namespace AIS {
        * The ability to obtain the current system time has been provided
        * purely for convenience.
        */
-      class Time {
-       public:
+      struct Time {
 	 //! Type of the \a seconds variable
 	 typedef signed long seconds_type;
 	 
@@ -72,7 +71,6 @@ namespace AIS {
 	 typedef signed long nanoseconds_type;
 	 
 	 
-       protected:
 	 /*!
 	  * \brief The number of nanoseconds in a second
 	  * 
@@ -102,7 +100,6 @@ namespace AIS {
 	 nanoseconds_type nanoseconds;
 	 
 	 
-       public:
 	 /*!
 	  * \brief Default constructor
 	  *
@@ -214,23 +211,6 @@ namespace AIS {
 	 virtual ~Time(void)
 	   {};
 
-	 
-	 /*!
-	  * \brief Return the seconds count
-	  * 
-	  * \return The number of \a seconds
-	  */
-	 const seconds_type getSeconds(void) const
-	   { return seconds; };
-	 
-	 /*!
-	  * \brief Return the nanoseconds count
-	  *
-	  * \return The number of \a nanoseconds
-	  */
-	 const nanoseconds_type getNanoseconds(void) const
-	   { return nanoseconds; };
-	 
 	 
 	 /*!
 	  * \brief Addition operator
