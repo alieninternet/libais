@@ -2,6 +2,10 @@ Makefile
 Makefile.in
 aclocal.m4
 autom4te.cache
+autoscan.log
 config.*
 configure
+configure.scan
+install-sh
 libtool
+missing
