@@ -69,41 +69,6 @@ String String::toUpper() const
 }
 
 
-/* IRCtoLower - Convert to lowercase while considering irc chars (eg {} and [])
- * Original 12/08/2001 pickle
- * 26/02/2002 pickle - Converted for use with std::string
- */
-String String::IRCtoLower() const
-{
-   char *temp = new char[length() + 1];
-   
-   for (register unsigned int i = (length() + 1); i--;) {
-      char ch = c_str()[i];
-      switch (ch) {
-       case '[':
-	 temp[i] = '{';
-	 continue;
-       case ']':
-	 temp[i] = '}';
-	 continue;
-       case '\\':
-	 temp[i] = '|';
-	 continue;
-       case '~':
-	 temp[i] = '^';
-	 continue;
-       default:
-	 temp[i] = tolower(ch);
-      }
-   }
-   
-   String result(temp);
-   delete temp;
-   
-   return result;
-}
-
-
 /* prepad - Make string exactly n by cropping or adding spaces to the start
  * Original 06/03/1999 pickle
  * 27/02/2002 pickle - Converted for std::string

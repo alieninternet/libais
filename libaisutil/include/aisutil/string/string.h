@@ -58,9 +58,6 @@ namespace AISutil {
       // Convert the entire string to upper-case
       String toUpper(void) const;
       
-      // toLower() with IRC chars
-      String IRCtoLower(void) const;
-      
       // Convert something via stringstream
       template <class T> static String convert(T const in) {
 	 std::ostringstream out;
