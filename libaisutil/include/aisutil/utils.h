@@ -50,7 +50,7 @@ namespace AIS {
 	  * Attempt to convert the given \p word into a boolean value. This
 	  * will convert words such as \e true, \e false, \e on, \e off,
 	  * \e yes, and \e no into their appropriate boolean counterparts.
-	  * If the string given is actually a number, a \e positive number
+	  * If the string given is actually a number, a positive number
 	  * will return \c true, while a value of zero or less will return
 	  * \c false.
 	  *
@@ -87,8 +87,8 @@ namespace AIS {
 	  * \param number The number you wish to convert to another base
 	  * \param base The base you wish to convert to. For obvious reasons,
 	  *    a base of 0 or 1 cannot be specified!
-	  * \param networkByteOrder specify true here if you wish to convert
-	  *    the \p number into network byte order.
+	  * \param networkByteOrder Specify \e true here if you wish to
+	  *    convert the \p number into network byte order.
 	  * \return The converted number as a String, without any padding.
 	  */
 	 extern const String baseXStr(unsigned long number,
