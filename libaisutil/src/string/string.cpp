@@ -24,6 +24,7 @@
 #endif
 
 #include <cctype>
+#include <algorithm>
 
 #include "aisutil/string/string.h"
 
@@ -36,15 +37,8 @@ using namespace AISutil;
  */
 String String::toLower() const
 {
-   char *temp = new char[length() + 1];
-   
-   for (register unsigned int i = (length() + 1); i--;) {
-      temp[i] = tolower(data()[i]);
-   }
-   
-   String result(temp);
-   delete temp;
-   
+   String result(length(), 0);
+   (void)std::transform(begin(), end(), result.begin(), tolower);
    return result;
 }
 
@@ -55,15 +49,8 @@ String String::toLower() const
  */
 String String::toUpper() const
 {
-   char *temp = new char[length() + 1];
-   
-   for (register unsigned int i = (length() + 1); i--;) {
-      temp[i] = toupper(data()[i]);
-   }
-   
-   String result(temp);
-   delete temp;
-
+   String result(length(), 0);
+   (void)std::transform(begin(), end(), result.begin(), toupper);
    return result;
 }
 
