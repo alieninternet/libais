@@ -40,7 +40,7 @@ namespace AIS {
 	 
        protected:
 	 //! Constructor
-	 SocketTypeSEQPACKET(const Socket::blockSize_type bs)
+	 explicit SocketTypeSEQPACKET(const Socket::blockSize_type bs)
 	   : bufferSize(bs), 
 	     buffer(0)
 	   { buffer = new char[bs]; };

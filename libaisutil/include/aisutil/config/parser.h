@@ -125,7 +125,7 @@ namespace AIS {
 	 
        public:
 	 //! Our constructor (this void really should be a defTablePtr_type?!?!!!!)
-	 ConfigParser(ConfigData& dc, const void* t, const String& f)
+	 explicit ConfigParser(ConfigData& dc, const void* t, const String& f)
 	   : dataClass(dc),
 	     topDefs((const defTablePtr_type)t),
 	     filename(f)

@@ -36,10 +36,10 @@ namespace AIS {
       class SocketIPv4TCP : public SocketDomainIPv4, public SocketTypeSTREAM {
        private:
 	 //! Constructor used when creating a new connection via accept()
-	 SocketIPv4TCP(const int newFD, 
-		       const Socket::blockSize_type newReadBlockSize,
-		       const sockaddr_in& newLocalAddress, 
-		       const sockaddr_in& newRemoteAddress)
+	 explicit SocketIPv4TCP(const int newFD, 
+				const Socket::blockSize_type newReadBlockSize,
+				const sockaddr_in& newLocalAddress, 
+				const sockaddr_in& newRemoteAddress)
 	   : Socket(newFD),
 	     SocketDomainIPv4(newLocalAddress, newRemoteAddress),
 	     SocketTypeSTREAM(newReadBlockSize)

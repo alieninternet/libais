@@ -48,8 +48,8 @@ namespace AIS {
 	 SocketDomainUNIX(void);
 	 
 	 //! Constructor used when creating a new connection via accept()
-	 SocketDomainUNIX(const sockaddr_un& newLocalAddress, 
-			  const sockaddr_un& newRemoteAddress);
+	 explicit SocketDomainUNIX(const sockaddr_un& newLocalAddress, 
+				   const sockaddr_un& newRemoteAddress);
 	 
        public:
 	 //! Destructor

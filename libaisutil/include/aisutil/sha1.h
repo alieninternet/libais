@@ -39,10 +39,10 @@ namespace AIS {
 
 	 
 	 //! Blank constructor (nobody should want a null digest, though)
-	 SHA1_Digest(void);
+	 explicit SHA1_Digest(void);
 	 
 	 //! Constructor (from a string)
-	 SHA1_Digest(const std::string& line);
+	 explicit SHA1_Digest(const std::string& line);
 
 	 //! Destructor
 	 ~SHA1_Digest(void)

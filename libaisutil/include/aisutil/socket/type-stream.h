@@ -44,8 +44,8 @@ namespace AIS {
 	 
        protected:
 	 //! Constructor
-	 SocketTypeSTREAM(const Socket::blockSize_type bs =
-			  LIBAISUTIL_SOCKET_STREAM_DEFAULT_BUFFER_SIZE)
+	 explicit SocketTypeSTREAM(const Socket::blockSize_type bs =
+				   LIBAISUTIL_SOCKET_STREAM_DEFAULT_BUFFER_SIZE)
 	   : bufferSize(bs), 
 	     buffer(0)
 	   { buffer = new char[bs]; };

@@ -64,9 +64,9 @@ namespace AIS {
       class SocketIPXSPX : public SocketDomainIPX, public SocketTypeSEQPACKET {
        private:
 	 //! Constructor used when creating a new connection via accept()
-	 SocketIPXSPX(const int newFD,
-		      const sockaddr_ipx& newLocalAddress,
-		      const sockaddr_ipx& newRemoteAddress)
+	 explicit SocketIPXSPX(const int newFD,
+			       const sockaddr_ipx& newLocalAddress,
+			       const sockaddr_ipx& newRemoteAddress)
 	   : Socket(newFD),
 	     SocketDomainIPX(newLocalAddress, newRemoteAddress),
 	     SocketTypeSEQPACKET(LIBAISUTIL_SOCKET_IPX_SPX_PACKET_SIZE)

@@ -53,7 +53,7 @@ namespace AIS {
 	 
        protected:
 	 //! Constructor
-	 Socket(int newFD = -1)
+	 explicit Socket(int newFD = -1)
 	   : fd(newFD),
 	     errorMessage("No error")
 	   {};

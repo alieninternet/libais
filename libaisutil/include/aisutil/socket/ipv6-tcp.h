@@ -36,10 +36,10 @@ namespace AIS {
       class SocketIPv6TCP : public SocketDomainIPv6, public SocketTypeSTREAM {
        private:
 	 //! Constructor used when creating a new connection via accept()
-	 SocketIPv6TCP(const int newFD, 
-		       const Socket::blockSize_type newReadBlockSize,
-		       const sockaddr_in6& newLocalAddress,
-		       const sockaddr_in6& newRemoteAddress)
+	 explicit SocketIPv6TCP(const int newFD, 
+				const Socket::blockSize_type newReadBlockSize,
+				const sockaddr_in6& newLocalAddress,
+				const sockaddr_in6& newRemoteAddress)
 	   : Socket(newFD),
 	     SocketDomainIPv6(newLocalAddress, newRemoteAddress),
 	     SocketTypeSTREAM(newReadBlockSize)

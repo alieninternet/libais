@@ -54,8 +54,8 @@ namespace AIS {
 	 SocketDomainIPv4(void);
 	 
 	 //! Constructor used when creating a new connection via accept()
-	 SocketDomainIPv4(const sockaddr_in& newLocalAddress, 
-			  const sockaddr_in& newRemoteAddress);
+	 explicit SocketDomainIPv4(const sockaddr_in& newLocalAddress, 
+				   const sockaddr_in& newRemoteAddress);
 	 
        public:
 	 //! Destructor

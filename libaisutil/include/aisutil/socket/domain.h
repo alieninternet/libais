@@ -32,6 +32,11 @@ namespace AIS {
    namespace Util {
       //! Socket domain base class
       class SocketDomain : virtual public Socket {
+       protected:
+	 //! Constructor
+	 SocketDomain(void)
+	   {};
+
        public:
 	 //! Destructor
 	 virtual ~SocketDomain(void)

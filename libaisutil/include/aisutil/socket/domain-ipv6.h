@@ -53,8 +53,8 @@ namespace AIS {
 	 SocketDomainIPv6(void);
 	 
 	 //! Constructor used when creating a new connection via accept()
-	 SocketDomainIPv6(const sockaddr_in6& newLocalAddress, 
-			  const sockaddr_in6& newRemoteAddress);
+	 explicit SocketDomainIPv6(const sockaddr_in6& newLocalAddress, 
+				   const sockaddr_in6& newRemoteAddress);
 	 
        public:
 	 //! Destructor

@@ -58,8 +58,8 @@ namespace AIS {
 	 SocketDomainIPX(void);
 	 
 	 //! Constructor used when creating a new connection via accept()
-	 SocketDomainIPX(const sockaddr_ipx& newLocalAddress, 
-			 const sockaddr_ipx& newRemoteAddress);
+	 explicit SocketDomainIPX(const sockaddr_ipx& newLocalAddress, 
+				  const sockaddr_ipx& newRemoteAddress);
 	 
        public:
 	 //! Destructor

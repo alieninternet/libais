@@ -36,10 +36,10 @@ namespace AIS {
       class SocketUNIX : public SocketDomainUNIX, public SocketTypeSTREAM {
        private:
 	 //! Constructor used when creating a new connection via accept()
-	 SocketUNIX(const int newFD, 
-		    const Socket::blockSize_type newReadBlockSize,
-		    const sockaddr_un& newLocalAddress, 
-		    const sockaddr_un& newRemoteAddress)
+	 explicit SocketUNIX(const int newFD, 
+			     const Socket::blockSize_type newReadBlockSize,
+			     const sockaddr_un& newLocalAddress, 
+			     const sockaddr_un& newRemoteAddress)
 	   : Socket(newFD),
 	     SocketDomainUNIX(newLocalAddress, newRemoteAddress),
 	     SocketTypeSTREAM(newReadBlockSize)

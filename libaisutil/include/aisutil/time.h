@@ -55,7 +55,7 @@ namespace AIS {
 	   {};
       
 	 //! Constructor (pass a 'true' here and the time will be set now)
-	 Time(const bool setTimeNow)
+	 explicit Time(const bool setTimeNow)
 	   : seconds(0), nanoseconds(0)
 	   {
 	      if (setTimeNow) {
