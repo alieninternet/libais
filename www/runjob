@@ -19,3 +19,6 @@ doxygen ./doxygen.conf
 
 # Remove the source module, we don't need it to sit here
 rm -rf ../libaisutil
+
+# Move the new stuff over the old stuff (above)
+mv cgi-bin htdocs ../.
