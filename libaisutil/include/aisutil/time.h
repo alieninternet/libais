@@ -166,14 +166,16 @@ namespace AIS {
 	 const Time operator+(const Time& rhs) const;
 	 
 	 //! Addition assignment operator
-	 const Time& operator+=(const Time& rhs)
+	 template <class T>
+	   const Time& operator+=(const T& rhs)
 	   { return ((*this) = (*this) + rhs); };
 	 
 	 //! Subtraction operator
 	 const Time operator-(const Time& rhs) const;
 	 
 	 //! Subtraction assignment operator
-	 const Time& operator-=(const Time& rhs)
+	 template <class T>
+	   const Time& operator-=(const T& rhs)
 	   { return ((*this) = (*this) - rhs); };
 	 
 	 //! Division operator
@@ -188,7 +190,8 @@ namespace AIS {
 	   };
 	 
 	 //! Not equal-to operator
-	 const bool operator!=(const Time& rhs) const
+	 template <class T>
+	   const bool operator!=(const T& rhs) const
 	   { return (!((*this) == rhs)); };
 	 
 	 //! Greater-than operator
@@ -214,11 +217,13 @@ namespace AIS {
 	   };
 	 
 	 //! Greater-than or equal to operator
-	 const bool operator>=(const Time& rhs) const
+	 template <class T>
+	   const bool operator>=(const T& rhs) const
 	   { return (!((*this) < rhs)); };
 	 
 	 //! Less-than or equal to operator
-	 const bool operator<=(const Time& rhs) const
+	 template <class T>
+	   const bool operator<=(const T& rhs) const
 	   { return (!((*this) > rhs)); };
 	 
 	 
@@ -248,24 +253,24 @@ namespace AIS {
 	 //! Assignment operator (from a 'time_t')
 	 const Time& operator=(const time_t& time)
 	   {
-	      this->seconds = time;
-	      this->nanoseconds = 0;
+	      seconds = time;
+	      nanoseconds = 0;
 	      return (*this);
 	   };
 	 
 	 //! Assignment operator (from a 'struct timespec')
 	 const Time& operator=(const struct timespec& time)
 	   {
-	      this->seconds = time.tv_sec;
-	      this->nanoseconds = time.tv_nsec;
+	      seconds = time.tv_sec;
+	      nanoseconds = time.tv_nsec;
 	      return (*this);
 	   };
 	 
 	 //! Assignment operator (from a 'struct timeval')
 	 const Time& operator=(const struct timeval& time)
 	   {
-	      this->seconds = time.tv_sec;
-	      this->nanoseconds = time.tv_usec * 1000;
+	      seconds = time.tv_sec;
+	      nanoseconds = time.tv_usec * 1000;
 	      return (*this);
 	   };
 	 
