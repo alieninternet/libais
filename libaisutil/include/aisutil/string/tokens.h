@@ -35,8 +35,9 @@ namespace AISutil {
       
     public:
       // Constructor
-      template < class T > StringTokens(const T& s, 
-					const String::size_type p = 0)
+      template <class T>
+	StringTokens(const T& s, 
+		     const String::size_type p = 0)
 	: String(s),
           position(p)
 	{};
