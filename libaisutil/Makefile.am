@@ -48,9 +48,8 @@ if LIBAISUTIL_COMPILE_SOCKET_UNIX
 endif
 
 
-
-# Source files..
-libaisutil_la_SOURCES=\
+# Include files..
+include_HEADERS=\
 	include/aisutil/config/data.h \
 	include/aisutil/config/parser.h \
 	include/aisutil/socket/domain-ipv4.h \
@@ -74,7 +73,11 @@ libaisutil_la_SOURCES=\
 	include/aisutil/aisutilconf.h \
 	include/aisutil/socket.h \
 	include/aisutil/string.h \
-	include/aisutil/version.h \
+	include/aisutil/version.h
+
+
+# Source files..
+libaisutil_la_SOURCES=\
 	src/config/data.cpp \
 	src/config/parser.cpp \
 	src/socket/socket.cpp \
