@@ -106,6 +106,7 @@ dist-hook:
 # The tests to run
 TESTS=\
 	test-sha1 \
+	test-stringtokens \
 	test-time \
 	test-utils
 
@@ -117,6 +118,8 @@ check_PROGRAMS=$(TESTS)
 # Test programs' source files
 test_sha1_SOURCES=\
 	test/tests.h test/sha1.cpp
+test_stringtokens_SOURCES=\
+	test/tests.h test/stringtokens.cpp
 test_time_SOURCES=\
 	test/tests.h test/time.cpp
 test_utils_SOURCES=\
@@ -125,6 +128,8 @@ test_utils_SOURCES=\
 
 # Test programs' libraries
 test_sha1_LDADD=\
+	libaisutil.la
+test_stringtokens_LDADD=\
 	libaisutil.la
 test_time_LDADD=\
 	libaisutil.la
