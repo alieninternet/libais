@@ -23,7 +23,7 @@
 # define _INCLUDE_LIBAISUTIL_VERSION_H_ 1
 
 /*! \file
- * \brief Version information
+ * \brief %Version information
  *
  * This file contains a list of \c extern symbols to assist in obtaining
  * various version information from the library.
@@ -32,7 +32,7 @@
 namespace AIS {
    namespace Util {
       /*!
-       * \brief Version and compile-time information
+       * \brief %Version and compile-time information
        * 
        * This version information is for you to access in your own programs.
        * It's used quite often as supplementary and/or extended information
