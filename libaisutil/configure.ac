@@ -1,7 +1,7 @@
 dnl $Id$
 dnl AutoConf configuration script for LibAISutil
 dnl
-dnl Copyright (c) 2001,2002,2003 Alien Internet Services
+dnl Copyright (c) 2001,2002,2003,2004 Alien Internet Services
 dnl
 dnl This file is a part of LibAISutil.
 dnl 
@@ -25,10 +25,10 @@ dnl  Getting ready to configure...
 dnl -------------------------------------------------------------------------
 dnl Initialise the autoconf/automake things
 AC_INIT([LibAISutil], [1.3.cvs], [libaisutil@alien.net.au])
-AM_INIT_AUTOMAKE([1.6.1 foreign no-installinfo no-installman nostdinc subdir-objects])
-AC_COPYRIGHT([Portions Copyright (c) 2001,2002,2003 Alien Internet Services])
-AC_PREREQ(2.57)
 AC_CONFIG_AUX_DIR(config)
+AM_INIT_AUTOMAKE([1.6.1 foreign no-installinfo no-installman nostdinc subdir-objects])
+AC_COPYRIGHT([Portions Copyright (c) 2001,2002,2003,2004 Alien Internet Services])
+AC_PREREQ(2.57)
 AM_CONFIG_HEADER(include/config.h)
 AC_REVISION([$Revision$])
 
@@ -85,6 +85,7 @@ dnl -------------------------------------------------------------------------
 dnl  Checking compiler and system characteristics
 dnl -------------------------------------------------------------------------
 dnl AC_AIX
+AC_GNU_SOURCE
 dnl AC_MINIX
 dnl AC_ISC_POSIX
 AC_SYS_LONG_FILE_NAMES
