@@ -17,6 +17,16 @@
  * http://libais.sourceforge.net/
  */
 
+/*! \namespace AIS::Util::Config
+ * \brief Configuration parser routines
+ * 
+ * The configuration parser routines encompass a complex, flexible system
+ * designed for absolutely modular processing of C-style configuration
+ * files, using either "prepackaged" variable handlers for numbers and
+ * strings, or "BYO" variable handlers for those bizarre data types you've
+ * invented for your software.
+ */
+
 /*! \namespace AIS::Util::Socket
  * \brief %Socket routines
  *
