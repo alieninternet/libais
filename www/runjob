@@ -21,8 +21,13 @@ rm -rf ./htdocs/manual
 doxygen ./doxygen.conf
 
 # Remove the source module, we don't need it to sit here, and the old web stuff
+echo "Removing source"
 rm -rf ../libaisutil ../cgi-bin/* ../htdocs/*
 
 # Move the new stuff over the old stuff (above)
+echo "Moving new stuff over old stuff"
 mv cgi-bin/* ../cgi-bin/.
 mv htdocs/* ../htdocs/.
+
+# Say we're done, so I don't go insane
+echo "Done."
