@@ -3,11 +3,6 @@
 #
 
 
-# Subdirectories :(
-SUBDIRS=\
-	include
-
-
 # Include dir
 INCLUDES=\
 	-I$(top_builddir)/include
