@@ -126,7 +126,7 @@ namespace AIS {
 	  * \param _nanoseconds The \a nanoseconds initialiser
 	  */
 	 explicit Time(const seconds_type _seconds,
-		       const nanoseconds_type _nanoseconds = 0)
+		       const nanoseconds_type _nanoseconds)
 	   : seconds(_seconds),
 	     nanoseconds(_nanoseconds)
 	   {
