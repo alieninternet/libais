@@ -29,3 +29,8 @@
      if (argc > 1) { \
 	std::cout << x << std::endl; \
      }
+
+#define TEST_ASSERT(x) \
+     if (x) { \
+	return TEST_RETURN_FAIL; \
+     }
