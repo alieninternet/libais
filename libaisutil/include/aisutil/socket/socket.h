@@ -272,8 +272,53 @@ namespace AIS {
 	     * \retval -1 Unable to determine the status of this flag
 	     */
 	    const signed int getReuseAddress(void) const
-	      { getSockoptFlag(SO_REUSEADDR); };
+	      { return getSockoptFlag(SO_REUSEADDR); };
 
+	    
+	    /*!
+	     * \brief Toggle the status of the priority flag
+	     * 
+	     * The priority flag, when set, \e possibly changes the way data
+	     * is sent to a remote host. For some operating systems, this
+	     * means that, when set, the flag will cause the system to queue
+	     * the packets ahead of other packets without this flag set.
+	     * 
+	     * Specifically for protocols which inherit from DomainIP (that
+	     * is, <em>Internet Protocols</em>), this will modify the
+	     * \e type-of-service (\e TOS) field's precedence level.
+	     * 
+	     * The change is \e permanent, in that it will effect all data
+	     * sent while the flag is set, up until the point where the socket
+	     * is destroyed, or the flag is unset.
+	     * 
+	     * This <b>does not</b> change the ordering of the packets sent,
+	     * since that's totally up to the specific transport type used.
+	     * 
+	     * \param toggle The new status of the flag. There is no default
+	     *    value here intentionally to avoid the priority flag being
+	     *    over-used. If the flag was over-used, it would defeat the
+	     *    purpose of the priority flag.
+	     * \return The status of the operation
+	     * \retval true The priority flag was changed
+	     * \retval false The priority flag could not be changed
+	     */
+	    const bool setSendPriority(const bool toggle = false)
+	      { return setSockoptFlag(SO_PRIORITY, toggle); };
+	    
+	    /*!
+	     * \brief Get the status of the priority flag
+	     * 
+	     * Determine the current status of the priority flag.
+	     * 
+	     * \return The boolean value of the flag
+	     * \retval 1 Sent packets are sent with the priority flag
+	     * \retval 0 Sent packets are not sent with the priority flag
+	     * \retval -1 The status of the priority flag could not be
+	     *    determined
+	     */
+	    const signed int getSendPriority(void) const
+	      { return getSockoptFlag(SO_PRIORITY); };
+	    
 
 	    /*!
 	     * \brief Close the socket
