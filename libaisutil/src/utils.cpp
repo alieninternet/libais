@@ -25,6 +25,7 @@
 
 #include <cassert>
 #include <cstdlib>
+#include <netinet/in.h>
 
 #include "aisutil/utils.h"
 #include "aisutil/string/string.h"
@@ -158,10 +159,12 @@ const int Utils::toBool(const std::string& word)
 /* baseXStr - Convert a number to another base (output a string) up to base 85
  * Original 17/01/2001 pickle
  * 06/04/2001 pickle - Updated the baseChrs string to produce base-85 output
+ * 20/07/2001 pickle - Fixed byte endian on intel machines to be 'natural'
  * Note: The output is NOT mime/base64-encoding compatible!!!
  */
 #define MAXBASE 85
-const String Utils::baseXStr(unsigned long number, const unsigned char base)
+const String Utils::baseXStr(unsigned long number, const unsigned char base,
+			     const bool networkByteOrder)
 {
    static const char baseChrs[MAXBASE + 1] =
      "0123456789"				// 10 +
@@ -174,6 +177,11 @@ const String Utils::baseXStr(unsigned long number, const unsigned char base)
    
    long digit;
    String tempStr;
+
+   // Convert the number into network byte order if necessary
+   if (networkByteOrder) {
+      number = htonl(number);
+   }
    
    while (number > 0) {
       digit = number % base;

@@ -337,7 +337,7 @@ const std::string SHA1::digest_type::toStr(const unsigned char base,
    std::string output;
 
    for (unsigned char i = 0; i < 5; ++i) {
-      output += Utils::baseXStr(u_long[i], base).prepad(pad, '0');
+      output += Utils::baseXStr(u_long[i], base, true).prepad(pad, '0');
    }
    
    return output;
