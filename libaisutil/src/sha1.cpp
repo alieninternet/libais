@@ -18,6 +18,7 @@
 #include <string>
 #include <cstring>
 #include <cstdlib>
+#include <cassert>
 
 extern "C" {
 #ifdef HAVE_OPENSSL
