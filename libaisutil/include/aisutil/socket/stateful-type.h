@@ -49,17 +49,45 @@ namespace AIS {
 	    virtual ~StatefulType(void)
 	      {};
 	    
-	    //! Listen on socket (only valid on SOCK_STREAM and SOCK_SEQPACKET types)
+	    /*!
+	     * \brief Start listening on the socket
+	     * 
+	     * This will begin 'listening' on the socket. When the socket is
+	     * listening, other sockets will be able to connect() to this one.
+	     * When a socket is pending connection to this one, the socket will
+	     * act as if new data needs to be read. Once this has happened,
+	     * you can create a new socket representing that connection by
+	     * using accept().
+	     *
+	     * Depending on the socket type, you may need to set the local
+	     * port with setLocalPort(), and/or the local address with
+	     * setLocalAddress(), and bind() the socket. Failure to do so
+	     * will certainly result in this call returning an error.
+	     * 
+	     * \return The status of the operation
+	     * \retval true The socket is now in the \e listening state
+	     * \retval false The socket could not be put in the \e listening
+	     *    state
+	     */
 	    virtual const bool
 	      listen(const int backlog =
 		     LIBAISUTIL_SOCKET_DEFAULT_LISTEN_BACKLOG);
 	    
 	    /*!
 	     * \brief Accept a new connection on this socket
+	     *
+	     * When a new connection is pending on the socket, this will
+	     * \e accept the new connection and create a the new socket
+	     * representing it. The new socket will have similar properties
+	     * to this one (flags, etc), and will share the same local address
+	     * and/or port, if applicable.
+	     * 
+	     * The new socket will have a remote address and port, reflecting
+	     * those representing the remote end of the connection.
 	     * 
 	     * \warning This will return a \b null-pointer (value of 0) if
 	     *    the accept failed
-	     * \return A newly allocated socket, of the same type and similar
+	     * \return A newly allocated socket
 	     * \retval 0 Accepting a new connection failed
 	     */
 	    virtual StatefulType* const accept(void) = 0;

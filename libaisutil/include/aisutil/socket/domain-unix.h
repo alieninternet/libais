@@ -38,30 +38,48 @@ namespace AIS {
 	 //! Unix Socket Domain
 	 class DomainUNIX : virtual public Socket {
 	  private:
+	    //! The local address of this socket
 	    sockaddr_un localAddress;
+
+	    //! The remote address of this socket
 	    sockaddr_un remoteAddress;
-	    
+
 	    //! Set the given address in the given address structure
 	    const bool setAddress(sockaddr_un& addr,
-				  const std::string& addrstr);
+				  const std::string& newaddr);
 	    
 	  protected:
 	    //! Constructor
 	    DomainUNIX(void);
 	    
-	    //! Constructor used when creating a new connection via accept()
-	    explicit DomainUNIX(const sockaddr_un& newLocalAddress, 
-				const sockaddr_un& newRemoteAddress);
+	    /*!
+	     * \brief Constructor
+	     * 
+	     * This is used when creating a new connection via accept()
+	     * 
+	     * \param _localAddress The local address to set
+	     * \param _remoteAddress The remote address to set
+	     */
+	    explicit DomainUNIX(const sockaddr_un& _localAddress,
+				const sockaddr_un& _remoteAddress);
 	    
 	  public:
 	    //! Destructor
 	    virtual ~DomainUNIX(void);
 	    
-	    //! Return the local address
+	    /*!
+	     * \brief Return the local address
+	     * 
+	     * \return The local address in its native form
+	     */
 	    const sockaddr_un& getLocalAddressRef(void) const
 	      { return localAddress; };
 	    
-	    //! Return the remote address
+	    /*!
+	     * \brief Return the remote address
+	     * 
+	     * \return The remote address in its native form
+	     */
 	    const sockaddr_un& getRemoteAddressRef(void) const
 	      { return remoteAddress; };
 	    

@@ -62,11 +62,11 @@ DomainIPX::DomainIPX(void)
 /* DomainIPX - Constructor used when accept()ing a connection
  * Original 06/07/2002 pickle
  */
-DomainIPX::DomainIPX(const sockaddr_ipx& newLocalAddress, 
-		     const sockaddr_ipx& newRemoteAddress)
+DomainIPX::DomainIPX(const sockaddr_ipx& _localAddress,
+		     const sockaddr_ipx& _remoteAddress)
 {
-   (void)memcpy(&localAddress, &newLocalAddress, sizeof(localAddress));
-   (void)memcpy(&remoteAddress, &newRemoteAddress, sizeof(remoteAddress));
+   (void)memcpy(&localAddress, &_localAddress, sizeof(localAddress));
+   (void)memcpy(&remoteAddress, &_remoteAddress, sizeof(remoteAddress));
 }
 
 
@@ -94,7 +94,7 @@ const std::string DomainIPX::makeAddressStr(const sockaddr_ipx& addr)
  * Original 03/07/2002 pickle
  */
 const bool DomainIPX::setAddress(sockaddr_ipx& addr, 
-				 const std::string& addrstr)
+				 const char* const newaddr)
 {
    // Duh. Me dumb. Me fix later.
    return false;

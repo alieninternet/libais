@@ -59,6 +59,11 @@ namespace AIS {
 	  */
 	 class Socket {
 	  public:
+	    /*!
+	     * \brief The 'block size' type.
+	     * 
+	     * This defines a standard type for block lengths.
+	     */
 	    typedef unsigned int blockSize_type;
 	    
 	  private:
@@ -272,7 +277,8 @@ namespace AIS {
 	    
 	    /*!
 	     * \brief Set the local address
-	     * 
+	     *
+	     * \param address The new address to replace \a localAddress with
 	     * \return The status of the operation
 	     * \retval true The address was set successfully
 	     * \retval false There was an error in setting the address, such
@@ -284,6 +290,7 @@ namespace AIS {
 	    /*!
 	     * \brief Set the remote address
 	     * 
+	     * \param address The new address to replace \a remoteAddress with
 	     * \return The status of the operation
 	     * \retval true The address was set successfully
 	     * \retval false There was an error in setting the port, such

@@ -38,16 +38,24 @@ namespace AIS {
 	 //! IPv6 Socket Domain
 	 class DomainIPv6 : virtual public Socket {
 	  private:
+	    //! The local address of this socket
 	    sockaddr_in6 localAddress;
-	    sockaddr_in6 remoteAddress;
 	    
-	    // Set the given address in the given address structure
+	    //! The remote address of this socket
+	    sockaddr_in6 remoteAddress;
+
+	    //@{
+	    //! Set the given address in the given address structure
 	    const bool setAddress(sockaddr_in6& addr,
-				  const std::string& addrstr);
+				  const char* const newaddr);
+	    const bool setAddress(sockaddr_in6& addr,
+				  const std::string& newaddr)
+	      { return setAddress(addr, newaddr.c_str()); };
 	    const bool setAddress(sockaddr_in6& addr,
 				  const sockaddr_in6& newaddr);
 	    const bool setAddress(sockaddr_in6& addr,
 				  const in6_addr& newaddr);
+	    //@}
 	    
 	    // Set the given port in the given address structure
 	    const bool setPort(sockaddr_in6& addr, const int port);
@@ -56,20 +64,35 @@ namespace AIS {
 	    //! Constructor
 	    DomainIPv6(void);
 	    
-	    //! Constructor used when creating a new connection via accept()
-	    explicit DomainIPv6(const sockaddr_in6& newLocalAddress, 
-				const sockaddr_in6& newRemoteAddress);
+	    /*!
+	     * \brief Constructor
+	     * 
+	     * This is used when creating a new connection via accept()
+	     * 
+	     * \param _localAddress The local address to set
+	     * \param _remoteAddress The remote address to set
+	     */
+	    explicit DomainIPv6(const sockaddr_in6& _localAddress, 
+				const sockaddr_in6& _remoteAddress);
 	 
 	  public:
 	    //! Destructor
 	    virtual ~DomainIPv6(void)
 	      {};
 	    
-	    //! Return the local address
+	    /*!
+	     * \brief Return the local address
+	     * 
+	     * \return The local address in its native form
+	     */
 	    const sockaddr_in6& getLocalAddressRef(void) const
 	      { return localAddress; };
 	    
-	    //! Return the remote address
+	    /*!
+	     * \brief Return the remote address
+	     * 
+	     * \return The remote address in its native form
+	     */
 	    const sockaddr_in6& getRemoteAddressRef(void) const
 	      { return remoteAddress; };
 	    
@@ -105,7 +128,12 @@ namespace AIS {
 	    const bool setLocalAddress(const std::string& address)
 	      { return setAddress(localAddress, address); };
 	    
-	    //! Set the local address (any other types we may support)
+	    /*!
+	     * \brief Set the local address
+	     * 
+	     * \overload
+	     * \copydoc setLocalAddress(const std::string& address)
+	     */
 	    template <class T>
 	      const bool setLocalAddress(const T& address)
 		{ return setAddress(localAddress, address); };
@@ -114,7 +142,12 @@ namespace AIS {
 	    const bool setRemoteAddress(const std::string& address)
 	      { return setAddress(remoteAddress, address); };
 	    
-	    //! Set the remote address (any other types we may support)
+	    /*!
+	     * \brief Set the remote address
+	     * 
+	     * \overload
+	     * \copydoc setRemoteAddress(const std::string& address)
+	     */
 	    template <class T>
 	      const bool setRemoteAddress(const T& address)
 		{ return setAddress(remoteAddress, address); };

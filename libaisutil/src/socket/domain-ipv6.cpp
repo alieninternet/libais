@@ -72,11 +72,11 @@ DomainIPv6::DomainIPv6(void)
 /* DomainIPv6 - Constructor used when accept()ing a connection
  * Original 06/07/2002 pickle
  */
-DomainIPv6::DomainIPv6(const sockaddr_in6& newLocalAddress,
-		       const sockaddr_in6& newRemoteAddress)
+DomainIPv6::DomainIPv6(const sockaddr_in6& _localAddress,
+		       const sockaddr_in6& _remoteAddress)
 {
-   (void)memcpy(&localAddress, &newLocalAddress, sizeof(localAddress));
-   (void)memcpy(&remoteAddress, &newRemoteAddress, sizeof(remoteAddress));
+   (void)memcpy(&localAddress, &_localAddress, sizeof(localAddress));
+   (void)memcpy(&remoteAddress, &_remoteAddress, sizeof(remoteAddress));
 }
 
 
@@ -104,10 +104,10 @@ const std::string DomainIPv6::getLocalAddress(void) const
  * Original 03/07/2002 pickle
  */
 const bool DomainIPv6::setAddress(sockaddr_in6& addr, 
-				  const std::string& addrstr)
+				  const char* const newaddr)
 {
    // Try to process the IP, checking if it worked okay
-   if (inet_pton(AF_INET6, addrstr.c_str(), &addr.sin6_addr) != 0) {
+   if (inet_pton(AF_INET6, newaddr, &addr.sin6_addr) != 0) {
       return true;
    }
 

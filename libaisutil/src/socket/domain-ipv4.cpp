@@ -64,11 +64,11 @@ DomainIPv4::DomainIPv4(void)
 /* DomainIPv4 - Constructor used when accept()ing a connection
  * Original 06/07/2002 pickle
  */
-DomainIPv4::DomainIPv4(const sockaddr_in& newLocalAddress,
-		       const sockaddr_in& newRemoteAddress)
+DomainIPv4::DomainIPv4(const sockaddr_in& _localAddress,
+		       const sockaddr_in& _remoteAddress)
 {
-   (void)memcpy(&localAddress, &newLocalAddress, sizeof(localAddress));
-   (void)memcpy(&remoteAddress, &newRemoteAddress, sizeof(remoteAddress));
+   (void)memcpy(&localAddress, &_localAddress, sizeof(localAddress));
+   (void)memcpy(&remoteAddress, &_remoteAddress, sizeof(remoteAddress));
 }
 
 
@@ -76,10 +76,10 @@ DomainIPv4::DomainIPv4(const sockaddr_in& newLocalAddress,
  * Original 03/07/2002 pickle
  */
 const bool DomainIPv4::setAddress(sockaddr_in& addr, 
-					const std::string& addrstr)
+				  const char* const newaddr)
 {
    // Try to process the IP, checking if it worked okay
-   if (inet_aton(addrstr.c_str(), &addr.sin_addr) != 0) {
+   if (inet_aton(newaddr, &addr.sin_addr) != 0) {
       return true;
    }
 

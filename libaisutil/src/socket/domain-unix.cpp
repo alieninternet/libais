@@ -62,11 +62,11 @@ DomainUNIX::DomainUNIX(void)
 /* DomainUNIX - Constructor used when accept()ing a connection
  * Original 06/07/2002 pickle
  */
-DomainUNIX::DomainUNIX(const sockaddr_un& newLocalAddress,
-		       const sockaddr_un& newRemoteAddress)
+DomainUNIX::DomainUNIX(const sockaddr_un& _localAddress,
+		       const sockaddr_un& _remoteAddress)
 {
-   (void)memcpy(&localAddress, &newLocalAddress, sizeof(localAddress));
-   (void)memcpy(&remoteAddress, &newRemoteAddress, sizeof(remoteAddress));
+   (void)memcpy(&localAddress, &_localAddress, sizeof(localAddress));
+   (void)memcpy(&remoteAddress, &_remoteAddress, sizeof(remoteAddress));
 }
 
 
@@ -89,12 +89,12 @@ DomainUNIX::~DomainUNIX(void)
  * Original 03/07/2002 pickle
  */
 const bool DomainUNIX::setAddress(sockaddr_un& addr, 
-				  const std::string& addrstr)
+				  const std::string& newaddr)
 {
    // Make sure the length is appropriate
-   if (addrstr.length() <= UNIX_PATH_MAX) {
+   if (newaddr.length() <= UNIX_PATH_MAX) {
       // Set the address
-      (void)memcpy(addr.sun_path, addrstr.c_str(), addrstr.length());
+      (void)memcpy(addr.sun_path, newaddr.data(), newaddr.length());
       
       // The address was OK, return happily
       return true;
