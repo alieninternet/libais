@@ -41,7 +41,7 @@ VERSION_MINOR=1
 VERSION_EXTRA=.pre
 
 LIB_VERSION=0
-LIB_REVISION=0
+LIB_REVISION=1
 LIB_AGE=0
 
 dnl Export our version information
