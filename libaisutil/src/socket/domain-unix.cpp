@@ -78,8 +78,10 @@ DomainUNIX::~DomainUNIX(void)
    // Close the socket
    (void)::close(getFD());
    
-   // Remove the unix file, if we can..
-   (void)::remove(localAddress.sun_path);
+   // Remove the unix file, we made one, and only if we can..
+   if (localAddress.sun_path[0] != '\0') {
+      (void)::remove(localAddress.sun_path);
+   }
 }
 
 
